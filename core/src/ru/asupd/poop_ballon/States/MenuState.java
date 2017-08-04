@@ -40,7 +40,7 @@ public class MenuState extends State {
 
     @Override
     public void update(float dt) {
-        velosity.add(0, 120, 0);
+        velosity.add(0, 100, 0);
         velosity.scl(dt);
         position.add(100 * dt, velosity.y, 0);
         velosity.scl(1 / dt);
