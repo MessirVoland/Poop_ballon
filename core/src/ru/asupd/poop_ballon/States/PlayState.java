@@ -1,6 +1,8 @@
 package ru.asupd.poop_ballon.States;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.utils.Array;
@@ -20,17 +22,23 @@ public class PlayState extends State {
 
     private Array<Balloon> balloons;
     private Texture background;
+    private BitmapFont FontRed1;
+    private int miss_ball = 0;
 
 
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        camera.setToOrtho(false, 640 , 800 );
+        camera.setToOrtho(false, 480 , 800 );
         background = new Texture("badlogic.jpg");
+
+        FontRed1 = new BitmapFont();
+        FontRed1.setColor(Color.RED); //Красный
+
 
         balloons = new Array<Balloon>();
 
-        for (int i = 1; i <= 4; i++){
+        for (int i = 0; i <= 4; i++){
             balloons.add(new Balloon(i * 100,i*10));
         }
     }
@@ -45,7 +53,11 @@ public class PlayState extends State {
         handleInput();
         for (Balloon balloon : balloons) {
             balloon.update(dt);
-            if (balloon.getPosition().y>640){balloon.setPosition(balloon.getPosition().x, random(80));}
+            if (balloon.getPosition().y>720){
+                balloon.setPosition(balloon.getPosition().x, random(80));
+                balloon.setGRAVITY(random(100)-200);
+                balloon.change_velosity();
+                miss_ball++;}
         }
     }
 
@@ -53,12 +65,12 @@ public class PlayState extends State {
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
-        sb.draw(background, 0, 0,640,400);
+        sb.draw(background, 0, 0,480,800);
         for (Balloon balloon : balloons) {
-            sb.draw(balloon.getTexture(),balloon.getPosition().x,balloon.getPosition().y,100,300);
+            sb.draw(balloon.getTexture(),balloon.getPosition().x,balloon.getPosition().y,100,200);
 
         }
-
+        FontRed1.draw(sb, "Missed ballons: "+ miss_ball, 10, 780);
         sb.end();
     }
 
