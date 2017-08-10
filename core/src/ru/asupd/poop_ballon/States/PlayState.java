@@ -1,6 +1,8 @@
 package ru.asupd.poop_ballon.States;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.utils.Array;
@@ -20,6 +22,8 @@ public class PlayState extends State {
 
     private Array<Balloon> balloons;
     private Texture background;
+    private BitmapFont FontRed1;
+    private int miss_ball = 0;
 
 
 
@@ -27,6 +31,10 @@ public class PlayState extends State {
         super(gsm);
         camera.setToOrtho(false, 640 , 800 );
         background = new Texture("badlogic.jpg");
+
+        FontRed1 = new BitmapFont();
+        FontRed1.setColor(Color.RED); //Красный
+
 
         balloons = new Array<Balloon>();
 
@@ -45,7 +53,9 @@ public class PlayState extends State {
         handleInput();
         for (Balloon balloon : balloons) {
             balloon.update(dt);
-            if (balloon.getPosition().y>640){balloon.setPosition(balloon.getPosition().x, random(80));}
+            if (balloon.getPosition().y>640){
+                balloon.setPosition(balloon.getPosition().x, random(80));
+                miss_ball++;}
         }
     }
 
@@ -58,7 +68,7 @@ public class PlayState extends State {
             sb.draw(balloon.getTexture(),balloon.getPosition().x,balloon.getPosition().y,100,300);
 
         }
-
+        FontRed1.draw(sb, "Missed ballons: "+ miss_ball, 10, 600);
         sb.end();
     }
 
