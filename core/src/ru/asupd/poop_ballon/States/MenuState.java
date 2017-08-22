@@ -14,22 +14,15 @@ import ru.asupd.poop_ballon.GameStateManager;
 public class MenuState extends State {
 
     private Texture background;
-    private Texture playBtn;
     private Texture balloon;
-    private Vector3 position;
-    private Vector3 velosity;
-    private static final int size=50;
 
 
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
-        camera.setToOrtho(false, 640 , 800 );
-        background = new Texture("sky.jpg");
-       // playBtn = new Texture("playbtn.png");
+        camera.setToOrtho(false,640,800 );
+        background = new Texture("Sky.jpg");
         balloon  = new Texture("Click_to_start.png");
-       // position = new Vector3(100, 100, 0);
-      //  velosity = new Vector3(0, 0, 0);
     }
     @Override
     public void handleInput() {
@@ -49,16 +42,12 @@ public class MenuState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0,640,800);
-      //  sb.draw(playBtn, (FlappyDemo.WIDTH / 2) - (playBtn.getWidth() / 2), FlappyDemo.HEIGHT / 2);
-       sb.draw(balloon,120,200,400,400);
+        sb.draw(balloon,120,200,400,400);
         sb.end();
 
     }
 
     @Override
     public void dispose() {
-        background.dispose();
-        balloon.dispose();
-
-    }
+      }
 }

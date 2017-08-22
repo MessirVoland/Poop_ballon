@@ -106,7 +106,6 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
-        balloons.clear();
         red_cross.dispose();
         background.dispose();
     }
