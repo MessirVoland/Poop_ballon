@@ -1,10 +1,12 @@
 package ru.asupd.poop_ballon.States;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 import ru.asupd.poop_ballon.GameStateManager;
@@ -45,6 +47,24 @@ public class PlayState extends State {
 
     @Override
     protected void handleInput() {
+        if(Gdx.input.justTouched()) {
+            Vector3 touchPos = new Vector3();
+            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            System.out.println("touchPos :"+touchPos);
+            camera.unproject(touchPos);
+            for (Balloon balloon : balloons) {
+                if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)){
+                    if ((balloon.getPosition().y<touchPos.y)&(balloon.getPosition().y+200>touchPos.y)){
+                        System.out.println("touched the ball :");
+                        balloon.setPosition(balloon.getPosition().x, -220-random(50));
+                        balloon.setVelosity(200-random(100));
+                        miss_ball++;
+                    }
+                }
+            }
+
+        }
+
 
     }
 
@@ -54,9 +74,8 @@ public class PlayState extends State {
         for (Balloon balloon : balloons) {
             balloon.update(dt);
             if (balloon.getPosition().y>720){
-                balloon.setPosition(balloon.getPosition().x, random(80));
-                balloon.setGRAVITY(random(100)-200);
-                balloon.change_velosity();
+                balloon.setPosition(balloon.getPosition().x, -220-random(50));
+                balloon.setVelosity(200-random(100));
                 miss_ball++;}
         }
     }

@@ -7,6 +7,7 @@ import ru.asupd.poop_ballon.MyGdxGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.title="Лопни шарик";
 		config.width=MyGdxGame.WIDTH;
 		config.height=MyGdxGame.HEIGHT;
 		new LwjglApplication(new MyGdxGame(), config);
