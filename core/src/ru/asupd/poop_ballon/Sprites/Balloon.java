@@ -26,7 +26,7 @@ public class Balloon {
         velosity = new Vector3(0, 0, 0);
        // zerovelosity = new Vector3(0, 0, 0);
         velosity.add(MOVEMENT, -GRAVITY, 0);
-        texture = new Texture("Blue-Balloon.png");
+        texture = new Texture("Black-Balloon.png");
         bounds = new Rectangle(x, y, texture.getWidth() , texture.getHeight());
     }
 

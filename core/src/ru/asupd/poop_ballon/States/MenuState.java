@@ -18,17 +18,18 @@ public class MenuState extends State {
     private Texture balloon;
     private Vector3 position;
     private Vector3 velosity;
+    private static final int size=50;
 
 
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 640 , 800 );
-        background = new Texture("badlogic.jpg");
+        background = new Texture("sky.jpg");
        // playBtn = new Texture("playbtn.png");
-        balloon  = new Texture("Blue-Balloon.png");
-        position = new Vector3(100, 100, 0);
-        velosity = new Vector3(0, 0, 0);
+        balloon  = new Texture("Click_to_start.png");
+       // position = new Vector3(100, 100, 0);
+      //  velosity = new Vector3(0, 0, 0);
     }
     @Override
     public void handleInput() {
@@ -40,10 +41,6 @@ public class MenuState extends State {
 
     @Override
     public void update(float dt) {
-        velosity.add(0, 100, 0);
-        velosity.scl(dt);
-        position.add(100 * dt, velosity.y, 0);
-        velosity.scl(1 / dt);
         handleInput();
     }
 
@@ -53,14 +50,15 @@ public class MenuState extends State {
         sb.begin();
         sb.draw(background, 0, 0,640,800);
       //  sb.draw(playBtn, (FlappyDemo.WIDTH / 2) - (playBtn.getWidth() / 2), FlappyDemo.HEIGHT / 2);
-       sb.draw(balloon,0,0,position.x,position.y);
+       sb.draw(balloon,120,200,400,400);
         sb.end();
 
     }
 
     @Override
     public void dispose() {
-
+        background.dispose();
+        balloon.dispose();
 
     }
 }
