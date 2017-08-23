@@ -122,6 +122,7 @@ public class Balloon {
 
     public void dispose(){
         texture.dispose();
+        //учусь рабоать с бранчами
     }
 
 }
