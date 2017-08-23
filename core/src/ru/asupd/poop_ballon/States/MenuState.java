@@ -15,6 +15,8 @@ public class MenuState extends State {
 
     private Texture background;
     private Texture balloon;
+    boolean toggle;
+
 
 
 

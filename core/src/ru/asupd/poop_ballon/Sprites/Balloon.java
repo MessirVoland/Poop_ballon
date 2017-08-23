@@ -31,7 +31,7 @@ public class Balloon {
     }
 
     public void setPooped(int i) {
-        if (i<150){
+        if (i<25){
             texture = new Texture("blow.png");
         }
         else
@@ -122,7 +122,6 @@ public class Balloon {
 
     public void dispose(){
         texture.dispose();
-        //учусь рабоать с бранчами
     }
 
 }

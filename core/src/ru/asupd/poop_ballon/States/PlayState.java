@@ -39,7 +39,6 @@ public class PlayState extends State {
     int index;
 
 
-
     public PlayState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
