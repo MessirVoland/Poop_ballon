@@ -31,7 +31,7 @@ public class Balloon {
     }
 
     public void setPooped(int i) {
-        if (i<5){
+        if (i<100){
             texture = new Texture("blow.png");
         }
         else
