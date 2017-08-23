@@ -103,7 +103,6 @@ public class Balloon {
        if (currentTime>=0.355f)
        {
            live_out=true;
-
        }
 
    }
@@ -111,7 +110,6 @@ public class Balloon {
             velosity.scl(dt);
             position.add(0, velosity.y, 0);
             // if (position.y < 0)position.y = 0;
-
       velosity.scl(1 / dt);
             bounds.setPosition(position.x, position.y);
 
