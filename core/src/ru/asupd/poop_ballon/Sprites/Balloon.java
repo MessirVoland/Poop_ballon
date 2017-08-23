@@ -31,7 +31,7 @@ public class Balloon {
     }
 
     public void setPooped(int i) {
-        if (i<100){
+        if (i<150){
             texture = new Texture("blow.png");
         }
         else
@@ -100,7 +100,7 @@ public class Balloon {
         */
    if (pooped){
         currentTime+=dt;
-       if (currentTime>=0.75f)
+       if (currentTime>=0.355f)
        {
            live_out=true;
 
