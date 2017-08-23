@@ -1,6 +1,8 @@
 package ru.asupd.poop_ballon.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -26,8 +28,14 @@ public class PlayState extends State {
     private Texture background;
     private BitmapFont FontRed1;
     private Texture red_cross;
+    private Texture muted;
+    private Texture unmuted;
     private int cautch_ball = 0;
     private int miss_ball = 0;
+    private Sound poop_Sound;
+    private Music background_Music;
+    boolean mute;
+    float volume;
 
 
 
@@ -41,7 +49,19 @@ public class PlayState extends State {
 
         red_cross = new Texture("Redcross.png");
 
+        muted = new Texture("mute.png");
+        unmuted = new Texture("unmute.png");
+        mute=false;
+        volume=1.0f;
+
+
         balloons = new Array<Balloon>();
+
+        poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
+        background_Music = Gdx.audio.newMusic(Gdx.files.internal("sound.mp3"));
+
+        background_Music.setLooping(true);
+        background_Music.play();
 
         for (int i = 0; i <= 4; i++){
             balloons.add(new Balloon(i * 100,i*10));
@@ -59,9 +79,24 @@ public class PlayState extends State {
                 if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)){
                     if ((balloon.getPosition().y<touchPos.y)&(balloon.getPosition().y+200>touchPos.y)){
                         System.out.println("touched the ball :");
+                        poop_Sound.play(volume);
                         balloon.setPosition(balloon.getPosition().x, -220-random(50));
                         balloon.setVelosity(200+random(cautch_ball*3)-random(100));
                         cautch_ball++;
+                    }
+                }
+            }
+            if ((480-69-69-69-69<touchPos.x)&(480-69-69-69-69+64>touchPos.x)){
+                if((800-69<touchPos.y)&(800-69+64>touchPos.y)){
+                    if (mute) {
+                        background_Music.play();
+                        volume=1.0f;
+                        mute=false;
+                    }
+                    else {
+                        background_Music.pause();
+                        volume=0.0f;
+                        mute=true;
                     }
                 }
             }
@@ -90,6 +125,12 @@ public class PlayState extends State {
 
         }
         FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 780);
+        if (mute){
+            sb.draw(muted,480-69-69-69-69,800-69,64,64);
+        }else{
+            sb.draw(unmuted,480-69-69-69-69,800-69,64,64);
+        }
+
         switch (miss_ball){
             case 4:
                 gsm.set(new GameoverState(gsm));
@@ -106,6 +147,8 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
+        poop_Sound.dispose();
+        background_Music.dispose();
         red_cross.dispose();
         background.dispose();
     }
