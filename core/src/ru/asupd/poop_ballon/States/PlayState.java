@@ -36,13 +36,14 @@ public class PlayState extends State {
     private Music background_Music;
     boolean mute;
     float volume;
+    int index;
 
 
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
-        background = new Texture("Sky.jpg");
+        background = new Texture("background.png");
 
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
@@ -64,7 +65,7 @@ public class PlayState extends State {
         background_Music.play();
 
         for (int i = 0; i <= 4; i++){
-            balloons.add(new Balloon(i * 100,i*10));
+            balloons.add(new Balloon(i * 96,-195-random(50),100));
         }
     }
 
@@ -75,16 +76,23 @@ public class PlayState extends State {
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             System.out.println("touchPos :"+touchPos);
             camera.unproject(touchPos);
+            index=0;
             for (Balloon balloon : balloons) {
                 if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)){
                     if ((balloon.getPosition().y<touchPos.y)&(balloon.getPosition().y+200>touchPos.y)){
-                        System.out.println("touched the ball :");
-                        poop_Sound.play(volume);
-                        balloon.setPosition(balloon.getPosition().x, -220-random(50));
-                        balloon.setVelosity(200+random(cautch_ball*3)-random(100));
-                        cautch_ball++;
+                        if (!balloon.isPooped()) {
+                            System.out.println("touched the ball :");
+                            poop_Sound.play(volume);
+                            //balloon.setPosition(balloon.getPosition().x, -220-random(50));
+
+                            cautch_ball++;
+
+                            balloon.setPooped(cautch_ball);
+                            balloons.add(new Balloon(random(4) * 96, -195 - random(50), (200 + random(cautch_ball * 3) - random(100))));
+                        }
                     }
                 }
+                index++;
             }
             if ((480-69-69-69-69<touchPos.x)&(480-69-69-69-69+64>touchPos.x)){
                 if((800-69<touchPos.y)&(800-69+64>touchPos.y)){
@@ -106,12 +114,19 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
+        index=0;
         for (Balloon balloon : balloons) {
             balloon.update(dt);
+
             if (balloon.getPosition().y>720){
                 balloon.setPosition(balloon.getPosition().x, -220-random(50));
                 balloon.setVelosity(200+random(cautch_ball*3)-random(100));
                 miss_ball++;}
+            if (balloon.isLive_out()){
+                balloon.dispose();
+                balloons.removeIndex(index);
+            }
+        index++;
         }
     }
 
@@ -121,7 +136,7 @@ public class PlayState extends State {
         sb.begin();
         sb.draw(background, 0, 0,480,800);
         for (Balloon balloon : balloons) {
-            sb.draw(balloon.getTexture(),balloon.getPosition().x,balloon.getPosition().y,100,200);
+            sb.draw(balloon.getTexture(),balloon.getPosition().x,balloon.getPosition().y,95,190);
 
         }
         FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 780);

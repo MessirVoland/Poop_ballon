@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
+import static com.badlogic.gdx.math.MathUtils.random;
+
 /**
  * Created by Voland on 04.08.2017.
  */
@@ -14,20 +16,57 @@ public class Balloon {
     private Vector3 position;
     private Vector3 velosity;
     private Rectangle bounds;
+    private Texture texture_b,texture_g,texture_r,texture_y;
     private Texture texture;
+    int color_of_balloon;
+    private float currentTime;
+    boolean pooped,live_out;
 
     public void setVelosity(int grav) {
 
         this.velosity.y = grav;
     }
+    public boolean isPooped() {
+        return pooped;
+    }
 
-    public Balloon(int x, int y){
+    public void setPooped(int i) {
+        if (i<100){
+            texture = new Texture("blow.png");
+        }
+        else
+        {
+            texture = new Texture("Blood_Splatter.png");
+        }
+        this.pooped = true;
+    }
+
+    public Balloon(int x, int y, int grav){
         position = new Vector3(x, y, 0);
         velosity = new Vector3(0, 0, 0);
        // zerovelosity = new Vector3(0, 0, 0);
-        velosity.add(MOVEMENT, -GRAVITY, 0);
-        texture = new Texture("Black-Balloon.png");
-        bounds = new Rectangle(x, y, texture.getWidth() , texture.getHeight());
+        this.velosity.y = grav;
+        pooped=false;
+        live_out=false;
+        currentTime=0;
+
+        color_of_balloon=random(3);
+        switch (color_of_balloon){
+            case 0:
+                texture =  new Texture("Balloon_blue.png");
+                break;
+            case 1:
+                texture =  new Texture("Balloon_red.png");
+                break;
+            case 2:
+                texture =  new Texture("Balloon_green.png");
+                break;
+            case 3:
+                texture =  new Texture("Balloon_yellow.png");
+                break;
+        }
+
+        bounds = new Rectangle(x, y, 95 , 190);
     }
 
     public Vector3 getPosition() {
@@ -35,13 +74,16 @@ public class Balloon {
     }
 
     public Texture getTexture() {
-
         return texture;
     }
 
     public void setPosition(float x,float y) {
         this.position.x = x;
         this.position.y = y;
+    }
+
+    public boolean isLive_out() {
+        return live_out;
     }
 
     public void update(float dt){
@@ -56,17 +98,33 @@ public class Balloon {
         velosity.scl(1 / dt);
         bounds.setPosition(position.x, position.y);
         */
-        velosity.scl(dt);
-        position.add(0, velosity.y, 0);
-       // if (position.y < 0)position.y = 0;
+   if (pooped){
+        currentTime+=dt;
+       if (currentTime>=0.75f)
+       {
+           live_out=true;
 
-        velosity.scl(1 / dt);
-        bounds.setPosition(position.x, position.y);
+       }
 
-        bounds.setPosition(position.x, position.y);
+   }
+   else {
+            velosity.scl(dt);
+            position.add(0, velosity.y, 0);
+            // if (position.y < 0)position.y = 0;
+
+      velosity.scl(1 / dt);
+            bounds.setPosition(position.x, position.y);
+
+        }
     }
 
     public Rectangle getBounds(){
         return bounds;
     }
+
+    public void dispose(){
+        texture.dispose();
+    }
+
 }
+
