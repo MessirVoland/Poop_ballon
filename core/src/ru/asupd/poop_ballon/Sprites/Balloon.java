@@ -31,7 +31,7 @@ public class Balloon {
     }
 
     public void setPooped(int i) {
-        if (i<100){
+        if (i<5){
             texture = new Texture("blow.png");
         }
         else
@@ -103,7 +103,6 @@ public class Balloon {
        if (currentTime>=0.75f)
        {
            live_out=true;
-
        }
 
    }
@@ -111,7 +110,6 @@ public class Balloon {
             velosity.scl(dt);
             position.add(0, velosity.y, 0);
             // if (position.y < 0)position.y = 0;
-
       velosity.scl(1 / dt);
             bounds.setPosition(position.x, position.y);
 
