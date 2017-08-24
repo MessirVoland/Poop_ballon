@@ -36,7 +36,7 @@ public class AndroidLauncher extends AndroidApplication {
 		adView.setAdListener(new AdListener() {
 			@Override
 			public void onAdLoaded() {
-				Log.i(TAG, "Ad Loaded.. rr.");
+				Log.i(TAG, "Ad Loaded13.. rr.");
 			}
 		});
 		adView.setAdSize(AdSize.SMART_BANNER);
