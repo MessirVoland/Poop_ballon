@@ -103,8 +103,8 @@ public class PlayState extends State {
                                 System.out.println("touched the ball :");
                                  poop_Sound.play(volume);
                                 //balloon.setPosition(balloon.getPosition().x, -220-random(50));
-                                shaker.shake(0.25f);
-                                Gdx.input.vibrate(75);
+                                shaker.shake(0.40f);
+
                                 cautch_ball++;
                                 // camera.rotate(0.2f);
                                 // camera.update();
@@ -144,7 +144,8 @@ public class PlayState extends State {
             if (balloon.getPosition().y>720){
                 balloon.setPosition(balloon.getPosition().x, -220-random(50));
                 balloon.setVelosity(200+random(cautch_ball*2)-random(100));
-                miss_ball++;}
+                miss_ball++;
+                Gdx.input.vibrate(250);}
             if (balloon.isLive_out()){
                 balloon.dispose();
                 balloons.removeIndex(index);
@@ -191,6 +192,9 @@ public class PlayState extends State {
         }
 
         switch (miss_ball){
+            default:
+                gsm.set(new GameoverState(gsm));
+                break;
             case 4:
                 gsm.set(new GameoverState(gsm));
                 break;
@@ -200,6 +204,9 @@ public class PlayState extends State {
                 sb.draw(red_cross,480-69-69,20,64,64);
             case 1:
                 sb.draw(red_cross,480-69,20,64,64);
+            case 0:
+                break;
+
         }
         sb.end();
     }
