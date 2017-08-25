@@ -13,6 +13,8 @@ import com.badlogic.gdx.utils.Array;
 
 import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Sprites.Balloon;
+import ru.asupd.poop_ballon.Sprites.Cloud;
+import ru.asupd.poop_ballon.Workers.Shaker;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 
@@ -25,7 +27,10 @@ import static com.badlogic.gdx.math.MathUtils.random;
 public class PlayState extends State {
 
     private Array<Balloon> balloons;
+    private Array<Cloud> clouds;
+
     private Texture background;
+    private Texture mini_menu_background;
     private BitmapFont FontRed1;
     private Texture red_cross;
     private Texture muted;
@@ -36,6 +41,7 @@ public class PlayState extends State {
     private Music background_Music;
     boolean mute;
     float volume;
+    Shaker shaker;
     int index;
 
 
@@ -43,29 +49,41 @@ public class PlayState extends State {
     public PlayState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
-        background = new Texture("background.png");
+        background = new Texture("background_clean.png");
+        mini_menu_background = new Texture("bot_menu_background.jpg");
 
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
 
         red_cross = new Texture("Redcross.png");
 
+
+        shaker = new Shaker(camera);
+
+
+        //инициализация музыки
+        poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
+
+        background_Music = Gdx.audio.newMusic(Gdx.files.internal("sound.mp3"));
+       // background_Music.setVolume(0.1f);
+        background_Music.setLooping(true);
+        background_Music.play();
+
         muted = new Texture("mute.png");
         unmuted = new Texture("unmute.png");
         mute=false;
         volume=1.0f;
 
-
+        //инициализация массива шаров
         balloons = new Array<Balloon>();
-
-        poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
-        background_Music = Gdx.audio.newMusic(Gdx.files.internal("sound.mp3"));
-
-        background_Music.setLooping(true);
-        background_Music.play();
-
         for (int i = 0; i <= 4; i++){
             balloons.add(new Balloon(i * 96,-195-random(50),100));
+        }
+
+        //инициализация массива облаков
+        clouds = new Array<Cloud>();
+        for (int i = 0; i <= 4; i++){
+            clouds.add(new Cloud(-random(1000)+400,125*i+100+10,random(25)+25));
         }
     }
 
@@ -81,21 +99,26 @@ public class PlayState extends State {
                 if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)){
                     if ((balloon.getPosition().y<touchPos.y)&(balloon.getPosition().y+200>touchPos.y)){
                         if (!balloon.isPooped()) {
-                            System.out.println("touched the ball :");
-                            poop_Sound.play(volume);
-                            //balloon.setPosition(balloon.getPosition().x, -220-random(50));
+                            if (touchPos.y>100) {
+                                System.out.println("touched the ball :");
+                                 poop_Sound.play(volume);
+                                //balloon.setPosition(balloon.getPosition().x, -220-random(50));
+                                shaker.shake(0.40f);
 
-                            cautch_ball++;
+                                cautch_ball++;
+                                // camera.rotate(0.2f);
+                                // camera.update();
 
-                            balloon.setPooped(cautch_ball);
-                            balloons.add(new Balloon(random(4) * 96, -195 - random(50), (200 + random(cautch_ball * 3) - random(100))));
+                                balloon.setPooped(cautch_ball);
+                                balloons.add(new Balloon(random(4) * 96, -195 - random(50), (200 + random(cautch_ball * 3) - random(100))));
+                            }
                         }
                     }
                 }
                 index++;
             }
             if ((480-69-69-69-69<touchPos.x)&(480-69-69-69-69+64>touchPos.x)){
-                if((800-69<touchPos.y)&(800-69+64>touchPos.y)){
+                if((20<touchPos.y)&(20+64>touchPos.y)){
                     if (mute) {
                         background_Music.play();
                         volume=1.0f;
@@ -120,42 +143,70 @@ public class PlayState extends State {
 
             if (balloon.getPosition().y>720){
                 balloon.setPosition(balloon.getPosition().x, -220-random(50));
-                balloon.setVelosity(200+random(cautch_ball*3)-random(100));
-                miss_ball++;}
+                balloon.setVelosity(200+random(cautch_ball*2)-random(100));
+                miss_ball++;
+                Gdx.input.vibrate(250);}
             if (balloon.isLive_out()){
                 balloon.dispose();
                 balloons.removeIndex(index);
             }
         index++;
         }
+
+        for (Cloud cloud : clouds) {
+            cloud.update(dt);
+            if (cloud.getPosition().x > 420) {
+                cloud.setPosition(-200 - random(250), cloud.getPosition().y);
+                cloud.change_texture();
+            }
+        }
+
+        shaker.update(dt);
+
     }
 
     @Override
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
-        sb.draw(background, 0, 0,480,800);
+
+        sb.draw(background, 0, 100,480,900);
+        for (Cloud cloud : clouds) {
+            sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
+        }
         for (Balloon balloon : balloons) {
             sb.draw(balloon.getTexture(),balloon.getPosition().x,balloon.getPosition().y,95,190);
 
         }
-        FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 780);
+
+
+        sb.draw(mini_menu_background, 0, 0,480,100);
+
+        FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 20);
+
         if (mute){
-            sb.draw(muted,480-69-69-69-69,800-69,64,64);
+            //sb.draw(muted,480-69-69-69-69,800-69,64,64);
+            sb.draw(muted,480-69-69-69-69,20,64,64);
         }else{
-            sb.draw(unmuted,480-69-69-69-69,800-69,64,64);
+            sb.draw(unmuted,480-69-69-69-69,20,64,64);
         }
 
         switch (miss_ball){
+            default:
+                gsm.set(new GameoverState(gsm));
+                break;
             case 4:
                 gsm.set(new GameoverState(gsm));
                 break;
             case 3:
-                sb.draw(red_cross,480-69-69-69,800-69,64,64);
+                sb.draw(red_cross,480-69-69-69,20,64,64);
             case 2:
-                sb.draw(red_cross,480-69-69,800-69,64,64);
+                sb.draw(red_cross,480-69-69,20,64,64);
             case 1:
-                sb.draw(red_cross,480-69,800-69,64,64);
+                sb.draw(red_cross,480-69,20,64,64);
+            case 0:
+                break;
+
         }
         sb.end();
     }

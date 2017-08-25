@@ -10,7 +10,7 @@ import static com.badlogic.gdx.math.MathUtils.random;
  * Created by Voland on 04.08.2017.
  */
 
-public class Balloon {
+public class Balloon extends Creature {
     private static final int MOVEMENT = 100;
     private int GRAVITY = -100;
     private Vector3 position;
