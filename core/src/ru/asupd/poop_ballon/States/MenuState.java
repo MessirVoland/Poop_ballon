@@ -21,8 +21,8 @@ public class MenuState extends State {
     public MenuState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false,640,800 );
-        background = new Texture("Sky.jpg");
-        balloon  = new Texture("Click_to_start.png");
+        background = new Texture("background_start.png");
+        balloon  = new Texture("tap.png");
     }
     @Override
     public void handleInput() {
@@ -42,7 +42,7 @@ public class MenuState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0,640,800);
-        sb.draw(balloon,120,200,400,400);
+        sb.draw(balloon,120,100,405,88);
         sb.end();
 
     }

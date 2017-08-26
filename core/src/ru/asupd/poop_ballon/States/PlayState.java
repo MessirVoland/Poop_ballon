@@ -69,8 +69,8 @@ public class PlayState extends State {
         background_Music.setLooping(true);
         background_Music.play();
 
-        muted = new Texture("mute.png");
-        unmuted = new Texture("unmute.png");
+        muted = new Texture("sound_off.png");
+        unmuted = new Texture("sound_on.png");
         mute=false;
         volume=1.0f;
 
@@ -170,7 +170,8 @@ public class PlayState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
 
-        sb.draw(background, 0, 100,480,900);
+        //sb.draw(background, 0, 100,480,900);
+        sb.draw(background,-25, -25,550,900);
         for (Cloud cloud : clouds) {
             sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
         }
@@ -200,10 +201,22 @@ public class PlayState extends State {
                 break;
             case 3:
                 sb.draw(red_cross,480-69-69-69,20,64,64);
+                background.dispose();
+                background = new Texture("background_night.png");
+                break;
+
             case 2:
                 sb.draw(red_cross,480-69-69,20,64,64);
+                background.dispose();
+                background = new Texture("background_evening.png");
+                break;
+
             case 1:
                 sb.draw(red_cross,480-69,20,64,64);
+                background.dispose();
+                background = new Texture("background_sunset.png");
+                break;
+
             case 0:
                 break;
 
