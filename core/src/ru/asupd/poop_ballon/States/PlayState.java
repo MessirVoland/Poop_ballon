@@ -256,14 +256,17 @@ public class PlayState extends State {
                 gsm.set(new GameoverState(gsm));
                 break;
             case 4:
-                gsm.set(new GameoverState(gsm));
-
-                //prefs.putBoolean("soundOn", true);
                 load_hiscore = prefs.getInteger("highscore");
                 if (load_hiscore<cautch_ball) {
                     prefs.putInteger("highscore", cautch_ball);
+                    prefs.flush();
                 }
-                prefs.flush();
+
+                gsm.set(new GameoverState(gsm));
+
+                //prefs.putBoolean("soundOn", true);
+
+
                 /*
                 SharedPreferences settings = context.getSharedPreferences(PERSISTANT_STORAGE_NAME, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = settings.edit();
