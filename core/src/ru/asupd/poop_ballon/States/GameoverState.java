@@ -12,10 +12,13 @@ import ru.asupd.poop_ballon.GameStateManager;
 
 public class GameoverState extends State {
     private Texture background;
+    float currentdt, waiting;
     public GameoverState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 320 , 440 );
         background = new Texture("Game_over.png");
+        currentdt=0;
+        waiting=1.0f;
 
     }
 
@@ -28,7 +31,10 @@ public class GameoverState extends State {
 
     @Override
     public void update(float dt) {
-        handleInput();
+        if (currentdt>=waiting) {
+            handleInput();
+        }
+        currentdt+=dt;
     }
 
     @Override

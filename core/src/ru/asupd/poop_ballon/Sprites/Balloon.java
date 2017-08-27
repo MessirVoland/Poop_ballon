@@ -50,19 +50,39 @@ public class Balloon extends Creature {
         live_out=false;
         currentTime=0;
 
-        color_of_balloon=random(3);
+        //color_of_balloon=random(3);
+        if (grav<260){
+            color_of_balloon=0;
+        }else
+            if (grav<320){
+                color_of_balloon=1;
+            }
+            else
+                if (grav<380){
+                    color_of_balloon=2;
+                }
+                else
+                    if(grav<420){
+                        color_of_balloon=3;
+                    }
+                    else{
+                        color_of_balloon=4;
+                    }
         switch (color_of_balloon){
-            case 0:
+            case 2:
                 texture =  new Texture("Balloon_blue.png");
                 break;
-            case 1:
+            case 3:
                 texture =  new Texture("Balloon_red.png");
                 break;
-            case 2:
+            case 0:
                 texture =  new Texture("Balloon_green.png");
                 break;
-            case 3:
+            case 1:
                 texture =  new Texture("Balloon_yellow.png");
+                break;
+            case 4:
+                texture =  new Texture("Balloon_purple.png");
                 break;
         }
 

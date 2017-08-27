@@ -39,7 +39,7 @@ public class PlayState extends State {
     private int miss_ball = 0;
     private Sound poop_Sound;
     private Music background_Music;
-    boolean mute;
+    boolean mute,change_background;
     float volume;
     Shaker shaker;
     int index;
@@ -65,7 +65,7 @@ public class PlayState extends State {
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
 
         background_Music = Gdx.audio.newMusic(Gdx.files.internal("sound.mp3"));
-       // background_Music.setVolume(0.1f);
+        background_Music.setVolume(0.1f);
         background_Music.setLooping(true);
         background_Music.play();
 
@@ -73,8 +73,9 @@ public class PlayState extends State {
         unmuted = new Texture("sound_on.png");
 
         //выключил звук на время тестов
-        mute=true;
-        volume=1.0f;
+        change_background = false;
+        mute=false;
+        volume=0.1f;
 
         //инициализация массива шаров
         balloons = new Array<Balloon>();
@@ -85,7 +86,7 @@ public class PlayState extends State {
         //инициализация массива облаков
         clouds = new Array<Cloud>();
         for (int i = 0; i <= 4; i++){
-            clouds.add(new Cloud(-random(1000)+400,125*i+100+10,random(25)+25));
+            clouds.add(new Cloud(random(1000)-400,125*i+100+10,-random(25)-25));
         }
     }
 
@@ -123,7 +124,7 @@ public class PlayState extends State {
                 if((20<touchPos.y)&(20+64>touchPos.y)){
                     if (mute) {
                         background_Music.play();
-                        volume=1.0f;
+                        volume=0.1f;
                         mute=false;
                     }
                     else {
@@ -145,8 +146,9 @@ public class PlayState extends State {
 
             if (balloon.getPosition().y>720){
                 balloon.setPosition(balloon.getPosition().x, -220-random(50));
-                balloon.setVelosity(200+random(cautch_ball*2)-random(100));
+                balloon.setVelosity(get_speed_for_balloon());
                 miss_ball++;
+                change_background=true;
                 Gdx.input.vibrate(250);}
             if (balloon.isLive_out()){
                 balloon.dispose();
@@ -157,8 +159,8 @@ public class PlayState extends State {
 
         for (Cloud cloud : clouds) {
             cloud.update(dt);
-            if (cloud.getPosition().x > 420) {
-                cloud.setPosition(-200 - random(250), cloud.getPosition().y);
+            if (cloud.getPosition().x < -320) {
+                cloud.setPosition(+480+200 + random(250), cloud.getPosition().y);
                 cloud.change_texture();
             }
         }
@@ -186,6 +188,7 @@ public class PlayState extends State {
         sb.draw(mini_menu_background, 0, 0,480,100);
 
         FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 20);
+        FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 50);
 
         if (mute){
             //sb.draw(muted,480-69-69-69-69,800-69,64,64);
@@ -202,21 +205,30 @@ public class PlayState extends State {
                 gsm.set(new GameoverState(gsm));
                 break;
             case 3:
-                sb.draw(red_cross,480-69-69-69,20,64,64);
-                background.dispose();
-                background = new Texture("background_night.png");
+              //  sb.draw(red_cross,480-69-69-69,20,64,64);
+                if (change_background) {
+                    change_background=false;
+                    background.dispose();
+                    background = new Texture("background_night.png");
+                }
                 break;
 
             case 2:
-                sb.draw(red_cross,480-69-69,20,64,64);
-                background.dispose();
-                background = new Texture("background_evening.png");
+              //  sb.draw(red_cross,480-69-69,20,64,64);
+                if (change_background) {
+                    change_background=false;
+                    background.dispose();
+                    background = new Texture("background_evening.png");
+                }
                 break;
 
             case 1:
-                sb.draw(red_cross,480-69,20,64,64);
-                background.dispose();
-                background = new Texture("background_sunset.png");
+              //  sb.draw(red_cross,480-69,20,64,64);
+                if (change_background) {
+                    change_background=false;
+                    background.dispose();
+                    background = new Texture("background_sunset.png");
+                }
                 break;
 
             case 0:
@@ -233,4 +245,14 @@ public class PlayState extends State {
         red_cross.dispose();
         background.dispose();
     }
+
+    private int get_speed_for_balloon(){
+        int speed = 0;
+        speed = 200+random(cautch_ball*2)-random(100);
+        if (speed>=550){
+            speed=550;//Ограничитель скорости шаров
+        }
+        return speed;
+    }
+
 }
