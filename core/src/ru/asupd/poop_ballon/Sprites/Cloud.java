@@ -31,6 +31,10 @@ public class Cloud extends Creature {
         return position;
     }
 
+    public int getColor_of_cloud() {
+        return color_of_cloud;
+    }
+
     public Cloud(int x, int y, int grav) {
        // texture =  new Texture("cloud1.png");
         position = new Vector3(x, y, 0);
@@ -45,6 +49,7 @@ public class Cloud extends Creature {
             case 1:
                 texture =  new Texture("cloud2.png");
                 break;
+
             case 2:
                 texture =  new Texture("cloud3.png");
                 break;

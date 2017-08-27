@@ -1,6 +1,7 @@
 package ru.asupd.poop_ballon.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -35,12 +36,17 @@ public class PlayState extends State {
     private Texture red_cross;
     private Texture muted;
     private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p,texture_pooped,texture_bloody;
+    private Texture texture_cloud1,texture_cloud2,texture_cloud3,texture_cloud4;
     private Texture unmuted;
     private int cautch_ball = 0;
     private int miss_ball = 0;
     private Sound poop_Sound;
     private Music background_Music;
     boolean mute,change_background;
+    public Preferences prefs;
+    public int load_hiscore;
+    int boo=15;
+    private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
     float volume;
     Shaker shaker;
     int index;
@@ -79,9 +85,16 @@ public class PlayState extends State {
         texture_b_p =  new Texture("Balloon_purple.png");
         texture_pooped=new Texture("blow.png");
         texture_bloody=new Texture("Blood_Splatter.png");
-
+/*
+        texture_cloud1=new Texture("cloud1.png");
+        texture_cloud2=new Texture("cloud2.png");
+        texture_cloud3=new Texture("cloud3.png");
+        texture_cloud4=new Texture("cloud4.png");
+*/
         muted = new Texture("sound_off.png");
         unmuted = new Texture("sound_on.png");
+
+        prefs = Gdx.app.getPreferences(APP_STORE_NAME);
 
 
 
@@ -194,6 +207,7 @@ public class PlayState extends State {
         sb.enableBlending();
 
         for (Cloud cloud : clouds) {
+
             sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
         }
 
@@ -218,7 +232,6 @@ public class PlayState extends State {
                 case 5:
                     sb.draw(texture_pooped, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
-
             }
 
         }
@@ -226,9 +239,10 @@ public class PlayState extends State {
         sb.disableBlending();
         sb.draw(mini_menu_background, 0, 0,480,100);
         sb.enableBlending();
-
-        FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 20);
-        FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 50);
+        load_hiscore = prefs.getInteger("highscore");
+        FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 60);
+        FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 40);
+        FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 20);
 
         if (mute){
             //sb.draw(muted,480-69-69-69-69,800-69,64,64);
@@ -243,6 +257,18 @@ public class PlayState extends State {
                 break;
             case 4:
                 gsm.set(new GameoverState(gsm));
+
+                //prefs.putBoolean("soundOn", true);
+                load_hiscore = prefs.getInteger("highscore");
+                if (load_hiscore<cautch_ball) {
+                    prefs.putInteger("highscore", cautch_ball);
+                }
+                prefs.flush();
+                /*
+                SharedPreferences settings = context.getSharedPreferences(PERSISTANT_STORAGE_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString( "name", "John" );
+                editor.commit();*/
                 break;
             case 3:
               //  sb.draw(red_cross,480-69-69-69,20,64,64);
@@ -284,6 +310,17 @@ public class PlayState extends State {
         background_Music.dispose();
         red_cross.dispose();
         background.dispose();
+        texture_b_b.dispose();
+        texture_b_r.dispose();
+        texture_b_g.dispose();
+        texture_b_y.dispose();
+        texture_b_p.dispose();
+        texture_pooped.dispose();
+        texture_bloody.dispose();
+        muted.dispose();
+        unmuted.dispose();
+
+
     }
 
     private int get_speed_for_balloon(){
