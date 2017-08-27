@@ -16,11 +16,15 @@ public class Balloon extends Creature {
     private Vector3 position;
     private Vector3 velosity;
     private Rectangle bounds;
-    private Texture texture_b,texture_g,texture_r,texture_y;
+    private Texture texture_pooped,texture_bloody;
     private Texture texture;
     int color_of_balloon;
     private float currentTime;
     boolean pooped,live_out;
+
+    public int getColor_of_balloon() {
+        return color_of_balloon;
+    }
 
     public void setVelosity(int grav) {
 
@@ -31,12 +35,13 @@ public class Balloon extends Creature {
     }
 
     public void setPooped(int i) {
-        if (i<150){
-            texture = new Texture("blow.png");
+        if (i<1000){
+            color_of_balloon=5;
+            System.out.println("texture_pooped");
         }
         else
         {
-            texture = new Texture("Blood_Splatter.png");
+            //bloody
         }
         this.pooped = true;
     }
@@ -49,6 +54,8 @@ public class Balloon extends Creature {
         pooped=false;
         live_out=false;
         currentTime=0;
+       // texture_pooped=new Texture("blow.png");
+       // texture_bloody=new Texture("Blood_Splatter.png");
 
         //color_of_balloon=random(3);
         if (grav<260){
@@ -68,7 +75,7 @@ public class Balloon extends Creature {
                     else{
                         color_of_balloon=4;
                     }
-        switch (color_of_balloon){
+       /* switch (color_of_balloon){
             case 2:
                 texture =  new Texture("Balloon_blue.png");
                 break;
@@ -84,7 +91,7 @@ public class Balloon extends Creature {
             case 4:
                 texture =  new Texture("Balloon_purple.png");
                 break;
-        }
+        }*/
 
         bounds = new Rectangle(x, y, 95 , 190);
     }
@@ -140,8 +147,12 @@ public class Balloon extends Creature {
         return bounds;
     }
 
-    public void dispose(){
-        texture.dispose();
+    public void dispose() {
+     //   texture.dispose();
+      //  texture_pooped.dispose();
+      //  texture_bloody.dispose();
+        System.out.println("Balloon disposed");
+
     }
 
 }

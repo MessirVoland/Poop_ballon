@@ -34,6 +34,7 @@ public class PlayState extends State {
     private BitmapFont FontRed1;
     private Texture red_cross;
     private Texture muted;
+    private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p,texture_pooped,texture_bloody;
     private Texture unmuted;
     private int cautch_ball = 0;
     private int miss_ball = 0;
@@ -69,8 +70,21 @@ public class PlayState extends State {
         background_Music.setLooping(true);
         background_Music.play();
 
+
+        //хорошо бы сделать отдельный текстур менеджер с полосой загрузки
+        texture_b_b =  new Texture("Balloon_blue.png");
+        texture_b_r =  new Texture("Balloon_red.png");
+        texture_b_g =  new Texture("Balloon_green.png");
+        texture_b_y =  new Texture("Balloon_yellow.png");
+        texture_b_p =  new Texture("Balloon_purple.png");
+        texture_pooped=new Texture("blow.png");
+        texture_bloody=new Texture("Blood_Splatter.png");
+
         muted = new Texture("sound_off.png");
         unmuted = new Texture("sound_on.png");
+
+
+
 
         //выключил звук на время тестов
         change_background = false;
@@ -175,17 +189,43 @@ public class PlayState extends State {
         sb.begin();
 
         //sb.draw(background, 0, 100,480,900);
+        sb.disableBlending();
         sb.draw(background,-25, -25,550,900);
+        sb.enableBlending();
+
         for (Cloud cloud : clouds) {
             sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
         }
+
         for (Balloon balloon : balloons) {
-            sb.draw(balloon.getTexture(),balloon.getPosition().x,balloon.getPosition().y,95,190);
+            switch (balloon.getColor_of_balloon()) {
+                case 0:
+                   // sb.draw(balloon.getTexture(), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    sb.draw(texture_b_g, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    break;
+                case 1:
+                    sb.draw(texture_b_y, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    break;
+                case 2:
+                    sb.draw(texture_b_b, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    break;
+                case 3:
+                    sb.draw(texture_b_r, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    break;
+                case 4:
+                    sb.draw(texture_b_p, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    break;
+                case 5:
+                    sb.draw(texture_pooped, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    break;
+
+            }
 
         }
 
-
+        sb.disableBlending();
         sb.draw(mini_menu_background, 0, 0,480,100);
+        sb.enableBlending();
 
         FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 20);
         FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 50);
