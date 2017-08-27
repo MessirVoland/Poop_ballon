@@ -71,7 +71,9 @@ public class PlayState extends State {
 
         muted = new Texture("sound_off.png");
         unmuted = new Texture("sound_on.png");
-        mute=false;
+
+        //выключил звук на время тестов
+        mute=true;
         volume=1.0f;
 
         //инициализация массива шаров
