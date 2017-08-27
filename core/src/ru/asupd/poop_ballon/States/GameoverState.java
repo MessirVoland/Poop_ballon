@@ -2,6 +2,7 @@ package ru.asupd.poop_ballon.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -27,6 +28,8 @@ public class GameoverState extends State {
         background = new Texture("Game_over.png");
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
         load_hiscore = prefs.getInteger("highscore");
+        FontRed1 = new BitmapFont();
+        FontRed1.setColor(Color.RED); //Красный
         currentdt=0;
         waiting=1.0f;
 
