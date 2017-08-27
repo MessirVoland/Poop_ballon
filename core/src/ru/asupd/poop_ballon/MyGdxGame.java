@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import ru.asupd.poop_ballon.States.MenuState;
+import ru.asupd.poop_ballon.States.PlayState;
 
 public class MyGdxGame extends ApplicationAdapter {
 	private GameStateManager gsm;
@@ -20,7 +21,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-		gsm.push(new MenuState(gsm));
+		gsm.push(new PlayState(gsm));
 	}
 
 	@Override

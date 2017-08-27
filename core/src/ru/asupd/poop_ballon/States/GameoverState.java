@@ -25,7 +25,7 @@ public class GameoverState extends State {
     public GameoverState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 320 , 440 );
-        background = new Texture("Game_over.png");
+        background = new Texture("background_night.png");
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
         load_hiscore = prefs.getInteger("highscore");
         FontRed1 = new BitmapFont();
@@ -39,6 +39,7 @@ public class GameoverState extends State {
     protected void handleInput() {
         if(Gdx.input.justTouched()){
             gsm.set(new PlayState(gsm));
+           // gsm.pop();
         }
     }
 

@@ -36,7 +36,7 @@ public class PlayState extends State {
     private Texture red_cross;
     private Texture muted;
     private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p,texture_pooped,texture_bloody;
-    private Texture texture_cloud1,texture_cloud2,texture_cloud3,texture_cloud4;
+    private Texture texture_click_to_start;
     private Texture unmuted;
     private int cautch_ball = 0;
     private int miss_ball = 0;
@@ -45,11 +45,15 @@ public class PlayState extends State {
     boolean mute,change_background;
     public Preferences prefs;
     public int load_hiscore;
-    int boo=15;
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
     float volume;
     Shaker shaker;
-    int index;
+    int index,x,y;
+
+    boolean started;//для страрта игры
+    int start_pos;
+    private Vector3 position;
+    private Vector3 velosity;
 
 
 
@@ -58,6 +62,12 @@ public class PlayState extends State {
         camera.setToOrtho(false, 480 , 800 );
         background = new Texture("background_clean.png");
         mini_menu_background = new Texture("bot_menu_background.jpg");
+        x=40;
+        y=250;
+        position = new Vector3(x, y, 0);
+        velosity = new Vector3(0, 0, 0);
+        this.velosity.y = 300;
+        texture_click_to_start=new Texture("Click_to_start.png");
 
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
@@ -66,6 +76,7 @@ public class PlayState extends State {
 
 
         shaker = new Shaker(camera);
+        started=false;
 
 
         //инициализация музыки
@@ -95,8 +106,6 @@ public class PlayState extends State {
         unmuted = new Texture("sound_on.png");
 
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
-
-
 
 
         //выключил звук на время тестов
@@ -161,6 +170,10 @@ public class PlayState extends State {
                     }
                 }
             }
+
+            if (!started){
+                started=true;
+            }
         }
     }
 
@@ -168,22 +181,30 @@ public class PlayState extends State {
     public void update(float dt) {
         handleInput();
         index=0;
-        for (Balloon balloon : balloons) {
-            balloon.update(dt);
-
-            if (balloon.getPosition().y>720){
-                balloon.setPosition(balloon.getPosition().x, -220-random(50));
-                balloon.setVelosity(get_speed_for_balloon());
-                miss_ball++;
-                change_background=true;
-                Gdx.input.vibrate(250);}
-            if (balloon.isLive_out()){
-                balloon.dispose();
-                balloons.removeIndex(index);
-            }
-        index++;
+        if ((started)&(position.y<1000)) {
+            velosity.scl(dt);
+            position.add(0, velosity.y, 0);
+            velosity.scl(1 / dt);
         }
 
+        if (started) {
+            for (Balloon balloon : balloons) {
+                balloon.update(dt);
+
+                if (balloon.getPosition().y > 720) {
+                    balloon.setPosition(balloon.getPosition().x, -220 - random(50));
+                    balloon.setVelosity(get_speed_for_balloon());
+                    miss_ball++;
+                    change_background = true;
+                    Gdx.input.vibrate(250);
+                }
+                if (balloon.isLive_out()) {
+                    balloon.dispose();
+                    balloons.removeIndex(index);
+                }
+                index++;
+            }
+        }
         for (Cloud cloud : clouds) {
             cloud.update(dt);
             if (cloud.getPosition().x < -320) {
@@ -206,10 +227,13 @@ public class PlayState extends State {
         sb.draw(background,-25, -25,550,900);
         sb.enableBlending();
 
+
         for (Cloud cloud : clouds) {
 
             sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
         }
+
+        sb.draw(texture_click_to_start,position.x,position.y,405,405);
 
         for (Balloon balloon : balloons) {
             switch (balloon.getColor_of_balloon()) {
@@ -255,7 +279,7 @@ public class PlayState extends State {
             default:
                 gsm.set(new GameoverState(gsm));
                 break;
-            case 4:
+            case 3:
                 load_hiscore = prefs.getInteger("highscore");
                 if (load_hiscore<cautch_ball) {
                     prefs.putInteger("highscore", cautch_ball);
@@ -273,7 +297,7 @@ public class PlayState extends State {
                 editor.putString( "name", "John" );
                 editor.commit();*/
                 break;
-            case 3:
+          /*  case 3:
               //  sb.draw(red_cross,480-69-69-69,20,64,64);
                 if (change_background) {
                     change_background=false;
@@ -281,7 +305,7 @@ public class PlayState extends State {
                     background = new Texture("background_night.png");
                 }
                 break;
-
+*/
             case 2:
               //  sb.draw(red_cross,480-69-69,20,64,64);
                 if (change_background) {
