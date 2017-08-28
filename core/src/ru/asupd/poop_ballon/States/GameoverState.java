@@ -17,7 +17,7 @@ import ru.asupd.poop_ballon.GameStateManager;
 
 public class GameoverState extends State {
     private Texture background;
-    private Texture tap_to_restart,your_score,your_best_score;
+    private Texture tap_to_restart,your_score,your_best_score,awesome;
     private Texture numbers;
     private Array<TextureRegion> frames_numbers;
     float currentdt, waiting;
@@ -37,6 +37,7 @@ public class GameoverState extends State {
 
         your_score = new Texture("your_score.png");
         your_best_score = new Texture("best_score_r.png");
+        awesome = new Texture("awesome.png");
 
         numbers = new Texture("numbers.png");
         frames_numbers = new Array<TextureRegion>();
@@ -94,19 +95,23 @@ public class GameoverState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0,480,800);
-        sb.draw(your_score,175,600,120,75);
+        sb.draw(tap_to_restart,60,600,360,50);
+        if (last_score>=load_hiscore) {
+            sb.draw(awesome, 95, 480, 290, 55);
+        }
+        sb.draw(your_score,175,400,120,75);
 
-        sb.draw(frames_numbers.get(score_last[0]),245,520,25,31);
-        sb.draw(frames_numbers.get(score_last[1]),225,520,25,31);
-        sb.draw(frames_numbers.get(score_last[2]),205,520,25,31);
-        sb.draw(frames_numbers.get(score_last[3]),185,520,25,31);
+        sb.draw(frames_numbers.get(score_last[0]),245,320,25,31);
+        sb.draw(frames_numbers.get(score_last[1]),225,320,25,31);
+        sb.draw(frames_numbers.get(score_last[2]),205,320,25,31);
+        sb.draw(frames_numbers.get(score_last[3]),185,320,25,31);
 
-        sb.draw(your_best_score,125,300,210,75);
+        sb.draw(your_best_score,125,100,210,75);
 
-        sb.draw(frames_numbers.get(score_best[0]),245,250,25,31);
-        sb.draw(frames_numbers.get(score_best[1]),225,250,25,31);
-        sb.draw(frames_numbers.get(score_best[2]),205,250,25,31);
-        sb.draw(frames_numbers.get(score_best[3]),185,250,25,31);
+        sb.draw(frames_numbers.get(score_best[0]),245,50,25,31);
+        sb.draw(frames_numbers.get(score_best[1]),225,50,25,31);
+        sb.draw(frames_numbers.get(score_best[2]),205,50,25,31);
+        sb.draw(frames_numbers.get(score_best[3]),185,50,25,31);
 
 
        // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 250);

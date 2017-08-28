@@ -67,7 +67,7 @@ public class PlayState extends State {
         camera.setToOrtho(false, 480 , 800 );
         background = new Texture("background_clean.png");
         x=10;
-        y=550;
+        y=450;
         position = new Vector3(x, y, 0);
         velosity = new Vector3(0, 0, 0);
         this.velosity.y = 300;
@@ -276,13 +276,13 @@ public class PlayState extends State {
         }
 
         if (!started){
-            sb.draw(your_high_score,130,200,211,74);
-            sb.draw(tap_to_play,80,400,335,51);
+            sb.draw(your_high_score,130,100,211,74);
+            sb.draw(tap_to_play,80,360,335,51);
 
-            sb.draw(frames_numbers.get(megred_high_score[0]),250,150,25,31);
-            sb.draw(frames_numbers.get(megred_high_score[1]),230,150,25,31);
-            sb.draw(frames_numbers.get(megred_high_score[2]),210,150,25,31);
-            sb.draw(frames_numbers.get(megred_high_score[3]),190,150,25,31);
+            sb.draw(frames_numbers.get(megred_high_score[0]),250,50,25,31);
+            sb.draw(frames_numbers.get(megred_high_score[1]),230,50,25,31);
+            sb.draw(frames_numbers.get(megred_high_score[2]),210,50,25,31);
+            sb.draw(frames_numbers.get(megred_high_score[3]),190,50,25,31);
         }
 
         for (Cloud cloud : clouds) {
