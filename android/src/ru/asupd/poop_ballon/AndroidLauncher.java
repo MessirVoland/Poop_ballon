@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -26,13 +28,23 @@ public class AndroidLauncher extends AndroidApplication {
 		super.onCreate(savedInstanceState);
 
 		RelativeLayout layout = new RelativeLayout(this);
+
+		// Do the stuff that initialize() would do for you
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useAccelerometer = false;
 		config.useCompass = false;
+
+		// Create the libgdx View
 		View gameView = initializeForView(new MyGdxGame(), config);
 		layout.addView(gameView);
 
-		adView = new AdView(this);
+		// Create and setup the AdMob view
+		AdView adView = new AdView(this);
 		adView.setAdListener(new AdListener() {
 			@Override
 			public void onAdLoaded() {
@@ -43,11 +55,13 @@ public class AndroidLauncher extends AndroidApplication {
 		adView.setAdUnitId("ca-app-pub-6755493316893566/6656095586");
 
 		AdRequest.Builder builder = new AdRequest.Builder();
-		//builder.addTestDevice("ADCD72548573E2D66A2AFC8594EDF6F6");
+		builder.addTestDevice("ADCD72548573E2D66A2AFC8594EDF6F6");
 		RelativeLayout.LayoutParams adParams = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.WRAP_CONTENT,
 				RelativeLayout.LayoutParams.WRAP_CONTENT
 		);
+		adParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		adParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 
 		layout.addView(adView,adParams);
 		adView.loadAd(builder.build());
