@@ -122,6 +122,7 @@ public class PlayState extends State {
 
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
         load_hiscore = prefs.getInteger("highscore");
+        prefs.putInteger("last_match_score", 0);
 
         int local_highscore;
 
@@ -206,6 +207,13 @@ public class PlayState extends State {
 
             if (!started){
                 started=true;
+                int local_highscore;
+                local_highscore = 0;
+                for (int k=0;k<=4;k++) {
+
+                    megred_high_score[k] = local_highscore % 10;
+                    local_highscore = local_highscore / 10;
+                }
             }
         }
     }
@@ -310,9 +318,9 @@ public class PlayState extends State {
         }
 
 
-        FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 790);
-        FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 755);
-        FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 720);
+       // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 790);
+       // FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 755);
+        FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 790);
 
 
         if (mute){
@@ -328,6 +336,9 @@ public class PlayState extends State {
                 break;
             case 3:
                 load_hiscore = prefs.getInteger("highscore");
+
+                prefs.putInteger("last_match_score", cautch_ball);
+                prefs.flush();
                 if (load_hiscore<cautch_ball) {
                     prefs.putInteger("highscore", cautch_ball);
                     prefs.flush();
