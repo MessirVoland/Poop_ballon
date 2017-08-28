@@ -138,7 +138,7 @@ public class PlayState extends State {
                 if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)){
                     if ((balloon.getPosition().y<touchPos.y)&(balloon.getPosition().y+200>touchPos.y)){
                         if (!balloon.isPooped()) {
-                            if (touchPos.y>100) {
+                            if (touchPos.y<700) {
                                 System.out.println("touched the ball :");
                                  poop_Sound.play(volume);
                                 //balloon.setPosition(balloon.getPosition().x, -220-random(50));
@@ -157,7 +157,7 @@ public class PlayState extends State {
                 index++;
             }
             if ((480-69-69-69-69<touchPos.x)&(480-69-69-69-69+64>touchPos.x)){
-                if((20<touchPos.y)&(20+64>touchPos.y)){
+                if((700+20<touchPos.y)&(700+20+64>touchPos.y)){
                     if (mute) {
                         background_Music.play();
                         volume=0.1f;
@@ -261,18 +261,18 @@ public class PlayState extends State {
         }
 
         sb.disableBlending();
-        sb.draw(mini_menu_background, 0, 0,480,100);
+        sb.draw(mini_menu_background, 0, 700,480,100);
         sb.enableBlending();
         load_hiscore = prefs.getInteger("highscore");
-        FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 60);
-        FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 40);
-        FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 20);
+        FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 790);
+        FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 755);
+        FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 720);
 
         if (mute){
             //sb.draw(muted,480-69-69-69-69,800-69,64,64);
-            sb.draw(muted,480-69-69-69-69,20,64,64);
+            sb.draw(muted,480-69-69-69-69,700+20,64,64);
         }else{
-            sb.draw(unmuted,480-69-69-69-69,20,64,64);
+            sb.draw(unmuted,480-69-69-69-69,700+20,64,64);
         }
 
         switch (miss_ball){
