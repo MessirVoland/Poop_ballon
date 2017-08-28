@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
@@ -36,7 +37,9 @@ public class PlayState extends State {
     private Texture muted;
     private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p,texture_pooped,texture_bloody;
     private Texture texture_poop_balloon;
-    private Texture your_high_score,tap_to_play;
+    private Texture your_high_score,tap_to_play,score;
+    private Texture numbers;
+    private Array<TextureRegion> frames_numbers;
 
     private Texture unmuted;
 
@@ -53,7 +56,7 @@ public class PlayState extends State {
     int index,x,y;
 
     boolean started;//для страрта игры
-    int start_pos;
+    int[] megred_high_score = new int[5];
     private Vector3 position;
     private Vector3 velosity;
 
@@ -72,6 +75,7 @@ public class PlayState extends State {
 
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
+
 
 
 
@@ -98,6 +102,15 @@ public class PlayState extends State {
         texture_bloody=new Texture("Blood_Splatter.png");
         your_high_score = new Texture("best_score_g.png");
         tap_to_play = new Texture("tap_to_play.png");
+        score =  new Texture("score.png");
+
+        numbers = new Texture("numbers.png");
+        frames_numbers = new Array<TextureRegion>();
+        for (int j=0;j<=9;j++){
+            frames_numbers.add(new TextureRegion(numbers,j*25,0,25,31));
+        }
+
+
 /*
         texture_cloud1=new Texture("cloud1.png");
         texture_cloud2=new Texture("cloud2.png");
@@ -108,6 +121,17 @@ public class PlayState extends State {
         unmuted = new Texture("sound_on.png");
 
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
+        load_hiscore = prefs.getInteger("highscore");
+
+        int local_highscore;
+
+        local_highscore = load_hiscore;
+        for (int k=0;k<=4;k++) {
+
+            megred_high_score[k] = local_highscore % 10;
+            local_highscore = local_highscore / 10;
+        }
+
 
 
         //выключил звук на время тестов
@@ -149,6 +173,13 @@ public class PlayState extends State {
                                 cautch_ball++;
                                 // camera.rotate(0.2f);
                                 // camera.update();
+                                int local_highscore;
+                                local_highscore = cautch_ball;
+                                for (int k=0;k<=4;k++) {
+
+                                    megred_high_score[k] = local_highscore % 10;
+                                    local_highscore = local_highscore / 10;
+                                }
 
                                 balloon.setPooped(cautch_ball);
                                 balloons.add(new Balloon(random(4) * 96, -195 - random(50), (200 + random(cautch_ball * 3) - random(100))));
@@ -158,7 +189,7 @@ public class PlayState extends State {
                 }
                 index++;
             }
-            if ((480-69-69-69-69<touchPos.x)&(480-69-69-69-69+64>touchPos.x)){
+            if ((480-69<touchPos.x)&(480-69+64>touchPos.x)){
                 if((700+20<touchPos.y)&(700+20+64>touchPos.y)){
                     if (mute) {
                         background_Music.play();
@@ -228,10 +259,22 @@ public class PlayState extends State {
         sb.disableBlending();
         sb.draw(background,-25, -25,550,900);
         sb.enableBlending();
+        if (started){
+            sb.draw(score,100,760,115,31);
+            sb.draw(frames_numbers.get(megred_high_score[0]),285,760,25,31);
+            sb.draw(frames_numbers.get(megred_high_score[1]),265,760,25,31);
+            sb.draw(frames_numbers.get(megred_high_score[2]),245,760,25,31);
+            sb.draw(frames_numbers.get(megred_high_score[3]),225,760,25,31);
+        }
 
         if (!started){
             sb.draw(your_high_score,130,200,211,74);
             sb.draw(tap_to_play,80,400,335,51);
+
+            sb.draw(frames_numbers.get(megred_high_score[0]),250,150,25,31);
+            sb.draw(frames_numbers.get(megred_high_score[1]),230,150,25,31);
+            sb.draw(frames_numbers.get(megred_high_score[2]),210,150,25,31);
+            sb.draw(frames_numbers.get(megred_high_score[3]),190,150,25,31);
         }
 
         for (Cloud cloud : clouds) {
@@ -266,16 +309,17 @@ public class PlayState extends State {
 
         }
 
-        load_hiscore = prefs.getInteger("highscore");
+
         FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 790);
         FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 755);
         FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 720);
 
+
         if (mute){
             //sb.draw(muted,480-69-69-69-69,800-69,64,64);
-            sb.draw(muted,480-69-69-69-69,700+20,64,64);
+            sb.draw(muted,480-69,700+20,64,64);
         }else{
-            sb.draw(unmuted,480-69-69-69-69,700+20,64,64);
+            sb.draw(unmuted,480-69,700+20,64,64);
         }
 
         switch (miss_ball){
