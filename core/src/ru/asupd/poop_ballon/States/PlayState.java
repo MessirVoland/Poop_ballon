@@ -31,13 +31,15 @@ public class PlayState extends State {
     private Array<Cloud> clouds;
 
     private Texture background;
-    private Texture mini_menu_background;
     private BitmapFont FontRed1;
-    private Texture red_cross;
+
     private Texture muted;
     private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p,texture_pooped,texture_bloody;
-    private Texture texture_click_to_start;
+    private Texture texture_poop_balloon;
+    private Texture your_high_score,tap_to_play;
+
     private Texture unmuted;
+
     private int cautch_ball = 0;
     private int miss_ball = 0;
     private Sound poop_Sound;
@@ -61,18 +63,16 @@ public class PlayState extends State {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
         background = new Texture("background_clean.png");
-        mini_menu_background = new Texture("bot_menu_background.jpg");
-        x=40;
-        y=250;
+        x=10;
+        y=550;
         position = new Vector3(x, y, 0);
         velosity = new Vector3(0, 0, 0);
         this.velosity.y = 300;
-        texture_click_to_start=new Texture("Click_to_start.png");
+        texture_poop_balloon=new Texture("poop_balloon.png");
 
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
 
-        red_cross = new Texture("Redcross.png");
 
 
         shaker = new Shaker(camera);
@@ -96,6 +96,8 @@ public class PlayState extends State {
         texture_b_p =  new Texture("Balloon_purple.png");
         texture_pooped=new Texture("blow.png");
         texture_bloody=new Texture("Blood_Splatter.png");
+        your_high_score = new Texture("best_score_g.png");
+        tap_to_play = new Texture("tap_to_play.png");
 /*
         texture_cloud1=new Texture("cloud1.png");
         texture_cloud2=new Texture("cloud2.png");
@@ -227,13 +229,17 @@ public class PlayState extends State {
         sb.draw(background,-25, -25,550,900);
         sb.enableBlending();
 
+        if (!started){
+            sb.draw(your_high_score,130,200,211,74);
+            sb.draw(tap_to_play,80,400,335,51);
+        }
 
         for (Cloud cloud : clouds) {
 
             sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
         }
 
-        sb.draw(texture_click_to_start,position.x,position.y,405,405);
+        sb.draw(texture_poop_balloon,position.x,position.y,463,218);
 
         for (Balloon balloon : balloons) {
             switch (balloon.getColor_of_balloon()) {
@@ -254,15 +260,12 @@ public class PlayState extends State {
                     sb.draw(texture_b_p, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 5:
-                    sb.draw(texture_pooped, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    sb.draw(texture_pooped, balloon.getPosition().x-10, balloon.getPosition().y+100, 115, 115);
                     break;
             }
 
         }
 
-        sb.disableBlending();
-        sb.draw(mini_menu_background, 0, 700,480,100);
-        sb.enableBlending();
         load_hiscore = prefs.getInteger("highscore");
         FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 790);
         FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 755);
@@ -335,7 +338,6 @@ public class PlayState extends State {
     public void dispose() {
         poop_Sound.dispose();
         background_Music.dispose();
-        red_cross.dispose();
         background.dispose();
         texture_b_b.dispose();
         texture_b_r.dispose();
