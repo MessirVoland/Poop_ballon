@@ -127,7 +127,7 @@ public class Balloon extends Creature {
         */
    if (pooped){
         currentTime+=dt;
-       if (currentTime>=0.355f)
+       if (currentTime>=0.055f)
        {
            live_out=true;
        }

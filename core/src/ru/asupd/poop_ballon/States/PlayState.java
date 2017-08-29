@@ -311,7 +311,7 @@ public class PlayState extends State {
                     sb.draw(texture_b_p, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 5:
-                    sb.draw(texture_pooped, balloon.getPosition().x-10, balloon.getPosition().y+100, 115, 115);
+                    sb.draw(texture_pooped, balloon.getPosition().x-10-115, balloon.getPosition().y+100-115, 330, 330);
                     break;
             }
 
