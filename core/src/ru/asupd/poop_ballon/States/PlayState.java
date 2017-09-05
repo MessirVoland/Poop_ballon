@@ -57,7 +57,7 @@ public class PlayState extends State {
     private int cautch_ball = 0;
     private int miss_ball = 0;
     private Sound poop_Sound;
-    private Music background_Music;
+    private Music background_Music,boss_Music;
     boolean mute,change_background;
     public Preferences prefs;
     public int load_hiscore;
@@ -100,9 +100,12 @@ public class PlayState extends State {
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
 
         background_Music = Gdx.audio.newMusic(Gdx.files.internal("sound.mp3"));
+        boss_Music = Gdx.audio.newMusic(Gdx.files.internal("Sound_19272 [Wav_Library_Net].mp3"));
         background_Music.setVolume(0.1f);
         background_Music.setLooping(true);
+        boss_Music.setLooping(true);
         background_Music.play();
+        boss_Music.setVolume(1.0f);
 
 
         //хорошо бы сделать отдельный текстур менеджер с полосой загрузки
@@ -292,6 +295,8 @@ public class PlayState extends State {
             if (boss_balloon.isLive()) {
                 boss_balloon.Start();
                 started = false;
+                background_Music.stop();
+                boss_Music.play();
             }
         }
 
@@ -300,6 +305,12 @@ public class PlayState extends State {
             velosity.scl(dt);
             position.add(0, velosity.y, 0);
             velosity.scl(1 / dt);
+        }
+        if (!boss_balloon.isLive()){
+            if (boss_Music.isPlaying()){
+                boss_Music.stop();
+                background_Music.play();
+            }
         }
 
 

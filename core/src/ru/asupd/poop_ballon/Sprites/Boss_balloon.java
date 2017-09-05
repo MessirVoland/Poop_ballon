@@ -84,6 +84,7 @@ public class Boss_balloon extends Creature {
     public void kill_boss(){
         live=false;
         started=false;
+
     }
     public void reposition(){
         position.x=random(300);
