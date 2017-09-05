@@ -13,9 +13,12 @@ import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
+import org.omg.CORBA.BooleanSeqHelper;
+
 import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Sprites.Animation;
 import ru.asupd.poop_ballon.Sprites.Balloon;
+import ru.asupd.poop_ballon.Sprites.Boss_balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
 import ru.asupd.poop_ballon.Workers.Shaker;
 
@@ -67,6 +70,8 @@ public class PlayState extends State {
     int[] megred_high_score = new int[5];
     private Vector3 position;
     private Vector3 velosity;
+
+    Boss_balloon boss_balloon;
 
 
 
@@ -179,6 +184,8 @@ public class PlayState extends State {
         for (int i = 0; i <= 4; i++){
             clouds.add(new Cloud(random(1000)-400,125*i+100+10,-random(25)-25));
         }
+
+        boss_balloon = new Boss_balloon(random(4)*96,-195-random(50),80);
     }
 
     @Override
@@ -189,6 +196,15 @@ public class PlayState extends State {
             System.out.println("touchPos :"+touchPos);
             camera.unproject(touchPos);
             index=0;
+            if (boss_balloon.isStarted()){
+                if ((boss_balloon.getPosition().x<touchPos.x)&(boss_balloon.getPosition().x+100>touchPos.x)){
+                    if ((boss_balloon.getPosition().y<touchPos.y)&(boss_balloon.getPosition().y+200>touchPos.y)){
+                        poop_Sound.play(volume);
+                        shaker.shake(0.40f);
+                        boss_balloon.clicked_boss();
+                    }
+                }
+            }
             for (Balloon balloon : balloons) {
                 if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)){
                     if ((balloon.getPosition().y<touchPos.y)&(balloon.getPosition().y+200>touchPos.y)){
@@ -244,13 +260,16 @@ public class PlayState extends State {
             }
 
             if (!started){
-                started=true;
+                if (!boss_balloon.isStarted()) {
+                    started = true;
+
                 int local_highscore;
                 local_highscore = 0;
                 for (int k=0;k<=4;k++) {
 
                     megred_high_score[k] = local_highscore % 10;
                     local_highscore = local_highscore / 10;
+                }
                 }
             }
         }
@@ -265,12 +284,24 @@ public class PlayState extends State {
         poof_balloon_r.update(dt);
         poof_balloon_p.update(dt);
 
+        if (boss_balloon.isStarted()){
+            boss_balloon.update(dt);
+        }
+
+        if ((cautch_ball>25)&(!boss_balloon.isStarted())){
+            if (boss_balloon.isLive()) {
+                boss_balloon.Start();
+                started = false;
+            }
+        }
+
         index=0;
         if ((started)&(position.y<1000)) {
             velosity.scl(dt);
             position.add(0, velosity.y, 0);
             velosity.scl(1 / dt);
         }
+
 
         if (started) {
             for (Balloon balloon : balloons) {
@@ -311,7 +342,7 @@ public class PlayState extends State {
         sb.disableBlending();
         sb.draw(background,-25, -25,550,900);
         sb.enableBlending();
-        if (started){
+        if ((started)|(boss_balloon.isStarted())){
             sb.draw(score,100,760,115,31);
             sb.draw(frames_numbers.get(megred_high_score[0]),285,760,25,31);
             sb.draw(frames_numbers.get(megred_high_score[1]),265,760,25,31);
@@ -319,7 +350,7 @@ public class PlayState extends State {
             sb.draw(frames_numbers.get(megred_high_score[3]),225,760,25,31);
         }
 
-        if (!started){
+        if ((!started)&(!boss_balloon.isStarted())){
             sb.draw(your_high_score,130,100,211,74);
             sb.draw(tap_to_play,80,360,335,51);
             sb.draw(frames_numbers.get(megred_high_score[0]),250,50,25,31);
@@ -334,7 +365,11 @@ public class PlayState extends State {
         }
 
         sb.draw(texture_poop_balloon,position.x,position.y,463,218);
+        if (boss_balloon.isStarted()){
+            sb.draw(boss_balloon.getTexture_boss(),boss_balloon.getPosition().x,boss_balloon.getPosition().y,95,190);
+        }
 
+        if (!boss_balloon.isStarted()){
         for (Balloon balloon : balloons) {
             switch (balloon.getColor_of_balloon()) {
                 case 0:
@@ -371,6 +406,8 @@ public class PlayState extends State {
             }
 
         }
+        }
+
 
 
        // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 790);
