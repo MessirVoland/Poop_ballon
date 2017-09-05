@@ -237,7 +237,7 @@ public class PlayState extends State {
                     balloon.setVelosity(get_speed_for_balloon());
                     miss_ball++;
                     change_background = true;
-                    Gdx.input.vibrate(250);
+                    Gdx.input.vibrate(125);
                 }
                 if (balloon.isLive_out()) {
                     balloon.dispose();
@@ -278,7 +278,6 @@ public class PlayState extends State {
         if (!started){
             sb.draw(your_high_score,130,100,211,74);
             sb.draw(tap_to_play,80,360,335,51);
-
             sb.draw(frames_numbers.get(megred_high_score[0]),250,50,25,31);
             sb.draw(frames_numbers.get(megred_high_score[1]),230,50,25,31);
             sb.draw(frames_numbers.get(megred_high_score[2]),210,50,25,31);
