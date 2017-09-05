@@ -36,7 +36,7 @@ public class Balloon extends Creature {
 
     public void setPooped(int i) {
         if (i<1000){
-            color_of_balloon=5;
+            color_of_balloon+=5;
             System.out.println("texture_pooped");
         }
         else
@@ -127,7 +127,7 @@ public class Balloon extends Creature {
         */
    if (pooped){
         currentTime+=dt;
-       if (currentTime>=0.055f)
+       if (currentTime>0.155f)
        {
            live_out=true;
        }

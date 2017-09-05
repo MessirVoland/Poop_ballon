@@ -24,7 +24,18 @@ public class Animation {
         maxFrameTime=cycleTime / frameCount;
         frame =0;
     }
+
+    public void setFrame(int frame) {
+        this.frame = frame;
+    }
+
+    public void setCurrentFrameTime(float currentFrameTime) {
+
+        this.currentFrameTime = currentFrameTime;
+    }
+
     public void update(float dt){
+
         currentFrameTime+=dt;
         if (currentFrameTime>maxFrameTime){
             frame++;

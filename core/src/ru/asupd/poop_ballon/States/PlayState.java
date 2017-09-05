@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 import ru.asupd.poop_ballon.GameStateManager;
+import ru.asupd.poop_ballon.Sprites.Animation;
 import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
 import ru.asupd.poop_ballon.Workers.Shaker;
@@ -42,6 +43,13 @@ public class PlayState extends State {
     private Array<TextureRegion> frames_numbers;
 
     private Texture unmuted;
+
+    private Texture poof_balloon_atlas;
+    private Animation poof_balloon_g;
+    private Animation poof_balloon_y;
+    private Animation poof_balloon_b;
+    private Animation poof_balloon_r;
+    private Animation poof_balloon_p;
 
     private int cautch_ball = 0;
     private int miss_ball = 0;
@@ -110,6 +118,26 @@ public class PlayState extends State {
             frames_numbers.add(new TextureRegion(numbers,j*25,0,25,31));
         }
 
+        poof_balloon_atlas = new Texture("pop_g.png");
+        poof_balloon_g = new Animation(new TextureRegion(poof_balloon_atlas),3,0.155f);
+
+
+        poof_balloon_atlas = new Texture("pop_y.png");
+        poof_balloon_y = new Animation(new TextureRegion(poof_balloon_atlas),3,0.155f);
+
+        poof_balloon_atlas = new Texture("pop_b.png");
+        poof_balloon_b = new Animation(new TextureRegion(poof_balloon_atlas),3,0.155f);
+
+
+        poof_balloon_atlas = new Texture("pop_r.png");
+        poof_balloon_r = new Animation(new TextureRegion(poof_balloon_atlas),3,0.155f);
+
+
+        poof_balloon_atlas = new Texture("pop_p.png");
+        poof_balloon_p = new Animation(new TextureRegion(poof_balloon_atlas),3,0.155f);
+
+
+
 
 /*
         texture_cloud1=new Texture("cloud1.png");
@@ -172,6 +200,16 @@ public class PlayState extends State {
                                 shaker.shake(0.40f);
 
                                 cautch_ball++;
+                                poof_balloon_g.setCurrentFrameTime(0.0f);
+                                poof_balloon_g.setFrame(0);
+                                poof_balloon_y.setCurrentFrameTime(0.0f);
+                                poof_balloon_y.setFrame(0);
+                                poof_balloon_b.setCurrentFrameTime(0.0f);
+                                poof_balloon_b.setFrame(0);
+                                poof_balloon_r.setCurrentFrameTime(0.0f);
+                                poof_balloon_r.setFrame(0);
+                                poof_balloon_p.setCurrentFrameTime(0.0f);
+                                poof_balloon_p.setFrame(0);
                                 // camera.rotate(0.2f);
                                 // camera.update();
                                 int local_highscore;
@@ -221,6 +259,12 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
+        poof_balloon_g.update(dt);
+        poof_balloon_y.update(dt);
+        poof_balloon_b.update(dt);
+        poof_balloon_r.update(dt);
+        poof_balloon_p.update(dt);
+
         index=0;
         if ((started)&(position.y<1000)) {
             velosity.scl(dt);
@@ -310,7 +354,19 @@ public class PlayState extends State {
                     sb.draw(texture_b_p, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 5:
-                    sb.draw(texture_pooped, balloon.getPosition().x-10-115, balloon.getPosition().y+100-115, 330, 330);
+                    sb.draw(poof_balloon_g.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    break;
+                case 6:
+                    sb.draw(poof_balloon_y.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    break;
+                case 7:
+                    sb.draw(poof_balloon_b.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    break;
+                case 8:
+                    sb.draw(poof_balloon_r.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    break;
+                case 9:
+                    sb.draw(poof_balloon_p.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     break;
             }
 
@@ -400,6 +456,7 @@ public class PlayState extends State {
         texture_b_p.dispose();
         texture_pooped.dispose();
         texture_bloody.dispose();
+        poof_balloon_atlas.dispose();
         muted.dispose();
         unmuted.dispose();
 
