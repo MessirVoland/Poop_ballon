@@ -13,9 +13,12 @@ import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
+import org.omg.CORBA.BooleanSeqHelper;
+
 import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Sprites.Animation;
 import ru.asupd.poop_ballon.Sprites.Balloon;
+import ru.asupd.poop_ballon.Sprites.Boss_balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
 import ru.asupd.poop_ballon.Workers.Shaker;
 
@@ -29,75 +32,83 @@ import static com.badlogic.gdx.math.MathUtils.random;
 
 public class PlayState extends State {
 
-    private Array<Balloon> balloons;
-    private Array<Cloud> clouds;
+    private Array<Balloon> balloons;//массив шаров
+    private Array<Cloud> clouds;//массив шаров
 
-    private Texture background;
-    private BitmapFont FontRed1;
+    private Texture background;//задник
+    private BitmapFont FontRed1;//для фпс
 
-    private Texture muted;
-    private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p,texture_pooped,texture_bloody;
-    private Texture texture_poop_balloon;
-    private Texture your_high_score,tap_to_play,score;
-    private Texture numbers;
-    private Array<TextureRegion> frames_numbers;
+    private Texture muted,unmuted;//иконка звука
 
-    private Texture unmuted;
+    private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p;//Шарики
 
-    private Texture poof_balloon_atlas;
-    private Animation poof_balloon_g;
-    private Animation poof_balloon_y;
-    private Animation poof_balloon_b;
-    private Animation poof_balloon_r;
-    private Animation poof_balloon_p;
+    private Texture texture_poop_balloon;//Название игры
 
-    private int cautch_ball = 0;
-    private int miss_ball = 0;
-    private Sound poop_Sound;
-    private Music background_Music;
-    boolean mute,change_background;
-    public Preferences prefs;
-    public int load_hiscore;
+    private Texture your_high_score,tap_to_play,score;//наибольший счет, таб ту плей, напись счет
+
+    private Texture numbers;//числа
+    private Array<TextureRegion> frames_numbers;//числа
+
+
+
+    private Texture poof_balloon_atlas;//загрузчик атласов взрывов
+    private Animation poof_balloon_g,poof_balloon_y,poof_balloon_b,poof_balloon_r,poof_balloon_p;
+
+    private int cautch_ball = 0;//поймано шаров
+    private int miss_ball = 0;//пропущено шаров
+
+    private Sound poop_Sound;//звук лопания
+    private Music background_Music,boss_Music;//музыка
+
+    boolean mute;//тишина
+    boolean change_background;//хз
+
+    public final static float ANIMATION_TIME=0.266f;//время анимации
+    public Preferences prefs;//для храниния данных
+    public int load_hiscore;//макс счет
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
-    float volume;
-    Shaker shaker;
-    int index,x,y;
+    float volume;//хз)
+    Shaker shaker;//шейкео
+    int index,x,y;//хз
 
     boolean started;//для страрта игры
-    int[] megred_high_score = new int[5];
-    private Vector3 position;
-    private Vector3 velosity;
+    int[] megred_high_score = new int[5];//для отображения счета
+
+    private Vector3 position;//Координаты заголовка игры
+    private Vector3 velosity;//вектор движения заголовка
+
+    Boss_balloon boss_balloon;//босс
 
 
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
+
+
         background = new Texture("background_clean.png");
-        x=10;
-        y=450;
-        position = new Vector3(x, y, 0);
-        velosity = new Vector3(0, 0, 0);
-        this.velosity.y = 300;
-        texture_poop_balloon=new Texture("poop_balloon.png");
 
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
 
 
-
-
         shaker = new Shaker(camera);
-        started=false;
+        started=false;//начало игры
+
+        position = new Vector3(10,500,0);
+        velosity=new Vector3(0,200,0);
 
 
         //инициализация музыки
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
 
         background_Music = Gdx.audio.newMusic(Gdx.files.internal("sound.mp3"));
-        background_Music.setVolume(0.1f);
+        boss_Music = Gdx.audio.newMusic(Gdx.files.internal("Sound_19272 [Wav_Library_Net].mp3"));
+        background_Music.setVolume(0.3f);
         background_Music.setLooping(true);
+        boss_Music.setLooping(true);
         background_Music.play();
+        boss_Music.setVolume(0.3f);
 
 
         //хорошо бы сделать отдельный текстур менеджер с полосой загрузки
@@ -106,9 +117,8 @@ public class PlayState extends State {
         texture_b_g =  new Texture("Balloon_green.png");
         texture_b_y =  new Texture("Balloon_yellow.png");
         texture_b_p =  new Texture("Balloon_purple.png");
-        texture_pooped=new Texture("blow.png");
-        texture_bloody=new Texture("Blood_Splatter.png");
         your_high_score = new Texture("best_score_g.png");
+        texture_poop_balloon = new Texture("poop_balloon.png");
         tap_to_play = new Texture("tap_to_play.png");
         score =  new Texture("score.png");
 
@@ -119,32 +129,17 @@ public class PlayState extends State {
         }
 
         poof_balloon_atlas = new Texture("pop_g.png");
-        poof_balloon_g = new Animation(new TextureRegion(poof_balloon_atlas),3,0.155f);
-
-
+        poof_balloon_g = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
         poof_balloon_atlas = new Texture("pop_y.png");
-        poof_balloon_y = new Animation(new TextureRegion(poof_balloon_atlas),3,0.155f);
-
+        poof_balloon_y = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
         poof_balloon_atlas = new Texture("pop_b.png");
-        poof_balloon_b = new Animation(new TextureRegion(poof_balloon_atlas),3,0.155f);
-
-
+        poof_balloon_b = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
         poof_balloon_atlas = new Texture("pop_r.png");
-        poof_balloon_r = new Animation(new TextureRegion(poof_balloon_atlas),3,0.155f);
-
-
+        poof_balloon_r = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
         poof_balloon_atlas = new Texture("pop_p.png");
-        poof_balloon_p = new Animation(new TextureRegion(poof_balloon_atlas),3,0.155f);
+        poof_balloon_p = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
 
 
-
-
-/*
-        texture_cloud1=new Texture("cloud1.png");
-        texture_cloud2=new Texture("cloud2.png");
-        texture_cloud3=new Texture("cloud3.png");
-        texture_cloud4=new Texture("cloud4.png");
-*/
         muted = new Texture("sound_off.png");
         unmuted = new Texture("sound_on.png");
 
@@ -152,16 +147,13 @@ public class PlayState extends State {
         load_hiscore = prefs.getInteger("highscore");
         prefs.putInteger("last_match_score", 0);
 
+        //Вывод макс очков
         int local_highscore;
-
         local_highscore = load_hiscore;
         for (int k=0;k<=4;k++) {
-
             megred_high_score[k] = local_highscore % 10;
             local_highscore = local_highscore / 10;
         }
-
-
 
         //выключил звук на время тестов
         change_background = false;
@@ -171,7 +163,7 @@ public class PlayState extends State {
         //инициализация массива шаров
         balloons = new Array<Balloon>();
         for (int i = 0; i <= 4; i++){
-            balloons.add(new Balloon(i * 96,-195-random(50),100));
+            balloons.add(new Balloon(i * 96,-195-random(50),100,true));
         }
 
         //инициализация массива облаков
@@ -179,6 +171,8 @@ public class PlayState extends State {
         for (int i = 0; i <= 4; i++){
             clouds.add(new Cloud(random(1000)-400,125*i+100+10,-random(25)-25));
         }
+        //инициализация босса
+        boss_balloon = new Boss_balloon(random(4)*96,-195-random(50),80);
     }
 
     @Override
@@ -186,20 +180,32 @@ public class PlayState extends State {
         if(Gdx.input.justTouched()) {
             Vector3 touchPos = new Vector3();
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            System.out.println("touchPos :"+touchPos);
+            //System.out.println("touchPos :"+touchPos);
             camera.unproject(touchPos);
             index=0;
+            //клик по боссу
+            if (boss_balloon.isStarted()){
+                if ((boss_balloon.getPosition().x<touchPos.x)&(boss_balloon.getPosition().x+100>touchPos.x)){
+                    if ((boss_balloon.getPosition().y<touchPos.y)&(boss_balloon.getPosition().y+200>touchPos.y)){
+                        poop_Sound.play(volume);
+                        shaker.shake(0.40f);
+                        boss_balloon.clicked_boss();
+                    }
+                }
+            }
+
+            //клик по шарам
             for (Balloon balloon : balloons) {
                 if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)){
                     if ((balloon.getPosition().y<touchPos.y)&(balloon.getPosition().y+200>touchPos.y)){
                         if (!balloon.isPooped()) {
                             if (touchPos.y<700) {
-                                System.out.println("touched the ball :");
+                                //System.out.println("touched the ball :");
                                  poop_Sound.play(volume);
-                                //balloon.setPosition(balloon.getPosition().x, -220-random(50));
                                 shaker.shake(0.40f);
 
                                 cautch_ball++;
+
                                 poof_balloon_g.setCurrentFrameTime(0.0f);
                                 poof_balloon_g.setFrame(0);
                                 poof_balloon_y.setCurrentFrameTime(0.0f);
@@ -210,8 +216,7 @@ public class PlayState extends State {
                                 poof_balloon_r.setFrame(0);
                                 poof_balloon_p.setCurrentFrameTime(0.0f);
                                 poof_balloon_p.setFrame(0);
-                                // camera.rotate(0.2f);
-                                // camera.update();
+
                                 int local_highscore;
                                 local_highscore = cautch_ball;
                                 for (int k=0;k<=4;k++) {
@@ -221,22 +226,32 @@ public class PlayState extends State {
                                 }
 
                                 balloon.setPooped(cautch_ball);
-                                balloons.add(new Balloon(random(4) * 96, -195 - random(50), (200 + random(cautch_ball * 3) - random(100))));
+                                balloons.add(new Balloon(random(4) * 96, -195 - random(50), (200 + random(cautch_ball * 3) - random(100)),!boss_balloon.isStarted()));
                             }
                         }
                     }
                 }
                 index++;
             }
+
+            //клик по иконке звука
             if ((480-69<touchPos.x)&(480-69+64>touchPos.x)){
                 if((700+20<touchPos.y)&(700+20+64>touchPos.y)){
                     if (mute) {
-                        background_Music.play();
+                        if (boss_balloon.isStarted()){
+                            boss_Music.play();
+                        }else {
+                            background_Music.play();
+                        }
                         volume=0.1f;
                         mute=false;
                     }
                     else {
-                        background_Music.pause();
+                        if (boss_balloon.isStarted()){
+                            boss_Music.pause();
+                        }else {
+                            background_Music.pause();
+                        }
                         volume=0.0f;
                         mute=true;
                     }
@@ -244,13 +259,16 @@ public class PlayState extends State {
             }
 
             if (!started){
-                started=true;
+                if (!boss_balloon.isStarted()) {
+                    started = true;
+
                 int local_highscore;
                 local_highscore = 0;
                 for (int k=0;k<=4;k++) {
 
                     megred_high_score[k] = local_highscore % 10;
                     local_highscore = local_highscore / 10;
+                }
                 }
             }
         }
@@ -259,18 +277,56 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
+
         poof_balloon_g.update(dt);
         poof_balloon_y.update(dt);
         poof_balloon_b.update(dt);
         poof_balloon_r.update(dt);
         poof_balloon_p.update(dt);
 
+        if (boss_balloon.isStarted()){
+            boss_balloon.update(dt);
+        }
+
+        //Старт босса
+        if ((cautch_ball>25)&(!boss_balloon.isStarted())){
+            if (boss_balloon.isLive()) {
+                boss_balloon.Start();
+                //started = false;
+                if (!mute) {
+                    background_Music.stop();
+                    boss_Music.play();
+                }
+                for (Balloon balloon : balloons) {
+                    balloon.stop_spawn();
+                }
+            }
+        }
+        //смерть босса
+        if ((!boss_balloon.isLive())&(!boss_balloon.isDead())){
+            boss_balloon.make_dead();
+            for (Balloon balloon : balloons) {
+                balloon.start_spawn();
+            }
+        }
+
+
         index=0;
+
         if ((started)&(position.y<1000)) {
             velosity.scl(dt);
             position.add(0, velosity.y, 0);
             velosity.scl(1 / dt);
         }
+        if (!boss_balloon.isLive()){
+            if (boss_Music.isPlaying()){
+                if (!mute) {
+                    boss_Music.stop();
+                    background_Music.play();
+                }
+            }
+        }
+
 
         if (started) {
             for (Balloon balloon : balloons) {
@@ -283,13 +339,16 @@ public class PlayState extends State {
                     change_background = true;
                     Gdx.input.vibrate(125);
                 }
+
                 if (balloon.isLive_out()) {
                     balloon.dispose();
+                    System.out.println("balloon disposed :"+cautch_ball);
                     balloons.removeIndex(index);
                 }
                 index++;
             }
         }
+
         for (Cloud cloud : clouds) {
             cloud.update(dt);
             if (cloud.getPosition().x < -320) {
@@ -299,19 +358,17 @@ public class PlayState extends State {
         }
 
         shaker.update(dt);
-
     }
 
     @Override
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
-
-        //sb.draw(background, 0, 100,480,900);
         sb.disableBlending();
         sb.draw(background,-25, -25,550,900);
         sb.enableBlending();
-        if (started){
+
+        if ((started)|(boss_balloon.isStarted())){
             sb.draw(score,100,760,115,31);
             sb.draw(frames_numbers.get(megred_high_score[0]),285,760,25,31);
             sb.draw(frames_numbers.get(megred_high_score[1]),265,760,25,31);
@@ -319,7 +376,7 @@ public class PlayState extends State {
             sb.draw(frames_numbers.get(megred_high_score[3]),225,760,25,31);
         }
 
-        if (!started){
+        if ((!started)&(!boss_balloon.isStarted())){
             sb.draw(your_high_score,130,100,211,74);
             sb.draw(tap_to_play,80,360,335,51);
             sb.draw(frames_numbers.get(megred_high_score[0]),250,50,25,31);
@@ -333,12 +390,15 @@ public class PlayState extends State {
             sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
         }
 
-        sb.draw(texture_poop_balloon,position.x,position.y,463,218);
+        sb.draw(texture_poop_balloon,position.x,position.y,463,218);//заголовок
+        if (boss_balloon.isStarted()){
+            sb.draw(boss_balloon.getTexture_boss(),boss_balloon.getPosition().x,boss_balloon.getPosition().y,95,190);
+        }
 
+        //if (!boss_balloon.isStarted()){
         for (Balloon balloon : balloons) {
             switch (balloon.getColor_of_balloon()) {
                 case 0:
-                   // sb.draw(balloon.getTexture(), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     sb.draw(texture_b_g, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 1:
@@ -370,16 +430,13 @@ public class PlayState extends State {
                     break;
             }
 
+       // }
         }
 
-
-       // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 790);
-       // FontRed1.draw(sb, " cautch_ball() ballons: "+  cautch_ball, 10, 755);
         FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 790);
 
 
         if (mute){
-            //sb.draw(muted,480-69-69-69-69,800-69,64,64);
             sb.draw(muted,480-69,700+20,64,64);
         }else{
             sb.draw(unmuted,480-69,700+20,64,64);
@@ -401,38 +458,17 @@ public class PlayState extends State {
 
                 gsm.set(new GameoverState(gsm));
 
-                //prefs.putBoolean("soundOn", true);
-
-
-                /*
-                SharedPreferences settings = context.getSharedPreferences(PERSISTANT_STORAGE_NAME, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putString( "name", "John" );
-                editor.commit();*/
                 break;
-          /*  case 3:
-              //  sb.draw(red_cross,480-69-69-69,20,64,64);
-                if (change_background) {
-                    change_background=false;
-                    background.dispose();
-                    background = new Texture("background_night.png");
-                }
-                break;
-*/
             case 2:
-              //  sb.draw(red_cross,480-69-69,20,64,64);
                 if (change_background) {
                     change_background=false;
-                    background.dispose();
                     background = new Texture("background_evening.png");
                 }
                 break;
 
             case 1:
-              //  sb.draw(red_cross,480-69,20,64,64);
                 if (change_background) {
-                    change_background=false;
-                    background.dispose();
+                    change_background = false;
                     background = new Texture("background_sunset.png");
                 }
                 break;
@@ -454,13 +490,9 @@ public class PlayState extends State {
         texture_b_g.dispose();
         texture_b_y.dispose();
         texture_b_p.dispose();
-        texture_pooped.dispose();
-        texture_bloody.dispose();
         poof_balloon_atlas.dispose();
         muted.dispose();
         unmuted.dispose();
-
-
     }
 
     private int get_speed_for_balloon(){
