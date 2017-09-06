@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 import static com.badlogic.gdx.math.MathUtils.random;
+import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
 
 /**
  * Created by Voland on 04.08.2017.
@@ -18,9 +19,11 @@ public class Balloon extends Creature {
     private Rectangle bounds;
     private Texture texture_pooped,texture_bloody;
     private Texture texture;
+
     int color_of_balloon;
     private float currentTime;
     boolean pooped,live_out;
+    boolean can_respawn;
 
     public int getColor_of_balloon() {
         return color_of_balloon;
@@ -37,7 +40,6 @@ public class Balloon extends Creature {
     public void setPooped(int i) {
         if (i<1000){
             color_of_balloon+=5;
-            System.out.println("texture_pooped");
         }
         else
         {
@@ -46,13 +48,14 @@ public class Balloon extends Creature {
         this.pooped = true;
     }
 
-    public Balloon(int x, int y, int grav){
+    public Balloon(int x, int y, int grav,boolean respawn){
         position = new Vector3(x, y, 0);
         velosity = new Vector3(0, 0, 0);
        // zerovelosity = new Vector3(0, 0, 0);
         this.velosity.y = grav;
         pooped=false;
         live_out=false;
+        can_respawn=respawn;
         currentTime=0;
        // texture_pooped=new Texture("blow.png");
        // texture_bloody=new Texture("Blood_Splatter.png");
@@ -127,19 +130,19 @@ public class Balloon extends Creature {
         */
    if (pooped){
         currentTime+=dt;
-       if (currentTime>0.155f)
+       if (currentTime>ANIMATION_TIME)
        {
            live_out=true;
        }
 
    }
    else {
-            velosity.scl(dt);
-            position.add(0, velosity.y, 0);
-            // if (position.y < 0)position.y = 0;
-      velosity.scl(1 / dt);
+       if (can_respawn) {
+           velosity.scl(dt);
+           position.add(0, velosity.y, 0);
+           velosity.scl(1 / dt);
+       }
             bounds.setPosition(position.x, position.y);
-
         }
     }
 
@@ -148,11 +151,13 @@ public class Balloon extends Creature {
     }
 
     public void dispose() {
-     //   texture.dispose();
-      //  texture_pooped.dispose();
-      //  texture_bloody.dispose();
-        System.out.println("Balloon disposed");
-
+       // System.out.println("Balloon disposed");
+    }
+    public void stop_spawn(){
+        can_respawn=false;
+    }
+    public void start_spawn(){
+        can_respawn=true;
     }
 
 }

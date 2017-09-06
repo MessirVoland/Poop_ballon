@@ -17,13 +17,21 @@ public class Boss_balloon extends Creature {
     private Texture texture_boss;
 
     private int health; //здоровье босса
-    private boolean live,started; //жив ли босс
+    /*жив ли босс в мире\ старт босса\ смерть босса  */
+    private boolean live,started,dead;
     private byte phase;//фаза босса
 
     private int clicked_phase_count;
 
+    public boolean isDead() {
+        return dead;
+    }
+
     public Boss_balloon(int x, int y, int grav ) {
-        live = true;started=false;
+        live = true;
+        started=false;
+        dead=false;
+
 
         texture_boss =  new Texture("ghost_balloon.png");
         position = new Vector3(x, y, 0);
@@ -81,10 +89,14 @@ public class Boss_balloon extends Creature {
 
         health--;
     }
+    //Смерть босса но без триггера смерти
     public void kill_boss(){
         live=false;
         started=false;
-
+        dead=false;
+    }
+    public void make_dead(){
+        dead=true;
     }
     public void reposition(){
         position.x=random(300);
@@ -117,6 +129,5 @@ public class Boss_balloon extends Creature {
     @Override
     public void dispose() {
         texture_boss.dispose();
-
     }
 }
