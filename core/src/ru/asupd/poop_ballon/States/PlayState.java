@@ -449,7 +449,7 @@ public class PlayState extends State {
         }else{
             sb.draw(unmuted,480-69,700+20,64,64);
         }
-        System.out.println("Missed balls: "+miss_ball);
+        //System.out.println("Missed balls: "+miss_ball);
         switch (miss_ball){
             default:
                 gsm.set(new GameoverState(gsm));

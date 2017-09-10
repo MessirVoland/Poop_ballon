@@ -1,6 +1,7 @@
 package ru.asupd.poop_ballon.Sprites;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
@@ -15,13 +16,24 @@ public class Boss_balloon extends Creature {
     private Vector3 velosity;
     private Rectangle bounds;
     private Texture texture_boss;
+
+    public static final float ANIMATION_TIME_BOSS_IDLE= 0.383f;//Время анимации обычного состояния
+    public static final float ANIMATION_TIME_BOSS_CLICKED= 0.055f;//и при клике
+    public static final float TIME_BOSS_CLICKED= 0.155f;//Время при котором босс считается кликнутым
+
+    private Texture texture_boss_atlas;//Атлас для загрузки анимаций босса
+    private Animation boos_animation_idle;//обычное состояние
+    private Animation boos_animation_clicked;//при клике
+
+
     private int health; //здоровье босса
-    /*жив ли босс в мире\ старт босса\ смерть босса  */
-    private boolean live,started,dead;
+    /*жив ли босс в мире\ старт босса\ смерть босса\ клик по боссу */
+    private boolean live,started,dead,clicked;
     private byte phase;//фаза босса
     private boolean missed;//Пропуск шара
 
     private int clicked_phase_count;
+    private float current_dt;
 
     public boolean isDead() {
         return dead;
@@ -32,20 +44,26 @@ public class Boss_balloon extends Creature {
     }
 
     public Boss_balloon(int x, int y, int grav) {
+        //логические операнды
         live = true;
         started=false;
         dead=false;
         missed =false;
+        clicked=false;
+        //texture_boss =  new Texture("ghost_balloon.png");
 
+        texture_boss_atlas = new Texture("ghost_norm.png");
+        boos_animation_idle = new Animation(new TextureRegion(texture_boss_atlas),6,ANIMATION_TIME_BOSS_IDLE);
+        texture_boss_atlas = new Texture("ghost_hit.png");
+        boos_animation_clicked = new Animation(new TextureRegion(texture_boss_atlas),2,ANIMATION_TIME_BOSS_CLICKED);
 
-
-        texture_boss =  new Texture("ghost_balloon.png");
         position = new Vector3(x, y, 0);
         velosity = new Vector3(0, grav, 0);
         health=26;
         phase =1;
         clicked_phase_count=0;
         bounds = new Rectangle(x, y, 95 , 190);
+        current_dt=0.0f;
     }
     public Vector3 getPosition() {
         return position;
@@ -58,11 +76,18 @@ public class Boss_balloon extends Creature {
         return started;
     }
 
-    public Texture getTexture_boss() {
-        return texture_boss;
+    public TextureRegion getTexture_boss() {
+        if (clicked){
+            return boos_animation_clicked.getFrames();
+        }
+        else {
+            return boos_animation_idle.getFrames();
+        }
     }
 
     public void clicked_boss(){
+        clicked=true;
+        current_dt=0.0f;
         if (health<=0){
             kill_boss();
         }
@@ -120,7 +145,17 @@ public class Boss_balloon extends Creature {
 
     @Override
     public void update(float dt) {
+        current_dt+=dt;
+        if (current_dt>=TIME_BOSS_CLICKED){
+            clicked=false;
+        }
 
+        if (clicked){
+            boos_animation_clicked.update(dt);
+        }
+        else{
+            boos_animation_idle.update(dt);
+        }
         velosity.scl(dt);
         position.add(velosity.x, velosity.y, 0);
         velosity.scl(1 / dt);
@@ -140,9 +175,9 @@ public class Boss_balloon extends Creature {
         }
     }
 
-
     @Override
     public void dispose() {
-        texture_boss.dispose();
+        //texture_boss.dispose();
+        texture_boss_atlas.dispose();
     }
 }
