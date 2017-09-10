@@ -55,7 +55,7 @@ public class PlayState extends State {
     private Animation poof_balloon_g,poof_balloon_y,poof_balloon_b,poof_balloon_r,poof_balloon_p;
 
     private int cautch_ball = 0;//поймано шаров
-    private int miss_ball = 0;//пропущено шаров
+    public int miss_ball = 0;//пропущено шаров
 
     private Sound poop_Sound;//звук лопания
     private Music background_Music,boss_Music;//музыка
@@ -301,6 +301,14 @@ public class PlayState extends State {
                     balloon.stop_spawn();
                 }
             }
+
+        }
+        //Активные действия и проверки босса
+        if ((boss_balloon.isMissed())&(boss_balloon.isStarted())){
+            miss_ball++;
+            boss_balloon.setMissed(false);
+            change_background = true;
+            Gdx.input.vibrate(125);
         }
         //смерть босса
         if ((!boss_balloon.isLive())&(!boss_balloon.isDead())){
@@ -441,7 +449,7 @@ public class PlayState extends State {
         }else{
             sb.draw(unmuted,480-69,700+20,64,64);
         }
-
+        System.out.println("Missed balls: "+miss_ball);
         switch (miss_ball){
             default:
                 gsm.set(new GameoverState(gsm));
@@ -502,6 +510,9 @@ public class PlayState extends State {
             speed=550;//Ограничитель скорости шаров
         }
         return speed;
+    }
+    public void missed_ball(){
+        miss_ball--;
     }
 
 }

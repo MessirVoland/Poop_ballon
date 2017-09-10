@@ -15,11 +15,11 @@ public class Boss_balloon extends Creature {
     private Vector3 velosity;
     private Rectangle bounds;
     private Texture texture_boss;
-
     private int health; //здоровье босса
     /*жив ли босс в мире\ старт босса\ смерть босса  */
     private boolean live,started,dead;
     private byte phase;//фаза босса
+    private boolean missed;//Пропуск шара
 
     private int clicked_phase_count;
 
@@ -27,16 +27,22 @@ public class Boss_balloon extends Creature {
         return dead;
     }
 
-    public Boss_balloon(int x, int y, int grav ) {
+    public boolean isMissed() {
+        return missed;
+    }
+
+    public Boss_balloon(int x, int y, int grav) {
         live = true;
         started=false;
         dead=false;
+        missed =false;
+
 
 
         texture_boss =  new Texture("ghost_balloon.png");
         position = new Vector3(x, y, 0);
         velosity = new Vector3(0, grav, 0);
-        health=100;
+        health=26;
         phase =1;
         clicked_phase_count=0;
         bounds = new Rectangle(x, y, 95 , 190);
@@ -64,27 +70,27 @@ public class Boss_balloon extends Creature {
         //Действия по клику на 1 фазу
         if (phase==1) {
             clicked_phase_count++;
-            if (clicked_phase_count>=5){
+            if (clicked_phase_count>=2){
                 clicked_phase_count=0;
                 reposition();
             }
         }
 
         //перевод на 2 фазу
-        if ((health<=75)&(phase==1)){phase=2;}
+        if ((health<=13)&(phase==1)){phase=2;}
 
         //вторая фаза
         if (phase==2){
             clicked_phase_count++;
-            if (clicked_phase_count>=5){
+            if (clicked_phase_count>=2){
                 clicked_phase_count=0;
                 //reposition();
-                velosity.y+=20;
+                velosity.y+=10;
             }
             velosity.y+=1;
             velosity.x=random(4*150)-300;
         }
-        if (health<=50){health-=200;}
+        if (health<=1){health-=200;}
 
 
         health--;
@@ -101,12 +107,17 @@ public class Boss_balloon extends Creature {
     public void reposition(){
         position.x=random(300);
         position.y-=300;
-        velosity.y+=80;
+        velosity.y+=40;
     }
 
     public boolean isLive() {
         return live;
     }
+
+    public void setMissed(boolean missed) {
+        this.missed = missed;
+    }
+
     @Override
     public void update(float dt) {
 
@@ -117,14 +128,18 @@ public class Boss_balloon extends Creature {
 
         if (position.y>1000){
             position.y=-200;
+            missed=true;
+            System.out.println("boss_missed");
         }
         if (position.x>480){
             position.x=0;
+
         }
         if (position.x<0){
             position.x=390;
         }
     }
+
 
     @Override
     public void dispose() {
