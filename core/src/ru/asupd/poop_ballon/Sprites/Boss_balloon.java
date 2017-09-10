@@ -14,23 +14,25 @@ import static com.badlogic.gdx.math.MathUtils.random;
 public class Boss_balloon extends Creature {
     private Vector3 position;
     private Vector3 velosity;
+    private Vector3 velosity_clicked;//вектор движения вниз
     private Rectangle bounds;
     private Texture texture_boss;
 
     public static final float ANIMATION_TIME_BOSS_IDLE= 0.383f;//Время анимации обычного состояния
-    public static final float ANIMATION_TIME_BOSS_CLICKED= 0.055f;//и при клике
-    public static final float TIME_BOSS_CLICKED= 0.155f;//Время при котором босс считается кликнутым
+    public static final float ANIMATION_TIME_BOSS_CLICKED= 0.050f;//и при клике
+    public static final float TIME_BOSS_CLICKED= 0.201f;//Время при котором босс считается кликнутым
 
     private Texture texture_boss_atlas;//Атлас для загрузки анимаций босса
     private Animation boos_animation_idle;//обычное состояние
     private Animation boos_animation_clicked;//при клике
 
 
-    private int health; //здоровье босса
+    private int health; //здоровье боссаqqqqqqqqqqqqqqqqqq
     /*жив ли босс в мире\ старт босса\ смерть босса\ клик по боссу */
     private boolean live,started,dead,clicked;
     private byte phase;//фаза босса
     private boolean missed;//Пропуск шара
+    private boolean reposition;//
 
     private int clicked_phase_count;
     private float current_dt;
@@ -50,6 +52,7 @@ public class Boss_balloon extends Creature {
         dead=false;
         missed =false;
         clicked=false;
+        reposition = false;
         //texture_boss =  new Texture("ghost_balloon.png");
 
         texture_boss_atlas = new Texture("ghost_norm.png");
@@ -59,6 +62,7 @@ public class Boss_balloon extends Creature {
 
         position = new Vector3(x, y, 0);
         velosity = new Vector3(0, grav, 0);
+        velosity_clicked = new Vector3(0,-550,0);
         health=26;
         phase =1;
         clicked_phase_count=0;
@@ -97,6 +101,8 @@ public class Boss_balloon extends Creature {
             clicked_phase_count++;
             if (clicked_phase_count>=2){
                 clicked_phase_count=0;
+                reposition=true;
+                velosity.x=random(8*150)-600;
                 reposition();
             }
         }
@@ -129,11 +135,6 @@ public class Boss_balloon extends Creature {
     public void make_dead(){
         dead=true;
     }
-    public void reposition(){
-        position.x=random(300);
-        position.y-=300;
-        velosity.y+=40;
-    }
 
     public boolean isLive() {
         return live;
@@ -152,27 +153,50 @@ public class Boss_balloon extends Creature {
 
         if (clicked){
             boos_animation_clicked.update(dt);
+
         }
         else{
             boos_animation_idle.update(dt);
         }
-        velosity.scl(dt);
-        position.add(velosity.x, velosity.y, 0);
-        velosity.scl(1 / dt);
-        bounds.setPosition(position.x, position.y);
+
+        if ((clicked)&(reposition)) {
+            velosity_clicked.scl(dt);
+            if (position.y<=-200) {
+                position.add(velosity_clicked.x, 0, 0);
+            }
+            else
+            {
+                position.add(velosity_clicked.x, velosity_clicked.y, 0);
+            }
+            velosity_clicked.scl(1 / dt);
+            bounds.setPosition(position.x, position.y);
+        }
+        else {
+            velosity.scl(dt);
+            position.add(velosity.x, velosity.y, 0);
+            velosity.scl(1 / dt);
+            bounds.setPosition(position.x, position.y);
+            reposition=false;
+        }
+
 
         if (position.y>1000){
             position.y=-200;
             missed=true;
             System.out.println("boss_missed");
         }
-        if (position.x>480){
-            position.x=0;
+        if (position.x>370){
+            //position.x=0;
+            velosity.x=-velosity.x;
 
         }
         if (position.x<0){
-            position.x=390;
+            //position.x=390;
+            velosity.x=-velosity.x;
         }
+    }
+    public void reposition(){
+        velosity.y+=30;
     }
 
     @Override
