@@ -31,7 +31,20 @@ public class MyGdxGame extends ApplicationAdapter {
 		gsm.update(Gdx.graphics.getDeltaTime());
 		gsm.render(batch);
 	}
-	
+
+	@Override
+	public void pause() {
+		super.pause();
+       // gsm.push(new GameoverState(gsm));
+
+	}
+
+	@Override
+	public void resume() {
+		super.resume();
+	//	gsm.set(new PlayState(gsm));
+	}
+
 	@Override
 	public void dispose () {
 		super.dispose();

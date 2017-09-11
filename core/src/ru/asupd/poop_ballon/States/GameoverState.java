@@ -29,6 +29,11 @@ public class GameoverState extends State {
     int[] score_last =new int[5];
 
 
+    @Override
+    public void pause() {
+
+    }
+
     public GameoverState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
@@ -77,7 +82,7 @@ public class GameoverState extends State {
     @Override
     protected void handleInput() {
         if(Gdx.input.justTouched()){
-            gsm.set(new PlayState(gsm));
+           gsm.set(new PlayState(gsm));
            // gsm.pop();
         }
     }

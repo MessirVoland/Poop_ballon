@@ -17,6 +17,10 @@ public class MenuState extends State {
     private Texture balloon;
 
 
+    @Override
+    public void pause() {
+
+    }
 
     public MenuState(GameStateManager gsm) {
         super(gsm);

@@ -187,12 +187,16 @@ public class Boss_balloon extends Creature {
         }
         if (position.x>370){
             //position.x=0;
-            velosity.x=-velosity.x;
+            if (velosity.x>0){
+                velosity.x=-velosity.x;
+            }
 
         }
         if (position.x<0){
             //position.x=390;
-            velosity.x=-velosity.x;
+            if (velosity.x<0) {
+                velosity.x = -velosity.x;
+            }
         }
     }
     public void reposition(){

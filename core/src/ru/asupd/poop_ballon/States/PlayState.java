@@ -492,6 +492,23 @@ public class PlayState extends State {
     public void dispose() {
         poop_Sound.dispose();
         background_Music.dispose();
+        boss_Music.dispose();
+        background.dispose();
+        texture_b_b.dispose();
+        texture_b_r.dispose();
+        texture_b_g.dispose();
+        texture_b_y.dispose();
+        texture_b_p.dispose();
+        poof_balloon_atlas.dispose();
+        muted.dispose();
+        unmuted.dispose();
+    }
+
+@Override
+    public void pause(){
+        poop_Sound.dispose();
+        background_Music.dispose();
+        boss_Music.dispose();
         background.dispose();
         texture_b_b.dispose();
         texture_b_r.dispose();
