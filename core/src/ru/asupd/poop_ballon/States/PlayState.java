@@ -172,7 +172,7 @@ public class PlayState extends State {
             clouds.add(new Cloud(random(1000)-400,125*i+100+10,-random(25)-25));
         }
         //инициализация босса
-        boss_balloon = new Boss_balloon(random(4)*96,-195-random(50),80);
+        boss_balloon = new Boss_balloon(random(4)*96,-195-random(50),80+80);
     }
 
     @Override

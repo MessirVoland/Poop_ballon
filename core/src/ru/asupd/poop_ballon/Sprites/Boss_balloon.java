@@ -116,7 +116,7 @@ public class Boss_balloon extends Creature {
             if (clicked_phase_count>=2){
                 clicked_phase_count=0;
                 //reposition();
-                velosity.y+=10;
+                velosity.y-=10;
             }
             velosity.y+=1;
             velosity.x=random(4*150)-300;
@@ -180,7 +180,7 @@ public class Boss_balloon extends Creature {
         }
 
 
-        if (position.y>1000){
+        if (position.y>900){
             position.y=-200;
             missed=true;
             System.out.println("boss_missed");
