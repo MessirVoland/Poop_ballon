@@ -10,6 +10,9 @@ public class DesktopLauncher {
 		config.title="Pop Balloon";
 		config.width=MyGdxGame.WIDTH;
 		config.height=MyGdxGame.HEIGHT;
+		//config.vSyncEnabled=false;
+		//config.foregroundFPS = 0;
+		//config.forceExit = true;
 		new LwjglApplication(new MyGdxGame(), config);
 
 	}
