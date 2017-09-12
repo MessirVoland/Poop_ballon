@@ -14,6 +14,7 @@ import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
 public class Balloon extends Creature {
     private static final int MOVEMENT = 100;
     private int GRAVITY = -100;
+    private int sin_grav =50;
     private Vector3 position;
     private Vector3 velosity;
     private Rectangle bounds;
@@ -23,7 +24,7 @@ public class Balloon extends Creature {
     int color_of_balloon;
     private float currentTime;
     boolean pooped,live_out;
-    boolean can_respawn;
+    boolean can_respawn,sin_grav_bool;
 
     public int getColor_of_balloon() {
         return color_of_balloon;
@@ -50,12 +51,13 @@ public class Balloon extends Creature {
 
     public Balloon(int x, int y, int grav,boolean respawn){
         position = new Vector3(x, y, 0);
-        velosity = new Vector3(0, 0, 0);
+        velosity = new Vector3(random(100)-50, 0, 0);
        // zerovelosity = new Vector3(0, 0, 0);
         this.velosity.y = grav;
         pooped=false;
         live_out=false;
         can_respawn=respawn;
+        sin_grav_bool=random.nextBoolean();
         currentTime=0;
        // texture_pooped=new Texture("blow.png");
        // texture_bloody=new Texture("Blood_Splatter.png");
@@ -128,6 +130,20 @@ public class Balloon extends Creature {
         velosity.scl(1 / dt);
         bounds.setPosition(position.x, position.y);
         */
+   if ((velosity.x<sin_grav)&(sin_grav_bool)){
+       velosity.x++;
+   }
+   if ((velosity.x>-sin_grav)&(!sin_grav_bool)){
+       velosity.x--;
+   }
+   if (velosity.x>sin_grav){
+       sin_grav_bool=false;
+   }
+   if (velosity.x<-sin_grav){
+       sin_grav_bool=true;
+   }
+
+
    if (pooped){
         currentTime+=dt;
        if (currentTime>ANIMATION_TIME)
@@ -139,8 +155,9 @@ public class Balloon extends Creature {
    else {
        if (can_respawn) {
            velosity.scl(dt);
-           position.add(0, velosity.y, 0);
+           position.add(velosity.x, velosity.y, 0);
            velosity.scl(1 / dt);
+
        }
             bounds.setPosition(position.x, position.y);
         }

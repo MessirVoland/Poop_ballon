@@ -79,6 +79,9 @@ public class PlayState extends State {
 
     Boss_balloon boss_balloon;//босс
 
+    private int chance_of_boss=20;//20%
+    private int chance_100_150=random(50)+100;
+
 
 
     public PlayState(GameStateManager gsm) {
@@ -163,7 +166,7 @@ public class PlayState extends State {
         //инициализация массива шаров
         balloons = new Array<Balloon>();
         for (int i = 0; i <= 4; i++){
-            balloons.add(new Balloon(i * 96,-195-random(50),100,true));
+            balloons.add(new Balloon(i * 96,-195-random(50),get_speed_for_balloon(),true));
         }
 
         //инициализация массива облаков
@@ -172,7 +175,10 @@ public class PlayState extends State {
             clouds.add(new Cloud(random(1000)-400,125*i+100+10,-random(25)-25));
         }
         //инициализация босса
-        boss_balloon = new Boss_balloon(random(4)*96,-195-random(50),80+80);
+        boss_balloon = new Boss_balloon(random(4)*96,-195-random(50),80);
+        if (random(100)>=chance_of_boss){
+            boss_balloon.setLive(false);
+        }
     }
 
     @Override
@@ -226,7 +232,7 @@ public class PlayState extends State {
                                 }
 
                                 balloon.setPooped(cautch_ball);
-                                balloons.add(new Balloon(random(4) * 96, -195 - random(50), (200 + random(cautch_ball * 3) - random(100)),!boss_balloon.isStarted()));
+                                balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(),!boss_balloon.isStarted()));
                             }
                         }
                     }
@@ -289,7 +295,7 @@ public class PlayState extends State {
         }
 
         //Старт босса
-        if ((cautch_ball>25)&(!boss_balloon.isStarted())){
+        if ((cautch_ball>chance_100_150)&(!boss_balloon.isStarted())){
             if (boss_balloon.isLive()) {
                 boss_balloon.Start();
                 //started = false;
@@ -520,12 +526,14 @@ public class PlayState extends State {
         unmuted.dispose();
     }
 
-    private int get_speed_for_balloon(){
-        int speed = 0;
-        speed = 200+random(cautch_ball*2)-random(100);
-        if (speed>=550){
-            speed=550;//Ограничитель скорости шаров
-        }
+    public int get_speed_for_balloon(){
+        int speed = 550;
+        speed = 250+random( ((int)Math.log(cautch_ball+2))*35)-random(100);
+       // if (speed>=550){
+       //     speed=550;//Ограничитель скорости шаров
+       // }
+        System.out.println("Math.log: "+((int) Math.log(cautch_ball+2)*35));
+        System.out.println("Speed: "+speed);
         return speed;
     }
     public void missed_ball(){
