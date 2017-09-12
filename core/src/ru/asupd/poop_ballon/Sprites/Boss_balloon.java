@@ -153,6 +153,7 @@ public class Boss_balloon extends Creature {
     public void update(float dt) {
         current_dt+=dt;
         if (current_dt>=TIME_BOSS_CLICKED){
+            
             clicked=false;
         }
 
