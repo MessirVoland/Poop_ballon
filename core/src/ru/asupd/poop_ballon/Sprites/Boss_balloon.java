@@ -45,6 +45,10 @@ public class Boss_balloon extends Creature {
         return missed;
     }
 
+    public void setLive(boolean live) {
+        this.live = live;
+    }
+
     public Boss_balloon(int x, int y, int grav) {
         //логические операнды
         live = true;
@@ -67,6 +71,7 @@ public class Boss_balloon extends Creature {
         phase =1;
         clicked_phase_count=0;
         bounds = new Rectangle(x, y, 95 , 190);
+
         current_dt=0.0f;
     }
     public Vector3 getPosition() {
