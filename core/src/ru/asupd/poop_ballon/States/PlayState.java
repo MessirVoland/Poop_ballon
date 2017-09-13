@@ -82,6 +82,10 @@ public class PlayState extends State {
     private int chance_of_boss=20;//20%
     private int chance_100_150=random(50)+100;
 
+    private static final int STEP_for_balloon=50;
+    public static final int MAX_STEP=401;
+    int current_step=1;
+
 
 
     public PlayState(GameStateManager gsm) {
@@ -165,7 +169,7 @@ public class PlayState extends State {
 
         //инициализация массива шаров
         balloons = new Array<Balloon>();
-        for (int i = 0; i <= 4; i++){
+        for (int i = 0; i <= 3; i++){
             balloons.add(new Balloon(i * 96,-195-random(50),get_speed_for_balloon(),true));
         }
 
@@ -232,6 +236,12 @@ public class PlayState extends State {
                                 }
 
                                 balloon.setPooped(cautch_ball);
+                                current_step++;
+                                if ((current_step>=STEP_for_balloon)&(cautch_ball<=500)){
+                                    current_step=0;
+                                    balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(),!boss_balloon.isStarted()));
+
+                                }
                                 balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(),!boss_balloon.isStarted()));
                             }
                         }
