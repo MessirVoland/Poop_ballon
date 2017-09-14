@@ -15,6 +15,8 @@ import com.badlogic.gdx.utils.Array;
 
 import org.omg.CORBA.BooleanSeqHelper;
 
+import java.util.Random;
+
 import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Sprites.Animation;
 import ru.asupd.poop_ballon.Sprites.Balloon;
@@ -108,6 +110,7 @@ public class PlayState extends State {
 
         //инициализация музыки
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
+
 
 
         boss_Music = Gdx.audio.newMusic(Gdx.files.internal("Sound_19272 [Wav_Library_Net].mp3"));
@@ -212,7 +215,16 @@ public class PlayState extends State {
                         if (!balloon.isPooped()) {
                             if (touchPos.y<700) {
                                 //System.out.println("touched the ball :");
-                                 poop_Sound.play(volume);
+                                long id = poop_Sound.play(volume);
+                                float minX = 0.75f;
+                                float maxX = 1.7f;
+
+                                Random rand = new Random();
+
+                                float finalX = rand.nextFloat() * (maxX - minX) + minX;
+                                poop_Sound.setPitch(id,finalX);
+
+
                                 shaker.shake(0.40f);
 
                                 cautch_ball++;
