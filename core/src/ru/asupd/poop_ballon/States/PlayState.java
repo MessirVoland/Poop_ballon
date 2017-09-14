@@ -109,13 +109,14 @@ public class PlayState extends State {
         //инициализация музыки
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
 
-        background_Music = Gdx.audio.newMusic(Gdx.files.internal("sound.mp3"));
+
         boss_Music = Gdx.audio.newMusic(Gdx.files.internal("Sound_19272 [Wav_Library_Net].mp3"));
+        background_Music = Gdx.audio.newMusic(Gdx.files.internal("sound.mp3"));
         background_Music.setVolume(0.3f);
         background_Music.setLooping(true);
-        boss_Music.setLooping(true);
         background_Music.play();
         boss_Music.setVolume(0.3f);
+        boss_Music.setLooping(true);
 
 
         //хорошо бы сделать отдельный текстур менеджер с полосой загрузки
@@ -538,11 +539,11 @@ public class PlayState extends State {
 
     public int get_speed_for_balloon(){
         int speed = 550;
-        speed = 250+random( ((int)Math.log(cautch_ball+2))*35)-random(100);
-       // if (speed>=550){
-       //     speed=550;//Ограничитель скорости шаров
-       // }
-        System.out.println("Math.log: "+((int) Math.log(cautch_ball+2)*35));
+        speed = 100+(int)(Math.sqrt(cautch_ball)*10)+random( ((int)Math.log(cautch_ball+2))*50);
+        if (speed>=500){
+            speed=500;//Ограничитель скорости шаров
+        }
+       // System.out.println("Math.log: "+((int) Math.log(cautch_ball+2)*35));
         System.out.println("Speed: "+speed);
         return speed;
     }

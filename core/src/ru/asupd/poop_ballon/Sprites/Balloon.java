@@ -42,10 +42,6 @@ public class Balloon extends Creature {
         if (i<1000){
             color_of_balloon+=5;
         }
-        else
-        {
-            //bloody
-        }
         this.pooped = true;
     }
 
@@ -119,23 +115,14 @@ public class Balloon extends Creature {
     }
 
     public void update(float dt){
-   /*     if (position.y > 0)
-            velosity.add(0, -GRAVITY, 0);
 
-        velosity.scl(dt);
-        position.add(0, velosity.y, 0);
-        if (position.y < 0)
-            position.y = 0;
-
-        velosity.scl(1 / dt);
-        bounds.setPosition(position.x, position.y);
-        */
    if ((velosity.x<sin_grav)&(sin_grav_bool)){
        velosity.x++;
    }
    if ((velosity.x>-sin_grav)&(!sin_grav_bool)){
        velosity.x--;
    }
+
    if (velosity.x>sin_grav){
        sin_grav_bool=false;
    }
@@ -156,6 +143,8 @@ public class Balloon extends Creature {
        if (can_respawn) {
            velosity.scl(dt);
            position.add(velosity.x, velosity.y, 0);
+           if (position.x>390){position.x=390;}
+           if (position.x<0  ){position.x=0;}
            velosity.scl(1 / dt);
 
        }
