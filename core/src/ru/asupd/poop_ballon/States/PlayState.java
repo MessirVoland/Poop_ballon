@@ -62,12 +62,14 @@ public class PlayState extends State {
     private Sound poop_Sound;//звук лопания
     private Music background_Music,boss_Music;//музыка
 
-    boolean mute;//тишина
+
     boolean change_background;//хз
 
     public final static float ANIMATION_TIME=0.266f;//время анимации
     public Preferences prefs;//для храниния данных
     public int load_hiscore;//макс счет
+    public boolean mute;//тишина
+    private boolean first_start=true;
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
     float volume;//хз)
     Shaker shaker;//шейкео
@@ -117,7 +119,7 @@ public class PlayState extends State {
         background_Music = Gdx.audio.newMusic(Gdx.files.internal("sound.mp3"));
         background_Music.setVolume(0.3f);
         background_Music.setLooping(true);
-        background_Music.play();
+
         boss_Music.setVolume(0.3f);
         boss_Music.setLooping(true);
 
@@ -156,6 +158,21 @@ public class PlayState extends State {
 
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
         load_hiscore = prefs.getInteger("highscore");
+        if (first_start!=prefs.getBoolean("first_start")){
+            prefs.putBoolean("first_start",true);
+            mute=false;
+            prefs.putBoolean("mute",mute);
+            prefs.flush();
+        }else
+        {
+            mute = prefs.getBoolean("mute");
+        }
+        if (!mute)
+        {
+            background_Music.play();
+        }
+
+        System.out.println("mute:"+mute);
         prefs.putInteger("last_match_score", 0);
 
         //Вывод макс очков
@@ -168,7 +185,7 @@ public class PlayState extends State {
 
         //выключил звук на время тестов
         change_background = false;
-        mute=false;
+        //mute=false;
         volume=0.1f;
 
         //инициализация массива шаров
@@ -274,6 +291,8 @@ public class PlayState extends State {
                         }
                         volume=0.1f;
                         mute=false;
+                        prefs.putBoolean("mute",mute);
+                        prefs.flush();
                     }
                     else {
                         if (boss_balloon.isStarted()){
@@ -283,6 +302,8 @@ public class PlayState extends State {
                         }
                         volume=0.0f;
                         mute=true;
+                        prefs.putBoolean("mute",mute);
+                        prefs.flush();
                     }
                 }
             }
