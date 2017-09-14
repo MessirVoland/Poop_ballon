@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
@@ -89,6 +90,8 @@ public class PlayState extends State {
     private static final int STEP_for_balloon=50;
     public static final int MAX_STEP=401;
     int current_step=1;
+    //частицы
+    ParticleEffect effect;
 
 
 
@@ -204,6 +207,11 @@ public class PlayState extends State {
         if (random(100)>=chance_of_boss){
             boss_balloon.setLive(false);
         }
+        //частицы
+        effect = new ParticleEffect();
+        effect.loadEmitters(Gdx.files.internal("particles/red_balls.p"));
+        effect.loadEmitterImages(Gdx.files.internal("particles"));
+        effect.start();
     }
 
     @Override
@@ -328,6 +336,8 @@ public class PlayState extends State {
     public void update(float dt) {
         handleInput();
 
+        effect.update(dt);
+
         poof_balloon_g.update(dt);
         poof_balloon_y.update(dt);
         poof_balloon_b.update(dt);
@@ -392,6 +402,7 @@ public class PlayState extends State {
 
                 if (balloon.getPosition().y > 720) {
                     balloon.setPosition(balloon.getPosition().x, -220 - random(50));
+
                     balloon.setVelosity(get_speed_for_balloon());
                     miss_ball++;
                     change_background = true;
@@ -416,6 +427,7 @@ public class PlayState extends State {
         }
 
         shaker.update(dt);
+        effect.setPosition(balloons.get(0).getPosition().x,balloons.get(0).getPosition().y);
     }
 
     @Override
@@ -425,6 +437,7 @@ public class PlayState extends State {
         sb.disableBlending();
         sb.draw(background,-25, -25,550,900);
         sb.enableBlending();
+        effect.draw(sb);
 
         if ((started)|(boss_balloon.isStarted())){
             sb.draw(score,100,760,115,31);
