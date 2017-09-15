@@ -41,7 +41,8 @@ public class Balloon extends Creature {
         this.velosity.y = grav;
     }
     public boolean isPooped() {
-        return pooped;
+        //if pooped
+        return pooped|make_orange;
     }
 
     public void setPooped(int i) {
@@ -69,7 +70,7 @@ public class Balloon extends Creature {
         if (number_of_ball_in_combo!=0) {
             combo = true;
             combo_number = number_of_ball_in_combo;
-            System.out.println("Combo_number: "+combo_number);
+            //System.out.println("Combo_number: "+combo_number);
         }else
         {
             combo = false;

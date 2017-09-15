@@ -259,8 +259,9 @@ public class PlayState extends State {
                     if ((balloon.getPosition().y < touchPos.y) & (balloon.getPosition().y + 200 > touchPos.y)) {
                         if (!balloon.isPooped()) {
                             current_combo++;
+                            current_step++;
                             balloon.setCombo(current_combo);
-                            System.out.println("Current combo on click: "+current_combo);
+                           // System.out.println("Current combo on click: "+current_combo);
                         }
                     }
                 }
@@ -312,9 +313,10 @@ public class PlayState extends State {
                                 }
 
                                 balloon.setPooped(cautch_ball);
-                                current_step++;
+
                                 if ((current_step>=STEP_for_balloon)&(cautch_ball<=500)){
                                     current_step=0;
+                                   // System.out.println("New balloon generated");
                                     balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(),!boss_balloon.isStarted()));
 
                                 }
@@ -647,8 +649,8 @@ public class PlayState extends State {
 
     public int get_speed_for_balloon(){
         int speed = 550;
-        speed = 100+(int)(Math.sqrt(cautch_ball)*10)+random( ((int)Math.log(cautch_ball+2))*50);
-        if (speed>=500){
+        speed = 100+(int)(Math.sqrt(cautch_ball)*8)+random( ((int)Math.log(cautch_ball+2))*40);
+        if (speed>=480){
             speed=500;//Ограничитель скорости шаров
         }
        // System.out.println("Math.log: "+((int) Math.log(cautch_ball+2)*35));
