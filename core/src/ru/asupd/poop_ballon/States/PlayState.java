@@ -167,11 +167,12 @@ public class PlayState extends State {
             prefs.putBoolean("mute",mute);
             prefs.flush();
         }else
-        {
+        {   volume=0.0f;
             mute = prefs.getBoolean("mute");
         }
         if (!mute)
         {
+            volume=0.1f;
             background_Music.play();
         }
 
@@ -189,7 +190,7 @@ public class PlayState extends State {
         //выключил звук на время тестов
         change_background = false;
         //mute=false;
-        volume=0.1f;
+        //volume=0.1f;
 
         //инициализация массива шаров
         balloons = new Array<Balloon>();
