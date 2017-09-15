@@ -49,6 +49,8 @@ public class PlayState extends State {
 
     private Texture your_high_score,tap_to_play,score;//наибольший счет, таб ту плей, напись счет
 
+    private Texture multi_x2,multi_x3,multi_x4,multi_x5;
+
     private Texture numbers;//числа
     private Array<TextureRegion> frames_numbers;//числа
 
@@ -99,6 +101,8 @@ public class PlayState extends State {
     //Комбо
     int current_combo=0;
 
+    Vector3 touchPos;//вектор прикосновния
+
 
 
     public PlayState(GameStateManager gsm) {
@@ -144,6 +148,11 @@ public class PlayState extends State {
         texture_poop_balloon = new Texture("poop_balloon.png");
         tap_to_play = new Texture("tap_to_play.png");
         score =  new Texture("score.png");
+
+        multi_x2 = new Texture("x2.png");
+        multi_x3 = new Texture("x3.png");
+        multi_x4 = new Texture("x4.png");
+        multi_x5 = new Texture("x4.png");
 
         numbers = new Texture("numbers.png");
         frames_numbers = new Array<TextureRegion>();
@@ -227,7 +236,7 @@ public class PlayState extends State {
     @Override
     protected void handleInput() {
         if(Gdx.input.justTouched()) {
-            Vector3 touchPos = new Vector3();
+            touchPos = new Vector3();
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             //System.out.println("touchPos :"+touchPos);
             camera.unproject(touchPos);
@@ -540,6 +549,21 @@ public class PlayState extends State {
             }
 
        // }
+        }
+
+        switch (current_combo){
+            case 2:
+                sb.draw(multi_x2,touchPos.x,touchPos.y);
+                break;
+            case 3:
+                sb.draw(multi_x3,touchPos.x,touchPos.y);
+                break;
+            case 4:
+                sb.draw(multi_x4,touchPos.x,touchPos.y);
+                break;
+            case 5:
+                sb.draw(multi_x5,touchPos.x,touchPos.y);
+                break;
         }
 
         FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 790);
