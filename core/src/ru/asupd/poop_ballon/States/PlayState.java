@@ -92,7 +92,7 @@ public class PlayState extends State {
     private int chance_of_boss=20;//20%
     private int chance_100_150=random(50)+100;
 
-    private static final int STEP_for_balloon=50;
+    private int STEP_for_balloon=50;
     public static final int MAX_STEP=401;
     int current_step=1;
     //частицы
@@ -273,7 +273,7 @@ public class PlayState extends State {
                 if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)){
                     if ((balloon.getPosition().y<touchPos.y)&(balloon.getPosition().y+200>touchPos.y)){
                         if (!balloon.isPooped()) {
-                            if (touchPos.y<700) {
+                            if (touchPos.y<750) {
                                 //System.out.println("touched the ball :");
 
                                 long id = poop_Sound.play(volume);
@@ -317,6 +317,7 @@ public class PlayState extends State {
                                 if ((current_step>=STEP_for_balloon)&(cautch_ball<=500)){
                                     current_step=0;
                                    // System.out.println("New balloon generated");
+                                    STEP_for_balloon+=20;
                                     balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(),!boss_balloon.isStarted()));
 
                                 }
