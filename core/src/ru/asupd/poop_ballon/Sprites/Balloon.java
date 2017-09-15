@@ -14,6 +14,7 @@ import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
 public class Balloon extends Creature {
     private static final int MOVEMENT = 100;
     private int GRAVITY = -100;
+    private static final float COMBO_TIME=0.266f;
     private int sin_grav =50;
     private Vector3 position;
     private Vector3 velosity;
@@ -23,8 +24,13 @@ public class Balloon extends Creature {
 
     int color_of_balloon;
     private float currentTime;
+    private float currentTime_or=0;
     boolean pooped,live_out;
     boolean can_respawn,sin_grav_bool;
+
+    private boolean combo=false;//Шар учавствует в комбо
+    private int combo_number=0;//номер шара в комбо
+    private boolean make_orange=false;//для оьбработки задержи перед изменением цвета в комбо
 
     public int getColor_of_balloon() {
         return color_of_balloon;
@@ -39,10 +45,36 @@ public class Balloon extends Creature {
     }
 
     public void setPooped(int i) {
-        if (i<1000){
-            color_of_balloon+=5;
+
+        if (combo){
+           // color_of_balloon=10;
+            currentTime_or+=0.07f*combo_number;
+            combo=false;
+           // System.out.println("Current_time: "+currentTime);
+            make_orange=true;
         }
-        this.pooped = true;
+        else{
+            color_of_balloon+=5;
+            this.pooped = true;
+        }
+
+
+    }
+
+    public int getCombo() {
+        return combo_number;
+    }
+
+    public void setCombo(int number_of_ball_in_combo){
+        if (number_of_ball_in_combo!=0) {
+            combo = true;
+            combo_number = number_of_ball_in_combo;
+            System.out.println("Combo_number: "+combo_number);
+        }else
+        {
+            combo = false;
+        }
+
     }
 
     public Balloon(int x, int y, int grav,boolean respawn){
@@ -115,6 +147,15 @@ public class Balloon extends Creature {
     }
 
     public void update(float dt){
+        if (make_orange){
+            currentTime_or+=dt;
+            if (currentTime_or>=ANIMATION_TIME){
+                make_orange=false;
+                color_of_balloon=10;
+                combo=true;
+                this.pooped = true;
+            }
+        }
 
    if ((velosity.x<sin_grav)&(sin_grav_bool)){
        velosity.x++;
@@ -135,7 +176,15 @@ public class Balloon extends Creature {
         currentTime+=dt;
        if (currentTime>ANIMATION_TIME)
        {
-           live_out=true;
+           if ((!combo)&(!make_orange)) {
+               live_out = true;
+           }else
+            {
+                   combo = false;
+                   currentTime = 0;
+                   color_of_balloon++;
+
+           }
        }
 
    }

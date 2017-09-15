@@ -43,7 +43,7 @@ public class PlayState extends State {
 
     private Texture muted,unmuted;//иконка звука
 
-    private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p;//Шарики
+    private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p,texture_b_o;//Шарики
 
     private Texture texture_poop_balloon;//Название игры
 
@@ -55,12 +55,15 @@ public class PlayState extends State {
 
 
     private Texture poof_balloon_atlas;//загрузчик атласов взрывов
-    private Animation poof_balloon_g,poof_balloon_y,poof_balloon_b,poof_balloon_r,poof_balloon_p;
+    private Animation poof_balloon_g,poof_balloon_y,poof_balloon_b,poof_balloon_r,poof_balloon_p,poof_balloon_o;
 
     private int cautch_ball = 0;//поймано шаров
     public int miss_ball = 0;//пропущено шаров
 
     private Sound poop_Sound;//звук лопания
+    private static final float minX = 0.75f;//Диапазон изменения хлопка
+    private static final float maxX = 1.7f;
+
     private Music background_Music,boss_Music;//музыка
 
 
@@ -92,6 +95,9 @@ public class PlayState extends State {
     int current_step=1;
     //частицы
     ParticleEffect effect;
+
+    //Комбо
+    int current_combo=0;
 
 
 
@@ -133,6 +139,7 @@ public class PlayState extends State {
         texture_b_g =  new Texture("Balloon_green.png");
         texture_b_y =  new Texture("Balloon_yellow.png");
         texture_b_p =  new Texture("Balloon_purple.png");
+        texture_b_o =  new Texture("round_b_o.png");
         your_high_score = new Texture("best_score_g.png");
         texture_poop_balloon = new Texture("poop_balloon.png");
         tap_to_play = new Texture("tap_to_play.png");
@@ -154,6 +161,8 @@ public class PlayState extends State {
         poof_balloon_r = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
         poof_balloon_atlas = new Texture("pop_p.png");
         poof_balloon_p = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
+        poof_balloon_atlas = new Texture("pop_o.png");
+        poof_balloon_o = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
 
 
         muted = new Texture("sound_off.png");
@@ -234,6 +243,21 @@ public class PlayState extends State {
                 }
             }
 
+            current_combo=0;
+            //Клик по шарам для проверки комбо, да долго проверять клик по шарам дважды но ничего лучше не придумал
+            for (Balloon balloon:balloons){
+                if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)) {
+                    if ((balloon.getPosition().y < touchPos.y) & (balloon.getPosition().y + 200 > touchPos.y)) {
+                        if (!balloon.isPooped()) {
+                            current_combo++;
+                            balloon.setCombo(current_combo);
+                            System.out.println("Current combo on click: "+current_combo);
+                        }
+                    }
+                }
+            }
+            //System.out.println("Current combo: "+current_combo);
+            //current_combo=0;
             //клик по шарам
             for (Balloon balloon : balloons) {
                 if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)){
@@ -241,19 +265,22 @@ public class PlayState extends State {
                         if (!balloon.isPooped()) {
                             if (touchPos.y<700) {
                                 //System.out.println("touched the ball :");
+
                                 long id = poop_Sound.play(volume);
-                                float minX = 0.75f;
-                                float maxX = 1.7f;
-
                                 Random rand = new Random();
-
                                 float finalX = rand.nextFloat() * (maxX - minX) + minX;
                                 poop_Sound.setPitch(id,finalX);
 
 
-                                shaker.shake(0.40f);
+                                shaker.shake(0.20f);
 
                                 cautch_ball++;
+                                //current_combo++;
+                                if (current_combo>=2) {
+                                    //balloon.setCombo(current_combo);
+                                }else {
+                                    balloon.setCombo(0);
+                                }
 
                                 poof_balloon_g.setCurrentFrameTime(0.0f);
                                 poof_balloon_g.setFrame(0);
@@ -265,11 +292,12 @@ public class PlayState extends State {
                                 poof_balloon_r.setFrame(0);
                                 poof_balloon_p.setCurrentFrameTime(0.0f);
                                 poof_balloon_p.setFrame(0);
+                                poof_balloon_o.setCurrentFrameTime(0.0f);
+                                poof_balloon_o.setFrame(0);
 
                                 int local_highscore;
                                 local_highscore = cautch_ball;
                                 for (int k=0;k<=4;k++) {
-
                                     megred_high_score[k] = local_highscore % 10;
                                     local_highscore = local_highscore / 10;
                                 }
@@ -288,6 +316,7 @@ public class PlayState extends State {
                 }
                 index++;
             }
+
 
             //клик по иконке звука
             if ((480-69<touchPos.x)&(480-69+64>touchPos.x)){
@@ -344,6 +373,8 @@ public class PlayState extends State {
         poof_balloon_b.update(dt);
         poof_balloon_r.update(dt);
         poof_balloon_p.update(dt);
+        poof_balloon_o.update(dt);
+
 
         if (boss_balloon.isStarted()){
             boss_balloon.update(dt);
@@ -412,7 +443,7 @@ public class PlayState extends State {
 
                 if (balloon.isLive_out()) {
                     balloon.dispose();
-                    System.out.println("balloon disposed :"+cautch_ball);
+                    //System.out.println("balloon disposed :"+cautch_ball);
                     balloons.removeIndex(index);
                 }
                 index++;
@@ -499,6 +530,12 @@ public class PlayState extends State {
                     break;
                 case 9:
                     sb.draw(poof_balloon_p.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    break;
+                case 10:
+                    sb.draw(texture_b_o, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    break;
+                case 11:
+                    sb.draw(poof_balloon_o.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     break;
             }
 
@@ -591,7 +628,7 @@ public class PlayState extends State {
             speed=500;//Ограничитель скорости шаров
         }
        // System.out.println("Math.log: "+((int) Math.log(cautch_ball+2)*35));
-        System.out.println("Speed: "+speed);
+        //System.out.println("Speed: "+speed);
         return speed;
     }
     public void missed_ball(){
