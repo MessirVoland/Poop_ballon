@@ -49,7 +49,7 @@ public class Balloon extends Creature {
 
         if (combo){
            // color_of_balloon=10;
-            currentTime_or+=0.07f*combo_number;
+            currentTime_or=0.07f*combo_number;
             combo=false;
            // System.out.println("Current_time: "+currentTime);
             make_orange=true;
@@ -150,7 +150,8 @@ public class Balloon extends Creature {
     public void update(float dt){
         if (make_orange){
             currentTime_or+=dt;
-            if (currentTime_or>=ANIMATION_TIME){
+            if (currentTime_or>=0.133f){
+            //if (currentTime_or>=1.0f){
                 make_orange=false;
                 color_of_balloon=10;
                 combo=true;
