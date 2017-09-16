@@ -23,6 +23,7 @@ import ru.asupd.poop_ballon.Sprites.Animation;
 import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.Sprites.Boss_balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
+import ru.asupd.poop_ballon.Workers.Score;
 import ru.asupd.poop_ballon.Workers.Shaker;
 
 import static com.badlogic.gdx.math.MathUtils.random;
@@ -51,8 +52,9 @@ public class PlayState extends State {
 
     private Texture multi_x2,multi_x3,multi_x4,multi_x5;
 
-    private Texture numbers;//числа
-    private Array<TextureRegion> frames_numbers;//числа
+    //private Texture numbers;//числа
+    //private Array<TextureRegion> frames_numbers;//числа
+    private Score score_num;
 
 
 
@@ -82,7 +84,7 @@ public class PlayState extends State {
     int index,x,y;//хз
 
     boolean started;//для страрта игры
-    int[] megred_high_score = new int[5];//для отображения счета
+    //int[] megred_high_score = new int[5];//для отображения счета
 
     private Vector3 position;//Координаты заголовка игры
     private Vector3 velosity;//вектор движения заголовка
@@ -154,11 +156,7 @@ public class PlayState extends State {
         multi_x4 = new Texture("x4.png");
         multi_x5 = new Texture("x4.png");
 
-        numbers = new Texture("numbers.png");
-        frames_numbers = new Array<TextureRegion>();
-        for (int j=0;j<=9;j++){
-            frames_numbers.add(new TextureRegion(numbers,j*25,0,25,31));
-        }
+        score_num = new Score();
 
         poof_balloon_atlas = new Texture("pop_g.png");
         poof_balloon_g = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
@@ -198,12 +196,9 @@ public class PlayState extends State {
         prefs.putInteger("last_match_score", 0);
 
         //Вывод макс очков
-        int local_highscore;
-        local_highscore = load_hiscore;
-        for (int k=0;k<=4;k++) {
-            megred_high_score[k] = local_highscore % 10;
-            local_highscore = local_highscore / 10;
-        }
+        //int local_highscore;
+        //local_highscore = load_hiscore;
+        score_num.setScore(load_hiscore);
 
         //выключил звук на время тестов
         change_background = false;
@@ -285,9 +280,12 @@ public class PlayState extends State {
                                 shaker.shake(0.20f);
 
                                 cautch_ball++;
+                                score_num.addScore(1);
                                 //current_combo++;
                                 if (current_combo>=2) {
                                     //balloon.setCombo(current_combo);
+                                    score_num.addScore(current_combo*current_combo-current_combo);
+                                    score_num.setCombo(current_combo);
                                 }else {
                                     balloon.setCombo(0);
                                 }
@@ -305,12 +303,13 @@ public class PlayState extends State {
                                 poof_balloon_o.setCurrentFrameTime(0.0f);
                                 poof_balloon_o.setFrame(0);
 
-                                int local_highscore;
-                                local_highscore = cautch_ball;
-                                for (int k=0;k<=4;k++) {
-                                    megred_high_score[k] = local_highscore % 10;
-                                    local_highscore = local_highscore / 10;
-                                }
+                                //int local_highscore;
+                                //local_highscore = cautch_ball;
+                                //score_num.setScore(cautch_ball);
+                                //for (int k=0;k<=4;k++) {
+                               //     megred_high_score[k] = local_highscore % 10;
+                                //    local_highscore = local_highscore / 10;
+                                //}
 
                                 balloon.setPooped(cautch_ball);
 
@@ -361,14 +360,15 @@ public class PlayState extends State {
             if (!started){
                 if (!boss_balloon.isStarted()) {
                     started = true;
+                    score_num.setScore(0);
 
-                int local_highscore;
-                local_highscore = 0;
-                for (int k=0;k<=4;k++) {
+                //int local_highscore;
+                //local_highscore = 0;
+                //for (int k=0;k<=4;k++) {
 
-                    megred_high_score[k] = local_highscore % 10;
-                    local_highscore = local_highscore / 10;
-                }
+                  //  megred_high_score[k] = local_highscore % 10;
+                   // local_highscore = local_highscore / 10;
+                //}
                 }
             }
         }
@@ -419,6 +419,8 @@ public class PlayState extends State {
             boss_balloon.make_dead();
             for (Balloon balloon : balloons) {
                 balloon.start_spawn();
+                score_num.addScore(50);
+                score_num.setCombo(9);
             }
         }
 
@@ -471,6 +473,7 @@ public class PlayState extends State {
         }
 
         shaker.update(dt);
+        score_num.update(dt);
         effect.setPosition(balloons.get(0).getPosition().x,balloons.get(0).getPosition().y);
     }
 
@@ -483,21 +486,24 @@ public class PlayState extends State {
         sb.enableBlending();
         effect.draw(sb);
 
+
         if ((started)|(boss_balloon.isStarted())){
             sb.draw(score,100,760,115,31);
-            sb.draw(frames_numbers.get(megred_high_score[0]),285,760,25,31);
-            sb.draw(frames_numbers.get(megred_high_score[1]),265,760,25,31);
-            sb.draw(frames_numbers.get(megred_high_score[2]),245,760,25,31);
-            sb.draw(frames_numbers.get(megred_high_score[3]),225,760,25,31);
+            score_num.draw(sb,225,760);
+            //sb.draw(frames_numbers.get(megred_high_score[0]),285,760,25,31);
+            //sb.draw(frames_numbers.get(megred_high_score[1]),265,760,25,31);
+            //sb.draw(frames_numbers.get(megred_high_score[2]),245,760,25,31);
+            //sb.draw(frames_numbers.get(megred_high_score[3]),225,760,25,31);
         }
 
         if ((!started)&(!boss_balloon.isStarted())){
             sb.draw(your_high_score,130,100,211,74);
             sb.draw(tap_to_play,80,360,335,51);
-            sb.draw(frames_numbers.get(megred_high_score[0]),250,50,25,31);
-            sb.draw(frames_numbers.get(megred_high_score[1]),230,50,25,31);
-            sb.draw(frames_numbers.get(megred_high_score[2]),210,50,25,31);
-            sb.draw(frames_numbers.get(megred_high_score[3]),190,50,25,31);
+            score_num.draw(sb,190,50);
+            //sb.draw(frames_numbers.get(megred_high_score[0]),250,50,25,31);
+            //sb.draw(frames_numbers.get(megred_high_score[1]),230,50,25,31);
+            //sb.draw(frames_numbers.get(megred_high_score[2]),210,50,25,31);
+            //sb.draw(frames_numbers.get(megred_high_score[3]),190,50,25,31);
         }
 
         for (Cloud cloud : clouds) {
@@ -557,15 +563,19 @@ public class PlayState extends State {
         switch (current_combo){
             case 2:
                 sb.draw(multi_x2,touchPos.x,touchPos.y);
+                //score_num.addScore(2);
                 break;
             case 3:
                 sb.draw(multi_x3,touchPos.x,touchPos.y);
+               // score_num.addScore(6);
                 break;
             case 4:
                 sb.draw(multi_x4,touchPos.x,touchPos.y);
+               // score_num.addScore(12);
                 break;
             case 5:
                 sb.draw(multi_x5,touchPos.x,touchPos.y);
+               // score_num.addScore(20);
                 break;
         }
 
@@ -584,6 +594,8 @@ public class PlayState extends State {
                 break;
             case 3:
                 load_hiscore = prefs.getInteger("highscore");
+
+                cautch_ball=score_num.getScore();
 
                 prefs.putInteger("last_match_score", cautch_ball);
                 prefs.flush();

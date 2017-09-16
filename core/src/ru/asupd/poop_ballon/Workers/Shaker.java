@@ -20,7 +20,7 @@ public class Shaker {
     }
     public void shake(float duration_in){
         elapsed=0;
-        intensity=3;
+        intensity=4;
         duration=duration_in;
     }
 
