@@ -31,6 +31,7 @@ public class Score {
         for (int j=0;j<=9;j++){
             frames_numbers.add(new TextureRegion(numbers,j*25,0,25,31));
         }
+		buffer=0;
 
     }
     public void setCombo(int combo_in){
