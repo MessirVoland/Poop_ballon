@@ -229,6 +229,7 @@ public class PlayState extends State {
         effect.start();
 
     }
+// Input
 
     @Override
     protected void handleInput() {
@@ -277,9 +278,9 @@ public class PlayState extends State {
                                 Random rand = new Random();
                                 float finalX = rand.nextFloat() * (maxX - minX) + minX;
                                 poop_Sound.setPitch(id,finalX);
+                                poop_Sound.setVolume(id,0.3f);
 
-
-                                shaker.shake(0.20f);
+                                shaker.shake(0.276f); // 0.2f
 
                                 cautch_ball++;
                                 score_num.addScore(1);
@@ -288,6 +289,7 @@ public class PlayState extends State {
                                     //balloon.setCombo(current_combo);
                                     score_num.addScore(current_combo*current_combo-current_combo);
                                     score_num.setCombo(current_combo);
+                                    //shaker.shake(0.20f*current_combo);
                                 }else {
                                     balloon.setCombo(0);
                                 }
