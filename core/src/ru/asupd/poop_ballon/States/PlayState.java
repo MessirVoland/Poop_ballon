@@ -499,7 +499,8 @@ public class PlayState extends State {
 
         if ((started)|(boss_balloon.isStarted())){
             sb.draw(score,100,760,115,31);
-            score_num.draw(sb,225,760);
+           //score_num.draw(sb, (int) (shaker.getBaseX()+225), (int) (shaker.getBaseY()+760));
+            score_num.draw(sb,((int) shaker.getCamera_sh().position.x)-15, ((int) shaker.getCamera_sh().position.y)+360);
             //sb.draw(frames_numbers.get(megred_high_score[0]),285,760,25,31);
             //sb.draw(frames_numbers.get(megred_high_score[1]),265,760,25,31);
             //sb.draw(frames_numbers.get(megred_high_score[2]),245,760,25,31);

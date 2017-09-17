@@ -11,7 +11,15 @@ import static com.badlogic.gdx.math.MathUtils.random;
 public class Shaker {
     private OrthographicCamera camera_sh;
     float elapsed,duration,intensity;
-    float baseX,baseY;
+    private float baseX,baseY;
+
+    public float getBaseX() {
+        return baseX;
+    }
+
+    public float getBaseY() {
+        return baseY;
+    }
 
     public Shaker(OrthographicCamera camera) {
         camera_sh=camera;
@@ -22,6 +30,10 @@ public class Shaker {
         elapsed=0;
         intensity=4;
         duration=duration_in;
+    }
+
+    public OrthographicCamera getCamera_sh() {
+        return camera_sh;
     }
 
     public void update(float delta) {
@@ -38,6 +50,7 @@ public class Shaker {
             camera_sh.update();
             // Increase the elapsed time by the delta provided.
             elapsed += delta;
+
         }else
         {
             camera_sh.position.x = baseX;
