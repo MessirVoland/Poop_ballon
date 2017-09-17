@@ -75,10 +75,10 @@ public class Score {
             sb.draw(plus,x+80,y-3,25+6,31+6);
             switch (combo_num) {
                 case 2:
-                    sb.draw(frames_numbers.get(combo_num), x + 100 + 6, y - 3, 25 + 6, 31 + 6);
+                    sb.draw(frames_numbers.get(4), x + 100 + 6, y - 3, 25 + 6, 31 + 6);
                     break;
                 case 3:
-                    sb.draw(frames_numbers.get(6), x + 100 + 6, y - 3, 25 + 6, 31 + 6);
+                    sb.draw(frames_numbers.get(9), x + 100 + 6, y - 3, 25 + 6, 31 + 6);
                     break;
                 case 4:
                     sb.draw(frames_numbers.get(1), x + 100 + 6, y - 3, 25 + 6, 31 + 6);

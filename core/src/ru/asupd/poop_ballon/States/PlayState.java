@@ -112,6 +112,7 @@ public class PlayState extends State {
         camera.setToOrtho(false, 480 , 800 );
 
 
+
         background = new Texture("background_clean.png");
 
         FontRed1 = new BitmapFont();
@@ -226,6 +227,7 @@ public class PlayState extends State {
         effect.loadEmitters(Gdx.files.internal("particles/red_balls.p"));
         effect.loadEmitterImages(Gdx.files.internal("particles"));
         effect.start();
+
     }
 
     @Override
@@ -419,9 +421,17 @@ public class PlayState extends State {
             boss_balloon.make_dead();
             for (Balloon balloon : balloons) {
                 balloon.start_spawn();
-                score_num.addScore(50);
-                score_num.setCombo(9);
+
+                //score_num.addScore(50);
+                //score_num.setCombo(9);
             }
+
+        }
+        if (boss_balloon.isGive_score()){
+            boss_balloon.setGive_score(false);
+            //System.out.println("add_score");
+            score_num.addScore(50);
+            score_num.setCombo(9);
         }
 
 

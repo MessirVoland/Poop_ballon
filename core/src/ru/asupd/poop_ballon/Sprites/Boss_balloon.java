@@ -29,10 +29,13 @@ public class Boss_balloon extends Creature {
 
     private int health; //здоровье боссаqqqqqqqqqqqqqqqqqq
     /*жив ли босс в мире\ старт босса\ смерть босса\ клик по боссу */
-    private boolean live,started,dead,clicked;
+    private boolean live,started,clicked;
+
+    private static boolean dead=false;
     private byte phase;//фаза босса
     private boolean missed;//Пропуск шара
     private boolean reposition;//
+    private boolean give_score=false;
 
     private int clicked_phase_count;
     private float current_dt;
@@ -79,6 +82,14 @@ public class Boss_balloon extends Creature {
     }
     public  void Start(){
         started=true;
+    }
+
+    public boolean isGive_score() {
+        return give_score;
+    }
+
+    public void setGive_score(boolean give_score) {
+        this.give_score = give_score;
     }
 
     public boolean isStarted() {
@@ -136,9 +147,13 @@ public class Boss_balloon extends Creature {
         live=false;
         started=false;
         dead=false;
+        give_score=true;
     }
     public void make_dead(){
         dead=true;
+    }
+    public void make_undead(){
+        dead=false;
     }
 
     public boolean isLive() {
@@ -212,6 +227,7 @@ public class Boss_balloon extends Creature {
     @Override
     public void dispose() {
         //texture_boss.dispose();
+
         texture_boss_atlas.dispose();
     }
 }
