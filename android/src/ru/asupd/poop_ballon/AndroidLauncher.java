@@ -62,7 +62,7 @@ public class AndroidLauncher extends AndroidApplication {
 		adParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 
 		layout.addView(adView,adParams);
-		adView.loadAd(builder.build());
+		//adView.loadAd(builder.build());
 
 		setContentView(layout);
 	}
