@@ -51,6 +51,8 @@ public class PlayState extends State {
     private Texture your_high_score,tap_to_play,score;//наибольший счет, таб ту плей, напись счет
 
     private Texture multi_x2,multi_x3,multi_x4,multi_x5;
+	
+	private Texture options;//кнопка опции
 
     //private Texture numbers;//числа
     //private Array<TextureRegion> frames_numbers;//числа
@@ -172,7 +174,7 @@ public class PlayState extends State {
         poof_balloon_atlas = new Texture("pop_o.png");
         poof_balloon_o = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
 
-
+		options = new Texture("options.png");
         muted = new Texture("sound_off.png");
         unmuted = new Texture("sound_on.png");
 
@@ -500,7 +502,7 @@ public class PlayState extends State {
 
 
         if ((started)|(boss_balloon.isStarted())){
-            sb.draw(score,100,760,115,31);
+            sb.draw(score,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.x)+360,115,31);
            //score_num.draw(sb, (int) (shaker.getBaseX()+225), (int) (shaker.getBaseY()+760));
             score_num.draw(sb,((int) shaker.getCamera_sh().position.x)-15, ((int) shaker.getCamera_sh().position.y)+360);
             //sb.draw(frames_numbers.get(megred_high_score[0]),285,760,25,31);
@@ -594,12 +596,13 @@ public class PlayState extends State {
 
         FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 790);
 
-
+		/*
         if (mute){
-            sb.draw(muted,480-69,700+20,64,64);
+            sb.draw(muted,((int) shaker.getCamera_sh().position.x)+240-69,((int) shaker.getCamera_sh().position.x)+300+20,64,64);
         }else{
-            sb.draw(unmuted,480-69,700+20,64,64);
-        }
+            sb.draw(unmuted,((int) shaker.getCamera_sh().position.x)240-69,((int) shaker.getCamera_sh().position.x)+300+20,64,64);
+        }*/
+		sb.draw(options,((int) shaker.getCamera_sh().position.x)240-69,((int) shaker.getCamera_sh().position.x)+300+20,64,64);
         //System.out.println("Missed balls: "+miss_ball);
         switch (miss_ball){
             default:
@@ -676,7 +679,7 @@ public class PlayState extends State {
     public int get_speed_for_balloon(){
         int speed = 550;
         speed = 100+(int)(Math.sqrt(cautch_ball)*8)+random( ((int)Math.log(cautch_ball+2))*40);
-        if (speed>=480){
+        if (speed>=500){
             speed=500;//Ограничитель скорости шаров
         }
        // System.out.println("Math.log: "+((int) Math.log(cautch_ball+2)*35));
