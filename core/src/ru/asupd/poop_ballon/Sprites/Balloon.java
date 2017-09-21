@@ -191,6 +191,8 @@ public class Balloon {
        {
            if ((!combo)&(!make_orange)) {
                live_out = true;
+               animation_current_balloon.dispose();
+               poof_balloon_atlas.dispose();
            }else
             {
                 combo = false;
