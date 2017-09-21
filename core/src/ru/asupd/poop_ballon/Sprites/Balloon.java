@@ -1,8 +1,11 @@
 package ru.asupd.poop_ballon.Sprites;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+
+import ru.asupd.poop_ballon.Workers.Shaker;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
@@ -11,7 +14,7 @@ import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
  * Created by Voland on 04.08.2017.
  */
 
-public class Balloon extends Creature {
+public class Balloon {
     private static final int MOVEMENT = 100;
     private int GRAVITY = -100;
     private static final float COMBO_TIME=0.266f;
@@ -22,11 +25,20 @@ public class Balloon extends Creature {
     private Texture texture_pooped,texture_bloody;
     private Texture texture;
 
+    private Animation animation_current_balloon;
+    Texture poof_balloon_atlas;
+
     int color_of_balloon;
     private float currentTime;
     private float currentTime_or=0;
     boolean pooped,live_out;
     boolean can_respawn,sin_grav_bool;
+
+    private int max_combo;
+
+    public void setMax_combo(int max_combo) {
+        this.max_combo = max_combo;
+    }
 
     private boolean combo=false;//Шар учавствует в комбо
     private int combo_number=0;//номер шара в комбо
@@ -49,7 +61,7 @@ public class Balloon extends Creature {
 
         if (combo){
            // color_of_balloon=10;
-            currentTime_or=0.07f*combo_number;
+            currentTime_or=0.10f*combo_number;
             combo=false;
            // System.out.println("Current_time: "+currentTime);
             make_orange=true;
@@ -70,7 +82,7 @@ public class Balloon extends Creature {
         if (number_of_ball_in_combo!=0) {
             combo = true;
             combo_number = number_of_ball_in_combo;
-            //System.out.println("Combo_number: "+combo_number);
+
         }else
         {
             combo = false;
@@ -78,55 +90,43 @@ public class Balloon extends Creature {
 
     }
 
-    public Balloon(int x, int y, int grav,boolean respawn){
+
+    public Balloon(int x, int y, int grav, boolean respawn){
         position = new Vector3(x, y, 0);
         velosity = new Vector3(random(100)-50, 0, 0);
-       // zerovelosity = new Vector3(0, 0, 0);
+
+        poof_balloon_atlas = new Texture("pop_o.png");
+
+        animation_current_balloon = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);;
+
+        // zerovelosity = new Vector3(0, 0, 0);
         this.velosity.y = grav;
         pooped=false;
         live_out=false;
         can_respawn=respawn;
         sin_grav_bool=random.nextBoolean();
         currentTime=0;
-       // texture_pooped=new Texture("blow.png");
-       // texture_bloody=new Texture("Blood_Splatter.png");
+        // texture_pooped=new Texture("blow.png");
+        // texture_bloody=new Texture("Blood_Splatter.png");
 
         //color_of_balloon=random(3);
         if (grav<260){
             color_of_balloon=0;
         }else
-            if (grav<320){
-                color_of_balloon=1;
-            }
-            else
-                if (grav<380){
-                    color_of_balloon=2;
-                }
-                else
-                    if(grav<420){
-                        color_of_balloon=3;
-                    }
-                    else{
-                        color_of_balloon=4;
-                    }
-       /* switch (color_of_balloon){
-            case 2:
-                texture =  new Texture("Balloon_blue.png");
-                break;
-            case 3:
-                texture =  new Texture("Balloon_red.png");
-                break;
-            case 0:
-                texture =  new Texture("Balloon_green.png");
-                break;
-            case 1:
-                texture =  new Texture("Balloon_yellow.png");
-                break;
-            case 4:
-                texture =  new Texture("Balloon_purple.png");
-                break;
-        }*/
-
+        if (grav<320){
+            color_of_balloon=1;
+        }
+        else
+        if (grav<380){
+            color_of_balloon=2;
+        }
+        else
+        if(grav<420){
+            color_of_balloon=3;
+        }
+        else{
+            color_of_balloon=4;
+        }
         bounds = new Rectangle(x, y, 95 , 190);
     }
 
@@ -141,23 +141,31 @@ public class Balloon extends Creature {
     public void setPosition(float x,float y) {
         this.position.x = x;
         this.position.y = y;
+        animation_current_balloon.setCurrentFrameTime(0.0f);
+    }
+    public TextureRegion getFrames(){
+        return animation_current_balloon.getFrames();
     }
 
     public boolean isLive_out() {
         return live_out;
     }
 
-    public void update(float dt){
-        if (make_orange){
-            currentTime_or+=dt;
-            if (currentTime_or>=0.133f){
-            //if (currentTime_or>=1.0f){
-                make_orange=false;
-                color_of_balloon=10;
-                combo=true;
-                this.pooped = true;
-            }
+    public void update(float dt, Shaker shaker){
+
+    if (make_orange){
+        currentTime_or+=dt;
+        if (currentTime_or>=0.10f*max_combo){
+            System.out.println("Combo_number: "+combo_number);
+        //if (currentTime_or>=1.0f){
+            make_orange=false;
+           // shaker.inc();
+            color_of_balloon=10;
+            combo=true;
+
+            this.pooped = true;
         }
+    }
 
    if ((velosity.x<sin_grav)&(sin_grav_bool)){
        velosity.x++;
@@ -176,16 +184,19 @@ public class Balloon extends Creature {
 
    if (pooped){
         currentTime+=dt;
+       if (combo_number>=1) {
+           animation_current_balloon.update(dt);
+       }
        if (currentTime>ANIMATION_TIME)
        {
            if ((!combo)&(!make_orange)) {
                live_out = true;
            }else
             {
-                   combo = false;
-                   currentTime = 0;
-                   color_of_balloon++;
-
+                combo = false;
+                currentTime = 0;
+               // animation_current_balloon.update(dt);
+                color_of_balloon++;
            }
        }
 

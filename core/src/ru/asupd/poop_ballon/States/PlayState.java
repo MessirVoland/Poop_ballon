@@ -70,12 +70,15 @@ public class PlayState extends State {
     private static final float minX = 0.75f;//Диапазон изменения хлопка
     private static final float maxX = 1.7f;
 
+    //private int max_combo=0;
+
     private Music background_Music,boss_Music;//музыка
 
 
     boolean change_background;//хз
 
     public final static float ANIMATION_TIME=0.266f;//время анимации
+    //public final static float ANIMATION_TIME=3.0f;
     public Preferences prefs;//для храниния данных
     public int load_hiscore;//макс счет
     public boolean mute;//тишина
@@ -171,7 +174,7 @@ public class PlayState extends State {
         poof_balloon_r = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
         poof_balloon_atlas = new Texture("pop_p.png");
         poof_balloon_p = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
-        poof_balloon_atlas = new Texture("pop_o.png");
+        poof_balloon_atlas = new Texture("pop_color.png");
         poof_balloon_o = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
 
 		options = new Texture("options.png");
@@ -252,6 +255,7 @@ public class PlayState extends State {
                 }
             }
 
+            //max_combo=0;
             current_combo=0;
             //Клик по шарам для проверки комбо, да долго проверять клик по шарам дважды но ничего лучше не придумал
             for (Balloon balloon:balloons){
@@ -269,6 +273,7 @@ public class PlayState extends State {
             //System.out.println("Current combo: "+current_combo);
             //current_combo=0;
             //клик по шарам
+
             for (Balloon balloon : balloons) {
                 if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)){
                     if ((balloon.getPosition().y<touchPos.y)&(balloon.getPosition().y+200>touchPos.y)){
@@ -291,6 +296,8 @@ public class PlayState extends State {
                                     //balloon.setCombo(current_combo);
                                     score_num.addScore(current_combo*current_combo-current_combo);
                                     score_num.setCombo(current_combo);
+                                    //balloon.setAnimation(poof_balloon_o);
+                                    balloon.setMax_combo(current_combo);
                                     //shaker.shake(0.20f*current_combo);
                                 }else {
                                     balloon.setCombo(0);
@@ -391,7 +398,7 @@ public class PlayState extends State {
         poof_balloon_b.update(dt);
         poof_balloon_r.update(dt);
         poof_balloon_p.update(dt);
-        poof_balloon_o.update(dt);
+        //poof_balloon_o.update(dt);
 
 
         if (boss_balloon.isStarted()){
@@ -458,7 +465,7 @@ public class PlayState extends State {
 
         if (started) {
             for (Balloon balloon : balloons) {
-                balloon.update(dt);
+                balloon.update(dt,shaker);
 
                 if (balloon.getPosition().y > 720) {
                     balloon.setPosition(balloon.getPosition().x, -220 - random(50));
@@ -568,7 +575,7 @@ public class PlayState extends State {
                     sb.draw(texture_b_o, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 11:
-                    sb.draw(poof_balloon_o.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    sb.draw(balloon.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     break;
             }
 
