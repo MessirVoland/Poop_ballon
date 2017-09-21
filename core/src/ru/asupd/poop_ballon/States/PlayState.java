@@ -51,7 +51,7 @@ public class PlayState extends State {
 
     private Texture your_high_score,tap_to_play,score;//наибольший счет, таб ту плей, напись счет
 
-    private Texture multi_x2,multi_x3,multi_x4,multi_x5;
+    private Texture multi_x2,multi_x3,multi_x4,multi_x5,multi_x6;
 	
 	private Texture options;//кнопка опции
 
@@ -166,7 +166,8 @@ public class PlayState extends State {
         multi_x2 = new Texture("x2.png");
         multi_x3 = new Texture("x3.png");
         multi_x4 = new Texture("x4.png");
-        multi_x5 = new Texture("x4.png");
+        multi_x5 = new Texture("x5.png");
+        multi_x6 = new Texture("x6.png");
 
         score_num = new Score();
 
@@ -682,6 +683,9 @@ public class PlayState extends State {
             case 5:
                 sb.draw(multi_x5,min_x,min_y);
                // score_num.addScore(20);
+                break;
+            case 6:
+                sb.draw(multi_x6,min_x,min_y);
                 break;
         }
 
