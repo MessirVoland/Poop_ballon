@@ -21,10 +21,6 @@ public class MenuState extends State {
     private BitmapFont FontRed1;
 
 
-    @Override
-    public void pause() {
-
-    }
 
     public MenuState(GameStateManager gsm) {
         super(gsm);

@@ -29,10 +29,6 @@ public class GameoverState extends State {
     int[] score_last =new int[5];
 
 
-    @Override
-    public void pause() {
-
-    }
 
     public GameoverState(GameStateManager gsm) {
         super(gsm);

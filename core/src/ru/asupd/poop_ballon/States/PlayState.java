@@ -43,6 +43,7 @@ public class PlayState extends State {
     private BitmapFont FontRed1;//для фпс
 
     private Texture muted,unmuted;//иконка звука
+    private Texture vibrated,unvibrated;//иконка звука
 
     private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p,texture_b_o;//Шарики
 
@@ -82,9 +83,11 @@ public class PlayState extends State {
     private Preferences prefs;//для храниния данных
     private int load_hiscore;//макс счет
     private boolean mute;//тишина
+    private boolean vibro=true;//вибратор
     private boolean first_start=true;
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
-    private float volume;//хз)
+    private float volume;//звук хлопков)
+
     private Shaker shaker;//шейкео
     private int index;//хз
     private boolean pause=false;
@@ -183,6 +186,8 @@ public class PlayState extends State {
 		options = new Texture("options.png");
         muted = new Texture("sound_off.png");
         unmuted = new Texture("sound_on.png");
+        vibrated = new Texture("vibro_on.png");
+        unvibrated = new Texture("vibro_off.png");
 
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
         load_hiscore = prefs.getInteger("highscore");
@@ -298,7 +303,7 @@ public class PlayState extends State {
                                     Random rand = new Random();
                                     float finalX = rand.nextFloat() * (maxX - minX) + minX;
                                     poop_Sound.setPitch(id, finalX);
-                                    poop_Sound.setVolume(id, 0.3f);
+                                    poop_Sound.setVolume(id, volume);
 
                                     shaker.shake(0.276f); // 0.2f
 
@@ -408,6 +413,55 @@ public class PlayState extends State {
                         //  megred_high_score[k] = local_highscore % 10;
                         // local_highscore = local_highscore / 10;
                         //}
+                    }
+                }
+            }
+            if (pause) {
+                //звук
+                if ((380 < touchPos.x) & (380 +64 > touchPos.x)) {
+                    if ((400 - 32 < touchPos.y) & (400 - 32 + 64 > touchPos.y)) {
+                        if (mute){
+                            mute=false;
+                            if (boss_balloon.isStarted()){
+                                boss_Music.play();
+                            }else {
+                                background_Music.play();
+                            }
+                            volume=0.1f;
+                            prefs.putBoolean("mute",mute);
+                            prefs.flush();
+                        }
+                        else
+                        {
+                            if (boss_balloon.isStarted()){
+                                boss_Music.pause();
+                            }else {
+                                background_Music.pause();
+                            }
+                            volume=0.0f;
+                            mute=true;
+                            prefs.putBoolean("mute",mute);
+                            prefs.flush();
+                        }
+
+                    }
+                }
+                //вибро
+                if ((100 < touchPos.x) & (100 +64 > touchPos.x)) {
+                    if ((400 - 32 < touchPos.y) & (400 - 32 + 64 > touchPos.y)) {
+                        if (vibro){
+                            vibro=false;
+
+                            //prefs.putBoolean("mute",mute);
+                            //prefs.flush();
+                        }
+                        else
+                        {
+                            vibro=true;
+                            //prefs.putBoolean("mute",mute);
+                            //prefs.flush();
+                        }
+
                     }
                 }
             }
@@ -682,6 +736,18 @@ public class PlayState extends State {
         }
         if (pause){
             sb.draw(pause_bgnd,((int) shaker.getCamera_sh().position.x)-240,((int) shaker.getCamera_sh().position.y)-400,480,800);
+
+            if (mute){
+                sb.draw(muted,((int) shaker.getCamera_sh().position.x)+140,((int) shaker.getCamera_sh().position.y)-32,64,64);
+            }else{
+                sb.draw(unmuted,((int) shaker.getCamera_sh().position.x)+140,((int) shaker.getCamera_sh().position.y)-32,64,64);
+            }
+            if (vibro){
+                sb.draw(vibrated,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)-32,64,64);
+            }else{
+                sb.draw(unvibrated,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)-32,64,64);
+            }
+
         }
 
         sb.end();
@@ -689,22 +755,6 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
-        poop_Sound.dispose();
-        background_Music.dispose();
-        boss_Music.dispose();
-        background.dispose();
-        texture_b_b.dispose();
-        texture_b_r.dispose();
-        texture_b_g.dispose();
-        texture_b_y.dispose();
-        texture_b_p.dispose();
-        poof_balloon_atlas.dispose();
-        muted.dispose();
-        unmuted.dispose();
-    }
-
-@Override
-    public void pause(){
         poop_Sound.dispose();
         background_Music.dispose();
         boss_Music.dispose();
