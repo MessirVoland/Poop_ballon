@@ -26,6 +26,7 @@ public class Balloon {
     private Texture texture;
 
     private Animation animation;
+    Texture poof_balloon_atlas;
 
     int color_of_balloon;
     private float currentTime;
@@ -60,7 +61,7 @@ public class Balloon {
 
         if (combo){
            // color_of_balloon=10;
-            currentTime_or=0.20f*combo_number;
+            currentTime_or=1.00f*combo_number;
             combo=false;
            // System.out.println("Current_time: "+currentTime);
             make_orange=true;
@@ -89,50 +90,17 @@ public class Balloon {
 
     }
 
-    public Balloon(int x, int y, int grav,boolean respawn){
-        position = new Vector3(x, y, 0);
-        velosity = new Vector3(random(100)-50, 0, 0);
-       // zerovelosity = new Vector3(0, 0, 0);
-        this.velosity.y = grav;
-        pooped=false;
-        live_out=false;
-        can_respawn=respawn;
-        sin_grav_bool=random.nextBoolean();
-        currentTime=0;
-
-       // texture_pooped=new Texture("blow.png");
-       // texture_bloody=new Texture("Blood_Splatter.png");
-
-        //color_of_balloon=random(3);
-        if (grav<260){
-            color_of_balloon=0;
-        }else
-            if (grav<320){
-                color_of_balloon=1;
-            }
-            else
-                if (grav<380){
-                    color_of_balloon=2;
-                }
-                else
-                    if(grav<420){
-                        color_of_balloon=3;
-                    }
-                    else{
-                        color_of_balloon=4;
-                    }
-        bounds = new Rectangle(x, y, 95 , 190);
-    }
-
     public void setAnimation(Animation animation) {
         this.animation = animation;
     }
 
-    public Balloon(int x, int y, int grav, boolean respawn, Animation animation1){
+    public Balloon(int x, int y, int grav, boolean respawn){
         position = new Vector3(x, y, 0);
         velosity = new Vector3(random(100)-50, 0, 0);
-        animation = new Animation();
-        animation=animation1;
+
+        poof_balloon_atlas = new Texture("pop_color.png");
+        animation = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);;
+
         // zerovelosity = new Vector3(0, 0, 0);
         this.velosity.y = grav;
         pooped=false;
@@ -175,6 +143,7 @@ public class Balloon {
     public void setPosition(float x,float y) {
         this.position.x = x;
         this.position.y = y;
+        animation.setCurrentFrameTime(0.0f);
     }
     public TextureRegion getFrames(){
         return animation.getFrames();
@@ -186,18 +155,19 @@ public class Balloon {
 
     public void update(float dt, Shaker shaker){
 
-        if (make_orange){
-            currentTime_or+=dt;
-            if (currentTime_or>=0.20f*max_combo){
-                System.out.println("Combo_number: "+combo_number);
-            //if (currentTime_or>=1.0f){
-                make_orange=false;
-                shaker.inc();
-                color_of_balloon=10;
-                combo=true;
-                this.pooped = true;
-            }
+    if (make_orange){
+        currentTime_or+=dt;
+        if (currentTime_or>=1.00f*max_combo){
+            System.out.println("Combo_number: "+combo_number);
+        //if (currentTime_or>=1.0f){
+            make_orange=false;
+           // shaker.inc();
+            color_of_balloon=10;
+            combo=true;
+
+            this.pooped = true;
         }
+    }
 
    if ((velosity.x<sin_grav)&(sin_grav_bool)){
        velosity.x++;
@@ -216,6 +186,9 @@ public class Balloon {
 
    if (pooped){
         currentTime+=dt;
+       if (combo_number>1) {
+           animation.update(dt);
+       }
        if (currentTime>ANIMATION_TIME)
        {
            if ((!combo)&(!make_orange)) {

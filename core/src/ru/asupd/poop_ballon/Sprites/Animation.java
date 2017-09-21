@@ -8,11 +8,11 @@ import com.badlogic.gdx.utils.Array;
  */
 
 public class Animation {
-    public Array<TextureRegion> frames;
-    public float maxFrameTime;
-    public float currentFrameTime;
-    public int frameCount;
-    public int frame;
+    private Array<TextureRegion> frames;
+    private float maxFrameTime;
+    private float currentFrameTime;
+    private int frameCount;
+    private int frame;
 
     public Animation(TextureRegion region,int frameCount,float cycleTime) {
         frames = new Array<TextureRegion>();
@@ -22,9 +22,6 @@ public class Animation {
         }
         this.frameCount=frameCount;
         maxFrameTime=cycleTime / frameCount;
-        frame =0;
-    }
-    public Animation(){
         frame =0;
     }
 

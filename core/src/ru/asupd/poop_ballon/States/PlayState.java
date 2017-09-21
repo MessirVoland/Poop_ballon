@@ -75,7 +75,8 @@ public class PlayState extends State {
 
     boolean change_background;//хз
 
-    public final static float ANIMATION_TIME=0.266f;//время анимации
+    //public final static float ANIMATION_TIME=0.266f;//время анимации
+    public final static float ANIMATION_TIME=3.0f;
     public Preferences prefs;//для храниния данных
     public int load_hiscore;//макс счет
     public boolean mute;//тишина
@@ -171,7 +172,7 @@ public class PlayState extends State {
         poof_balloon_r = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
         poof_balloon_atlas = new Texture("pop_p.png");
         poof_balloon_p = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
-        poof_balloon_atlas = new Texture("pop_o.png");
+        poof_balloon_atlas = new Texture("pop_color.png");
         poof_balloon_o = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
 
 
@@ -395,7 +396,7 @@ public class PlayState extends State {
         poof_balloon_b.update(dt);
         poof_balloon_r.update(dt);
         poof_balloon_p.update(dt);
-        poof_balloon_o.update(dt);
+        //poof_balloon_o.update(dt);
 
 
         if (boss_balloon.isStarted()){
@@ -608,7 +609,7 @@ public class PlayState extends State {
         }
         //System.out.println("Missed balls: "+miss_ball);
         switch (miss_ball){
-            default:
+           /* default:
                 gsm.set(new GameoverState(gsm));
                 break;
             case 3:
@@ -625,7 +626,7 @@ public class PlayState extends State {
 
                 gsm.set(new GameoverState(gsm));
 
-                break;
+                break;*/
             case 2:
                 if (change_background) {
                     change_background=false;
