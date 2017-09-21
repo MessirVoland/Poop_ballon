@@ -68,6 +68,8 @@ public class PlayState extends State {
     private static final float minX = 0.75f;//Диапазон изменения хлопка
     private static final float maxX = 1.7f;
 
+    private int max_combo=0;
+
     private Music background_Music,boss_Music;//музыка
 
 
@@ -250,6 +252,7 @@ public class PlayState extends State {
                 }
             }
 
+            max_combo=0;
             current_combo=0;
             //Клик по шарам для проверки комбо, да долго проверять клик по шарам дважды но ничего лучше не придумал
             for (Balloon balloon:balloons){
@@ -267,6 +270,7 @@ public class PlayState extends State {
             //System.out.println("Current combo: "+current_combo);
             //current_combo=0;
             //клик по шарам
+
             for (Balloon balloon : balloons) {
                 if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)){
                     if ((balloon.getPosition().y<touchPos.y)&(balloon.getPosition().y+200>touchPos.y)){
@@ -289,6 +293,8 @@ public class PlayState extends State {
                                     //balloon.setCombo(current_combo);
                                     score_num.addScore(current_combo*current_combo-current_combo);
                                     score_num.setCombo(current_combo);
+                                    balloon.setAnimation(poof_balloon_o);
+                                    balloon.setMax_combo(current_combo);
                                     //shaker.shake(0.20f*current_combo);
                                 }else {
                                     balloon.setCombo(0);
@@ -566,7 +572,7 @@ public class PlayState extends State {
                     sb.draw(texture_b_o, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 11:
-                    sb.draw(poof_balloon_o.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    sb.draw(balloon.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     break;
             }
 
