@@ -68,15 +68,15 @@ public class PlayState extends State {
     private static final float minX = 0.75f;//Диапазон изменения хлопка
     private static final float maxX = 1.7f;
 
-    private int max_combo=0;
+    //private int max_combo=0;
 
     private Music background_Music,boss_Music;//музыка
 
 
     boolean change_background;//хз
 
-    //public final static float ANIMATION_TIME=0.266f;//время анимации
-    public final static float ANIMATION_TIME=3.0f;
+    public final static float ANIMATION_TIME=0.266f;//время анимации
+    //public final static float ANIMATION_TIME=3.0f;
     public Preferences prefs;//для храниния данных
     public int load_hiscore;//макс счет
     public boolean mute;//тишина
@@ -253,7 +253,7 @@ public class PlayState extends State {
                 }
             }
 
-            max_combo=0;
+            //max_combo=0;
             current_combo=0;
             //Клик по шарам для проверки комбо, да долго проверять клик по шарам дважды но ничего лучше не придумал
             for (Balloon balloon:balloons){
@@ -294,7 +294,7 @@ public class PlayState extends State {
                                     //balloon.setCombo(current_combo);
                                     score_num.addScore(current_combo*current_combo-current_combo);
                                     score_num.setCombo(current_combo);
-                                    balloon.setAnimation(poof_balloon_o);
+                                    //balloon.setAnimation(poof_balloon_o);
                                     balloon.setMax_combo(current_combo);
                                     //shaker.shake(0.20f*current_combo);
                                 }else {
@@ -609,7 +609,7 @@ public class PlayState extends State {
         }
         //System.out.println("Missed balls: "+miss_ball);
         switch (miss_ball){
-           /* default:
+            default:
                 gsm.set(new GameoverState(gsm));
                 break;
             case 3:
@@ -626,7 +626,7 @@ public class PlayState extends State {
 
                 gsm.set(new GameoverState(gsm));
 
-                break;*/
+                break;
             case 2:
                 if (change_background) {
                     change_background=false;

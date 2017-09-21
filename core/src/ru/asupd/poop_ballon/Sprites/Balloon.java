@@ -25,7 +25,7 @@ public class Balloon {
     private Texture texture_pooped,texture_bloody;
     private Texture texture;
 
-    private Animation animation;
+    private Animation animation_current_balloon;
     Texture poof_balloon_atlas;
 
     int color_of_balloon;
@@ -61,7 +61,7 @@ public class Balloon {
 
         if (combo){
            // color_of_balloon=10;
-            currentTime_or=1.00f*combo_number;
+            currentTime_or=0.10f*combo_number;
             combo=false;
            // System.out.println("Current_time: "+currentTime);
             make_orange=true;
@@ -90,16 +90,14 @@ public class Balloon {
 
     }
 
-    public void setAnimation(Animation animation) {
-        this.animation = animation;
-    }
 
     public Balloon(int x, int y, int grav, boolean respawn){
         position = new Vector3(x, y, 0);
         velosity = new Vector3(random(100)-50, 0, 0);
 
-        poof_balloon_atlas = new Texture("pop_color.png");
-        animation = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);;
+        poof_balloon_atlas = new Texture("pop_o.png");
+
+        animation_current_balloon = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);;
 
         // zerovelosity = new Vector3(0, 0, 0);
         this.velosity.y = grav;
@@ -143,10 +141,10 @@ public class Balloon {
     public void setPosition(float x,float y) {
         this.position.x = x;
         this.position.y = y;
-        animation.setCurrentFrameTime(0.0f);
+        animation_current_balloon.setCurrentFrameTime(0.0f);
     }
     public TextureRegion getFrames(){
-        return animation.getFrames();
+        return animation_current_balloon.getFrames();
     }
 
     public boolean isLive_out() {
@@ -157,7 +155,7 @@ public class Balloon {
 
     if (make_orange){
         currentTime_or+=dt;
-        if (currentTime_or>=1.00f*max_combo){
+        if (currentTime_or>=0.10f*max_combo){
             System.out.println("Combo_number: "+combo_number);
         //if (currentTime_or>=1.0f){
             make_orange=false;
@@ -186,8 +184,8 @@ public class Balloon {
 
    if (pooped){
         currentTime+=dt;
-       if (combo_number>1) {
-           animation.update(dt);
+       if (combo_number>=1) {
+           animation_current_balloon.update(dt);
        }
        if (currentTime>ANIMATION_TIME)
        {
@@ -197,7 +195,7 @@ public class Balloon {
             {
                 combo = false;
                 currentTime = 0;
-                animation.update(dt);
+               // animation_current_balloon.update(dt);
                 color_of_balloon++;
            }
        }
