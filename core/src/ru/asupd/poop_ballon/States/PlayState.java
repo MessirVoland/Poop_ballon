@@ -456,7 +456,7 @@ public class PlayState extends State {
 
         if (started) {
             for (Balloon balloon : balloons) {
-                balloon.update(dt);
+                balloon.update(dt,shaker);
 
                 if (balloon.getPosition().y > 720) {
                     balloon.setPosition(balloon.getPosition().x, -220 - random(50));

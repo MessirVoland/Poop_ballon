@@ -50,7 +50,8 @@ public class AndroidLauncher extends AndroidApplication {
 			}
 		});
 		adView.setAdSize(AdSize.SMART_BANNER);
-		adView.setAdUnitId("ca-app-pub-6755493316893566/6656095586");
+		//adView.setAdUnitId("ca-app-pub-6755493316893566/6656095586");//
+		adView.setAdUnitId("ca-app-pub-6755493316893566/8454794770");//самсунг аппс
 
 		AdRequest.Builder builder = new AdRequest.Builder();
 		//builder.addTestDevice("ADCD72548573E2D66A2AFC8594EDF6F6");

@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
+import ru.asupd.poop_ballon.Workers.Shaker;
+
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
 
@@ -11,7 +13,7 @@ import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
  * Created by Voland on 04.08.2017.
  */
 
-public class Balloon extends Creature {
+public class Balloon {
     private static final int MOVEMENT = 100;
     private int GRAVITY = -100;
     private static final float COMBO_TIME=0.266f;
@@ -147,12 +149,13 @@ public class Balloon extends Creature {
         return live_out;
     }
 
-    public void update(float dt){
+    public void update(float dt, Shaker shaker){
         if (make_orange){
             currentTime_or+=dt;
             if (currentTime_or>=0.133f){
             //if (currentTime_or>=1.0f){
                 make_orange=false;
+                shaker.inc();
                 color_of_balloon=10;
                 combo=true;
                 this.pooped = true;
