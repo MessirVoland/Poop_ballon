@@ -39,7 +39,7 @@ public class PlayState extends State {
     private Array<Balloon> balloons;//массив шаров
     private Array<Cloud> clouds;//массив шаров
 
-    private Texture background;//задник
+    private Texture background,pause_bgnd;//задник
     private BitmapFont FontRed1;//для фпс
 
     private Texture muted,unmuted;//иконка звука
@@ -64,7 +64,7 @@ public class PlayState extends State {
     private Animation poof_balloon_g,poof_balloon_y,poof_balloon_b,poof_balloon_r,poof_balloon_p,poof_balloon_o;
 
     private int cautch_ball = 0;//поймано шаров
-    public int miss_ball = 0;//пропущено шаров
+    private int miss_ball = 0;//пропущено шаров
 
     private Sound poop_Sound;//звук лопания
     private static final float minX = 0.75f;//Диапазон изменения хлопка
@@ -75,18 +75,20 @@ public class PlayState extends State {
     private Music background_Music,boss_Music;//музыка
 
 
-    boolean change_background;//хз
+    private boolean change_background;//хз
 
     public final static float ANIMATION_TIME=0.266f;//время анимации
     //public final static float ANIMATION_TIME=3.0f;
-    public Preferences prefs;//для храниния данных
-    public int load_hiscore;//макс счет
-    public boolean mute;//тишина
+    private Preferences prefs;//для храниния данных
+    private int load_hiscore;//макс счет
+    private boolean mute;//тишина
     private boolean first_start=true;
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
-    float volume;//хз)
-    Shaker shaker;//шейкео
-    int index,x,y;//хз
+    private float volume;//хз)
+    private Shaker shaker;//шейкео
+    private int index;//хз
+    private boolean pause=false;
+    float min_x=0.0f,min_y=0.0f;
 
     boolean started;//для страрта игры
     //int[] megred_high_score = new int[5];//для отображения счета
@@ -94,7 +96,7 @@ public class PlayState extends State {
     private Vector3 position;//Координаты заголовка игры
     private Vector3 velosity;//вектор движения заголовка
 
-    Boss_balloon boss_balloon;//босс
+    private Boss_balloon boss_balloon;//босс
 
     private int chance_of_boss=20;//20%
     private int chance_100_150=random(50)+100;
@@ -103,10 +105,10 @@ public class PlayState extends State {
     public static final int MAX_STEP=401;
     int current_step=1;
     //частицы
-    ParticleEffect effect;
+    private ParticleEffect effect;
 
     //Комбо
-    int current_combo=0;
+    private int current_combo=0;
 
     Vector3 touchPos;//вектор прикосновния
 
@@ -119,6 +121,7 @@ public class PlayState extends State {
 
 
         background = new Texture("background_clean.png");
+        pause_bgnd = new Texture("pause.png");
 
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
@@ -243,107 +246,117 @@ public class PlayState extends State {
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             //System.out.println("touchPos :"+touchPos);
             camera.unproject(touchPos);
-            index=0;
-            //клик по боссу
-            if (boss_balloon.isStarted()){
-                if ((boss_balloon.getPosition().x<touchPos.x)&(boss_balloon.getPosition().x+100>touchPos.x)){
-                    if ((boss_balloon.getPosition().y<touchPos.y)&(boss_balloon.getPosition().y+200>touchPos.y)){
-                        poop_Sound.play(volume);
-                        shaker.shake(0.40f);
-                        boss_balloon.clicked_boss();
-                    }
-                }
-            }
+            index = 0;
 
-            //max_combo=0;
-            current_combo=0;
-            //Клик по шарам для проверки комбо, да долго проверять клик по шарам дважды но ничего лучше не придумал
-            for (Balloon balloon:balloons){
-                if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)) {
-                    if ((balloon.getPosition().y < touchPos.y) & (balloon.getPosition().y + 200 > touchPos.y)) {
-                        if (!balloon.isPooped()) {
-                            current_combo++;
-                            current_step++;
-                            balloon.setCombo(current_combo);
-                           // System.out.println("Current combo on click: "+current_combo);
+            //клик по боссу
+
+            if (!pause){
+                if (touchPos!=null) {
+                    min_x = touchPos.x;
+                    min_y = touchPos.y;
+                }
+
+            }
+            if (!pause) {
+                if (boss_balloon.isStarted()) {
+                    if ((boss_balloon.getPosition().x < touchPos.x) & (boss_balloon.getPosition().x + 100 > touchPos.x)) {
+                        if ((boss_balloon.getPosition().y < touchPos.y) & (boss_balloon.getPosition().y + 200 > touchPos.y)) {
+                            poop_Sound.play(volume);
+                            shaker.shake(0.40f);
+                            boss_balloon.clicked_boss();
                         }
                     }
                 }
-            }
-            //System.out.println("Current combo: "+current_combo);
-            //current_combo=0;
-            //клик по шарам
 
-            for (Balloon balloon : balloons) {
-                if ((balloon.getPosition().x<touchPos.x)&(balloon.getPosition().x+100>touchPos.x)){
-                    if ((balloon.getPosition().y<touchPos.y)&(balloon.getPosition().y+200>touchPos.y)){
-                        if (!balloon.isPooped()) {
-                            if (touchPos.y<750) {
-                                //System.out.println("touched the ball :");
-
-                                long id = poop_Sound.play(volume);
-                                Random rand = new Random();
-                                float finalX = rand.nextFloat() * (maxX - minX) + minX;
-                                poop_Sound.setPitch(id,finalX);
-                                poop_Sound.setVolume(id,0.3f);
-
-                                shaker.shake(0.276f); // 0.2f
-
-                                cautch_ball++;
-                                score_num.addScore(1);
-                                //current_combo++;
-                                if (current_combo>=2) {
-                                    //balloon.setCombo(current_combo);
-                                    score_num.addScore(current_combo*current_combo-current_combo);
-                                    score_num.setCombo(current_combo);
-                                    //balloon.setAnimation(poof_balloon_o);
-                                    balloon.setMax_combo(current_combo);
-                                    //shaker.shake(0.20f*current_combo);
-                                }else {
-                                    balloon.setCombo(0);
-                                }
-
-                                poof_balloon_g.setCurrentFrameTime(0.0f);
-                                poof_balloon_g.setFrame(0);
-                                poof_balloon_y.setCurrentFrameTime(0.0f);
-                                poof_balloon_y.setFrame(0);
-                                poof_balloon_b.setCurrentFrameTime(0.0f);
-                                poof_balloon_b.setFrame(0);
-                                poof_balloon_r.setCurrentFrameTime(0.0f);
-                                poof_balloon_r.setFrame(0);
-                                poof_balloon_p.setCurrentFrameTime(0.0f);
-                                poof_balloon_p.setFrame(0);
-                                poof_balloon_o.setCurrentFrameTime(0.0f);
-                                poof_balloon_o.setFrame(0);
-
-                                //int local_highscore;
-                                //local_highscore = cautch_ball;
-                                //score_num.setScore(cautch_ball);
-                                //for (int k=0;k<=4;k++) {
-                               //     megred_high_score[k] = local_highscore % 10;
-                                //    local_highscore = local_highscore / 10;
-                                //}
-
-                                balloon.setPooped(cautch_ball);
-
-                                if ((current_step>=STEP_for_balloon)&(cautch_ball<=500)){
-                                    current_step=0;
-                                   // System.out.println("New balloon generated");
-                                    STEP_for_balloon+=20;
-                                    balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(),!boss_balloon.isStarted()));
-
-                                }
-                                balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(),!boss_balloon.isStarted()));
+                //max_combo=0;
+                current_combo = 0;
+                //Клик по шарам для проверки комбо, да долго проверять клик по шарам дважды но ничего лучше не придумал
+                for (Balloon balloon : balloons) {
+                    if ((balloon.getPosition().x < touchPos.x) & (balloon.getPosition().x + 100 > touchPos.x)) {
+                        if ((balloon.getPosition().y < touchPos.y) & (balloon.getPosition().y + 200 > touchPos.y)) {
+                            if (!balloon.isPooped()) {
+                                current_combo++;
+                                current_step++;
+                                balloon.setCombo(current_combo);
+                                // System.out.println("Current combo on click: "+current_combo);
                             }
                         }
                     }
                 }
-                index++;
-            }
+                //System.out.println("Current combo: "+current_combo);
+                //current_combo=0;
+                //клик по шарам
+
+                for (Balloon balloon : balloons) {
+                    if ((balloon.getPosition().x < touchPos.x) & (balloon.getPosition().x + 100 > touchPos.x)) {
+                        if ((balloon.getPosition().y < touchPos.y) & (balloon.getPosition().y + 200 > touchPos.y)) {
+                            if (!balloon.isPooped()) {
+                                if (touchPos.y < 750) {
+                                    //System.out.println("touched the ball :");
+
+                                    long id = poop_Sound.play(volume);
+                                    Random rand = new Random();
+                                    float finalX = rand.nextFloat() * (maxX - minX) + minX;
+                                    poop_Sound.setPitch(id, finalX);
+                                    poop_Sound.setVolume(id, 0.3f);
+
+                                    shaker.shake(0.276f); // 0.2f
+
+                                    cautch_ball++;
+                                    score_num.addScore(1);
+                                    //current_combo++;
+                                    if (current_combo >= 2) {
+                                        //balloon.setCombo(current_combo);
+                                        score_num.addScore(current_combo * current_combo - current_combo);
+                                        score_num.setCombo(current_combo);
+                                        //balloon.setAnimation(poof_balloon_o);
+                                        balloon.setMax_combo(current_combo);
+                                        //shaker.shake(0.20f*current_combo);
+                                    } else {
+                                        balloon.setCombo(0);
+                                    }
+
+                                    poof_balloon_g.setCurrentFrameTime(0.0f);
+                                    poof_balloon_g.setFrame(0);
+                                    poof_balloon_y.setCurrentFrameTime(0.0f);
+                                    poof_balloon_y.setFrame(0);
+                                    poof_balloon_b.setCurrentFrameTime(0.0f);
+                                    poof_balloon_b.setFrame(0);
+                                    poof_balloon_r.setCurrentFrameTime(0.0f);
+                                    poof_balloon_r.setFrame(0);
+                                    poof_balloon_p.setCurrentFrameTime(0.0f);
+                                    poof_balloon_p.setFrame(0);
+                                    poof_balloon_o.setCurrentFrameTime(0.0f);
+                                    poof_balloon_o.setFrame(0);
+
+                                    //int local_highscore;
+                                    //local_highscore = cautch_ball;
+                                    //score_num.setScore(cautch_ball);
+                                    //for (int k=0;k<=4;k++) {
+                                    //     megred_high_score[k] = local_highscore % 10;
+                                    //    local_highscore = local_highscore / 10;
+                                    //}
+
+                                    balloon.setPooped(cautch_ball);
+
+                                    if ((current_step >= STEP_for_balloon) & (cautch_ball <= 500)) {
+                                        current_step = 0;
+                                        // System.out.println("New balloon generated");
+                                        STEP_for_balloon += 20;
+                                        balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(), !boss_balloon.isStarted()));
+
+                                    }
+                                    balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(), !boss_balloon.isStarted()));
+                                }
+                            }
+                        }
+                    }
+                    index++;
+                }
 
 
-            //клик по иконке звука
-            if ((480-69<touchPos.x)&(480-69+64>touchPos.x)){
+                //клик по иконке звука
+            /*if ((480-69<touchPos.x)&(480-69+64>touchPos.x)){
                 if((700+20<touchPos.y)&(700+20+64>touchPos.y)){
                     if (mute) {
                         if (boss_balloon.isStarted()){
@@ -368,134 +381,150 @@ public class PlayState extends State {
                         prefs.flush();
                     }
                 }
+            }*/
+
             }
+            //клик по опциям второй
+            if ((480 - 69 < touchPos.x) & (480 - 69 + 64 > touchPos.x)) {
+                if ((700 + 20 < touchPos.y) & (700 + 20 + 64 > touchPos.y)) {
+                    if (pause) {
+                        pause = false;
+                    } else {
+                        pause = true;
+                    }
+                }
+            }
+                else
+            {
+                if ((!started)&(!pause)) {
+                    if (!boss_balloon.isStarted()) {
+                        started = true;
+                        score_num.setScore(0);
 
-            if (!started){
-                if (!boss_balloon.isStarted()) {
-                    started = true;
-                    score_num.setScore(0);
+                        //int local_highscore;
+                        //local_highscore = 0;
+                        //for (int k=0;k<=4;k++) {
 
-                //int local_highscore;
-                //local_highscore = 0;
-                //for (int k=0;k<=4;k++) {
-
-                  //  megred_high_score[k] = local_highscore % 10;
-                   // local_highscore = local_highscore / 10;
-                //}
+                        //  megred_high_score[k] = local_highscore % 10;
+                        // local_highscore = local_highscore / 10;
+                        //}
+                    }
                 }
             }
         }
+
     }
 
     @Override
     public void update(float dt) {
         handleInput();
 
-        effect.update(dt);
+        if (!pause) {
+            effect.update(dt);
+            poof_balloon_g.update(dt);
+            poof_balloon_y.update(dt);
+            poof_balloon_b.update(dt);
+            poof_balloon_r.update(dt);
+            poof_balloon_p.update(dt);
+            //poof_balloon_o.update(dt);
 
-        poof_balloon_g.update(dt);
-        poof_balloon_y.update(dt);
-        poof_balloon_b.update(dt);
-        poof_balloon_r.update(dt);
-        poof_balloon_p.update(dt);
-        //poof_balloon_o.update(dt);
 
+            if (boss_balloon.isStarted()) {
+                boss_balloon.update(dt);
+            }
 
-        if (boss_balloon.isStarted()){
-            boss_balloon.update(dt);
-        }
-
-        //Старт босса
-        if ((cautch_ball>chance_100_150)&(!boss_balloon.isStarted())){
-            if (boss_balloon.isLive()) {
-                boss_balloon.Start();
-                //started = false;
-                if (!mute) {
-                    background_Music.stop();
-                    boss_Music.play();
+            //Старт босса
+            if ((cautch_ball > chance_100_150) & (!boss_balloon.isStarted())) {
+                if (boss_balloon.isLive()) {
+                    boss_balloon.Start();
+                    //started = false;
+                    if (!mute) {
+                        background_Music.stop();
+                        boss_Music.play();
+                    }
+                    for (Balloon balloon : balloons) {
+                        balloon.stop_spawn();
+                    }
                 }
+
+            }
+            //Активные действия и проверки босса
+            if ((boss_balloon.isMissed()) & (boss_balloon.isStarted())) {
+                miss_ball++;
+                boss_balloon.setMissed(false);
+                change_background = true;
+                Gdx.input.vibrate(125);
+            }
+            //смерть босса
+            if ((!boss_balloon.isLive()) & (!boss_balloon.isDead())) {
+                boss_balloon.make_dead();
                 for (Balloon balloon : balloons) {
-                    balloon.stop_spawn();
+                    balloon.start_spawn();
+
+                    //score_num.addScore(50);
+                    //score_num.setCombo(9);
+                }
+
+            }
+            if (boss_balloon.isGive_score()) {
+                boss_balloon.setGive_score(false);
+                //System.out.println("add_score");
+                score_num.addScore(50);
+                score_num.setCombo(9);
+            }
+
+
+            index = 0;
+
+            if ((started) & (position.y < 1000)) {
+                velosity.scl(dt);
+                position.add(0, velosity.y, 0);
+                velosity.scl(1 / dt);
+            }
+            if (!boss_balloon.isLive()) {
+                if (boss_Music.isPlaying()) {
+                    if (!mute) {
+                        boss_Music.stop();
+                        background_Music.play();
+                    }
                 }
             }
 
-        }
-        //Активные действия и проверки босса
-        if ((boss_balloon.isMissed())&(boss_balloon.isStarted())){
-            miss_ball++;
-            boss_balloon.setMissed(false);
-            change_background = true;
-            Gdx.input.vibrate(125);
-        }
-        //смерть босса
-        if ((!boss_balloon.isLive())&(!boss_balloon.isDead())){
-            boss_balloon.make_dead();
-            for (Balloon balloon : balloons) {
-                balloon.start_spawn();
 
-                //score_num.addScore(50);
-                //score_num.setCombo(9);
-            }
+            if (started) {
+                for (Balloon balloon : balloons) {
+                    balloon.update(dt, shaker);
 
-        }
-        if (boss_balloon.isGive_score()){
-            boss_balloon.setGive_score(false);
-            //System.out.println("add_score");
-            score_num.addScore(50);
-            score_num.setCombo(9);
-        }
+                    if (balloon.getPosition().y > 720) {
+                        balloon.setPosition(balloon.getPosition().x, -220 - random(50));
 
+                        balloon.setVelosity(get_speed_for_balloon());
+                        miss_ball++;
+                        change_background = true;
+                        Gdx.input.vibrate(125);
+                    }
 
-        index=0;
-
-        if ((started)&(position.y<1000)) {
-            velosity.scl(dt);
-            position.add(0, velosity.y, 0);
-            velosity.scl(1 / dt);
-        }
-        if (!boss_balloon.isLive()){
-            if (boss_Music.isPlaying()){
-                if (!mute) {
-                    boss_Music.stop();
-                    background_Music.play();
+                    if (balloon.isLive_out()) {
+                        balloon.dispose();
+                        //System.out.println("balloon disposed :"+cautch_ball);
+                        balloons.removeIndex(index);
+                    }
+                    index++;
                 }
             }
-        }
 
-
-        if (started) {
-            for (Balloon balloon : balloons) {
-                balloon.update(dt,shaker);
-
-                if (balloon.getPosition().y > 720) {
-                    balloon.setPosition(balloon.getPosition().x, -220 - random(50));
-
-                    balloon.setVelosity(get_speed_for_balloon());
-                    miss_ball++;
-                    change_background = true;
-                    Gdx.input.vibrate(125);
+            for (Cloud cloud : clouds) {
+                cloud.update(dt);
+                if (cloud.getPosition().x < -320) {
+                    cloud.setPosition(+480 + 200 + random(250), cloud.getPosition().y);
+                    cloud.change_texture();
                 }
-
-                if (balloon.isLive_out()) {
-                    balloon.dispose();
-                    //System.out.println("balloon disposed :"+cautch_ball);
-                    balloons.removeIndex(index);
-                }
-                index++;
             }
-        }
 
-        for (Cloud cloud : clouds) {
-            cloud.update(dt);
-            if (cloud.getPosition().x < -320) {
-                cloud.setPosition(+480+200 + random(250), cloud.getPosition().y);
-                cloud.change_texture();
-            }
+            shaker.update(dt);
+            score_num.update(dt);
+            effect.setPosition(balloons.get(0).getPosition().x, balloons.get(0).getPosition().y);
         }
-
-        shaker.update(dt);
-        score_num.update(dt);
-        effect.setPosition(balloons.get(0).getPosition().x,balloons.get(0).getPosition().y);
     }
 
     @Override
@@ -506,6 +535,7 @@ public class PlayState extends State {
         sb.draw(background,-25, -25,550,900);
         sb.enableBlending();
         effect.draw(sb);
+
 
 
         if ((started)|(boss_balloon.isStarted())){
@@ -584,19 +614,19 @@ public class PlayState extends State {
 
         switch (current_combo){
             case 2:
-                sb.draw(multi_x2,touchPos.x,touchPos.y);
+                sb.draw(multi_x2,min_x,min_y);
                 //score_num.addScore(2);
                 break;
             case 3:
-                sb.draw(multi_x3,touchPos.x,touchPos.y);
+                sb.draw(multi_x3,min_x,min_y);
                // score_num.addScore(6);
                 break;
             case 4:
-                sb.draw(multi_x4,touchPos.x,touchPos.y);
+                sb.draw(multi_x4,min_x,min_y);
                // score_num.addScore(12);
                 break;
             case 5:
-                sb.draw(multi_x5,touchPos.x,touchPos.y);
+                sb.draw(multi_x5,min_x,min_y);
                // score_num.addScore(20);
                 break;
         }
@@ -650,6 +680,10 @@ public class PlayState extends State {
                 break;
 
         }
+        if (pause){
+            sb.draw(pause_bgnd,((int) shaker.getCamera_sh().position.x)-240,((int) shaker.getCamera_sh().position.y)-400,480,800);
+        }
+
         sb.end();
     }
 

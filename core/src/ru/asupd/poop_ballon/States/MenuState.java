@@ -1,7 +1,9 @@
 package ru.asupd.poop_ballon.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
@@ -15,6 +17,8 @@ public class MenuState extends State {
 
     private Texture background;
     private Texture balloon;
+    private float current_dt=0;
+    private BitmapFont FontRed1;
 
 
     @Override
@@ -27,11 +31,13 @@ public class MenuState extends State {
         camera.setToOrtho(false,640,800 );
         background = new Texture("background_start.png");
         balloon  = new Texture("tap.png");
+        FontRed1 = new BitmapFont();
+        FontRed1.setColor(Color.RED);
     }
     @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
-            gsm.set(new PlayState(gsm));
+          //  gsm.set(new PlayState(gsm));
         }
 
     }
@@ -39,6 +45,10 @@ public class MenuState extends State {
     @Override
     public void update(float dt) {
         handleInput();
+        current_dt+=dt;
+        if (current_dt>=3.0f){
+            gsm.set(new PlayState(gsm));
+        }
     }
 
     @Override
@@ -47,6 +57,7 @@ public class MenuState extends State {
         sb.begin();
         sb.draw(background, 0, 0,640,800);
         sb.draw(balloon,120,100,405,88);
+        FontRed1.draw(sb, " Time to START 3.0f : "+ current_dt, 10, 790);
         sb.end();
 
     }
