@@ -32,9 +32,11 @@ public class Shaker {
         duration=duration_in;
     }
     public void inc(){
-        intensity++;
-        intensity++;
-        duration+=0.5f;
+        intensity+=0.5;
+        //intensity++;
+        //intensity++;
+        duration+=0.2f;
+        //duration+=0.5f;
         //duration=0,5f;
     }
 
