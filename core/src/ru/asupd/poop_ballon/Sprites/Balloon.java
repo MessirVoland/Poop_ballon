@@ -61,7 +61,7 @@ public class Balloon {
 
         if (combo){
            // color_of_balloon=10;
-            currentTime_or=0.10f*combo_number;
+            currentTime_or=0.08f*combo_number;
             combo=false;
            // System.out.println("Current_time: "+currentTime);
             make_orange=true;
@@ -155,11 +155,11 @@ public class Balloon {
 
     if (make_orange){
         currentTime_or+=dt;
-        if (currentTime_or>=0.10f*max_combo){
+        if (currentTime_or>=0.08f*max_combo){
             System.out.println("Combo_number: "+combo_number);
         //if (currentTime_or>=1.0f){
             make_orange=false;
-           // shaker.inc();
+            shaker.inc();
             color_of_balloon=10;
             combo=true;
 

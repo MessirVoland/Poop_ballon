@@ -509,7 +509,7 @@ public class PlayState extends State {
 
 
         if ((started)|(boss_balloon.isStarted())){
-            sb.draw(score,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.x)+360,115,31);
+            sb.draw(score,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)+360,115,31);
            //score_num.draw(sb, (int) (shaker.getBaseX()+225), (int) (shaker.getBaseY()+760));
             score_num.draw(sb,((int) shaker.getCamera_sh().position.x)-15, ((int) shaker.getCamera_sh().position.y)+360);
             //sb.draw(frames_numbers.get(megred_high_score[0]),285,760,25,31);
@@ -609,7 +609,9 @@ public class PlayState extends State {
         }else{
             sb.draw(unmuted,((int) shaker.getCamera_sh().position.x)240-69,((int) shaker.getCamera_sh().position.x)+300+20,64,64);
         }*/
-		sb.draw(options,((int) shaker.getCamera_sh().position.x+240-69),((int) shaker.getCamera_sh().position.x+300+20),64,64);
+
+		sb.draw(options,((int) (shaker.getCamera_sh().position.x)+240-69),((int) (shaker.getCamera_sh().position.y+400-69)),64,64);
+
         //System.out.println("Missed balls: "+miss_ball);
         switch (miss_ball){
             default:
