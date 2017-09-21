@@ -609,7 +609,7 @@ public class PlayState extends State {
         }else{
             sb.draw(unmuted,((int) shaker.getCamera_sh().position.x)240-69,((int) shaker.getCamera_sh().position.x)+300+20,64,64);
         }*/
-		sb.draw(options,((int) shaker.getCamera_sh().position.x)240-69,((int) shaker.getCamera_sh().position.x)+300+20,64,64);
+		sb.draw(options,((int) shaker.getCamera_sh().position.x+240-69),((int) shaker.getCamera_sh().position.x+300+20),64,64);
         //System.out.println("Missed balls: "+miss_ball);
         switch (miss_ball){
             default:
