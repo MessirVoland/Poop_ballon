@@ -9,9 +9,12 @@ import static com.badlogic.gdx.math.MathUtils.random;
  */
 
 public class Shaker {
+    private final static float SPEED_OF_COMEBACK=0.5f;//скорость возвращения экрана после шейка в обыное состояние
     private OrthographicCamera camera_sh;
     private float elapsed,duration,intensity;
-    private float baseX,baseY;
+    private float baseX=0,baseY=0;
+    private float x, y;
+
 
     public float getBaseX() {
         return baseX;
@@ -23,8 +26,8 @@ public class Shaker {
 
     public Shaker(OrthographicCamera camera) {
         camera_sh=camera;
-       baseX= camera.position.x ;
-       baseY= camera.position.y ;
+       baseX+= camera.position.x ;
+       baseY+= camera.position.y ;
     }
     public void shake(float duration_in){
         elapsed=0;
@@ -50,8 +53,10 @@ public class Shaker {
             // Calculate the amount of shake based on how long it has been shaking already
             float currentPower = intensity * camera_sh.zoom * ((duration - elapsed) / duration);
            //System.out.println("shaking? cp: "+currentPower);
-            float x = (random.nextFloat() - 0.5f) * currentPower;
-            float y = (random.nextFloat() - 0.5f) * currentPower;
+
+            x = (random.nextFloat() - 0.5f) * currentPower;
+
+            y = (random.nextFloat() - 0.5f) * currentPower;
             camera_sh.translate(-x, -y);
             camera_sh.update();
             // Increase the elapsed time by the delta provided.
@@ -59,8 +64,32 @@ public class Shaker {
 
         }else
         {
-            camera_sh.position.x = baseX;
-            camera_sh.position.y = baseY;
+            if (camera_sh.position.x!=baseX) {
+                if (camera_sh.position.x > baseX) {
+                    camera_sh.translate(-SPEED_OF_COMEBACK,0);
+                }else
+                {
+                    camera_sh.translate(SPEED_OF_COMEBACK,0);
+                }
+                if (((camera_sh.position.x - baseX)<=SPEED_OF_COMEBACK)&((camera_sh.position.x - baseX)>=-SPEED_OF_COMEBACK)){
+                    camera_sh.position.x = baseX;
+                }
+            }
+
+            if (camera_sh.position.y!=baseY) {
+                if (camera_sh.position.y > baseY) {
+                    camera_sh.translate(0,-SPEED_OF_COMEBACK);
+                }else
+                {
+                    camera_sh.translate(0,SPEED_OF_COMEBACK);
+                }
+                if (((camera_sh.position.y - baseY)<=SPEED_OF_COMEBACK)&((camera_sh.position.y - baseY)>=-SPEED_OF_COMEBACK)){
+                    camera_sh.position.y = baseY;
+                }
+            }
+
+           // camera_sh.position.x = baseX;
+           // camera_sh.position.y = baseY;
             camera_sh.update();
         }
     }
