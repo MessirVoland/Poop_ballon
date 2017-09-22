@@ -11,28 +11,25 @@ import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
 
 /**
+ * Шарик)
  * Created by Voland on 04.08.2017.
  */
 
 public class Balloon {
-    private static final int MOVEMENT = 100;
-    private int GRAVITY = -100;
-    private static final float COMBO_TIME=0.266f;
-    private int sin_grav =50;
     private Vector3 position;
     private Vector3 velosity;
     private Rectangle bounds;
-    private Texture texture_pooped,texture_bloody;
-    private Texture texture;
+    //private Texture texture_pooped,texture_bloody;
+    //private Texture texture;
 
     private Animation animation_current_balloon;
-    Texture poof_balloon_atlas;
+    private Texture poof_balloon_atlas;
 
-    int color_of_balloon;
+    private int color_of_balloon;
     private float currentTime;
     private float currentTime_or=0;
-    boolean pooped,live_out;
-    boolean can_respawn,sin_grav_bool;
+    private boolean pooped,live_out;
+    private boolean can_respawn,sin_grav_bool;
 
     private int max_combo;
 
@@ -74,9 +71,9 @@ public class Balloon {
 
     }
 
-    public int getCombo() {
-        return combo_number;
-    }
+    //public int getCombo() {
+     //   return combo_number;
+    //}
 
     public void setCombo(int number_of_ball_in_combo){
         if (number_of_ball_in_combo!=0) {
@@ -97,7 +94,7 @@ public class Balloon {
 
         poof_balloon_atlas = new Texture("pop_o.png");
 
-        animation_current_balloon = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);;
+        animation_current_balloon = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
 
         // zerovelosity = new Vector3(0, 0, 0);
         this.velosity.y = grav;
@@ -134,9 +131,9 @@ public class Balloon {
         return position;
     }
 
-    public Texture getTexture() {
-        return texture;
-    }
+    //public Texture getTexture() {
+    //    return texture;
+    //}
 
     public void setPosition(float x,float y) {
         this.position.x = x;
@@ -167,14 +164,15 @@ public class Balloon {
         }
     }
 
-   if ((velosity.x<sin_grav)&(sin_grav_bool)){
+        int sin_grav = 50;
+        if ((velosity.x< sin_grav)&(sin_grav_bool)){
        velosity.x++;
    }
    if ((velosity.x>-sin_grav)&(!sin_grav_bool)){
        velosity.x--;
    }
 
-   if (velosity.x>sin_grav){
+   if (velosity.x> sin_grav){
        sin_grav_bool=false;
    }
    if (velosity.x<-sin_grav){
@@ -216,9 +214,9 @@ public class Balloon {
         }
     }
 
-    public Rectangle getBounds(){
-        return bounds;
-    }
+   // public Rectangle getBounds(){
+    //    return bounds;
+   // }
 
     public void dispose() {
        // System.out.println("Balloon disposed");

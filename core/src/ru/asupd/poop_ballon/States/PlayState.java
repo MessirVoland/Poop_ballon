@@ -10,11 +10,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-
-import org.omg.CORBA.BooleanSeqHelper;
 
 import java.util.Random;
 
@@ -28,7 +25,7 @@ import ru.asupd.poop_ballon.Workers.Shaker;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 
-/**
+/**Игровой модуль
  * Created by Voland on 04.08.2017.
  */
 
@@ -84,14 +81,13 @@ public class PlayState extends State {
     private int load_hiscore;//макс счет
     private boolean mute;//тишина
     private boolean vibro=true;//вибратор
-    private boolean first_start=true;
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
     private float volume;//звук хлопков)
 
     private Shaker shaker;//шейкео
     private int index;//хз
     private boolean pause=false;
-    float min_x=0.0f,min_y=0.0f;
+    private float min_x=0.0f,min_y=0.0f;
 
     boolean started;//для страрта игры
     //int[] megred_high_score = new int[5];//для отображения счета
@@ -113,11 +109,11 @@ public class PlayState extends State {
     //Комбо
     private int current_combo=0;
 
-    Vector3 touchPos;//вектор прикосновния
+    private Vector3 touchPos;//вектор прикосновния
 
 
 
-    public PlayState(GameStateManager gsm) {
+    protected PlayState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
 
@@ -192,7 +188,8 @@ public class PlayState extends State {
 
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
         load_hiscore = prefs.getInteger("highscore");
-        if (first_start!=prefs.getBoolean("first_start")){
+        boolean first_start = true;
+        if (first_start !=prefs.getBoolean("first_start")){
             prefs.putBoolean("first_start",true);
             mute=false;
             prefs.putBoolean("mute",mute);
