@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
 /**
+ * Анимация
  * Created by Asup.D on 12.12.2016.
  */
 

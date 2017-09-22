@@ -135,9 +135,6 @@ public class PlayState extends State {
 
         //инициализация музыки
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
-
-
-
         boss_Music = Gdx.audio.newMusic(Gdx.files.internal("Sound_19272 [Wav_Library_Net].mp3"));
         background_Music = Gdx.audio.newMusic(Gdx.files.internal("sound.mp3"));
         background_Music.setVolume(0.3f);
@@ -390,11 +387,12 @@ public class PlayState extends State {
             //клик по опциям второй
             if ((480 - 69 < touchPos.x) & (480 - 69 + 64 > touchPos.x)) {
                 if ((700 + 20 < touchPos.y) & (700 + 20 + 64 > touchPos.y)) {
-                    if (pause) {
+                   pause=!pause;
+                   /* if (pause) {
                         pause = false;
                     } else {
                         pause = true;
-                    }
+                    }*/
                 }
             }
                 else
@@ -505,7 +503,9 @@ public class PlayState extends State {
                 miss_ball++;
                 boss_balloon.setMissed(false);
                 change_background = true;
-                Gdx.input.vibrate(125);
+                if (vibro) {
+                    Gdx.input.vibrate(125);
+                }
             }
             //смерть босса
             if ((!boss_balloon.isLive()) & (!boss_balloon.isDead())) {
@@ -553,7 +553,9 @@ public class PlayState extends State {
                         balloon.setVelosity(get_speed_for_balloon());
                         miss_ball++;
                         change_background = true;
-                        Gdx.input.vibrate(125);
+                        if (vibro) {
+                            Gdx.input.vibrate(125);
+                        }
                     }
 
                     if (balloon.isLive_out()) {

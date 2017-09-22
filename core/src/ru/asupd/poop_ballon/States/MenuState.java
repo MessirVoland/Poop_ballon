@@ -1,15 +1,14 @@
 package ru.asupd.poop_ballon.States;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 
 import ru.asupd.poop_ballon.GameStateManager;
 
 /**
+ * Меню
  * Created by Voland on 04.08.2017.
  */
 
@@ -32,9 +31,9 @@ public class MenuState extends State {
     }
     @Override
     public void handleInput() {
-        if(Gdx.input.justTouched()){
+        //if(Gdx.input.justTouched()){
           //  gsm.set(new PlayState(gsm));
-        }
+       // }
 
     }
 
