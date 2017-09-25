@@ -37,6 +37,7 @@ public final class GameoverState extends State {
 
     public GameoverState(GameStateManager gsm,float redball_x) {
         super(gsm);
+        redball_x=-190;
         camera.setToOrtho(false, 480 , 800 );
         background = new Texture("background_night.png");
         tap_to_restart = new Texture("restart.png");

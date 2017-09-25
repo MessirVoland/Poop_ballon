@@ -101,6 +101,7 @@ public class PlayState extends State {
     private float min_x=0.0f,min_y=0.0f;
 
     boolean started;//для страрта игры
+    private static GameoverState gameoverState;
     //int[] megred_high_score = new int[5];//для отображения счета
 
     private Vector3 position;//Координаты заголовка игры
@@ -488,12 +489,13 @@ public class PlayState extends State {
             if (game_over_dt>=0.7f){
                 if (game_over_ball_fly){
                     if (position.x<=-190) {
-                         gsm.set(new GameoverState(gsm,position.x));
+                         gsm.set(gameoverState);
                     }
                 }
                 if ((!game_over_ball_fly)&(game_over_well_play)){
                     game_over_ball_fly=true;
                     game_over_dt=0;
+
                 }
 
                 if (!game_over_well_play){
@@ -503,6 +505,7 @@ public class PlayState extends State {
                     velosity.y=0;
                     position.x=480;
                     position.y=0;
+                    gameoverState = new GameoverState(gsm,-190);
                 }
             }
         }
@@ -758,7 +761,7 @@ public class PlayState extends State {
         //System.out.println("Missed balls: "+miss_ball);
         switch (miss_ball){
             default:
-                gsm.set(new GameoverState(gsm,position.x));
+                //gsm.set(new GameoverState(gsm,position.x));
                 break;
             case 3:
                 if (!game_over_start) {
