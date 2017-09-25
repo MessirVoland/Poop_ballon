@@ -54,7 +54,7 @@ public class Balloon {
         return pooped|make_orange;
     }
 
-    public void setPooped(int i) {
+    public void setPooped() {
 
         if (combo){
            // color_of_balloon=10;

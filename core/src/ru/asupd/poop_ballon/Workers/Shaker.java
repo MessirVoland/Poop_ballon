@@ -9,7 +9,7 @@ import static com.badlogic.gdx.math.MathUtils.random;
  */
 
 public class Shaker {
-    private final static float SPEED_OF_COMEBACK=0.5f;//скорость возвращения экрана после шейка в обыное состояние
+    private final static float SPEED_OF_COMEBACK=1.8f;//скорость возвращения экрана после шейка в обыное состояние
     private OrthographicCamera camera_sh;
     private float elapsed,duration,intensity;
     private float baseX=0,baseY=0;

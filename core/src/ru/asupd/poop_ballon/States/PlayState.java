@@ -84,6 +84,16 @@ public class PlayState extends State {
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
     private float volume;//звук хлопков)
 
+    //гейм овер
+    private boolean game_over_start=false;//перероход в гейм овер
+    private boolean game_over_well_play=false;
+    private boolean game_over_ball_fly=false;
+    private float game_over_dt=0;
+    private final static float GAME_OVER_ANIM=0.266f;
+    private Texture well_played;
+    private Texture nice_played;
+    private float x_game_over=-480,y_game_over=0;
+
     private Shaker shaker;//шейкео
     private int index;//хз
     private boolean pause=false;
@@ -161,6 +171,9 @@ public class PlayState extends State {
         multi_x4 = new Texture("x4.png");
         multi_x5 = new Texture("x5.png");
         multi_x6 = new Texture("x6.png");
+
+        well_played = new Texture("wp.png");
+        nice_played = new Texture("nice_try.png");
 
         score_num = new Score();
 
@@ -337,7 +350,7 @@ public class PlayState extends State {
                                     //    local_highscore = local_highscore / 10;
                                     //}
 
-                                    balloon.setPooped(cautch_ball);
+                                    balloon.setPooped();
 
                                     if ((current_step >= STEP_for_balloon) & (cautch_ball <= 500)) {
                                         current_step = 0;
@@ -468,6 +481,25 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
+        if (game_over_start){
+            game_over_dt+=dt;
+            if (game_over_dt>=ANIMATION_TIME){
+                if (game_over_ball_fly){
+                    gsm.set(new GameoverState(gsm));
+                }
+                if ((!game_over_ball_fly)&(game_over_well_play)){
+                    game_over_ball_fly=true;
+                    game_over_dt=0;
+                }
+
+                if (!game_over_well_play){
+                    game_over_well_play=true;
+                    game_over_dt=0;
+                    position.x=480;
+                    position.y=0;
+                }
+            }
+        }
 
         if (!pause) {
             effect.update(dt);
@@ -533,6 +565,11 @@ public class PlayState extends State {
                 position.add(0, velosity.y, 0);
                 velosity.scl(1 / dt);
             }
+            if (game_over_ball_fly){
+                velosity.scl(dt);
+                position.add(-50, 0, 0);
+                velosity.scl(1 / dt);
+            }
             if (!boss_balloon.isLive()) {
                 if (boss_Music.isPlaying()) {
                     if (!mute) {
@@ -577,7 +614,9 @@ public class PlayState extends State {
 
             shaker.update(dt);
             score_num.update(dt);
-            effect.setPosition(balloons.get(0).getPosition().x, balloons.get(0).getPosition().y);
+            if (balloons.size>=1) {
+                effect.setPosition(balloons.get(0).getPosition().x, balloons.get(0).getPosition().y);
+            }
         }
     }
 
@@ -588,6 +627,10 @@ public class PlayState extends State {
         sb.disableBlending();
         sb.draw(background,-25, -25,550,900);
         sb.enableBlending();
+        if (game_over_ball_fly) {
+            sb.draw(texture_b_r, position.x, position.y, 480, 800);
+        }
+
         effect.draw(sb);
 
 
@@ -616,10 +659,19 @@ public class PlayState extends State {
 
             sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
         }
-
-        sb.draw(texture_poop_balloon,position.x,position.y,463,218);//заголовок
+        if (!game_over_ball_fly) {
+            sb.draw(texture_poop_balloon, position.x, position.y, 463, 218);//заголовок
+        }
         if (boss_balloon.isStarted()){
             sb.draw(boss_balloon.getTexture_boss(),boss_balloon.getPosition().x,boss_balloon.getPosition().y,95,190);
+        }
+        if (game_over_well_play){
+            if (load_hiscore<cautch_ball){
+                sb.draw(well_played,100,200,200,100);
+            }else
+            {
+                sb.draw(nice_played,100,200,200,100);
+            }
         }
 
         //if (!boss_balloon.isStarted()){
@@ -705,18 +757,25 @@ public class PlayState extends State {
                 gsm.set(new GameoverState(gsm));
                 break;
             case 3:
-                load_hiscore = prefs.getInteger("highscore");
-
-                cautch_ball=score_num.getScore();
-
-                prefs.putInteger("last_match_score", cautch_ball);
-                prefs.flush();
-                if (load_hiscore<cautch_ball) {
-                    prefs.putInteger("highscore", cautch_ball);
+                if (!game_over_start) {
+                    for (Balloon balloon : balloons) {
+                        balloon.setPooped();
+                        balloon.stop_spawn();
+                    }
+                    game_over_start=true;
+                    //  balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(), !boss_balloon.isStarted()));
+                    load_hiscore = prefs.getInteger("highscore");
+                    cautch_ball=score_num.getScore();
+                    prefs.putInteger("last_match_score", cautch_ball);
                     prefs.flush();
+                    if (load_hiscore<cautch_ball) {
+                        prefs.putInteger("highscore", cautch_ball);
+                        prefs.flush();
+                    }
                 }
 
-                gsm.set(new GameoverState(gsm));
+
+               // gsm.set(new GameoverState(gsm));
 
                 break;
             case 2:
@@ -724,6 +783,7 @@ public class PlayState extends State {
                     change_background=false;
                     background = new Texture("background_evening.png");
                 }
+
                 break;
 
             case 1:
