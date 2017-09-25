@@ -430,8 +430,8 @@ public class PlayState extends State {
             }
             if (pause) {
                 //звук
-                if ((380 < touchPos.x) & (380 +64 > touchPos.x)) {
-                    if ((400 - 32 < touchPos.y) & (400 - 32 + 64 > touchPos.y)) {
+                if ((270 < touchPos.x) & (270+150 > touchPos.x)) {
+                    if ((400 - 78 < touchPos.y) & (400 - 78 + 156 > touchPos.y)) {
                         if (mute){
                             mute=false;
                             if (boss_balloon.isStarted()){
@@ -459,8 +459,8 @@ public class PlayState extends State {
                     }
                 }
                 //вибро
-                if ((100 < touchPos.x) & (100 +64 > touchPos.x)) {
-                    if ((400 - 32 < touchPos.y) & (400 - 32 + 64 > touchPos.y)) {
+                if ((60 < touchPos.x) & (60 +150 > touchPos.x)) {
+                    if ((400 - 78 < touchPos.y) & (400 - 78 + 156 > touchPos.y)) {
                         if (vibro){
                             vibro=false;
 
@@ -810,14 +810,14 @@ public class PlayState extends State {
             sb.draw(pause_bgnd,((int) shaker.getCamera_sh().position.x)-240,((int) shaker.getCamera_sh().position.y)-400,480,800);
 
             if (mute){
-                sb.draw(muted,((int) shaker.getCamera_sh().position.x)+140,((int) shaker.getCamera_sh().position.y)-32,150,156);
+                sb.draw(muted,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78,150,156);
             }else{
-                sb.draw(unmuted,((int) shaker.getCamera_sh().position.x)+140,((int) shaker.getCamera_sh().position.y)-32,150,156);
+                sb.draw(unmuted,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78,150,156);
             }
             if (vibro){
-                sb.draw(vibrated,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)-32,150,156);
+                sb.draw(vibrated,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78,150,156);
             }else{
-                sb.draw(unvibrated,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)-32,150,156);
+                sb.draw(unvibrated,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78,150,156);
             }
 
         }
