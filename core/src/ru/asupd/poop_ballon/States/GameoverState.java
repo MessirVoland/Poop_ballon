@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Matrix3;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 import ru.asupd.poop_ballon.GameStateManager;
@@ -28,6 +30,9 @@ public class GameoverState extends State {
     int[] score_best =new int[5];
     int[] score_last =new int[5];
 
+    Vector3 velosity,position;
+    Texture big_balloon;
+
 
 
     public GameoverState(GameStateManager gsm) {
@@ -41,6 +46,9 @@ public class GameoverState extends State {
         awesome = new Texture("awesome.png");
 
         numbers = new Texture("numbers.png");
+        big_balloon= new Texture("big_balloon.png");
+        position = new Vector3(-190,0,0);
+        velosity=new Vector3(-800,0,0);
         frames_numbers = new Array<TextureRegion>();
 
         for (int j=0;j<=9;j++){
@@ -89,6 +97,11 @@ public class GameoverState extends State {
             handleInput();
         }
         currentdt+=dt;
+        if (position.x>=-865) {
+            velosity.scl(dt);
+            position.add(velosity.x, 0, 0);
+            velosity.scl(1 / dt);
+        }
     }
 
     @Override
@@ -113,6 +126,7 @@ public class GameoverState extends State {
         sb.draw(frames_numbers.get(score_best[1]),225,50,25,31);
         sb.draw(frames_numbers.get(score_best[2]),205,50,25,31);
         sb.draw(frames_numbers.get(score_best[3]),185,50,25,31);
+        sb.draw(big_balloon,position.x,position.y,860,800);
 
 
        // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 250);
