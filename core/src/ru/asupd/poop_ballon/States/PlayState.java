@@ -92,6 +92,7 @@ public class PlayState extends State {
     private final static float GAME_OVER_ANIM=0.266f;
     private Texture well_played;
     private Texture nice_played;
+    private Texture big_balloon;
     private float x_game_over=-480,y_game_over=0;
 
     private Shaker shaker;//шейкео
@@ -174,6 +175,7 @@ public class PlayState extends State {
 
         well_played = new Texture("wp.png");
         nice_played = new Texture("nice_try.png");
+        big_balloon= new Texture("big_balloon.png");
 
         score_num = new Score();
 
@@ -483,9 +485,11 @@ public class PlayState extends State {
         handleInput();
         if (game_over_start){
             game_over_dt+=dt;
-            if (game_over_dt>=ANIMATION_TIME){
+            if (game_over_dt>=0.7f){
                 if (game_over_ball_fly){
-                    gsm.set(new GameoverState(gsm));
+                    if (position.x<=-190) {
+                         gsm.set(new GameoverState(gsm));
+                    }
                 }
                 if ((!game_over_ball_fly)&(game_over_well_play)){
                     game_over_ball_fly=true;
@@ -495,6 +499,8 @@ public class PlayState extends State {
                 if (!game_over_well_play){
                     game_over_well_play=true;
                     game_over_dt=0;
+                    velosity.x=-800;
+                    velosity.y=0;
                     position.x=480;
                     position.y=0;
                 }
@@ -567,7 +573,7 @@ public class PlayState extends State {
             }
             if (game_over_ball_fly){
                 velosity.scl(dt);
-                position.add(-50, 0, 0);
+                position.add(velosity.x, 0, 0);
                 velosity.scl(1 / dt);
             }
             if (!boss_balloon.isLive()) {
@@ -627,9 +633,7 @@ public class PlayState extends State {
         sb.disableBlending();
         sb.draw(background,-25, -25,550,900);
         sb.enableBlending();
-        if (game_over_ball_fly) {
-            sb.draw(texture_b_r, position.x, position.y, 480, 800);
-        }
+
 
         effect.draw(sb);
 
@@ -811,6 +815,9 @@ public class PlayState extends State {
                 sb.draw(unvibrated,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)-32,64,64);
             }
 
+        }
+        if (game_over_ball_fly) {
+            sb.draw(big_balloon, position.x, position.y,860, 800);
         }
 
         sb.end();
