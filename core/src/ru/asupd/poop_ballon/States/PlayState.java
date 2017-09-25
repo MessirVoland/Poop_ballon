@@ -488,7 +488,7 @@ public class PlayState extends State {
             if (game_over_dt>=0.7f){
                 if (game_over_ball_fly){
                     if (position.x<=-190) {
-                         gsm.set(new GameoverState(gsm));
+                         gsm.set(new GameoverState(gsm,position.x));
                     }
                 }
                 if ((!game_over_ball_fly)&(game_over_well_play)){
@@ -758,7 +758,7 @@ public class PlayState extends State {
         //System.out.println("Missed balls: "+miss_ball);
         switch (miss_ball){
             default:
-                gsm.set(new GameoverState(gsm));
+                gsm.set(new GameoverState(gsm,position.x));
                 break;
             case 3:
                 if (!game_over_start) {

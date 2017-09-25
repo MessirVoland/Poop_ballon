@@ -17,25 +17,25 @@ import ru.asupd.poop_ballon.GameStateManager;
  * Created by Voland on 22.08.2017.
  */
 
-public class GameoverState extends State {
-    private Texture background;
-    private Texture tap_to_restart,your_score,your_best_score,awesome;
-    private Texture numbers;
-    private Array<TextureRegion> frames_numbers;
-    float currentdt, waiting;
-    private BitmapFont FontRed1;
-    public Preferences prefs;
+public final class GameoverState extends State {
+    private final Texture background;
+    private final Texture tap_to_restart,your_score,your_best_score,awesome;
+    private final Texture numbers;
+    private final Array<TextureRegion> frames_numbers;
+    static float  currentdt, waiting;
+    private final BitmapFont FontRed1;
+    public final Preferences prefs;
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
-    int load_hiscore,last_score;
-    int[] score_best =new int[5];
-    int[] score_last =new int[5];
+    final int load_hiscore,last_score;
+    final int[] score_best =new int[5];
+    final int[] score_last =new int[5];
 
-    Vector3 velosity,position;
-    Texture big_balloon;
+     final Vector3 velosity,position;
+     final Texture big_balloon;
 
 
 
-    public GameoverState(GameStateManager gsm) {
+    public GameoverState(GameStateManager gsm,float redball_x) {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
         background = new Texture("background_night.png");
@@ -47,7 +47,7 @@ public class GameoverState extends State {
 
         numbers = new Texture("numbers.png");
         big_balloon= new Texture("big_balloon.png");
-        position = new Vector3(-190,0,0);
+        position = new Vector3(redball_x,0,0);
         velosity=new Vector3(-800,0,0);
         frames_numbers = new Array<TextureRegion>();
 
