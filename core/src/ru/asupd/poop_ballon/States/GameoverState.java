@@ -17,27 +17,31 @@ import ru.asupd.poop_ballon.GameStateManager;
  * Created by Voland on 22.08.2017.
  */
 
-public final class GameoverState extends State {
-    private final Texture background;
-    private final Texture tap_to_restart,your_score,your_best_score,awesome;
-    private final Texture numbers;
-    private final Array<TextureRegion> frames_numbers;
-    static float  currentdt, waiting;
-    private final BitmapFont FontRed1;
-    public final Preferences prefs;
+public class GameoverState extends State {
+    Texture background;
+    Texture tap_to_restart,your_score,your_best_score,awesome;
+    Texture numbers;
+    Array<TextureRegion> frames_numbers;
+    float  currentdt, waiting;
+    final BitmapFont FontRed1;
+    final Preferences prefs;
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
-    final int load_hiscore,last_score;
-    final int[] score_best =new int[5];
-    final int[] score_last =new int[5];
+    int load_hiscore,last_score;
+    int[] score_best =new int[5];
+    int[] score_last =new int[5];
 
-     final Vector3 velosity,position;
-     final Texture big_balloon;
+    Vector3 velosity,position;
+    Texture big_balloon;
 
 
+    public void setPosition(Vector3 position) {
+        this.position = position;
+    }
 
-    public GameoverState(GameStateManager gsm,float redball_x) {
+    public GameoverState(GameStateManager gsm, float redball_x) {
         super(gsm);
-        redball_x=-190;
+        //redball_x=-190;
+        System.out.println("redball_x: "+redball_x);
         camera.setToOrtho(false, 480 , 800 );
         background = new Texture("background_night.png");
         tap_to_restart = new Texture("restart.png");
@@ -49,7 +53,7 @@ public final class GameoverState extends State {
         numbers = new Texture("numbers.png");
         big_balloon= new Texture("big_balloon.png");
         position = new Vector3(redball_x,0,0);
-        velosity=new Vector3(-800,0,0);
+        velosity=new Vector3(-1200,0,0);
         frames_numbers = new Array<TextureRegion>();
 
         for (int j=0;j<=9;j++){
@@ -103,6 +107,7 @@ public final class GameoverState extends State {
             position.add(velosity.x, 0, 0);
             velosity.scl(1 / dt);
         }
+        System.out.println("position.x: "+position.x);
     }
 
     @Override
