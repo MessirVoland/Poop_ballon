@@ -41,7 +41,7 @@ public class GameoverState extends State {
     public GameoverState(GameStateManager gsm, float redball_x) {
         super(gsm);
         //redball_x=-190;
-        System.out.println("redball_x: "+redball_x);
+        //System.out.println("redball_x: "+redball_x);
         camera.setToOrtho(false, 480 , 800 );
         background = new Texture("background_night.png");
         tap_to_restart = new Texture("restart.png");
@@ -107,7 +107,7 @@ public class GameoverState extends State {
             position.add(velosity.x, 0, 0);
             velosity.scl(1 / dt);
         }
-        System.out.println("position.x: "+position.x);
+        //System.out.println("position.x: "+position.x);
     }
 
     @Override
