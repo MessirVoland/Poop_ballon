@@ -810,14 +810,14 @@ public class PlayState extends State {
             sb.draw(pause_bgnd,((int) shaker.getCamera_sh().position.x)-240,((int) shaker.getCamera_sh().position.y)-400,480,800);
 
             if (mute){
-                sb.draw(muted,((int) shaker.getCamera_sh().position.x)+140,((int) shaker.getCamera_sh().position.y)-32,64,64);
+                sb.draw(muted,((int) shaker.getCamera_sh().position.x)+140,((int) shaker.getCamera_sh().position.y)-32,150,156);
             }else{
-                sb.draw(unmuted,((int) shaker.getCamera_sh().position.x)+140,((int) shaker.getCamera_sh().position.y)-32,64,64);
+                sb.draw(unmuted,((int) shaker.getCamera_sh().position.x)+140,((int) shaker.getCamera_sh().position.y)-32,150,156);
             }
             if (vibro){
-                sb.draw(vibrated,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)-32,64,64);
+                sb.draw(vibrated,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)-32,150,156);
             }else{
-                sb.draw(unvibrated,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)-32,64,64);
+                sb.draw(unvibrated,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)-32,150,156);
             }
 
         }
