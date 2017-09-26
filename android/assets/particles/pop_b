@@ -1,4 +1,4 @@
-Untitled
+balls
 - Delay -
 active: false
 - Duration - 
@@ -29,11 +29,11 @@ highMax: 1300.0
 relative: false
 scalingCount: 3
 scaling0: 1.0
-scaling1: 0.98039216
+scaling1: 1.0
 scaling2: 0.49019608
 timelineCount: 3
 timeline0: 0.0
-timeline1: 0.8082192
+timeline1: 0.43150684
 timeline2: 1.0
 - Life Offset - 
 active: false
@@ -66,23 +66,25 @@ scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Scale - 
-lowMin: 20.0
-lowMax: 20.0
-highMin: 50.0
-highMax: 60.0
+lowMin: 10.0
+lowMax: 10.0
+highMin: 45.0
+highMax: 50.0
 relative: false
-scalingCount: 2
-scaling0: 0.47058824
-scaling1: 0.98039216
-timelineCount: 2
+scalingCount: 3
+scaling0: 0.5882353
+scaling1: 0.84313726
+scaling2: 0.92156863
+timelineCount: 3
 timeline0: 0.0
-timeline1: 0.9931507
+timeline1: 0.34246576
+timeline2: 1.0
 - Velocity - 
 active: true
-lowMin: -500.0
-lowMax: -500.0
+lowMin: -900.0
+lowMax: -900.0
 highMin: 0.0
-highMax: 200.0
+highMax: 100.0
 relative: false
 scalingCount: 3
 scaling0: 0.0
@@ -90,7 +92,7 @@ scaling1: 1.0
 scaling2: 1.0
 timelineCount: 3
 timeline0: 0.0
-timeline1: 0.6849315
+timeline1: 0.15753424
 timeline2: 1.0
 - Angle - 
 active: true
@@ -102,7 +104,7 @@ relative: false
 scalingCount: 3
 scaling0: 1.0
 scaling1: 1.0
-scaling2: 1.0
+scaling2: 0.49019608
 timelineCount: 3
 timeline0: 0.0
 timeline1: 0.74657536
@@ -113,31 +115,41 @@ active: false
 active: true
 lowMin: 0.0
 lowMax: 0.0
-highMin: 0.0
-highMax: 0.0
+highMin: -90.0
+highMax: -90.0
 relative: false
-scalingCount: 1
+scalingCount: 3
 scaling0: 1.0
-timelineCount: 1
+scaling1: 0.50980395
+scaling2: 0.98039216
+timelineCount: 3
 timeline0: 0.0
+timeline1: 0.5
+timeline2: 1.0
 - Gravity - 
 active: true
-lowMin: 20.0
-lowMax: 20.0
-highMin: 50.0
-highMax: 50.0
+lowMin: 100.0
+lowMax: 100.0
+highMin: -10.0
+highMax: -10.0
 relative: false
-scalingCount: 1
+scalingCount: 2
 scaling0: 1.0
-timelineCount: 1
+scaling1: 0.019607844
+timelineCount: 2
 timeline0: 0.0
+timeline1: 1.0
 - Tint - 
-colorsCount: 3
-colors0: 0.7294118
-colors1: 0.9843137
+colorsCount: 6
+colors0: 0.83137256
+colors1: 0.98039216
 colors2: 1.0
-timelineCount: 1
+colors3: 0.0
+colors4: 0.83137256
+colors5: 1.0
+timelineCount: 2
 timeline0: 0.0
+timeline1: 1.0
 - Transparency - 
 lowMin: 0.0
 lowMax: 0.0
