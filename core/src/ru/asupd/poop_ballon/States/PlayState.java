@@ -492,7 +492,7 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
-        currnent_dt_background=dt*2;
+        currnent_dt_background=dt*8; //2;
         if (game_over_start){
             game_over_dt+=dt;
             if (game_over_dt>=0.7f){
