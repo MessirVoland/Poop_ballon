@@ -247,7 +247,8 @@ public class PlayState extends State {
         //инициализация массива облаков
         clouds = new Array<Cloud>();
         for (int i = 0; i <= 4; i++){
-            clouds.add(new Cloud(random(1000)-400,125*i+100+10,-random(25)-25));
+            //clouds.add(new Cloud(random(1000)-400,125*i+100+10,-random(25)-25));
+            clouds.add(new Cloud(random(680)-222,125*i+100+10,-random(25)-25));
         }
         //инициализация босса
         boss_balloon = new Boss_balloon(random(4)*96,-195-random(50),80);
@@ -628,8 +629,8 @@ public class PlayState extends State {
 
             for (Cloud cloud : clouds) {
                 cloud.update(dt);
-                if (cloud.getPosition().x < -320) {
-                    cloud.setPosition(+480 + 200 + random(250), cloud.getPosition().y);
+                if (cloud.getPosition().x < -222) {
+                    cloud.setPosition(+480 + 222 + random(0), cloud.getPosition().y);
                     cloud.change_texture();
                 }
             }
