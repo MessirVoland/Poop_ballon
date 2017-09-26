@@ -9,7 +9,7 @@ public class Resizer {
     float size_x,size_y;
     float local_x,local_y;
 
-    private final static float FIRST_MOVE=0.1f*4,SECOND_MOVE=0.0666f*4,THIRD_MOVE=0.05f*4,FORTH_MOVE=0.0333f*4;
+    private final static float FIRST_MOVE=0.1f,SECOND_MOVE=0.0666f,THIRD_MOVE=0.05f,FORTH_MOVE=0.0333f;
     int position=0;
     float current_dt=0;
     boolean start=false;

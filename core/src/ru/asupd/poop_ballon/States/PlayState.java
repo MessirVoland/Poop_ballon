@@ -98,6 +98,8 @@ public class PlayState extends State {
     private Texture nice_played;
     private Texture big_balloon;
     private float x_game_over=-480,y_game_over=0;
+    private Resizer well_played_resizer;
+    private Resizer nice_played_resizer;
 
     private Shaker shaker;//шейкео
     private int index;//хз
@@ -177,7 +179,6 @@ public class PlayState extends State {
         your_high_score = new Texture("best_score_g.png");
         texture_poop_balloon = new Texture("poop_balloon.png");
         resizer_poop_balloon = new Resizer(texture_poop_balloon.getWidth(),texture_poop_balloon.getHeight());
-        resizer_poop_balloon.start();
         tap_to_play = new Texture("tap_to_play.png");
         score =  new Texture("score.png");
 
@@ -270,6 +271,10 @@ public class PlayState extends State {
         effect_pop.loadEmitters(Gdx.files.internal("particles/pop_b"));
         effect_pop.loadEmitterImages(Gdx.files.internal("particles"));
         //effect_pop.start();
+        resizer_poop_balloon.start();
+        nice_played_resizer=new Resizer(384,88);
+        well_played_resizer=new Resizer(323,164);
+
 
     }
 // Input
@@ -503,6 +508,9 @@ public class PlayState extends State {
     public void update(float dt) {
         handleInput();
         resizer_poop_balloon.update(dt);
+        well_played_resizer.update(dt);
+        nice_played_resizer.update(dt);
+
         currnent_dt_background=dt*8; //2;
         if (game_over_start){
             game_over_dt+=dt;
@@ -685,20 +693,12 @@ public class PlayState extends State {
             sb.draw(score,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)+360,115,31);
            //score_num.draw(sb, (int) (shaker.getBaseX()+225), (int) (shaker.getBaseY()+760));
             score_num.draw(sb,((int) shaker.getCamera_sh().position.x)-15, ((int) shaker.getCamera_sh().position.y)+360);
-            //sb.draw(frames_numbers.get(megred_high_score[0]),285,760,25,31);
-            //sb.draw(frames_numbers.get(megred_high_score[1]),265,760,25,31);
-            //sb.draw(frames_numbers.get(megred_high_score[2]),245,760,25,31);
-            //sb.draw(frames_numbers.get(megred_high_score[3]),225,760,25,31);
         }
 
         if ((!started)&(!boss_balloon.isStarted())){
             sb.draw(your_high_score,130,100,211,74);
             sb.draw(tap_to_play,80,360,335,51);
             score_num.draw(sb,190,50);
-            //sb.draw(frames_numbers.get(megred_high_score[0]),250,50,25,31);
-            //sb.draw(frames_numbers.get(megred_high_score[1]),230,50,25,31);
-            //sb.draw(frames_numbers.get(megred_high_score[2]),210,50,25,31);
-            //sb.draw(frames_numbers.get(megred_high_score[3]),190,50,25,31);
         }
 
         for (Cloud cloud : clouds) {
@@ -708,18 +708,18 @@ public class PlayState extends State {
 
         }
         if (!game_over_ball_fly) {
-            //sb.draw(texture_poop_balloon, position.x, position.y, 463, 218);//заголовок
-            sb.draw(texture_poop_balloon, position.x+(texture_poop_balloon.getWidth()/2)-(resizer_poop_balloon.getSize_x()/2), position.y+(texture_poop_balloon.getHeight()/2)-(resizer_poop_balloon.getSize_y()/2), resizer_poop_balloon.getSize_x(), resizer_poop_balloon.getSize_y());//заголовок
+            sb.draw(texture_poop_balloon, position.x, position.y, 463, 218);//заголовок
+            //sb.draw(texture_poop_balloon, position.x+(texture_poop_balloon.getWidth()/2)-(resizer_poop_balloon.getSize_x()/2), position.y+(texture_poop_balloon.getHeight()/2)-(resizer_poop_balloon.getSize_y()/2), resizer_poop_balloon.getSize_x(), resizer_poop_balloon.getSize_y());//заголовок
         }
         if (boss_balloon.isStarted()){
             sb.draw(boss_balloon.getTexture_boss(),boss_balloon.getPosition().x,boss_balloon.getPosition().y,95,190);
         }
         if (game_over_well_play){
-            if (load_hiscore<cautch_ball){
-                sb.draw(well_played,100,200,200,100);
+            if (load_hiscore>cautch_ball){
+                sb.draw(nice_played,48+(384/2)-(nice_played_resizer.getSize_x()/2),300,nice_played_resizer.getSize_x(),88);
             }else
             {
-                sb.draw(nice_played,100,200,200,100);
+                sb.draw(well_played,78+(323/2)-(well_played_resizer.getSize_x()/2),300+(164/2)-(well_played_resizer.getSize_y()),well_played_resizer.getSize_x(),well_played_resizer.getSize_y());
             }
         }
 
@@ -824,6 +824,8 @@ public class PlayState extends State {
                         balloon.stop_spawn();
                     }
                     game_over_start=true;
+                    nice_played_resizer.start();
+                    well_played_resizer.start();
                     //  balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(), !boss_balloon.isStarted()));
                     load_hiscore = prefs.getInteger("highscore");
                     cautch_ball=score_num.getScore();
