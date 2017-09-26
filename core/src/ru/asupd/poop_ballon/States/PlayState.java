@@ -797,7 +797,7 @@ public class PlayState extends State {
             default:
                 //gsm.set(new GameoverState(gsm,position.x));
                 break;
-            case 5:
+            case 3:
                 if (!game_over_start) {
                     for (Balloon balloon : balloons) {
                         balloon.setPooped();
