@@ -336,7 +336,6 @@ public class PlayState extends State {
                                     poop_Sound.setVolume(id, volume);
 
                                     shaker.shake(0.276f); // 0.2f
-                                    effect_pop.start();
                                     cautch_ball++;
                                     score_num.addScore(1);
                                     //current_combo++;
@@ -745,24 +744,25 @@ public class PlayState extends State {
                     sb.draw(texture_b_p, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 5:
+                    effect_pop.start();
                     sb.draw(poof_balloon_g.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 6:
                     sb.draw(poof_balloon_y.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
-                    effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
+                   // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 7:
                     sb.draw(poof_balloon_b.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
-                    effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
+                    //effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 8:
                     sb.draw(poof_balloon_r.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
-                    effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
+                   // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 9:
                     sb.draw(poof_balloon_p.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
-                    effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
+                   // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 10:
                     sb.setColor(1,1,1,1);
