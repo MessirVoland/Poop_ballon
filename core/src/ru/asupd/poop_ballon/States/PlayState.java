@@ -534,7 +534,8 @@ public class PlayState extends State {
         }
 
         if (!pause) {
-            effect.update(dt);
+            //effect.update(dt);
+            effect_pop.update(dt);
             poof_balloon_g.update(dt);
             poof_balloon_y.update(dt);
             poof_balloon_b.update(dt);
