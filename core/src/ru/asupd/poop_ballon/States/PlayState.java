@@ -135,8 +135,8 @@ public class PlayState extends State {
         background = new Texture("bacgound_atlas.png");
         background_frames = new Array<TextureRegion>();
         back_ground_atlas = new TextureRegion(background);
-        int frameWidth=back_ground_atlas.getRegionWidth()/7;
-        for (int i=0;i<7;i++){
+        int frameWidth=back_ground_atlas.getRegionWidth()/4;
+        for (int i=0;i<4;i++){
             background_frames.add(new TextureRegion(back_ground_atlas,i*frameWidth,0,frameWidth,back_ground_atlas.getRegionHeight()));
         }
 
@@ -492,7 +492,7 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
-        currnent_dt_background=dt;
+        currnent_dt_background=dt*2;
         if (game_over_start){
             game_over_dt+=dt;
             if (game_over_dt>=0.7f){
@@ -690,7 +690,7 @@ public class PlayState extends State {
         }
 
         for (Cloud cloud : clouds) {
-            sb.setColor(1,0.7f,0.7f,0.9f);
+            sb.setColor(1,1,1,0.9f);
             sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
             sb.setColor(1,1,1,1);
 
@@ -712,7 +712,7 @@ public class PlayState extends State {
 
         //if (!boss_balloon.isStarted()){
         for (Balloon balloon : balloons) {
-            sb.setColor(1,1,1,0.8f);
+            sb.setColor(1,1,1,0.9f);
             switch (balloon.getColor_of_balloon()) {
 
                 case 0:
