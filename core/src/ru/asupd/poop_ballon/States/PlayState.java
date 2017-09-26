@@ -709,7 +709,7 @@ public class PlayState extends State {
         }
         if (!game_over_ball_fly) {
             //sb.draw(texture_poop_balloon, position.x, position.y, 463, 218);//заголовок
-            sb.draw(texture_poop_balloon, position.x, position.y, resizer_poop_balloon.getSize_x(), resizer_poop_balloon.getSize_y());//заголовок
+            sb.draw(texture_poop_balloon, position.x+(texture_poop_balloon.getWidth()/2)-(resizer_poop_balloon.getSize_x()/2), position.y+(texture_poop_balloon.getHeight()/2)-(resizer_poop_balloon.getSize_y()/2), resizer_poop_balloon.getSize_x(), resizer_poop_balloon.getSize_y());//заголовок
         }
         if (boss_balloon.isStarted()){
             sb.draw(boss_balloon.getTexture_boss(),boss_balloon.getPosition().x,boss_balloon.getPosition().y,95,190);

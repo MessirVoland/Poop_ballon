@@ -153,7 +153,7 @@ public class Balloon {
     if (make_orange){
         currentTime_or+=dt;
         if (currentTime_or>=0.08f*max_combo){
-            System.out.println("Combo_number: "+combo_number);
+            //System.out.println("Combo_number: "+combo_number);
         //if (currentTime_or>=1.0f){
             make_orange=false;
             shaker.inc();

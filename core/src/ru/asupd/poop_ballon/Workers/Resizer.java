@@ -9,7 +9,7 @@ public class Resizer {
     float size_x,size_y;
     float local_x,local_y;
 
-    private final static float FIRST_MOVE=0.1f,SECOND_MOVE=0.0666f,THIRD_MOVE=0.05f,FORTH_MOVE=0.333f;
+    private final static float FIRST_MOVE=0.1f*4,SECOND_MOVE=0.0666f*4,THIRD_MOVE=0.05f*4,FORTH_MOVE=0.0333f*4;
     int position=0;
     float current_dt=0;
     boolean start=false;
@@ -18,69 +18,73 @@ public class Resizer {
         size_y=y;
     }
     public void update(float dt){
-        if (start){
+        if (start) {
             //current_dt+=dt;
-            switch (position){
-                case 0:
+            switch (position) {
+                case 4:
                     current_dt+=dt;
-                    if (current_dt<FIRST_MOVE){
-                        local_x=size_x*((float)((current_dt*1.3)/FIRST_MOVE));
-                        local_y=size_y*((float)((current_dt*1.3)/FIRST_MOVE));
-                    }else
+                    if (current_dt<1.0f){
+                        local_x=size_x;
+                        local_y=size_y;
+                    }
+                    else
                     {
-                        //current_dt=0;
+                        current_dt=0;
+                        position=0;
+                    }
+                    break;
+                case 3:
+                    current_dt+=dt;
+                    if (current_dt<FORTH_MOVE){
+                        local_x= (float) (size_x*1.1) -(float)((size_x*0.1)*current_dt/FORTH_MOVE);
+                        local_y= (float) (size_y*1.1) -(float)((size_y*0.1)*current_dt/FORTH_MOVE);
+                    }
+                    else
+                    {
+                        current_dt=0;
+                        position++;
+                    }
+                    break;
+
+                case 2:
+                    current_dt+=dt;
+                    if (current_dt<THIRD_MOVE){
+                        local_x= (float) (size_x*0.8) +(float)((size_x*0.3)*current_dt/THIRD_MOVE);
+                        local_y= (float) (size_y*0.8) +(float)((size_y*0.3)*current_dt/THIRD_MOVE);
+                    }
+                    else
+                    {
+                        current_dt=0;
                         position++;
                     }
                     break;
                 case 1:
-                    current_dt-=dt;
-                    if (current_dt>SECOND_MOVE){
-                        local_x=size_x*((float)((current_dt*0.8)/SECOND_MOVE));
-                        local_y=size_y*((float)((current_dt*0.8)/SECOND_MOVE));
-                    }
-                    else
-                    {
-                        //current_dt=0;
-                        position++;
-                    }
-                    break;
-                case 2:
                     current_dt+=dt;
-                    if (current_dt<THIRD_MOVE){
-                        local_x=size_x*((float)((current_dt*1.1)/THIRD_MOVE));
-                        local_y=size_y*((float)((current_dt*1.1)/THIRD_MOVE));
-                    }
-                    else
-                    {
-                        //current_dt=0;
-                        position++;
-                    }
-                    break;
-                case 3:
-                    current_dt-=dt;
-                    if (current_dt>FORTH_MOVE){
-                        local_x=size_x*((float)((current_dt)/FORTH_MOVE));
-                        local_y=size_y*((float)((current_dt)/FORTH_MOVE));
+                    if (current_dt<SECOND_MOVE){
+                        local_x= (float) (size_x*1.3) -(float)((size_x*0.5)*current_dt/SECOND_MOVE);
+                        local_y= (float) (size_y*1.3) -(float)((size_y*0.5)*current_dt/SECOND_MOVE);
                     }
                     else
                     {
                         current_dt=0;
                         position++;
-                        //position=0;
                     }
                     break;
-                case 4:
+                case 0:
                     current_dt+=dt;
-                    if (current_dt>=1.0f)
+                    if (current_dt<FIRST_MOVE){
+                        local_x= (((float) (size_x*1.3))*current_dt)/FIRST_MOVE;
+                        local_y= (((float) (size_y*1.3))*current_dt)/FIRST_MOVE;
+                    }
+                    else
                     {
-                        position=0;
+                        position++;
                         current_dt=0;
                     }
-                    local_x=size_x;
-                    local_y=size_y;
                     break;
             }
         }
+
     }
 
     public float getSize_y() {
@@ -91,6 +95,7 @@ public class Resizer {
     }
     public void start(){
         start=true;
+        current_dt=0;
     }
 
 }
