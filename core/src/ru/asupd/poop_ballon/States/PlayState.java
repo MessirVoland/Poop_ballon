@@ -530,6 +530,10 @@ public class PlayState extends State {
 
                 if (!game_over_well_play){
                     game_over_well_play=true;
+                    well_played_resizer.setPosition(0);
+                    nice_played_resizer.setPosition(0);
+                    well_played_resizer.start();
+                    nice_played_resizer.start();
                     game_over_dt=0;
                     velosity.x=-1200;
                     velosity.y=0;
@@ -716,10 +720,10 @@ public class PlayState extends State {
         }
         if (game_over_well_play){
             if (load_hiscore>cautch_ball){
-                sb.draw(nice_played,48+(384/2)-(nice_played_resizer.getSize_x()/2),300,nice_played_resizer.getSize_x(),88);
+                sb.draw(nice_played,48+(384/2)-(nice_played_resizer.getSize_x()/2),300+(88/2)-(nice_played_resizer.getSize_y()/2),nice_played_resizer.getSize_x(),nice_played_resizer.getSize_y());
             }else
             {
-                sb.draw(well_played,78+(323/2)-(well_played_resizer.getSize_x()/2),300+(164/2)-(well_played_resizer.getSize_y()),well_played_resizer.getSize_x(),well_played_resizer.getSize_y());
+                sb.draw(well_played,78+(323/2)-(well_played_resizer.getSize_x()/2),300+(164/2)-(well_played_resizer.getSize_y()/2),well_played_resizer.getSize_x(),well_played_resizer.getSize_y());
             }
         }
 

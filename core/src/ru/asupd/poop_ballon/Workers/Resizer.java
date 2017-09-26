@@ -17,6 +17,11 @@ public class Resizer {
         size_x=x;
         size_y=y;
     }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     public void update(float dt){
         if (start) {
             //current_dt+=dt;
@@ -29,8 +34,8 @@ public class Resizer {
                     }
                     else
                     {
-                        current_dt=0;
-                        position=0;
+                        //current_dt=0;
+                        //position=0;
                     }
                     break;
                 case 3:
