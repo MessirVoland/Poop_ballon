@@ -40,7 +40,7 @@ public class PlayState extends State {
     private TextureRegion back_ground_atlas;
     private Array<TextureRegion> background_frames;
     private boolean change_background;//хз
-    private float currnent_dt_background=0,current_alpha_background=0;
+    private float currnent_dt_background=0,current_alpha_background=1.0f;
 
     private BitmapFont FontRed1;//для фпс
 
@@ -647,18 +647,18 @@ public class PlayState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         //sb.disableBlending();
-        if (current_alpha_background<0.9f)
+        if (current_alpha_background<1.0f)
         {
             sb.setColor(1,1,1,current_alpha_background);
-            sb.draw(background_frames.get(miss_ball+1), -25, -25, 550, 900);
-            sb.setColor(1,1,1,1.0f-current_alpha_background);
             sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
+            sb.setColor(1,1,1,1.0f-current_alpha_background);
+            sb.draw(background_frames.get(miss_ball-1), -25, -25, 550, 900);
             current_alpha_background+=currnent_dt_background;
         }
         else
         {
             sb.setColor(1,1,1,1.0f);
-            sb.draw(background_frames.get(miss_ball+1), -25, -25, 550, 900);
+            sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
         }
 
 
@@ -797,7 +797,7 @@ public class PlayState extends State {
             default:
                 //gsm.set(new GameoverState(gsm,position.x));
                 break;
-            case 3:
+            case 5:
                 if (!game_over_start) {
                     for (Balloon balloon : balloons) {
                         balloon.setPooped();
@@ -820,20 +820,20 @@ public class PlayState extends State {
 
                 break;
             case 2:
-                if (change_background) {
-                    change_background=false;
+               // if (change_background) {
+               //     change_background=false;
                     //miss_ball++;
-                    background = new Texture("background_evening.png");
-                }
+                   // background = new Texture("background_evening.png");
+               // }
 
                 break;
 
             case 1:
-                if (change_background) {
-                    change_background = false;
+               // if (change_background) {
+                  //  change_background = false;
                     //miss_ball++;
-                    background = new Texture("background_sunset.png");
-                }
+                  // background = new Texture("background_sunset.png");
+               // }
                 break;
 
             case 0:
