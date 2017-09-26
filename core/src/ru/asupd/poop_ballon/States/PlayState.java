@@ -20,6 +20,7 @@ import ru.asupd.poop_ballon.Sprites.Animation;
 import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.Sprites.Boss_balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
+import ru.asupd.poop_ballon.Workers.Resizer;
 import ru.asupd.poop_ballon.Workers.Score;
 import ru.asupd.poop_ballon.Workers.Shaker;
 
@@ -50,6 +51,7 @@ public class PlayState extends State {
     private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p,texture_b_o;//Шарики
 
     private Texture texture_poop_balloon;//Название игры
+    private Resizer resizer_poop_balloon;
 
     private Texture your_high_score,tap_to_play,score;//наибольший счет, таб ту плей, напись счет
 
@@ -173,6 +175,8 @@ public class PlayState extends State {
         texture_b_o =  new Texture("round_b_o.png");
         your_high_score = new Texture("best_score_g.png");
         texture_poop_balloon = new Texture("poop_balloon.png");
+        resizer_poop_balloon = new Resizer(texture_poop_balloon.getWidth(),texture_poop_balloon.getHeight());
+        resizer_poop_balloon.start();
         tap_to_play = new Texture("tap_to_play.png");
         score =  new Texture("score.png");
 
@@ -493,6 +497,7 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
+        resizer_poop_balloon.update(dt);
         currnent_dt_background=dt*2;
         if (game_over_start){
             game_over_dt+=dt;
@@ -697,7 +702,8 @@ public class PlayState extends State {
 
         }
         if (!game_over_ball_fly) {
-            sb.draw(texture_poop_balloon, position.x, position.y, 463, 218);//заголовок
+            //sb.draw(texture_poop_balloon, position.x, position.y, 463, 218);//заголовок
+            sb.draw(texture_poop_balloon, position.x, position.y, resizer_poop_balloon.getSize_x(), resizer_poop_balloon.getSize_y());//заголовок
         }
         if (boss_balloon.isStarted()){
             sb.draw(boss_balloon.getTexture_boss(),boss_balloon.getPosition().x,boss_balloon.getPosition().y,95,190);
