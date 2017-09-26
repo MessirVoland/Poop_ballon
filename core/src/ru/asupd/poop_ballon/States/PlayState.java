@@ -690,7 +690,7 @@ public class PlayState extends State {
         }
 
         for (Cloud cloud : clouds) {
-            sb.setColor(1,1,1,0.9f);
+            sb.setColor(1,0.7f,0.7f,0.9f);
             sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
             sb.setColor(1,1,1,1);
 
