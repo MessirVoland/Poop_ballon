@@ -665,8 +665,10 @@ public class PlayState extends State {
         }
 
         for (Cloud cloud : clouds) {
-
+            sb.setColor(1,1,1,0.9f);
             sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
+            sb.setColor(1,1,1,1);
+
         }
         if (!game_over_ball_fly) {
             sb.draw(texture_poop_balloon, position.x, position.y, 463, 218);//заголовок
@@ -685,7 +687,9 @@ public class PlayState extends State {
 
         //if (!boss_balloon.isStarted()){
         for (Balloon balloon : balloons) {
+            sb.setColor(1,1,1,0.8f);
             switch (balloon.getColor_of_balloon()) {
+
                 case 0:
                     sb.draw(texture_b_g, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
@@ -717,15 +721,18 @@ public class PlayState extends State {
                     sb.draw(poof_balloon_p.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     break;
                 case 10:
+                    sb.setColor(1,1,1,1);
                     sb.draw(texture_b_o, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 11:
+                    sb.setColor(1,1,1,1);
                     sb.draw(balloon.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     break;
             }
 
        // }
         }
+        sb.setColor(1,1,1,1);
 
         switch (current_combo){
             case 2:
