@@ -37,6 +37,11 @@ public class PlayState extends State {
     private Array<Cloud> clouds;//массив шаров
 
     private Texture background,pause_bgnd;//задник
+    private TextureRegion back_ground_atlas;
+    private Array<TextureRegion> background_frames;
+    private boolean change_background;//хз
+    private float currnent_dt_background=0,current_alpha_background=0;
+
     private BitmapFont FontRed1;//для фпс
 
     private Texture muted,unmuted;//иконка звука
@@ -71,9 +76,6 @@ public class PlayState extends State {
     //private int max_combo=0;
 
     private Music background_Music,boss_Music;//музыка
-
-
-    private boolean change_background;//хз
 
     public final static float ANIMATION_TIME=0.266f;//время анимации
     //public final static float ANIMATION_TIME=3.0f;
@@ -129,9 +131,15 @@ public class PlayState extends State {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
 
+        //background = new Texture("background_clean.png");
+        background = new Texture("bacgound_atlas.png");
+        background_frames = new Array<TextureRegion>();
+        back_ground_atlas = new TextureRegion(background);
+        int frameWidth=back_ground_atlas.getRegionWidth()/7;
+        for (int i=0;i<7;i++){
+            background_frames.add(new TextureRegion(back_ground_atlas,i*frameWidth,0,frameWidth,back_ground_atlas.getRegionHeight()));
+        }
 
-
-        background = new Texture("background_clean.png");
         pause_bgnd = new Texture("pause.png");
 
         FontRed1 = new BitmapFont();
@@ -484,6 +492,7 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
+        currnent_dt_background=dt;
         if (game_over_start){
             game_over_dt+=dt;
             if (game_over_dt>=0.7f){
@@ -544,6 +553,7 @@ public class PlayState extends State {
             //Активные действия и проверки босса
             if ((boss_balloon.isMissed()) & (boss_balloon.isStarted())) {
                 miss_ball++;
+                current_alpha_background=0.0f;
                 boss_balloon.setMissed(false);
                 change_background = true;
                 if (vibro) {
@@ -600,6 +610,7 @@ public class PlayState extends State {
 
                         balloon.setVelosity(get_speed_for_balloon());
                         miss_ball++;
+                        current_alpha_background=0.0f;
                         change_background = true;
                         if (vibro) {
                             Gdx.input.vibrate(125);
@@ -635,9 +646,23 @@ public class PlayState extends State {
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
-        sb.disableBlending();
-        sb.draw(background,-25, -25,550,900);
-        sb.enableBlending();
+        //sb.disableBlending();
+        if (current_alpha_background<0.9f)
+        {
+            sb.setColor(1,1,1,current_alpha_background);
+            sb.draw(background_frames.get(miss_ball+1), -25, -25, 550, 900);
+            sb.setColor(1,1,1,1.0f-current_alpha_background);
+            sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
+            current_alpha_background+=currnent_dt_background;
+        }
+        else
+        {
+            sb.setColor(1,1,1,1.0f);
+            sb.draw(background_frames.get(miss_ball+1), -25, -25, 550, 900);
+        }
+
+
+        //sb.enableBlending();
 
 
         effect.draw(sb);
@@ -797,6 +822,7 @@ public class PlayState extends State {
             case 2:
                 if (change_background) {
                     change_background=false;
+                    //miss_ball++;
                     background = new Texture("background_evening.png");
                 }
 
@@ -805,6 +831,7 @@ public class PlayState extends State {
             case 1:
                 if (change_background) {
                     change_background = false;
+                    //miss_ball++;
                     background = new Texture("background_sunset.png");
                 }
                 break;
@@ -847,6 +874,7 @@ public class PlayState extends State {
         texture_b_y.dispose();
         texture_b_p.dispose();
         poof_balloon_atlas.dispose();
+        background_frames.clear();
         muted.dispose();
         unmuted.dispose();
     }
