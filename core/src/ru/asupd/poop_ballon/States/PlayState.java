@@ -769,24 +769,28 @@ public class PlayState extends State {
                 case 6:
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     balloon.part_start();
+                    balloon.effect.draw(sb);
                     //balloon.effect.draw(sb);
                    // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 7:
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     balloon.part_start();
+                    balloon.effect.draw(sb);
                    // balloon.effect.draw(sb);
                     //effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 8:
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     balloon.part_start();
+                    balloon.effect.draw(sb);
                     //balloon.effect.draw(sb);
                    // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 9:
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     balloon.part_start();
+                    balloon.effect.draw(sb);
                    // balloon.effect.draw(sb);
                    // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
@@ -797,6 +801,8 @@ public class PlayState extends State {
                 case 11:
                     sb.setColor(1,1,1,1);
                     sb.draw(balloon.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    balloon.part_start();
+                    balloon.effect.draw(sb);
                     break;
             }
 

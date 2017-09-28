@@ -36,6 +36,7 @@ public class AndroidLauncher extends AndroidApplication {
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useAccelerometer = false;
 		config.useCompass = false;
+		config.useGL30=true;
 
 		// Create the libgdx View
 		View gameView = initializeForView(new MyGdxGame(), config);

@@ -179,6 +179,7 @@ public class Balloon {
     public void part_start(){
         effect.start();
         effect.setPosition(position.x+45,position.y+145);
+
     }
 
     public void setAnimation_idle(Animation animation_idle) {
