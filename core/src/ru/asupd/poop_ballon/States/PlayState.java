@@ -122,8 +122,8 @@ public class PlayState extends State {
     public static final int MAX_STEP=401;
     int current_step=1;
     //частицы
-    private ParticleEffect effect;
-    private ParticleEffect effect_pop;
+    //private ParticleEffect effect;
+    //private ParticleEffect effect_pop;
 
     //Комбо
     private int current_combo=0;
@@ -271,9 +271,9 @@ public class PlayState extends State {
       //  effect.loadEmitterImages(Gdx.files.internal("particles"));
       //  effect.start();
 
-        effect_pop = new ParticleEffect();
-        effect_pop.loadEmitters(Gdx.files.internal("particles/pop_b"));
-        effect_pop.loadEmitterImages(Gdx.files.internal("particles"));
+        //effect_pop = new ParticleEffect();
+        //effect_pop.loadEmitters(Gdx.files.internal("particles/pop_b"));
+        //effect_pop.loadEmitterImages(Gdx.files.internal("particles"));
         //effect_pop.start();
         resizer_poop_balloon.start();
         nice_played_resizer=new Resizer(384,88);
@@ -550,7 +550,7 @@ public class PlayState extends State {
 
         if (!pause) {
             //effect.update(dt);
-            effect_pop.update(dt);
+            //effect_pop.update(dt);
            // poof_balloon_g.update(dt);
            // poof_balloon_y.update(dt);
            // poof_balloon_b.update(dt);
@@ -664,9 +664,10 @@ public class PlayState extends State {
 
             shaker.update(dt);
             score_num.update(dt);
-            if (balloons.size>=1) {
-                effect.setPosition(balloons.get(0).getPosition().x, balloons.get(0).getPosition().y);
-            }
+
+            //if (balloons.size>=1) {
+            //    effect.setPosition(balloons.get(0).getPosition().x, balloons.get(0).getPosition().y);
+            //}
         }
     }
 
@@ -752,24 +753,34 @@ public class PlayState extends State {
                     sb.draw(texture_b_p, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 5:
-                    effect_pop.start();
+                    //effect_pop.start();
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
-                    effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
+                    balloon.part_start();
+                    balloon.effect.draw(sb);
+                    //effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 6:
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    balloon.part_start();
+                    balloon.effect.draw(sb);
                    // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 7:
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    balloon.part_start();
+                    balloon.effect.draw(sb);
                     //effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 8:
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    balloon.part_start();
+                    balloon.effect.draw(sb);
                    // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 9:
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    balloon.part_start();
+                    balloon.effect.draw(sb);
                    // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 10:
@@ -784,7 +795,7 @@ public class PlayState extends State {
 
        // }
         }
-        effect_pop.draw(sb);
+        //effect.draw(sb);
         sb.setColor(1,1,1,1);
 
         switch (current_combo){

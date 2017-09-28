@@ -1,6 +1,8 @@
 package ru.asupd.poop_ballon.Sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -31,6 +33,8 @@ public class Balloon {
     private float currentTime_or=0;
     private boolean pooped,live_out;
     private boolean can_respawn,sin_grav_bool;
+
+    public ParticleEffect effect;
 
     private int max_combo;
 
@@ -97,6 +101,10 @@ public class Balloon {
 
         animation_current_balloon = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
 
+        effect = new ParticleEffect();
+        effect.loadEmitters(Gdx.files.internal("particles/pop_b"));
+        effect.loadEmitterImages(Gdx.files.internal("particles"));
+
         // zerovelosity = new Vector3(0, 0, 0);
         this.velosity.y = grav;
         pooped=false;
@@ -157,6 +165,10 @@ public class Balloon {
     public boolean isLive_out() {
         return live_out;
     }
+    public void part_start(){
+        effect.start();
+        effect.setPosition(position.x+45,position.y+145);
+    }
 
     public void setAnimation_idle(Animation animation_idle) {
         this.animation_idle = animation_idle;
@@ -195,6 +207,7 @@ public class Balloon {
 
 
    if (pooped){
+       effect.update(dt);
         currentTime+=dt;
        if (!combo) {
            animation_idle.update(dt);
