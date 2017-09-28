@@ -929,7 +929,7 @@ public class PlayState extends State {
         //texture_b_g.dispose();
         //texture_b_y.dispose();
         //texture_b_p.dispose();
-        poof_balloon_atlas.dispose();
+       // poof_balloon_atlas.dispose();
         background_frames.clear();
         muted.dispose();
         unmuted.dispose();
