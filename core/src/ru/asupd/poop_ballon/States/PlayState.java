@@ -220,10 +220,12 @@ public class PlayState extends State {
             prefs.putBoolean("first_start",true);
             mute=false;
             prefs.putBoolean("mute",mute);
+            prefs.putBoolean("vibro",vibro);
             prefs.flush();
         }else
         {   volume=0.0f;
             mute = prefs.getBoolean("mute");
+            vibro = prefs.getBoolean("vibro");
         }
         if (!mute)
         {
@@ -489,14 +491,14 @@ public class PlayState extends State {
                         if (vibro){
                             vibro=false;
 
-                            //prefs.putBoolean("mute",mute);
-                            //prefs.flush();
+                            prefs.putBoolean("vibro",vibro);
+                            prefs.flush();
                         }
                         else
                         {
                             vibro=true;
-                            //prefs.putBoolean("mute",mute);
-                            //prefs.flush();
+                            prefs.putBoolean("vibro",vibro);
+                            prefs.flush();
                         }
 
                     }
@@ -691,7 +693,7 @@ public class PlayState extends State {
         //sb.enableBlending();
 
 
-        effect.draw(sb);
+        //effect.draw(sb);
 
 
 
