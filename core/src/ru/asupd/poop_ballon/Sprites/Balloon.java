@@ -22,8 +22,9 @@ public class Balloon {
     //private Texture texture_pooped,texture_bloody;
     //private Texture texture;
 
-    private Animation animation_current_balloon;
+    private Animation animation_current_balloon,animation_idle;
     private Texture poof_balloon_atlas;
+    private Texture poof_balloon_atlas_idle;
 
     private int color_of_balloon;
     private float currentTime;
@@ -109,22 +110,28 @@ public class Balloon {
         //color_of_balloon=random(3);
         if (grav<260){
             color_of_balloon=0;
+            poof_balloon_atlas_idle = new Texture("pop_g.png");
         }else
         if (grav<320){
             color_of_balloon=1;
+            poof_balloon_atlas_idle = new Texture("pop_b.png");
         }
         else
         if (grav<380){
             color_of_balloon=2;
+            poof_balloon_atlas_idle = new Texture("pop_y.png");
         }
         else
         if(grav<420){
             color_of_balloon=3;
+            poof_balloon_atlas_idle = new Texture("pop_r.png");
         }
         else{
             color_of_balloon=4;
+            poof_balloon_atlas_idle = new Texture("pop_p.png");
         }
         bounds = new Rectangle(x, y, 95 , 190);
+        animation_idle=new Animation(new TextureRegion(poof_balloon_atlas_idle),3,ANIMATION_TIME);
     }
 
     public Vector3 getPosition() {
@@ -142,6 +149,9 @@ public class Balloon {
     }
     public TextureRegion getFrames(){
         return animation_current_balloon.getFrames();
+    }
+    public TextureRegion getFrames_idle(){
+        return animation_idle.getFrames();
     }
 
     public boolean isLive_out() {
@@ -181,9 +191,14 @@ public class Balloon {
 
 
    if (pooped){
+       animation_idle.update(dt);
         currentTime+=dt;
+
        if (combo_number>=1) {
            animation_current_balloon.update(dt);
+       }else
+       {
+          // animation_idle.update(dt);
        }
        if (currentTime>ANIMATION_TIME)
        {

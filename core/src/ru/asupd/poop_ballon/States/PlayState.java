@@ -547,11 +547,11 @@ public class PlayState extends State {
         if (!pause) {
             //effect.update(dt);
             effect_pop.update(dt);
-            poof_balloon_g.update(dt);
-            poof_balloon_y.update(dt);
-            poof_balloon_b.update(dt);
-            poof_balloon_r.update(dt);
-            poof_balloon_p.update(dt);
+           // poof_balloon_g.update(dt);
+           // poof_balloon_y.update(dt);
+           // poof_balloon_b.update(dt);
+          //  poof_balloon_r.update(dt);
+           // poof_balloon_p.update(dt);
             //poof_balloon_o.update(dt);
 
 
@@ -749,23 +749,23 @@ public class PlayState extends State {
                     break;
                 case 5:
                     effect_pop.start();
-                    sb.draw(poof_balloon_g.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 6:
-                    sb.draw(poof_balloon_y.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                    // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 7:
-                    sb.draw(poof_balloon_b.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     //effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 8:
-                    sb.draw(poof_balloon_r.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                    // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 9:
-                    sb.draw(poof_balloon_p.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
+                    sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                    // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 10:
