@@ -2,6 +2,7 @@ package ru.asupd.poop_ballon.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -20,6 +21,7 @@ import ru.asupd.poop_ballon.Sprites.Animation;
 import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.Sprites.Boss_balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
+import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Resizer;
 import ru.asupd.poop_ballon.Workers.Score;
 import ru.asupd.poop_ballon.Workers.Shaker;
@@ -135,6 +137,11 @@ public class PlayState extends State {
     protected PlayState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
+       // Assets.load();
+       // while (!Assets.manager.update()){
+        //    System.out.println("LOading... : "+Assets.manager.getProgress()*100+ "%");
+        //}
+
 
         //background = new Texture("background_clean.png");
         background = new Texture("bacgound_atlas.png");
@@ -168,7 +175,7 @@ public class PlayState extends State {
         boss_Music.setVolume(0.3f);
         boss_Music.setLooping(true);
 
-
+        //Assets assets = new Assets();
         //хорошо бы сделать отдельный текстур менеджер с полосой загрузки
         texture_b_b =  new Texture("Balloon_blue.png");
         texture_b_r =  new Texture("Balloon_red.png");
@@ -762,25 +769,25 @@ public class PlayState extends State {
                 case 6:
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     balloon.part_start();
-                    balloon.effect.draw(sb);
+                    //balloon.effect.draw(sb);
                    // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 7:
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     balloon.part_start();
-                    balloon.effect.draw(sb);
+                   // balloon.effect.draw(sb);
                     //effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 8:
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     balloon.part_start();
-                    balloon.effect.draw(sb);
+                    //balloon.effect.draw(sb);
                    // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 9:
                     sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
                     balloon.part_start();
-                    balloon.effect.draw(sb);
+                   // balloon.effect.draw(sb);
                    // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
                     break;
                 case 10:
@@ -918,6 +925,7 @@ public class PlayState extends State {
         background_frames.clear();
         muted.dispose();
         unmuted.dispose();
+
     }
 
     public int get_speed_for_balloon(){

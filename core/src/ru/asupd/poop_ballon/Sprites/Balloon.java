@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
+import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Shaker;
 
 import static com.badlogic.gdx.math.MathUtils.random;
@@ -94,16 +95,18 @@ public class Balloon {
 
 
     public Balloon(int x, int y, int grav, boolean respawn){
+
         position = new Vector3(x, y, 0);
         velosity = new Vector3(random(100)-50, 0, 0);
 
-        poof_balloon_atlas = new Texture("pop_o.png");
+        //poof_balloon_atlas =  Assets.manager.get(Assets.poof_balloon_atlas_idle_o,Texture.class);
 
-        animation_current_balloon = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
+        //animation_current_balloon = new Animation(Assets.manager.get(Assets.poof_balloon_atlas_o_Texture_region,TextureRegion.class),3,ANIMATION_TIME);
 
-        effect = new ParticleEffect();
-        effect.loadEmitters(Gdx.files.internal("particles/pop_b"));
-        effect.loadEmitterImages(Gdx.files.internal("particles"));
+        //effect = new ParticleEffect();
+        //effect.loadEmitters(Gdx.files.internal("particles/pop_b"));
+        //effect.loadEmitterImages(Gdx.files.internal("particles"));
+        effect = new ParticleEffect(Assets.effect);
 
         // zerovelosity = new Vector3(0, 0, 0);
         this.velosity.y = grav;
@@ -118,28 +121,36 @@ public class Balloon {
         //color_of_balloon=random(3);
         if (grav<260){
             color_of_balloon=0;
-            poof_balloon_atlas_idle = new Texture("pop_g.png");
+            //poof_balloon_atlas_idle = new Texture("pop_g.png");
+            //poof_balloon_atlas_idle = Assets.manager.get(Assets.poof_balloon_atlas_idle_g,Texture.class);
+            //animation_idle=new Animation(new TextureRegion(poof_balloon_atlas_idle),3,ANIMATION_TIME);
+            animation_idle = new Animation(new TextureRegion(Assets.manager.get(Assets.poof_balloon_atlas_idle_g,Texture.class)),3,ANIMATION_TIME);
         }else
         if (grav<320){
             color_of_balloon=1;
-            poof_balloon_atlas_idle = new Texture("pop_b.png");
+            //poof_balloon_atlas_idle = Assets.manager.get(Assets.poof_balloon_atlas_idle_y,Texture.class);
+            animation_idle = new Animation(new TextureRegion(Assets.manager.get(Assets.poof_balloon_atlas_idle_y,Texture.class)),3,ANIMATION_TIME);
         }
         else
         if (grav<380){
             color_of_balloon=2;
-            poof_balloon_atlas_idle = new Texture("pop_y.png");
+            //poof_balloon_atlas_idle =  Assets.manager.get(Assets.poof_balloon_atlas_idle_b,Texture.class);
+            animation_idle = new Animation(new TextureRegion(Assets.manager.get(Assets.poof_balloon_atlas_idle_b,Texture.class)),3,ANIMATION_TIME);
         }
         else
         if(grav<420){
             color_of_balloon=3;
-            poof_balloon_atlas_idle = new Texture("pop_r.png");
+            //poof_balloon_atlas_idle =  Assets.manager.get(Assets.poof_balloon_atlas_idle_r,Texture.class);
+            animation_idle = new Animation(new TextureRegion(Assets.manager.get(Assets.poof_balloon_atlas_idle_r,Texture.class)),3,ANIMATION_TIME);
         }
         else{
             color_of_balloon=4;
-            poof_balloon_atlas_idle = new Texture("pop_p.png");
+            //poof_balloon_atlas_idle =  Assets.manager.get(Assets.poof_balloon_atlas_idle_p,Texture.class);
+            animation_idle = new Animation(new TextureRegion(Assets.manager.get(Assets.poof_balloon_atlas_idle_p,Texture.class)),3,ANIMATION_TIME);
         }
         bounds = new Rectangle(x, y, 95 , 190);
-        animation_idle=new Animation(new TextureRegion(poof_balloon_atlas_idle),3,ANIMATION_TIME);
+        //animation_idle=new Animation(new TextureRegion(poof_balloon_atlas_idle),3,ANIMATION_TIME);
+        animation_current_balloon = new Animation(new TextureRegion(Assets.manager.get(Assets.poof_balloon_atlas_idle_o,Texture.class)),3,ANIMATION_TIME);
     }
 
     public Vector3 getPosition() {
@@ -223,7 +234,7 @@ public class Balloon {
            if ((!combo)&(!make_orange)) {
                live_out = true;
                animation_current_balloon.dispose();
-               poof_balloon_atlas.dispose();
+//               poof_balloon_atlas.dispose();
            }else
 
             {

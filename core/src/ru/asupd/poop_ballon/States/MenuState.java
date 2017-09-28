@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import ru.asupd.poop_ballon.GameStateManager;
+import ru.asupd.poop_ballon.Workers.Assets;
 
 /**
  * Меню
@@ -52,12 +53,17 @@ public class MenuState extends State {
         sb.begin();
         sb.draw(background, 0, 0,640,800);
         sb.draw(balloon,120,100,405,88);
+        Assets.load();
         FontRed1.draw(sb, " Time to START 3.0f : "+ current_dt, 10, 790);
+        while (!Assets.manager.update()){
+            FontRed1.draw(sb, "LOADING >>> "+ +Assets.manager.getProgress()*100+ "%", 10, 775);
+        }
         sb.end();
 
     }
 
     @Override
     public void dispose() {
+        //Assets.dispose();
       }
 }
