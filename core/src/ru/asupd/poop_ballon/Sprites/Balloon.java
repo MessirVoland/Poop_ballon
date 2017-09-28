@@ -158,6 +158,10 @@ public class Balloon {
         return live_out;
     }
 
+    public void setAnimation_idle(Animation animation_idle) {
+        this.animation_idle = animation_idle;
+    }
+
     public void update(float dt, Shaker shaker){
 
     if (make_orange){
@@ -191,9 +195,10 @@ public class Balloon {
 
 
    if (pooped){
-       animation_idle.update(dt);
         currentTime+=dt;
-
+       if (!combo) {
+           animation_idle.update(dt);
+       }
        if (combo_number>=1) {
            animation_current_balloon.update(dt);
        }else
@@ -207,6 +212,7 @@ public class Balloon {
                animation_current_balloon.dispose();
                poof_balloon_atlas.dispose();
            }else
+
             {
                 combo = false;
                 currentTime = 0;

@@ -247,7 +247,9 @@ public class PlayState extends State {
         //инициализация массива шаров
         balloons = new Array<Balloon>();
         for (int i = 0; i <= 3; i++){
+            //int local_speed = get_speed_for_balloon();
             balloons.add(new Balloon(i * 96,-195-random(50),get_speed_for_balloon(),true));
+            balloons.get(i).setAnimation_idle(poof_balloon_g);
         }
 
         //инициализация массива облаков
@@ -262,10 +264,10 @@ public class PlayState extends State {
             boss_balloon.setLive(false);
         }
         //частицы
-        effect = new ParticleEffect();
-        effect.loadEmitters(Gdx.files.internal("particles/red_balls.p"));
-        effect.loadEmitterImages(Gdx.files.internal("particles"));
-        effect.start();
+       // effect = new ParticleEffect();
+      //  effect.loadEmitters(Gdx.files.internal("particles/red_balls.p"));
+      //  effect.loadEmitterImages(Gdx.files.internal("particles"));
+      //  effect.start();
 
         effect_pop = new ParticleEffect();
         effect_pop.loadEmitters(Gdx.files.internal("particles/pop_b"));
