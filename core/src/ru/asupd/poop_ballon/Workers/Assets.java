@@ -22,6 +22,12 @@ public class Assets {
     public static final String poof_balloon_atlas_idle_y = "pop_y.png";
     public static final String poof_balloon_atlas_idle_r = "pop_r.png";
     public static final String poof_balloon_atlas_idle_p = "pop_p.png";
+    public static final String balloon_blue ="Balloon_blue.png";
+    public static final String balloon_green ="Balloon_green.png";
+    public static final String balloon_yellow ="Balloon_yellow.png";
+    public static final String balloon_red ="Balloon_red.png";
+    public static final String balloon_purple ="Balloon_purple.png";
+    public static final String balloon_orange ="round_b_o.png";
 
     public static final ParticleEffect effect = new ParticleEffect();
 
@@ -35,6 +41,13 @@ public class Assets {
         manager.load(poof_balloon_atlas_idle_y,Texture.class);
         manager.load(poof_balloon_atlas_idle_r,Texture.class);
         manager.load(poof_balloon_atlas_idle_p,Texture.class);
+
+        manager.load(balloon_green,Texture.class);
+        manager.load(balloon_yellow,Texture.class);
+        manager.load(balloon_blue,Texture.class);
+        manager.load(balloon_red,Texture.class);
+        manager.load(balloon_purple,Texture.class);
+        manager.load(balloon_orange,Texture.class);
 
         //manager.load(poof_balloon_atlas_o_Texture_region, TextureRegion.class);
         //effect = new ParticleEffect();

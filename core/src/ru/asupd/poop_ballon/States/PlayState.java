@@ -50,7 +50,7 @@ public class PlayState extends State {
     private Texture muted,unmuted;//иконка звука
     private Texture vibrated,unvibrated;//иконка звука
 
-    private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p,texture_b_o;//Шарики
+    //private Texture texture_b_b,texture_b_g,texture_b_y,texture_b_r,texture_b_p,texture_b_o;//Шарики
 
     private Texture texture_poop_balloon;//Название игры
     private Resizer resizer_poop_balloon;
@@ -68,7 +68,8 @@ public class PlayState extends State {
 
 
     private Texture poof_balloon_atlas;//загрузчик атласов взрывов
-    private Animation poof_balloon_g,poof_balloon_y,poof_balloon_b,poof_balloon_r,poof_balloon_p,poof_balloon_o;
+
+    //private Animation poof_balloon_g,poof_balloon_y,poof_balloon_b,poof_balloon_r,poof_balloon_p,poof_balloon_o;
 
     private int cautch_ball = 0;//поймано шаров
     private int miss_ball = 0;//пропущено шаров
@@ -177,12 +178,13 @@ public class PlayState extends State {
 
         //Assets assets = new Assets();
         //хорошо бы сделать отдельный текстур менеджер с полосой загрузки
-        texture_b_b =  new Texture("Balloon_blue.png");
-        texture_b_r =  new Texture("Balloon_red.png");
-        texture_b_g =  new Texture("Balloon_green.png");
-        texture_b_y =  new Texture("Balloon_yellow.png");
-        texture_b_p =  new Texture("Balloon_purple.png");
-        texture_b_o =  new Texture("round_b_o.png");
+        //texture_b_b =  new Texture("Balloon_blue.png");
+        //texture_b_r =  new Texture("Balloon_red.png");
+        //texture_b_g =  new Texture("Balloon_green.png");
+        //texture_b_y =  new Texture("Balloon_yellow.png");
+        //texture_b_p =  new Texture("Balloon_purple.png");
+        //texture_b_o =  new Texture("round_b_o.png");
+
         your_high_score = new Texture("best_score_g.png");
         texture_poop_balloon = new Texture("poop_balloon.png");
         resizer_poop_balloon = new Resizer(texture_poop_balloon.getWidth(),texture_poop_balloon.getHeight());
@@ -201,18 +203,18 @@ public class PlayState extends State {
 
         score_num = new Score();
 
-        poof_balloon_atlas = new Texture("pop_g.png");
-        poof_balloon_g = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
-        poof_balloon_atlas = new Texture("pop_y.png");
-        poof_balloon_y = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
-        poof_balloon_atlas = new Texture("pop_b.png");
-        poof_balloon_b = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
-        poof_balloon_atlas = new Texture("pop_r.png");
-        poof_balloon_r = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
-        poof_balloon_atlas = new Texture("pop_p.png");
-        poof_balloon_p = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
-        poof_balloon_atlas = new Texture("pop_color.png");
-        poof_balloon_o = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
+        //poof_balloon_atlas = new Texture("pop_g.png");
+        //poof_balloon_g = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
+        //poof_balloon_atlas = new Texture("pop_y.png");
+        //poof_balloon_y = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
+        //poof_balloon_atlas = new Texture("pop_b.png");
+        //poof_balloon_b = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
+        //poof_balloon_atlas = new Texture("pop_r.png");
+        //poof_balloon_r = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
+        //poof_balloon_atlas = new Texture("pop_p.png");
+        //poof_balloon_p = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
+        //poof_balloon_atlas = new Texture("pop_color.png");
+        //poof_balloon_o = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
 
 		options = new Texture("options.png");
         muted = new Texture("sound_off.png");
@@ -258,7 +260,7 @@ public class PlayState extends State {
         for (int i = 0; i <= 3; i++){
             //int local_speed = get_speed_for_balloon();
             balloons.add(new Balloon(i * 96,-195-random(50),get_speed_for_balloon(),true));
-            balloons.get(i).setAnimation_idle(poof_balloon_g);
+            //balloons.get(i).setAnimation_idle(poof_balloon_g);
         }
 
         //инициализация массива облаков
@@ -366,18 +368,18 @@ public class PlayState extends State {
                                         balloon.setCombo(0);
                                     }
 
-                                    poof_balloon_g.setCurrentFrameTime(0.0f);
-                                    poof_balloon_g.setFrame(0);
-                                    poof_balloon_y.setCurrentFrameTime(0.0f);
-                                    poof_balloon_y.setFrame(0);
-                                    poof_balloon_b.setCurrentFrameTime(0.0f);
-                                    poof_balloon_b.setFrame(0);
-                                    poof_balloon_r.setCurrentFrameTime(0.0f);
-                                    poof_balloon_r.setFrame(0);
-                                    poof_balloon_p.setCurrentFrameTime(0.0f);
-                                    poof_balloon_p.setFrame(0);
-                                    poof_balloon_o.setCurrentFrameTime(0.0f);
-                                    poof_balloon_o.setFrame(0);
+                                    //poof_balloon_g.setCurrentFrameTime(0.0f);
+                                    //poof_balloon_g.setFrame(0);
+                                    //poof_balloon_y.setCurrentFrameTime(0.0f);
+                                    //poof_balloon_y.setFrame(0);
+                                    //poof_balloon_b.setCurrentFrameTime(0.0f);
+                                    //poof_balloon_b.setFrame(0);
+                                    //poof_balloon_r.setCurrentFrameTime(0.0f);
+                                    //poof_balloon_r.setFrame(0);
+                                    //poof_balloon_p.setCurrentFrameTime(0.0f);
+                                    //poof_balloon_p.setFrame(0);
+                                    //poof_balloon_o.setCurrentFrameTime(0.0f);
+                                    //poof_balloon_o.setFrame(0);
 
                                     //int local_highscore;
                                     //local_highscore = cautch_ball;
@@ -745,19 +747,19 @@ public class PlayState extends State {
             switch (balloon.getColor_of_balloon()) {
 
                 case 0:
-                    sb.draw(texture_b_g, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    sb.draw(Assets.manager.get(Assets.balloon_green,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 1:
-                    sb.draw(texture_b_y, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    sb.draw(Assets.manager.get(Assets.balloon_yellow,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 2:
-                    sb.draw(texture_b_b, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    sb.draw(Assets.manager.get(Assets.balloon_blue,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 3:
-                    sb.draw(texture_b_r, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    sb.draw(Assets.manager.get(Assets.balloon_red,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 4:
-                    sb.draw(texture_b_p, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    sb.draw(Assets.manager.get(Assets.balloon_purple,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 5:
                     //effect_pop.start();
@@ -796,7 +798,7 @@ public class PlayState extends State {
                     break;
                 case 10:
                     sb.setColor(1,1,1,1);
-                    sb.draw(texture_b_o, balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    sb.draw(Assets.manager.get(Assets.balloon_orange,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 11:
                     sb.setColor(1,1,1,1);
@@ -922,11 +924,11 @@ public class PlayState extends State {
         background_Music.dispose();
         boss_Music.dispose();
         background.dispose();
-        texture_b_b.dispose();
-        texture_b_r.dispose();
-        texture_b_g.dispose();
-        texture_b_y.dispose();
-        texture_b_p.dispose();
+        //texture_b_b.dispose();
+        //texture_b_r.dispose();
+        //texture_b_g.dispose();
+        //texture_b_y.dispose();
+        //texture_b_p.dispose();
         poof_balloon_atlas.dispose();
         background_frames.clear();
         muted.dispose();
