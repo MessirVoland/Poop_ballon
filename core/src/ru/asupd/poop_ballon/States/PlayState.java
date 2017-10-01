@@ -106,7 +106,7 @@ public class PlayState extends State {
 
     private Shaker shaker;//шейкео
     private int index;//хз
-    private boolean pause=false;
+    private static boolean pause=false;
     private float min_x=0.0f,min_y=0.0f;
 
     boolean started;//для страрта игры
@@ -506,6 +506,7 @@ public class PlayState extends State {
                         else
                         {
                             vibro=true;
+                            Gdx.input.vibrate(125);
                             prefs.putBoolean("vibro",vibro);
                             prefs.flush();
                         }
@@ -515,6 +516,9 @@ public class PlayState extends State {
             }
         }
 
+    }
+    public static final void setPAUSE(){
+        pause = true;
     }
 
     @Override
@@ -747,19 +751,24 @@ public class PlayState extends State {
             switch (balloon.getColor_of_balloon()) {
 
                 case 0:
-                    sb.draw(Assets.manager.get(Assets.balloon_green,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                    //Assets.manager.get(Assets.balloon_green,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                    sb.draw(Assets.instance.manager.get(Assets.balloon_green,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 1:
-                    sb.draw(Assets.manager.get(Assets.balloon_yellow,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                   // Assets.manager.get(Assets.balloon_yellow,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                    sb.draw(Assets.instance.manager.get(Assets.balloon_yellow,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 2:
-                    sb.draw(Assets.manager.get(Assets.balloon_blue,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                  //  Assets.manager.get(Assets.balloon_blue,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                    sb.draw(Assets.instance.manager.get(Assets.balloon_blue,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 3:
-                    sb.draw(Assets.manager.get(Assets.balloon_red,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                  //  Assets.manager.get(Assets.balloon_red,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                    sb.draw(Assets.instance.manager.get(Assets.balloon_red,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 4:
-                    sb.draw(Assets.manager.get(Assets.balloon_purple,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                   // Assets.manager.get(Assets.balloon_purple,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                    sb.draw(Assets.instance.manager.get(Assets.balloon_purple,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 5:
                     //effect_pop.start();
@@ -798,7 +807,8 @@ public class PlayState extends State {
                     break;
                 case 10:
                     sb.setColor(1,1,1,1);
-                    sb.draw(Assets.manager.get(Assets.balloon_orange,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                   // Assets.manager.get(Assets.balloon_orange,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                    sb.draw(Assets.instance.manager.get(Assets.balloon_orange,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                     break;
                 case 11:
                     sb.setColor(1,1,1,1);
@@ -834,8 +844,25 @@ public class PlayState extends State {
                 sb.draw(multi_x6,min_x,min_y);
                 break;
         }
+        int fps = Gdx.graphics.getFramesPerSecond();
+        if (fps >= 45) {
+            // 45 or more FPS show up in green
+            FontRed1.setColor(0, 1, 0, 1);
+        } else if (fps >= 30) {
+            // 30 or more FPS show up in yellow
+            FontRed1.setColor(1, 1, 0, 1);
+        } else {
+            // less than 30 FPS show up in red
+            FontRed1.setColor(1, 0, 0, 1);
+        }
 
-        FontRed1.draw(sb, " FPS : "+  Gdx.graphics.getFramesPerSecond(), 10, 790);
+        FontRed1.draw(sb, " FPS : "+  fps, 10, 790);
+        FontRed1.setColor(1, 1, 1, 1);
+
+        long memUsageJavaHeap = Gdx.app.getJavaHeap();
+        long memUsageNativeHeap = Gdx.app.getNativeHeap();
+        FontRed1.draw(sb, "JavaHeap : "+memUsageJavaHeap, 10, 775);
+        FontRed1.draw(sb, "NativeHeap : "+memUsageNativeHeap,10,760);
 
 		/*
         if (mute){
@@ -949,5 +976,6 @@ public class PlayState extends State {
     public void missed_ball(){
         miss_ball--;
     }
+
 
 }

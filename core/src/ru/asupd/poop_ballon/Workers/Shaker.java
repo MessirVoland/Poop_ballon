@@ -88,6 +88,12 @@ public class Shaker {
                 }
             }
 
+
+            /* из учебника пример
+            final float shakeAmplitudeInDegrees = 5.0f;
+            float shake = MathUtils.sin(rot) * shakeAmplitudeInDegrees;
+            sprite.setRotation(shake);
+             */
            // camera_sh.position.x = baseX;
            // camera_sh.position.y = baseY;
             camera_sh.update();

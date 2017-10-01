@@ -126,33 +126,33 @@ public class Balloon {
             //poof_balloon_atlas_idle = new Texture("pop_g.png");
             //poof_balloon_atlas_idle = Assets.manager.get(Assets.poof_balloon_atlas_idle_g,Texture.class);
             //animation_idle=new Animation(new TextureRegion(poof_balloon_atlas_idle),3,ANIMATION_TIME);
-            animation_idle = new Animation(new TextureRegion(Assets.manager.get(Assets.poof_balloon_atlas_idle_g,Texture.class)),3,ANIMATION_TIME);
+            animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_g,Texture.class)),3,ANIMATION_TIME);
         }else
         if (grav<320){
             color_of_balloon=1;
             //poof_balloon_atlas_idle = Assets.manager.get(Assets.poof_balloon_atlas_idle_y,Texture.class);
-            animation_idle = new Animation(new TextureRegion(Assets.manager.get(Assets.poof_balloon_atlas_idle_y,Texture.class)),3,ANIMATION_TIME);
+            animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_y,Texture.class)),3,ANIMATION_TIME);
         }
         else
         if (grav<380){
             color_of_balloon=2;
             //poof_balloon_atlas_idle =  Assets.manager.get(Assets.poof_balloon_atlas_idle_b,Texture.class);
-            animation_idle = new Animation(new TextureRegion(Assets.manager.get(Assets.poof_balloon_atlas_idle_b,Texture.class)),3,ANIMATION_TIME);
+            animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_b,Texture.class)),3,ANIMATION_TIME);
         }
         else
         if(grav<420){
             color_of_balloon=3;
             //poof_balloon_atlas_idle =  Assets.manager.get(Assets.poof_balloon_atlas_idle_r,Texture.class);
-            animation_idle = new Animation(new TextureRegion(Assets.manager.get(Assets.poof_balloon_atlas_idle_r,Texture.class)),3,ANIMATION_TIME);
+            animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_r,Texture.class)),3,ANIMATION_TIME);
         }
         else{
             color_of_balloon=4;
             //poof_balloon_atlas_idle =  Assets.manager.get(Assets.poof_balloon_atlas_idle_p,Texture.class);
-            animation_idle = new Animation(new TextureRegion(Assets.manager.get(Assets.poof_balloon_atlas_idle_p,Texture.class)),3,ANIMATION_TIME);
+            animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_p,Texture.class)),3,ANIMATION_TIME);
         }
         bounds = new Rectangle(x, y, 95 , 190);
         //animation_idle=new Animation(new TextureRegion(poof_balloon_atlas_idle),3,ANIMATION_TIME);
-        animation_current_balloon = new Animation(new TextureRegion(Assets.manager.get(Assets.poof_balloon_atlas_idle_o,Texture.class)),3,ANIMATION_TIME);
+        animation_current_balloon = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_o,Texture.class)),3,ANIMATION_TIME);
     }
 
     public Vector3 getPosition() {
