@@ -1,7 +1,9 @@
 package ru.asupd.poop_ballon.Workers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -15,6 +17,7 @@ import ru.asupd.poop_ballon.Sprites.Animation;
 public class Assets {
     public static final AssetManager manager = new AssetManager();
 
+    //шары и анимация шаров
     public static final String poof_balloon_atlas_idle_o = "pop_o.png";
    // public static final String poof_balloon_atlas_o_Texture_region = "pop_o.png";
     public static final String poof_balloon_atlas_idle_g = "pop_g.png";
@@ -29,10 +32,26 @@ public class Assets {
     public static final String balloon_purple ="Balloon_purple.png";
     public static final String balloon_orange ="round_b_o.png";
 
-    public static final ParticleEffect effect = new ParticleEffect();
+    //облачка
+    public static final AssetDescriptor<Texture> cloud1 = new AssetDescriptor<Texture>("cloud1.png",Texture.class);
+    public static final AssetDescriptor<Texture> cloud2 = new AssetDescriptor<Texture>("cloud2.png",Texture.class);
+    public static final AssetDescriptor<Texture> cloud3 = new AssetDescriptor<Texture>("cloud3.png",Texture.class);
+    public static final AssetDescriptor<Texture> cloud4 = new AssetDescriptor<Texture>("cloud4.png",Texture.class);
+
+
+    //Частицы
+    public static final String Particles_of_balloon_g="particles/pop_b";
+
+
+    public static ParticleEffect effect = new ParticleEffect();
 
 
 
+    /*public static void loadParticleEffects(){
+        ParticleEffectLoader.ParticleEffectParameter pep = new ParticleEffectLoader.ParticleEffectParameter();
+        pep.atlasFile = "assets/particles";
+        manager.load(Particles_of_balloon_g,ParticleEffect.class,pep);
+    }*/
     public static void load(){
 
         manager.load(poof_balloon_atlas_idle_o, Texture.class);
@@ -49,8 +68,13 @@ public class Assets {
         manager.load(balloon_purple,Texture.class);
         manager.load(balloon_orange,Texture.class);
 
+        manager.load(cloud1);
+        manager.load(cloud2);
+        manager.load(cloud3);
+        manager.load(cloud4);
+
         //manager.load(poof_balloon_atlas_o_Texture_region, TextureRegion.class);
-        //effect = new ParticleEffect();
+        effect = new ParticleEffect();
         effect.loadEmitters(Gdx.files.internal("particles/pop_b"));
         effect.loadEmitterImages(Gdx.files.internal("particles"));
 

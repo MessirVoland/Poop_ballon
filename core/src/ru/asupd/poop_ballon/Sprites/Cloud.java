@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
+import ru.asupd.poop_ballon.Workers.Assets;
+
 import static com.badlogic.gdx.math.MathUtils.random;
 
 /**
@@ -44,17 +46,17 @@ public class Cloud extends Creature {
         color_of_cloud=random(3);
         switch (color_of_cloud){
             case 0:
-                texture =  new Texture("cloud1.png");
+                texture = Assets.manager.get(Assets.cloud1);
                 break;
             case 1:
-                texture =  new Texture("cloud2.png");
+                texture = Assets.manager.get(Assets.cloud2);
                 break;
 
             case 2:
-                texture =  new Texture("cloud3.png");
+                texture = Assets.manager.get(Assets.cloud3);
                 break;
             case 3:
-                texture =  new Texture("cloud4.png");
+                texture = Assets.manager.get(Assets.cloud4);
                 break;
         }
     }
@@ -72,16 +74,16 @@ public class Cloud extends Creature {
         color_of_cloud=random(3);
         switch (color_of_cloud){
             case 0:
-                texture =  new Texture("cloud1.png");
+                texture = Assets.manager.get(Assets.cloud1);
                 break;
             case 1:
-                texture =  new Texture("cloud2.png");
+                texture = Assets.manager.get(Assets.cloud2);
                 break;
             case 2:
-                texture =  new Texture("cloud3.png");
+                texture = Assets.manager.get(Assets.cloud3);
                 break;
             case 3:
-                texture =  new Texture("cloud4.png");
+                texture = Assets.manager.get(Assets.cloud4);
                 break;
         }
 

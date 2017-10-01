@@ -106,6 +106,8 @@ public class Balloon {
         //effect = new ParticleEffect();
         //effect.loadEmitters(Gdx.files.internal("particles/pop_b"));
         //effect.loadEmitterImages(Gdx.files.internal("particles"));
+        //effect = Assets.manager.get(Assets.Particles_of_balloon_g,ParticleEffect.class);
+                //new ParticleEffect(Assets.effect);
         effect = new ParticleEffect(Assets.effect);
 
         // zerovelosity = new Vector3(0, 0, 0);

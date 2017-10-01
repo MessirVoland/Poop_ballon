@@ -54,6 +54,7 @@ public class MenuState extends State {
         sb.draw(background, 0, 0,640,800);
         sb.draw(balloon,120,100,405,88);
         Assets.load();
+        //Assets.loadParticleEffects();
         FontRed1.draw(sb, " Time to START 3.0f : "+ current_dt, 10, 790);
         while (!Assets.manager.update()){
             FontRed1.draw(sb, "LOADING >>> "+ +Assets.manager.getProgress()*100+ "%", 10, 775);
