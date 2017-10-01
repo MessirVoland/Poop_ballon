@@ -332,7 +332,7 @@ public class PlayState extends State {
                             poop_Sound.play(volume);
                             System.out.println("Hearthballon_clicked");
                             shaker.shake(0.40f);
-                            current_alpha_background=0.0f;
+                            //current_alpha_background=0.0f;
                             //if (miss_ball>1) {
                             //    miss_ball--;
                            //}
