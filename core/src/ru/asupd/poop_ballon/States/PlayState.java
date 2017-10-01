@@ -21,6 +21,7 @@ import ru.asupd.poop_ballon.Sprites.Animation;
 import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.Sprites.Boss_balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
+import ru.asupd.poop_ballon.Sprites.Hearth_balloon;
 import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Resizer;
 import ru.asupd.poop_ballon.Workers.Score;
@@ -117,6 +118,8 @@ public class PlayState extends State {
     private Vector3 velosity;//вектор движения заголовка
 
     private Boss_balloon boss_balloon;//босс
+
+    private Hearth_balloon hearth_balloon;
 
     private int chance_of_boss=20;//20%
     private int chance_100_150=random(50)+100;
@@ -274,6 +277,9 @@ public class PlayState extends State {
         if (random(100)>=chance_of_boss){
             boss_balloon.setLive(false);
         }
+        hearth_balloon = new Hearth_balloon();
+
+
         //частицы
        // effect = new ParticleEffect();
       //  effect.loadEmitters(Gdx.files.internal("particles/red_balls.p"));
@@ -320,6 +326,23 @@ public class PlayState extends State {
                         }
                     }
                 }
+                if (hearth_balloon.isFly()){
+                    if ((hearth_balloon.getPosition().x<touchPos.x)&(hearth_balloon.getPosition().x+95>touchPos.x)){
+                        if ((hearth_balloon.getPosition().y<touchPos.y)&(hearth_balloon.getPosition().y+95>touchPos.y)){
+                            poop_Sound.play(volume);
+                            System.out.println("Hearthballon_clicked");
+                            shaker.shake(0.40f);
+                            current_alpha_background=0.0f;
+                            //if (miss_ball>1) {
+                            //    miss_ball--;
+                           //}
+                            hearth_balloon.setFly(false);
+                            hearth_balloon.restart();
+                        }
+                    }
+                }
+
+
 
                 //max_combo=0;
                 current_combo = 0;
@@ -356,6 +379,10 @@ public class PlayState extends State {
                                     shaker.shake(0.276f); // 0.2f
                                     cautch_ball++;
                                     score_num.addScore(1);
+
+                                    if ((hearth_balloon.isFly()==false)&(score_num.getScore()>50)){
+                                        hearth_balloon.setFly(true);
+                                    }
                                     //current_combo++;
                                     if (current_combo >= 2) {
                                         //balloon.setCombo(current_combo);
@@ -674,6 +701,9 @@ public class PlayState extends State {
                     cloud.change_texture();
                 }
             }
+            if (hearth_balloon.isFly()){
+                hearth_balloon.update(dt);
+            }
 
             shaker.update(dt);
             score_num.update(dt);
@@ -822,6 +852,9 @@ public class PlayState extends State {
         }
         //effect.draw(sb);
         sb.setColor(1,1,1,1);
+        if (hearth_balloon.isFly()) {
+            sb.draw(hearth_balloon.getTexture(), hearth_balloon.getPosition().x, hearth_balloon.getPosition().y, 95, 169);
+        }
 
         switch (current_combo){
             case 2:

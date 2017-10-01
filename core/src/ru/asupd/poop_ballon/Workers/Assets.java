@@ -51,6 +51,9 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> star6 = new AssetDescriptor<Texture>("st6.png",Texture.class);
     public static final AssetDescriptor<Texture> star7 = new AssetDescriptor<Texture>("st7.png",Texture.class);
 
+    //единичные объекты
+    public static final AssetDescriptor<Texture> heart_baloon = new AssetDescriptor<Texture>("heart_baloon.png",Texture.class);
+
 
     //Частицы
     //public static final String Particles_of_balloon_g="particles/pop_b";
@@ -99,6 +102,8 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(star6);
         manager.load(star7);
 
+        manager.load(heart_baloon);
+
         //manager.load(poof_balloon_atlas_o_Texture_region, TextureRegion.class);
         //effect = new ParticleEffect();
         effect.loadEmitters(Gdx.files.internal("particles/pop_b"));
@@ -110,6 +115,7 @@ public class Assets implements Disposable, AssetErrorListener {
     }
     public void dispose(){
         //try {
+        System.exit(1);
             manager.dispose();
             instance.dispose();
         //} catch (Throwable t){
@@ -135,6 +141,8 @@ public class Assets implements Disposable, AssetErrorListener {
         Assets.instance.manager.get(Assets.cloud2).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Assets.instance.manager.get(Assets.cloud3).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Assets.instance.manager.get(Assets.cloud4).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
 
 
     }
