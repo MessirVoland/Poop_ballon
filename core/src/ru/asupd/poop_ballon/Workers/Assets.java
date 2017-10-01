@@ -109,9 +109,12 @@ public class Assets implements Disposable, AssetErrorListener {
 
     }
     public void dispose(){
-
-        manager.dispose();
-        instance.dispose();
+        //try {
+            manager.dispose();
+            instance.dispose();
+        //} catch (Throwable t){
+        //    System.out.println("Smm: "+t );
+       // }
     }
     public static void make_linear(){
         Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_o,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

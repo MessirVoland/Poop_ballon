@@ -35,16 +35,20 @@ public class MyGdxGame implements ApplicationListener {
     @Override
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		gsm.update(Gdx.graphics.getDeltaTime());
-		gsm.render(batch);
+        if (gsm!=null) {
+            gsm.update(Gdx.graphics.getDeltaTime());
+            gsm.render(batch);
+        }
 	}
 
 	@Override
 	public void pause() {
         System.out.println("paused");
         Assets.instance.dispose();
-       gsm.set(new MenuState(gsm));
+
+       //gsm.set(new MenuState(gsm));
 		//PlayState.setPAUSE();
+        gsm = null;
 		//
 
         System.out.println("End pause");
@@ -58,7 +62,8 @@ public class MyGdxGame implements ApplicationListener {
 		//Texture.setAssetManager(manager);
         System.out.println("Resumed");
         Assets.instance.load(new AssetManager());
-		gsm.set(new MenuState(gsm));
+        gsm = new GameStateManager();
+		gsm.push(new MenuState(gsm));
 
 		//Assets.dispose();
 		//Assets.load();
