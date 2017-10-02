@@ -36,6 +36,7 @@ public class AndroidLauncher extends AndroidApplication {
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useAccelerometer = false;
 		config.useCompass = false;
+        config.useGL30=true;//не использовать с рекламой
 
 		// Create the libgdx View
 		View gameView = initializeForView(new MyGdxGame(), config);
@@ -62,7 +63,7 @@ public class AndroidLauncher extends AndroidApplication {
 		adParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 
 		layout.addView(adView,adParams);
-		adView.loadAd(builder.build());
+		//adView.loadAd(builder.build());
 
 		setContentView(layout);
 	}
