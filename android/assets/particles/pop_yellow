@@ -183,7 +183,7 @@ additive: false
 behind: false
 premultipliedAlpha: false
 - Image Path -
-part2_blue.png
+part2_yellow.png
 
 
 parts
@@ -373,7 +373,7 @@ additive: false
 behind: false
 premultipliedAlpha: false
 - Image Path -
-part1_blue.png
+part1_yellow.png
 
 
 balls
