@@ -57,7 +57,13 @@ public class Shaker {
             x = (random.nextFloat() - 0.5f) * currentPower;
 
             y = (random.nextFloat() - 0.5f) * currentPower;
-            camera_sh.translate(-x, -y);
+            if ((baseX<=camera_sh.position.x+10)&(baseX>=camera_sh.position.x-10)){
+                camera_sh.translate(-x, 0);
+            }
+            if ((baseY<=camera_sh.position.y+10)&(baseY>=camera_sh.position.y-10)){
+                camera_sh.translate(0, -y);
+            }
+            //camera_sh.translate(-x, -y);
             camera_sh.update();
             // Increase the elapsed time by the delta provided.
             elapsed += delta;

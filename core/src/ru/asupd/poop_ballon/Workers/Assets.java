@@ -142,6 +142,8 @@ public class Assets implements Disposable, AssetErrorListener {
         Assets.instance.manager.get(Assets.cloud3).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Assets.instance.manager.get(Assets.cloud4).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+        Assets.instance.manager.get(Assets.heart_baloon).setFilter(Texture.TextureFilter.Linear,Texture.TextureFilter.Linear);
+
 
 
 
