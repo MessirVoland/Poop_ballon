@@ -317,8 +317,8 @@ public class PlayState extends State {
                     min_x = touchPos.x;
                     min_y = touchPos.y;
                 }
-
             }
+			
             if (!pause) {
                 if (boss_balloon.isStarted()) {
                     if ((boss_balloon.getPosition().x < touchPos.x) & (boss_balloon.getPosition().x + 100 > touchPos.x)) {
@@ -329,6 +329,7 @@ public class PlayState extends State {
                         }
                     }
                 }
+				
                 if (hearth_balloon.isFly()){
                     if ((hearth_balloon.getPosition().x<touchPos.x)&(hearth_balloon.getPosition().x+95>touchPos.x)){
                         if ((hearth_balloon.getPosition().y<touchPos.y)&(hearth_balloon.getPosition().y+95>touchPos.y)){
@@ -574,7 +575,7 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
-        resizer_poop_balloon.update(dt);
+        //resizer_poop_balloon.update(dt); ресайзер заглавия?
         if (game_over_start) {
             well_played_resizer.update(dt);
             nice_played_resizer.update(dt);
@@ -584,7 +585,8 @@ public class PlayState extends State {
         }
 
         currnent_dt_background=dt*8; //2;
-        if (game_over_start){
+        
+		if (game_over_start){
             game_over_dt+=dt;
             if (game_over_dt>=0.7f){
                 if (game_over_ball_fly){
@@ -596,8 +598,6 @@ public class PlayState extends State {
                 if ((!game_over_ball_fly)&(game_over_well_play)){
                     game_over_ball_fly=true;
                     game_over_dt=0;
-
-
                 }
 
                 if (!game_over_well_play){
