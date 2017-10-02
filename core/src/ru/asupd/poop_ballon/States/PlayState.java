@@ -120,6 +120,7 @@ public class PlayState extends State {
     private Boss_balloon boss_balloon;//босс
 
     private Hearth_balloon hearth_balloon;
+    private byte counter_of_h_ballons=0;
 
     private int chance_of_boss=20;//20%
     private int chance_100_150=random(50)+100;
@@ -331,11 +332,12 @@ public class PlayState extends State {
                         if ((hearth_balloon.getPosition().y<touchPos.y)&(hearth_balloon.getPosition().y+95>touchPos.y)){
                             poop_Sound.play(volume);
                             System.out.println("Hearthballon_clicked");
+                            counter_of_h_ballons++;
                             shaker.shake(0.40f);
-                            //current_alpha_background=0.0f;
+                            current_alpha_background=2.0f;
                             //if (miss_ball>1) {
-                            //    miss_ball--;
-                           //}
+                                miss_ball--;
+                            //}
                             hearth_balloon.setFly(false);
                             hearth_balloon.restart();
                         }
@@ -362,6 +364,9 @@ public class PlayState extends State {
                 //System.out.println("Current combo: "+current_combo);
                 //current_combo=0;
                 //клик по шарам
+                if (miss_ball>=1){
+                    hearth_balloon.setCan_fly(true);
+                }
 
                 for (Balloon balloon : balloons) {
                     if ((balloon.getPosition().x < touchPos.x) & (balloon.getPosition().x + 100 > touchPos.x)) {
@@ -380,9 +385,25 @@ public class PlayState extends State {
                                     cautch_ball++;
                                     score_num.addScore(1);
 
-                                    if ((hearth_balloon.isFly()==false)&(score_num.getScore()>50)){
-                                        hearth_balloon.setFly(true);
+
+                                    if (counter_of_h_ballons<=score_num.getScore()/500){
+                                        //System.out.println("counter: "+counter_of_h_ballons);
+                                        //System.out.println("score_num.getScore()/50: "+score_num.getScore()/50);
+                                        if (miss_ball>=1) {
+                                            hearth_balloon.setCan_fly(true);
+                                            hearth_balloon.setFly(true);
+                                        }
+                                        else
+                                        {
+                                            counter_of_h_ballons++;
+                                        }
                                     }
+
+                                        //if ((score_num.getScore()%50==1) & (score_num.getScore()%50 == 0)) {
+                                        //    hearth_balloon.setFly(true);
+                                        //}
+
+
                                     //current_combo++;
                                     if (current_combo >= 2) {
                                         //balloon.setCombo(current_combo);
@@ -703,6 +724,11 @@ public class PlayState extends State {
             }
             if (hearth_balloon.isFly()){
                 hearth_balloon.update(dt);
+                if (hearth_balloon.getPosition().x>=480+95){
+                    counter_of_h_ballons++;
+                    hearth_balloon.setFly(false);
+                    hearth_balloon.restart();
+                }
             }
 
             shaker.update(dt);
@@ -726,6 +752,21 @@ public class PlayState extends State {
             sb.setColor(1,1,1,1.0f-current_alpha_background);
             sb.draw(background_frames.get(miss_ball-1), -25, -25, 550, 900);
             current_alpha_background+=currnent_dt_background;
+            if (current_alpha_background>=1.0f){
+                current_alpha_background=1.0f;
+            }
+        }
+        else
+        if (current_alpha_background>1.0f)
+        {
+            sb.setColor(1,1,1,current_alpha_background-1.0f);
+            sb.draw(background_frames.get(miss_ball+1), -25, -25, 550, 900);
+            sb.setColor(1,1,1,1.0f-current_alpha_background-1.0f);
+            sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
+            current_alpha_background-=currnent_dt_background;
+            if (current_alpha_background<=1.0f){
+                current_alpha_background=1.0f;
+            }
         }
         else
         {

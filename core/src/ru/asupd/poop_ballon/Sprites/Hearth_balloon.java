@@ -14,6 +14,12 @@ public class Hearth_balloon extends Creature {
     private Vector3 velosity;
     private boolean fly=false;
 
+    public boolean isCan_fly() {
+        return can_fly;
+    }
+
+    private boolean can_fly=true;
+
     private boolean sin_grav_bool;
     Texture texture;
 
@@ -60,7 +66,15 @@ public class Hearth_balloon extends Creature {
 
     }
 
+    public void setCan_fly(boolean can_fly) {
+        this.can_fly = can_fly;
+    }
+
     public void setFly(boolean fly) {
+        if (fly){
+            can_fly=false;
+
+        }
         this.fly = fly;
     }
 
