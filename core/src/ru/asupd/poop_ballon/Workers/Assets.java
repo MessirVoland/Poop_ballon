@@ -119,7 +119,7 @@ public class Assets implements Disposable, AssetErrorListener {
     }
     public void dispose(){
         //try {
-        System.exit(1);
+        //System.exit(1);
          //   manager.dispose();
           //  instance.dispose();
         //} catch (Throwable t){

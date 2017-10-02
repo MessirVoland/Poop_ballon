@@ -44,11 +44,12 @@ public class MyGdxGame implements ApplicationListener {
 	@Override
 	public void pause() {
         System.out.println("paused");
-        Assets.instance.dispose();
+		PlayState.setPAUSE();
+      //  Assets.instance.dispose();
 
        //gsm.set(new MenuState(gsm));
 		//PlayState.setPAUSE();
-        gsm = null;
+      //  gsm = null;
 		//
 
         System.out.println("End pause");
@@ -60,10 +61,10 @@ public class MyGdxGame implements ApplicationListener {
         //Assets.load();
         //Assets.manager.update();
 		//Texture.setAssetManager(manager);
-        System.out.println("Resumed");
-        Assets.instance.load(new AssetManager());
-        gsm = new GameStateManager();
-		gsm.push(new MenuState(gsm));
+        //System.out.println("Resumed");
+       // Assets.instance.load(new AssetManager());
+       // gsm = new GameStateManager();
+		//gsm.push(new MenuState(gsm));
 
 		//Assets.dispose();
 		//Assets.load();
