@@ -34,6 +34,8 @@ public class Balloon {
     private float currentTime_or=0;
     private boolean pooped,live_out;
     private boolean can_respawn,sin_grav_bool;
+    private boolean part_start=true;
+    private boolean anim_end=false;
 
     public ParticleEffect effect;
 
@@ -179,13 +181,23 @@ public class Balloon {
         return live_out;
     }
     public void part_start(){
-        effect.start();
-        effect.setPosition(position.x+45,position.y+145);
+        if (part_start) {
+            effect.start();
+            effect.setPosition(position.x + 45, position.y + 145);
+            part_start=false;
+        }
 
     }
 
     public void setAnimation_idle(Animation animation_idle) {
         this.animation_idle = animation_idle;
+    }
+
+    public boolean isAnim_end() {
+        return anim_end;
+    }
+    public void update_part(float dt){
+        effect.update(dt);
     }
 
     public void update(float dt, Shaker shaker){
@@ -235,8 +247,12 @@ public class Balloon {
        if (currentTime>ANIMATION_TIME)
        {
            if ((!combo)&(!make_orange)) {
-               live_out = true;
-               animation_current_balloon.dispose();
+               if (effect.isComplete()) {
+                   live_out = true;
+                   animation_current_balloon.dispose();
+               }
+               anim_end=true;
+
 //               poof_balloon_atlas.dispose();
            }else
 

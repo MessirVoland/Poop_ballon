@@ -859,75 +859,79 @@ public class PlayState extends State {
         //if (!boss_balloon.isStarted()){
         for (Balloon balloon : balloons) {
             sb.setColor(1,1,1,0.9f);
-            switch (balloon.getColor_of_balloon()) {
+            if (!balloon.isAnim_end()) {
+                switch (balloon.getColor_of_balloon()) {
 
-                case 0:
-                    //Assets.manager.get(Assets.balloon_green,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-                    sb.draw(Assets.instance.manager.get(Assets.balloon_green,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                    break;
-                case 1:
-                   // Assets.manager.get(Assets.balloon_yellow,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-                    sb.draw(Assets.instance.manager.get(Assets.balloon_yellow,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                    break;
-                case 2:
-                  //  Assets.manager.get(Assets.balloon_blue,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-                    sb.draw(Assets.instance.manager.get(Assets.balloon_blue,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                    break;
-                case 3:
-                  //  Assets.manager.get(Assets.balloon_red,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-                    sb.draw(Assets.instance.manager.get(Assets.balloon_red,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                    break;
-                case 4:
-                   // Assets.manager.get(Assets.balloon_purple,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-                    sb.draw(Assets.instance.manager.get(Assets.balloon_purple,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                    break;
-                case 5:
-                    //effect_pop.start();
-                    sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
-                    balloon.part_start();
-                    balloon.effect.draw(sb);
-                    //effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
-                    break;
-                case 6:
-                    sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
-                    balloon.part_start();
-                    balloon.effect.draw(sb);
-                    //balloon.effect.draw(sb);
-                   // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
-                    break;
-                case 7:
-                    sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
-                    balloon.part_start();
-                    balloon.effect.draw(sb);
-                   // balloon.effect.draw(sb);
-                    //effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
-                    break;
-                case 8:
-                    sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
-                    balloon.part_start();
-                    balloon.effect.draw(sb);
-                    //balloon.effect.draw(sb);
-                   // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
-                    break;
-                case 9:
-                    sb.draw(balloon.getFrames_idle(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
-                    balloon.part_start();
-                    balloon.effect.draw(sb);
-                   // balloon.effect.draw(sb);
-                   // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
-                    break;
-                case 10:
-                    sb.setColor(1,1,1,1);
-                   // Assets.manager.get(Assets.balloon_orange,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-                    sb.draw(Assets.instance.manager.get(Assets.balloon_orange,Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                    break;
-                case 11:
-                    sb.setColor(1,1,1,1);
-                    sb.draw(balloon.getFrames(), balloon.getPosition().x-50, balloon.getPosition().y+40, 190, 190);
-                    balloon.part_start();
-                    balloon.effect.draw(sb);
-                    break;
+                    case 0:
+                        //Assets.manager.get(Assets.balloon_green,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                        sb.draw(Assets.instance.manager.get(Assets.balloon_green, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                        break;
+                    case 1:
+                        // Assets.manager.get(Assets.balloon_yellow,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                        sb.draw(Assets.instance.manager.get(Assets.balloon_yellow, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                        break;
+                    case 2:
+                        //  Assets.manager.get(Assets.balloon_blue,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                        sb.draw(Assets.instance.manager.get(Assets.balloon_blue, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                        break;
+                    case 3:
+                        //  Assets.manager.get(Assets.balloon_red,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                        sb.draw(Assets.instance.manager.get(Assets.balloon_red, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                        break;
+                    case 4:
+                        // Assets.manager.get(Assets.balloon_purple,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                        sb.draw(Assets.instance.manager.get(Assets.balloon_purple, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                        break;
+                    case 5:
+                        //effect_pop.start();
+                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                        balloon.part_start();
+                        balloon.effect.draw(sb);
+                        //effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
+                        break;
+                    case 6:
+                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                        balloon.part_start();
+                        balloon.effect.draw(sb);
+                        //balloon.effect.draw(sb);
+                        // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
+                        break;
+                    case 7:
+                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                        balloon.part_start();
+                        balloon.effect.draw(sb);
+                        // balloon.effect.draw(sb);
+                        //effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
+                        break;
+                    case 8:
+                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                        balloon.part_start();
+                        balloon.effect.draw(sb);
+                        //balloon.effect.draw(sb);
+                        // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
+                        break;
+                    case 9:
+                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                        balloon.part_start();
+                        balloon.effect.draw(sb);
+                        // balloon.effect.draw(sb);
+                        // effect_pop.setPosition(balloon.getPosition().x+45,balloon.getPosition().y+145);
+                        break;
+                    case 10:
+                        sb.setColor(1, 1, 1, 1);
+                        // Assets.manager.get(Assets.balloon_orange,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+                        sb.draw(Assets.instance.manager.get(Assets.balloon_orange, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                        break;
+                    case 11:
+                        sb.setColor(1, 1, 1, 1);
+                        sb.draw(balloon.getFrames(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                        balloon.part_start();
+                        balloon.effect.draw(sb);
+                        break;
+                }
             }
+            else
+                balloon.effect.draw(sb);
 
        // }
         }
