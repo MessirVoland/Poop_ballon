@@ -22,6 +22,7 @@ import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.Sprites.Boss_balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
 import ru.asupd.poop_ballon.Sprites.Hearth_balloon;
+import ru.asupd.poop_ballon.Sprites.Star;
 import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Resizer;
 import ru.asupd.poop_ballon.Workers.Score;
@@ -39,6 +40,7 @@ public class PlayState extends State {
 
     private Array<Balloon> balloons;//массив шаров
     private Array<Cloud> clouds;//массив шаров
+    private Array<Star> stars;//звезды
 
     private Texture background,pause_bgnd;//задник
     private TextureRegion back_ground_atlas;
@@ -149,7 +151,7 @@ public class PlayState extends State {
 
 
         //background = new Texture("background_clean.png");
-        background = new Texture("bacgound_atlas.png");
+        background = Assets.instance.manager.get(Assets.back_ground_atlas);
         background_frames = new Array<TextureRegion>();
         back_ground_atlas = new TextureRegion(background);
         int frameWidth=back_ground_atlas.getRegionWidth()/4;
@@ -573,8 +575,13 @@ public class PlayState extends State {
     public void update(float dt) {
         handleInput();
         resizer_poop_balloon.update(dt);
-        well_played_resizer.update(dt);
-        nice_played_resizer.update(dt);
+        if (game_over_start) {
+            well_played_resizer.update(dt);
+            nice_played_resizer.update(dt);
+            for (Star star : stars ){
+                star.update(dt);
+            }
+        }
 
         currnent_dt_background=dt*8; //2;
         if (game_over_start){
@@ -599,12 +606,16 @@ public class PlayState extends State {
                     nice_played_resizer.setPosition(0);
                     well_played_resizer.start();
                     nice_played_resizer.start();
+                    for (Star star : stars ){
+                        star.resizer.setPosition(0);
+                        star.resizer.start();
+                    }
                     game_over_dt=0;
                     velosity.x=-1200;
                     velosity.y=0;
                     position.x=480;
                     position.y=0;
-                    gameoverState = new GameoverState(gsm,-190);
+                    gameoverState = new GameoverState(gsm,-190,stars);
                 }
             }
         }
@@ -814,6 +825,10 @@ public class PlayState extends State {
             {
                 sb.draw(well_played,78+(323/2)-(well_played_resizer.getSize_x()/2),300+(164/2)-(well_played_resizer.getSize_y()/2),well_played_resizer.getSize_x(),well_played_resizer.getSize_y());
             }
+            for (Star star : stars ){
+                sb.draw(star.getTexture(),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
+               // sb.draw(Assets.instance.manager.get(Assets.star1),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
+            }
         }
 
         //if (!boss_balloon.isStarted()){
@@ -959,6 +974,18 @@ public class PlayState extends State {
                         balloon.stop_spawn();
                     }
                     game_over_start=true;
+                    //инициализация массива звезд
+                    stars = new Array<Star>();
+
+                    for (int i = 0; i <=score_num.getScore()/100; i++){
+                        //int local_speed = get_speed_for_balloon();
+                        stars.add(new Star(random(400)+40, random(720)+40));
+                        //balloons.get(i).setAnimation_idle(poof_balloon_g);
+                    }
+                    for (Star star : stars ){
+                        star.resizer.start();
+                    }
+
                     nice_played_resizer.start();
                     well_played_resizer.start();
                     //  balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(), !boss_balloon.isStarted()));
@@ -1024,7 +1051,7 @@ public class PlayState extends State {
         poop_Sound.dispose();
         background_Music.dispose();
         boss_Music.dispose();
-        background.dispose();
+       // background.dispose();
         //texture_b_b.dispose();
         //texture_b_r.dispose();
         //texture_b_g.dispose();

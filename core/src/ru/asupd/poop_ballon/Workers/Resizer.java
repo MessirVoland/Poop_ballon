@@ -13,7 +13,7 @@ public class Resizer {
     int position=0;
     float current_dt=0;
     boolean start=false;
-    public Resizer(int x,int y) {
+    public Resizer(float x, float y) {
         size_x=x;
         size_y=y;
     }

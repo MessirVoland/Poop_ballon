@@ -12,13 +12,15 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 import ru.asupd.poop_ballon.GameStateManager;
+import ru.asupd.poop_ballon.Sprites.Star;
+import ru.asupd.poop_ballon.Workers.Assets;
 
 /**
  * Created by Voland on 22.08.2017.
  */
 
 public class GameoverState extends State {
-    Texture background;
+    TextureRegion background;
     Texture tap_to_restart,your_score,your_best_score,awesome;
     Texture numbers;
     Array<TextureRegion> frames_numbers;
@@ -29,6 +31,7 @@ public class GameoverState extends State {
     int load_hiscore,last_score;
     int[] score_best =new int[5];
     int[] score_last =new int[5];
+    Array<Star> final_stars;
 
     Vector3 velosity,position;
     Texture big_balloon;
@@ -38,12 +41,17 @@ public class GameoverState extends State {
         this.position = position;
     }
 
-    public GameoverState(GameStateManager gsm, float redball_x) {
+    public GameoverState(GameStateManager gsm, float redball_x, Array<Star> stars) {
         super(gsm);
         //redball_x=-190;
         //System.out.println("redball_x: "+redball_x);
         camera.setToOrtho(false, 480 , 800 );
-        background = new Texture("background_night.png");
+        this.final_stars=stars;
+
+        //background = new Texture("background_night.png");
+        background = new TextureRegion((Texture)(Assets.instance.manager.get(Assets.back_ground_atlas)));
+        background = new TextureRegion(background,4*background.getRegionWidth()/4,0,background.getRegionWidth()/4,background.getRegionHeight());
+
         tap_to_restart = new Texture("restart.png");
 
         your_score = new Texture("your_score.png");
@@ -115,6 +123,10 @@ public class GameoverState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0,480,800);
+        for (Star star : final_stars ){
+            sb.draw(star.getTexture(),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
+            // sb.draw(Assets.instance.manager.get(Assets.star1),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
+        }
         sb.draw(tap_to_restart,60,600,360,50);
         if (last_score>=load_hiscore) {
             sb.draw(awesome, 95, 480, 290, 55);
@@ -133,6 +145,8 @@ public class GameoverState extends State {
         sb.draw(frames_numbers.get(score_best[2]),205,50,25,31);
         sb.draw(frames_numbers.get(score_best[3]),185,50,25,31);
         sb.draw(big_balloon,position.x,position.y,860,800);
+
+
 
 
        // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 250);
