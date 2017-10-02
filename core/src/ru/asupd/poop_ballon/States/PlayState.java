@@ -756,31 +756,52 @@ public class PlayState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         //sb.disableBlending();
+        //потеря жизни
         if (current_alpha_background<1.0f)
         {
-            sb.setColor(1,1,1,current_alpha_background);
-            sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
-            sb.setColor(1,1,1,1.0f-current_alpha_background);
-            sb.draw(background_frames.get(miss_ball-1), -25, -25, 550, 900);
-            current_alpha_background+=currnent_dt_background;
+            if (miss_ball!=1) {
+                sb.setColor(1, 1, 1, current_alpha_background);
+                sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
+                sb.setColor(1, 1.0f-0.07f*current_alpha_background, 1.0f-0.43f*current_alpha_background, 1.0f - current_alpha_background);
+                sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
+                current_alpha_background += currnent_dt_background;
+            }else
+            {
+                sb.setColor(1, 1, 1, current_alpha_background);
+                sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
+                sb.setColor(1, 1, 1, 1.0f - current_alpha_background);
+                sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
+                current_alpha_background += currnent_dt_background;
+            }
             if (current_alpha_background>=1.0f){
                 current_alpha_background=1.0f;
             }
         }
         else
+            //восстановление
         if (current_alpha_background>1.0f)
         {
-            sb.setColor(1,1,1,current_alpha_background-1.0f);
-            sb.draw(background_frames.get(miss_ball+1), -25, -25, 550, 900);
-            sb.setColor(1,1,1,1.0f-current_alpha_background-1.0f);
-            sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
-            current_alpha_background-=currnent_dt_background;
+            if (miss_ball!=0) {
+                sb.setColor(1, 1, 1, current_alpha_background - 1.0f);
+                sb.draw(background_frames.get(miss_ball + 1), -25, -25, 550, 900);
+                sb.setColor(1,  1.0f-0.07f*current_alpha_background, 1.0f-0.43f*current_alpha_background, 1.0f - current_alpha_background - 1.0f);
+                sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
+                current_alpha_background -= currnent_dt_background;
+            }
+            else
+            {
+                sb.setColor(1, 1, 1, current_alpha_background - 1.0f);
+                sb.draw(background_frames.get(miss_ball + 1), -25, -25, 550, 900);
+                sb.setColor(1, 1, 1, 1.0f - current_alpha_background - 1.0f);
+                sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
+                current_alpha_background -= currnent_dt_background;
+            }
             if (current_alpha_background<=1.0f){
                 current_alpha_background=1.0f;
             }
         }
         else
-        {
+        { //обычный режим
             sb.setColor(1,1,1,1.0f);
             sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
         }
@@ -803,6 +824,9 @@ public class PlayState extends State {
             sb.draw(your_high_score,130,100,211,74);
             sb.draw(tap_to_play,80,360,335,51);
             score_num.draw(sb,190,50);
+        }
+        if (hearth_balloon.isFly()) {
+            sb.draw(hearth_balloon.getTexture(), hearth_balloon.getPosition().x, hearth_balloon.getPosition().y, 95, 169);
         }
 
         for (Cloud cloud : clouds) {
@@ -830,6 +854,7 @@ public class PlayState extends State {
                // sb.draw(Assets.instance.manager.get(Assets.star1),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
             }
         }
+
 
         //if (!boss_balloon.isStarted()){
         for (Balloon balloon : balloons) {
@@ -908,9 +933,7 @@ public class PlayState extends State {
         }
         //effect.draw(sb);
         sb.setColor(1,1,1,1);
-        if (hearth_balloon.isFly()) {
-            sb.draw(hearth_balloon.getTexture(), hearth_balloon.getPosition().x, hearth_balloon.getPosition().y, 95, 169);
-        }
+
 
         switch (current_combo){
             case 2:
