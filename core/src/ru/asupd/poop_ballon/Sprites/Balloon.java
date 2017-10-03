@@ -275,9 +275,13 @@ public class Balloon {
 
             {
                 if (with_combo_multi){
-                    switch (combo_number){
+                    System.out.println(max_combo);
+                    switch (max_combo){
+
+
+
                         default:
-                            PlayState.combo_effects.add(new ParticleEffect(Assets.combo_2x));
+                            PlayState.combo_effects.add(new ParticleEffect(Assets.combo_6x));
                             break;
                         case 2:
                             PlayState.combo_effects.add(new ParticleEffect(Assets.combo_2x));
