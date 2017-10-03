@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
+import ru.asupd.poop_ballon.States.PlayState;
 import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Shaker;
 
@@ -256,6 +257,7 @@ public class Balloon {
            if ((!combo)&(!make_orange)) {
                if (effect.isComplete()) {
                    live_out = true;
+                   //PlayState.null_Current_combo();
                    animation_current_balloon.dispose();
                }
                anim_end=true;

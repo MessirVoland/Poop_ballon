@@ -67,6 +67,13 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect effect_purple = new ParticleEffect();
     public static ParticleEffect effect_orange = new ParticleEffect();
 
+    public static ParticleEffect combo_2x = new ParticleEffect();
+    public static ParticleEffect combo_3x = new ParticleEffect();
+    public static ParticleEffect combo_4x = new ParticleEffect();
+    public static ParticleEffect combo_5x = new ParticleEffect();
+    public static ParticleEffect combo_6x = new ParticleEffect();
+    //public static ParticleEffect combo_7x = new ParticleEffect();
+
     //private AssetManager assetManager;
 
 
@@ -127,6 +134,21 @@ public class Assets implements Disposable, AssetErrorListener {
         effect_red.loadEmitterImages(Gdx.files.internal("particles"));
         effect_purple.loadEmitterImages(Gdx.files.internal("particles"));
         effect_orange.loadEmitterImages(Gdx.files.internal("particles"));
+
+        combo_2x.loadEmitters(Gdx.files.internal("particles/2x_combo"));
+        combo_3x.loadEmitters(Gdx.files.internal("particles/3x_combo"));
+        combo_4x.loadEmitters(Gdx.files.internal("particles/4x_combo"));
+        combo_5x.loadEmitters(Gdx.files.internal("particles/5x_combo"));
+        combo_6x.loadEmitters(Gdx.files.internal("particles/6x_combo"));
+        //combo_7x.loadEmitters(Gdx.files.internal("particles/7x_combo"));
+
+        combo_2x.loadEmitterImages(Gdx.files.internal("particles"));
+        combo_3x.loadEmitterImages(Gdx.files.internal("particles"));
+        combo_4x.loadEmitterImages(Gdx.files.internal("particles"));
+        combo_5x.loadEmitterImages(Gdx.files.internal("particles"));
+        combo_6x.loadEmitterImages(Gdx.files.internal("particles"));
+        //combo_7x.loadEmitterImages(Gdx.files.internal("particles/pop_green"));
+
 
         //assetManager.finishLoading();
 

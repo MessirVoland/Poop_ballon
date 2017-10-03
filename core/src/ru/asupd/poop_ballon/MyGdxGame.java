@@ -24,6 +24,7 @@ public class MyGdxGame implements ApplicationListener {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
+        PlayState.setUNPAUSE();
 		gsm.push(new MenuState(gsm));
 	}
 

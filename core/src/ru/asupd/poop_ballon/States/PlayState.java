@@ -130,12 +130,16 @@ public class PlayState extends State {
     private int STEP_for_balloon=50;
     public static final int MAX_STEP=401;
     int current_step=1;
+
     //частицы
     //private ParticleEffect effect;
     //private ParticleEffect effect_pop;
 
     //Комбо
-    private int current_combo=0;
+    private static int current_combo=0;
+    private static final float TIME_FOR_COMBO = 1.25f;//максимальное время отображения значка комбо
+    float current_time_for_combo = 0.0f;//текущее время комбо
+    Array<ParticleEffect> combo_effects = new Array<ParticleEffect>();
 
     private Vector3 touchPos;//вектор прикосновния
 
@@ -297,6 +301,12 @@ public class PlayState extends State {
         nice_played_resizer=new Resizer(384,88);
         well_played_resizer=new Resizer(323,164);
 
+        //combo_effects.add(Assets.combo_2x);
+        //combo_effects.add(Assets.combo_3x);
+        //combo_effects.add(Assets.combo_4x);
+        //combo_effects.add(Assets.combo_5x);
+        //combo_effects.add(Assets.combo_6x);
+        //combo_effects.add(Assets.combo_7x);
 
     }
 // Input
@@ -351,6 +361,7 @@ public class PlayState extends State {
 
                 //max_combo=0;
                 current_combo = 0;
+
                 //Клик по шарам для проверки комбо, да долго проверять клик по шарам дважды но ничего лучше не придумал
                 for (Balloon balloon : balloons) {
                     if ((balloon.getPosition().x < touchPos.x) & (balloon.getPosition().x + 100 > touchPos.x)) {
@@ -367,6 +378,43 @@ public class PlayState extends State {
                 //System.out.println("Current combo: "+current_combo);
                 //current_combo=0;
                 //клик по шарам
+                if (current_combo >= 2) {
+                    //balloon.setCombo(current_combo);
+                    switch (current_combo) {
+                        case 2:
+                            combo_effects.add(new ParticleEffect(Assets.combo_2x));
+                            combo_effects.get(combo_effects.size - 1).start();
+                            combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
+                            break;
+                        case 3:
+                            combo_effects.add(new ParticleEffect(Assets.combo_3x));
+                            combo_effects.get(combo_effects.size - 1).start();
+                            combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
+                            break;
+                        case 4:
+                            combo_effects.add(new ParticleEffect(Assets.combo_4x));
+                            combo_effects.get(combo_effects.size - 1).start();
+                            combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
+                            break;
+                        case 5:
+                            combo_effects.add(new ParticleEffect(Assets.combo_5x));
+                            combo_effects.get(combo_effects.size - 1).start();
+                            combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
+                            break;
+                        case 6:
+                            combo_effects.add(new ParticleEffect(Assets.combo_6x));
+                            combo_effects.get(combo_effects.size - 1).start();
+                            combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
+                            break;
+                       /* case 7:
+                            combo_effects.add(new ParticleEffect(Assets.combo_7x));
+                            combo_effects.get(combo_effects.size - 1).start();
+                            combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
+                            break;*/
+
+                    }
+                }
+
                 if (miss_ball>=1){
                     hearth_balloon.setCan_fly(true);
                 }
@@ -410,6 +458,8 @@ public class PlayState extends State {
                                     //current_combo++;
                                     if (current_combo >= 2) {
                                         //balloon.setCombo(current_combo);
+
+                                        //combo_effects.get(current_combo-2).start();
                                         score_num.addScore(current_combo * current_combo - current_combo);
                                         score_num.setCombo(current_combo);
                                         //balloon.setAnimation(poof_balloon_o);
@@ -568,8 +618,17 @@ public class PlayState extends State {
         }
 
     }
+
+    public static void null_Current_combo() {
+        current_combo = 0;
+    }
+
     public static final void setPAUSE(){
+
         pause = true;
+    }
+    public static final void setUNPAUSE(){
+        pause = false;
     }
 
     @Override
@@ -748,6 +807,18 @@ public class PlayState extends State {
             //if (balloons.size>=1) {
             //    effect.setPosition(balloons.get(0).getPosition().x, balloons.get(0).getPosition().y);
             //}
+            for(ParticleEffect combo_effect :combo_effects){
+                combo_effect.update(dt);
+            }
+            if (current_combo>=2){
+                current_time_for_combo+=dt;
+
+                if (current_time_for_combo>=TIME_FOR_COMBO)
+                {
+                    current_time_for_combo=0;
+                    current_combo=0;
+                }
+            }
         }
     }
 
@@ -938,28 +1009,41 @@ public class PlayState extends State {
         //effect.draw(sb);
         sb.setColor(1,1,1,1);
 
-
-        switch (current_combo){
-            case 2:
-                sb.draw(multi_x2,min_x,min_y);
-                //score_num.addScore(2);
-                break;
-            case 3:
-                sb.draw(multi_x3,min_x,min_y);
-               // score_num.addScore(6);
-                break;
-            case 4:
-                sb.draw(multi_x4,min_x,min_y);
-               // score_num.addScore(12);
-                break;
-            case 5:
-                sb.draw(multi_x5,min_x,min_y);
-               // score_num.addScore(20);
-                break;
-            case 6:
-                sb.draw(multi_x6,min_x,min_y);
-                break;
+        if (combo_effects.size>=1) {
+            for (int j = 0; j <= combo_effects.size - 1; j++) {
+                if (!combo_effects.get(j).isComplete()) {
+                    combo_effects.get(j).draw(sb);
+                } else {
+                    combo_effects.removeIndex(j);
+                }
+            }
         }
+            /*switch (current_combo) {
+                case 2:
+                    //sb.draw(multi_x2, min_x, min_y);
+                  //  combo_effects.get(0).setPosition(min_x,min_y);
+                   // combo_effects.get(0).draw(sb);
+                    //score_num.addScore(2);
+                    break;
+                case 3:
+                    sb.draw(multi_x3, min_x, min_y);
+                    // score_num.addScore(6);
+                    break;
+                case 4:
+                    sb.draw(multi_x4, min_x, min_y);
+                    // score_num.addScore(12);
+                    break;
+                case 5:
+                    sb.draw(multi_x5, min_x, min_y);
+                    // score_num.addScore(20);
+                    break;
+                case 6:
+                    sb.draw(multi_x6, min_x, min_y);
+                    break;
+            }
+            }*/
+
+
         int fps = Gdx.graphics.getFramesPerSecond();
         if (fps >= 45) {
             // 45 or more FPS show up in green
@@ -1031,6 +1115,7 @@ public class PlayState extends State {
 
                 break;
             case 2:
+               // miss_ball--;
                // if (change_background) {
                //     change_background=false;
                     //miss_ball++;
