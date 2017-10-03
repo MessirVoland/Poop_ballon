@@ -347,12 +347,15 @@ public class PlayState extends State {
                             System.out.println("Hearthballon_clicked");
                             counter_of_h_ballons++;
                             shaker.shake(0.40f);
-                            current_alpha_background=2.0f;
-                            //if (miss_ball>1) {
+                            if (hearth_balloon.getClicks()==3) {
+                                current_alpha_background = 2.0f;
+                                //if (miss_ball>1) {
                                 miss_ball--;
-                            //}
-                            hearth_balloon.setFly(false);
-                            hearth_balloon.restart();
+                                //}
+                                hearth_balloon.setFly(false);
+                                hearth_balloon.restart();
+                            }else
+                                hearth_balloon.clicked();
                         }
                     }
                 }
@@ -376,7 +379,8 @@ public class PlayState extends State {
                     }
                 }
                 //System.out.println("Current combo: "+current_combo);
-                current_step=0;
+                //current_step=0;
+                int mini_step=0;
                 //клик по шарам
                 /*if (current_combo >= 2) {
                     //balloon.setCombo(current_combo);
@@ -458,10 +462,10 @@ public class PlayState extends State {
                                     //current_combo++;
 
                                     if (current_combo >= 2) {
-                                        current_step++;
+                                        mini_step++;
                                         //System.out.println("current_step :"+current_step);
                                         //System.out.println("current_combo:"+current_combo);
-                                        if (current_step==1){
+                                        if (mini_step==1){
                                             balloon.start_combo_part();
                                         }
                                         //balloon.setCombo(current_combo);
