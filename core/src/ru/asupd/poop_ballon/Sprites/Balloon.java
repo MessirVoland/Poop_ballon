@@ -41,6 +41,7 @@ public class Balloon {
     public ParticleEffect effect;
 
     private int max_combo;
+    private boolean with_combo_multi=false;
 
     public void setMax_combo(int max_combo) {
         this.max_combo = max_combo;
@@ -62,6 +63,9 @@ public class Balloon {
         //if pooped
         return pooped|make_orange;
     }
+    public void start_combo_part(){
+        with_combo_multi=true;
+    }
 
     public void setPooped() {
 
@@ -72,6 +76,7 @@ public class Balloon {
            // System.out.println("Current_time: "+currentTime);
             make_orange=true;
             effect = new ParticleEffect(Assets.effect_orange);
+
         }
         else{
             color_of_balloon+=5;
@@ -88,6 +93,7 @@ public class Balloon {
     public void setCombo(int number_of_ball_in_combo){
         if (number_of_ball_in_combo!=0) {
             combo = true;
+            with_combo_multi=false;
             combo_number = number_of_ball_in_combo;
 
         }else
@@ -260,12 +266,41 @@ public class Balloon {
                    //PlayState.null_Current_combo();
                    animation_current_balloon.dispose();
                }
+
+
                anim_end=true;
 
 //               poof_balloon_atlas.dispose();
            }else
 
             {
+                if (with_combo_multi){
+                    switch (combo_number){
+                        default:
+                            PlayState.combo_effects.add(new ParticleEffect(Assets.combo_2x));
+                            break;
+                        case 2:
+                            PlayState.combo_effects.add(new ParticleEffect(Assets.combo_2x));
+                            break;
+                        case 3:
+                            PlayState.combo_effects.add(new ParticleEffect(Assets.combo_3x));
+                            break;
+                        case 4:
+                            PlayState.combo_effects.add(new ParticleEffect(Assets.combo_4x));
+                            break;
+                        case 5:
+                            PlayState.combo_effects.add(new ParticleEffect(Assets.combo_5x));
+                            break;
+                        case 6:
+                            PlayState.combo_effects.add(new ParticleEffect(Assets.combo_6x));
+                            break;
+                    }
+                    PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
+                    PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(position.x+45,position.y+145);
+                    //System.out.println("Combo started");
+                    with_combo_multi=false;
+                }
+
                 combo = false;
                 currentTime = 0;
                // animation_current_balloon.update(dt);

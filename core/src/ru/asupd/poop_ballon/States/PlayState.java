@@ -139,7 +139,7 @@ public class PlayState extends State {
     private static int current_combo=0;
     private static final float TIME_FOR_COMBO = 1.25f;//максимальное время отображения значка комбо
     float current_time_for_combo = 0.0f;//текущее время комбо
-    Array<ParticleEffect> combo_effects = new Array<ParticleEffect>();
+    public static Array<ParticleEffect> combo_effects = new Array<ParticleEffect>();
 
     private Vector3 touchPos;//вектор прикосновния
 
@@ -376,15 +376,15 @@ public class PlayState extends State {
                     }
                 }
                 //System.out.println("Current combo: "+current_combo);
-                //current_combo=0;
+                current_step=0;
                 //клик по шарам
-                if (current_combo >= 2) {
+                /*if (current_combo >= 2) {
                     //balloon.setCombo(current_combo);
                     switch (current_combo) {
                         case 2:
-                            combo_effects.add(new ParticleEffect(Assets.combo_2x));
-                            combo_effects.get(combo_effects.size - 1).start();
-                            combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
+                           // combo_effects.add(new ParticleEffect(Assets.combo_2x));
+                           // combo_effects.get(combo_effects.size - 1).start();
+                           // combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
                             break;
                         case 3:
                             combo_effects.add(new ParticleEffect(Assets.combo_3x));
@@ -410,10 +410,10 @@ public class PlayState extends State {
                             combo_effects.add(new ParticleEffect(Assets.combo_7x));
                             combo_effects.get(combo_effects.size - 1).start();
                             combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
-                            break;*/
+                            break;
 
                     }
-                }
+                }*/
 
                 if (miss_ball>=1){
                     hearth_balloon.setCan_fly(true);
@@ -456,7 +456,14 @@ public class PlayState extends State {
 
 
                                     //current_combo++;
+
                                     if (current_combo >= 2) {
+                                        current_step++;
+                                        //System.out.println("current_step :"+current_step);
+                                        //System.out.println("current_combo:"+current_combo);
+                                        if (current_step==1){
+                                            balloon.start_combo_part();
+                                        }
                                         //balloon.setCombo(current_combo);
 
                                         //combo_effects.get(current_combo-2).start();
@@ -809,6 +816,7 @@ public class PlayState extends State {
             //}
             for(ParticleEffect combo_effect :combo_effects){
                 combo_effect.update(dt);
+               // System.out.print("Update combo");
             }
             if (current_combo>=2){
                 current_time_for_combo+=dt;
