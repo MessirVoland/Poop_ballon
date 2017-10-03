@@ -67,9 +67,9 @@ public class MenuState extends State {
                 //
         //Assets.loadParticleEffects();
         FontRed1.draw(sb, " Time to START 3.0f : "+ current_dt, 10, 790);
-       // while (!Assets.manager.update()){
-        //    FontRed1.draw(sb, "LOADING >>> "+ +Assets.manager.getProgress()*100+ "%", 10, 775);
-        //}
+        while (!Assets.instance.manager.update()) {
+            FontRed1.draw(sb, "LOADING >>> " + +Assets.instance.manager.getProgress() * 100 + "%", 10, 775);
+        }
 
         switch (Gdx.app.getType()){
             case Desktop:

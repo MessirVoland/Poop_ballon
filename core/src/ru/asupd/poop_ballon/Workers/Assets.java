@@ -60,8 +60,12 @@ public class Assets implements Disposable, AssetErrorListener {
     //Частицы
     //public static final String Particles_of_balloon_g="particles/pop_b";
 
-
-    public static ParticleEffect effect = new ParticleEffect();
+    public static ParticleEffect effect_green = new ParticleEffect();
+    public static ParticleEffect effect_yellow = new ParticleEffect();
+    public static ParticleEffect effect_blue = new ParticleEffect();
+    public static ParticleEffect effect_red = new ParticleEffect();
+    public static ParticleEffect effect_purple = new ParticleEffect();
+    public static ParticleEffect effect_orange = new ParticleEffect();
 
     //private AssetManager assetManager;
 
@@ -110,10 +114,21 @@ public class Assets implements Disposable, AssetErrorListener {
 
         //manager.load(poof_balloon_atlas_o_Texture_region, TextureRegion.class);
         //effect = new ParticleEffect();
-        effect.loadEmitters(Gdx.files.internal("particles/pop_b"));
-        effect.loadEmitterImages(Gdx.files.internal("particles"));
+        effect_green.loadEmitters(Gdx.files.internal("particles/pop_green"));
+        effect_yellow.loadEmitters(Gdx.files.internal("particles/pop_yellow"));
+        effect_blue.loadEmitters(Gdx.files.internal("particles/pop_blue"));
+        effect_red.loadEmitters(Gdx.files.internal("particles/pop_red"));
+        effect_purple.loadEmitters(Gdx.files.internal("particles/pop_perp"));
+        effect_orange.loadEmitters(Gdx.files.internal("particles/pop_orange"));
 
-        assetManager.finishLoading();
+        effect_green.loadEmitterImages(Gdx.files.internal("particles"));
+        effect_yellow.loadEmitterImages(Gdx.files.internal("particles"));
+        effect_blue.loadEmitterImages(Gdx.files.internal("particles"));
+        effect_red.loadEmitterImages(Gdx.files.internal("particles"));
+        effect_purple.loadEmitterImages(Gdx.files.internal("particles"));
+        effect_orange.loadEmitterImages(Gdx.files.internal("particles"));
+
+        //assetManager.finishLoading();
 
 
     }

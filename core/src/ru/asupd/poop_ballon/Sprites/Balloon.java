@@ -70,6 +70,7 @@ public class Balloon {
             combo=false;
            // System.out.println("Current_time: "+currentTime);
             make_orange=true;
+            effect = new ParticleEffect(Assets.effect_orange);
         }
         else{
             color_of_balloon+=5;
@@ -110,7 +111,7 @@ public class Balloon {
         //effect.loadEmitterImages(Gdx.files.internal("particles"));
         //effect = Assets.manager.get(Assets.Particles_of_balloon_g,ParticleEffect.class);
                 //new ParticleEffect(Assets.effect);
-        effect = new ParticleEffect(Assets.effect);
+
 
         // zerovelosity = new Vector3(0, 0, 0);
         this.velosity.y = grav;
@@ -125,6 +126,7 @@ public class Balloon {
         //color_of_balloon=random(3);
         if (grav<260){
             color_of_balloon=0;
+            effect = new ParticleEffect(Assets.effect_green);
             //poof_balloon_atlas_idle = new Texture("pop_g.png");
             //poof_balloon_atlas_idle = Assets.manager.get(Assets.poof_balloon_atlas_idle_g,Texture.class);
             //animation_idle=new Animation(new TextureRegion(poof_balloon_atlas_idle),3,ANIMATION_TIME);
@@ -132,28 +134,33 @@ public class Balloon {
         }else
         if (grav<320){
             color_of_balloon=1;
+            effect = new ParticleEffect(Assets.effect_yellow);
             //poof_balloon_atlas_idle = Assets.manager.get(Assets.poof_balloon_atlas_idle_y,Texture.class);
             animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_y,Texture.class)),3,ANIMATION_TIME);
         }
         else
         if (grav<380){
             color_of_balloon=2;
+            effect = new ParticleEffect(Assets.effect_blue);
             //poof_balloon_atlas_idle =  Assets.manager.get(Assets.poof_balloon_atlas_idle_b,Texture.class);
             animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_b,Texture.class)),3,ANIMATION_TIME);
         }
         else
         if(grav<420){
             color_of_balloon=3;
+            effect = new ParticleEffect(Assets.effect_red);
             //poof_balloon_atlas_idle =  Assets.manager.get(Assets.poof_balloon_atlas_idle_r,Texture.class);
             animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_r,Texture.class)),3,ANIMATION_TIME);
         }
         else{
             color_of_balloon=4;
+            effect = new ParticleEffect(Assets.effect_purple);
             //poof_balloon_atlas_idle =  Assets.manager.get(Assets.poof_balloon_atlas_idle_p,Texture.class);
             animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_p,Texture.class)),3,ANIMATION_TIME);
         }
         bounds = new Rectangle(x, y, 95 , 190);
         //animation_idle=new Animation(new TextureRegion(poof_balloon_atlas_idle),3,ANIMATION_TIME);
+       // effect = new ParticleEffect(Assets.effect_orange);
         animation_current_balloon = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_o,Texture.class)),3,ANIMATION_TIME);
     }
 
