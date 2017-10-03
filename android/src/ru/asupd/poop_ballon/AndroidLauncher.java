@@ -15,8 +15,9 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 import ru.asupd.poop_ballon.MyGdxGame;
+import ru.asupd.poop_ballon.Workers.AdsController;
 
-public class AndroidLauncher extends AndroidApplication {
+public class AndroidLauncher extends AndroidApplication implements AdsController{
 	public static final String TAG="AndroidLauncher";
 
 	protected AdView adView;
@@ -40,20 +41,22 @@ public class AndroidLauncher extends AndroidApplication {
 		//** Лучше вообще не использовать
 
 		// Create the libgdx View
-		View gameView = initializeForView(new MyGdxGame(), config);
+		View gameView = initializeForView(new MyGdxGame(this), config);
 		layout.addView(gameView);
 
 		// Create and setup the AdMob view
-		AdView adView = new AdView(this);
-		adView.setAdListener(new AdListener() {
-			@Override
-			public void onAdLoaded() {
-				Log.i(TAG, "Ad Loaded13.. rr.");
-			}
-		});
-		adView.setAdSize(AdSize.SMART_BANNER);
-		adView.setAdUnitId("ca-app-pub-6755493316893566/6656095586");
+		//adView = new AdView(this);
+		//adView.setAdListener(new AdListener() {
+		//	@Override
+		//	public void onAdLoaded() {
 
+		//	Log.i(TAG, "Ad Loaded13.. rr.");
+		//	}
+		//});
+		//adView.setAdSize(AdSize.SMART_BANNER);
+		//adView.setAdUnitId("ca-app-pub-6755493316893566/6656095586");
+
+		setupAds();
 		AdRequest.Builder builder = new AdRequest.Builder();
 		//builder.addTestDevice("ADCD72548573E2D66A2AFC8594EDF6F6");
 		RelativeLayout.LayoutParams adParams = new RelativeLayout.LayoutParams(
@@ -68,5 +71,34 @@ public class AndroidLauncher extends AndroidApplication {
 
 		setContentView(layout);
 	}
+	public void setupAds() {
+		adView = new AdView(this);
+		adView.setVisibility(View.INVISIBLE);
+		adView.setBackgroundColor(0xff000000); // black
+		adView.setAdUnitId("ca-app-pub-6755493316893566/6656095586");
+		adView.setAdSize(AdSize.SMART_BANNER);
+	}
 
+	@Override
+	public void showBannerAd() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				adView.setVisibility(View.VISIBLE);
+				AdRequest.Builder builder = new AdRequest.Builder();
+				AdRequest ad = builder.build();
+				adView.loadAd(ad);
+			}
+		});
+	}
+
+	@Override
+	public void hideBannerAd() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				adView.setVisibility(View.INVISIBLE);
+			}
+		});
+	}
 }

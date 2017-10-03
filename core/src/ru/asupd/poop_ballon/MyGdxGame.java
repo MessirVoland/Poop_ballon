@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import ru.asupd.poop_ballon.States.MenuState;
 import ru.asupd.poop_ballon.States.PlayState;
+import ru.asupd.poop_ballon.Workers.AdsController;
 import ru.asupd.poop_ballon.Workers.Assets;
 
 
@@ -18,6 +19,14 @@ public class MyGdxGame implements ApplicationListener {
 
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800; // 800
+	private AdsController adsController;
+	public MyGdxGame(AdsController adsController) {
+		if (adsController != null) {
+			this.adsController = adsController;
+		} else {
+			this.adsController = new DummyAdsController();
+		}
+	}
 
 	@Override
 	public void create () {
@@ -25,6 +34,7 @@ public class MyGdxGame implements ApplicationListener {
 		gsm = new GameStateManager();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
         PlayState.setUNPAUSE();
+		adsController.showBannerAd();
 		gsm.push(new MenuState(gsm));
 	}
 
@@ -76,5 +86,17 @@ public class MyGdxGame implements ApplicationListener {
 	@Override
 	public void dispose () {
         Assets.instance.dispose();
+	}
+
+	private class DummyAdsController implements AdsController {
+		@Override
+		public void showBannerAd() {
+
+		}
+
+		@Override
+		public void hideBannerAd() {
+
+		}
 	}
 }

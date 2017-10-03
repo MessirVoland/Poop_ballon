@@ -13,7 +13,7 @@ public class DesktopLauncher {
 		//config.vSyncEnabled=false;
 		//config.foregroundFPS = 0;
 		//config.forceExit = true;
-		new LwjglApplication(new MyGdxGame(), config);
+		new LwjglApplication(new MyGdxGame(null), config);
 
 	}
 }
