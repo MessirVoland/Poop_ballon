@@ -60,7 +60,7 @@ public class PlayState extends State {
 
     private Texture your_high_score,tap_to_play,score;//наибольший счет, таб ту плей, напись счет
 
-    private Texture multi_x2,multi_x3,multi_x4,multi_x5,multi_x6;
+    //private Texture multi_x2,multi_x3,multi_x4,multi_x5,multi_x6;
 	
 	private Texture options;//кнопка опции
 
@@ -201,11 +201,11 @@ public class PlayState extends State {
         tap_to_play = new Texture("tap_to_play.png");
         score =  new Texture("score.png");
 
-        multi_x2 = new Texture("x2.png");
-        multi_x3 = new Texture("x3.png");
-        multi_x4 = new Texture("x4.png");
-        multi_x5 = new Texture("x5.png");
-        multi_x6 = new Texture("x6.png");
+        //multi_x2 = new Texture("x2.png");
+        //multi_x3 = new Texture("x3.png");
+        //multi_x4 = new Texture("x4.png");
+        //multi_x5 = new Texture("x5.png");
+        //multi_x6 = new Texture("x6.png");
 
         well_played = new Texture("wp.png");
         nice_played = new Texture("nice_try.png");
@@ -441,7 +441,7 @@ public class PlayState extends State {
                                     score_num.addScore(1);
 
 
-                                    if (counter_of_h_ballons<=score_num.getScore()/500){
+                                    if (counter_of_h_ballons<=score_num.getScore()/400){
                                         //System.out.println("counter: "+counter_of_h_ballons);
                                         //System.out.println("score_num.getScore()/50: "+score_num.getScore()/50);
                                         if (miss_ball>=1) {
