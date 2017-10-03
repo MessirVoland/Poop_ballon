@@ -1,8 +1,10 @@
 package ru.asupd.poop_ballon.Sprites;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Vector3;
 
+import ru.asupd.poop_ballon.States.PlayState;
 import ru.asupd.poop_ballon.Workers.Assets;
 
 /**
@@ -42,6 +44,10 @@ public class Hearth_balloon extends Creature {
 
     public void clicked(){
         clicks++;
+        ParticleEffect effect = Assets.hearth_ballon_part;
+        PlayState.combo_effects.add(new ParticleEffect(effect));
+        PlayState.combo_effects.get(PlayState.combo_effects.size-1).setPosition(position.x+45,position.y+145);
+        PlayState.combo_effects.get(PlayState.combo_effects.size-1).start();
 
     }
     public void restart(){

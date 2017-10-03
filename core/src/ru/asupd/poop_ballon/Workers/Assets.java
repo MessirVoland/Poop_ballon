@@ -73,6 +73,8 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect combo_5x = new ParticleEffect();
     public static ParticleEffect combo_6x = new ParticleEffect();
     //public static ParticleEffect combo_7x = new ParticleEffect();
+    public static ParticleEffect hearth_ballon_part = new ParticleEffect();
+
 
     //private AssetManager assetManager;
 
@@ -148,6 +150,10 @@ public class Assets implements Disposable, AssetErrorListener {
         combo_5x.loadEmitterImages(Gdx.files.internal("particles"));
         combo_6x.loadEmitterImages(Gdx.files.internal("particles"));
         //combo_7x.loadEmitterImages(Gdx.files.internal("particles/pop_green"));
+
+        hearth_ballon_part.load(Gdx.files.internal("particles/plus5"),Gdx.files.internal("particles"));
+
+
 
 
         //assetManager.finishLoading();

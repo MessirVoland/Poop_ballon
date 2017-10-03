@@ -345,7 +345,7 @@ public class PlayState extends State {
                         if ((hearth_balloon.getPosition().y<touchPos.y)&(hearth_balloon.getPosition().y+95>touchPos.y)){
                             poop_Sound.play(volume);
                             System.out.println("Hearthballon_clicked");
-                            counter_of_h_ballons++;
+
                             shaker.shake(0.40f);
                             if (hearth_balloon.getClicks()==3) {
                                 current_alpha_background = 2.0f;
@@ -354,6 +354,7 @@ public class PlayState extends State {
                                 //}
                                 hearth_balloon.setFly(false);
                                 hearth_balloon.restart();
+                                counter_of_h_ballons++;
                             }else
                                 hearth_balloon.clicked();
                         }
@@ -1127,7 +1128,7 @@ public class PlayState extends State {
 
                 break;
             case 2:
-               // miss_ball--;
+                //miss_ball--;
                // if (change_background) {
                //     change_background=false;
                     //miss_ball++;
