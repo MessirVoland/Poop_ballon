@@ -1097,6 +1097,11 @@ public class PlayState extends State {
                         balloon.setPooped();
                         balloon.stop_spawn();
                     }
+                    //убрать шар здоровья
+                    if (hearth_balloon.isFly()){
+                        hearth_balloon.setFly(false);
+                        hearth_balloon.restart();
+                    }
                     game_over_start=true;
                     //инициализация массива звезд
                     stars = new Array<Star>();
