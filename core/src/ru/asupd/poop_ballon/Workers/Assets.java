@@ -53,6 +53,11 @@ public class Assets implements Disposable, AssetErrorListener {
 
     //единичные объекты
     public static final AssetDescriptor<Texture> heart_baloon = new AssetDescriptor<Texture>("heart_baloon.png",Texture.class);
+    public static final AssetDescriptor<Texture> heart_baloon_hole1 = new AssetDescriptor<Texture>("heart_baloon_hole1.png",Texture.class);
+    public static final AssetDescriptor<Texture> heart_baloon_hole2 = new AssetDescriptor<Texture>("heart_baloon_hole2.png",Texture.class);
+    public static final AssetDescriptor<Texture> heart_baloon_anim = new AssetDescriptor<Texture>("pop_HB.png",Texture.class);
+
+
 
     public static final AssetDescriptor<Texture> back_ground_atlas = new AssetDescriptor<Texture>("bacgound_atlas.png",Texture.class);
 
@@ -74,6 +79,9 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect combo_6x = new ParticleEffect();
     //public static ParticleEffect combo_7x = new ParticleEffect();
     public static ParticleEffect hearth_ballon_part = new ParticleEffect();
+    public static ParticleEffect hearth_ballon_part_hole1 = new ParticleEffect();
+    public static ParticleEffect hearth_ballon_part_hole2 = new ParticleEffect();
+    public static ParticleEffect hearth_ballon_part_heart = new ParticleEffect();
 
 
     //private AssetManager assetManager;
@@ -118,6 +126,9 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(star7);
 
         manager.load(heart_baloon);
+        manager.load(heart_baloon_hole1);
+        manager.load(heart_baloon_hole2);
+        manager.load(heart_baloon_anim);
 
         manager.load(back_ground_atlas);
 
@@ -152,6 +163,9 @@ public class Assets implements Disposable, AssetErrorListener {
         //combo_7x.loadEmitterImages(Gdx.files.internal("particles/pop_green"));
 
         hearth_ballon_part.load(Gdx.files.internal("particles/plus5"),Gdx.files.internal("particles"));
+        hearth_ballon_part_hole1.load(Gdx.files.internal("particles/heart_hole1"),Gdx.files.internal("particles"));
+        hearth_ballon_part_hole2.load(Gdx.files.internal("particles/heart_hole2"),Gdx.files.internal("particles"));
+        hearth_ballon_part_heart.load(Gdx.files.internal("particles/heart"),Gdx.files.internal("particles"));
 
 
 

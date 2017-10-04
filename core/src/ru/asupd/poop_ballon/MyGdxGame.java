@@ -19,7 +19,10 @@ public class MyGdxGame implements ApplicationListener {
 
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800; // 800
-	private AdsController adsController;
+	private static AdsController adsController;
+	public static void show_banner(){
+		adsController.showBannerAd();
+	}
 
 	public MyGdxGame(AdsController adsController) {
 		if (adsController != null) {
@@ -35,7 +38,7 @@ public class MyGdxGame implements ApplicationListener {
 		gsm = new GameStateManager();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
         PlayState.setUNPAUSE();
-		adsController.showBannerAd();
+		show_banner();
 		gsm.push(new MenuState(gsm));
 	}
 

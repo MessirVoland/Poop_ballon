@@ -145,6 +145,7 @@ public class PlayState extends State {
 
 
 
+
     protected PlayState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
@@ -342,22 +343,25 @@ public class PlayState extends State {
                 }
 				
                 if (hearth_balloon.isFly()){
-                    if ((hearth_balloon.getPosition().x<touchPos.x)&(hearth_balloon.getPosition().x+95>touchPos.x)){
-                        if ((hearth_balloon.getPosition().y<touchPos.y)&(hearth_balloon.getPosition().y+95>touchPos.y)){
-                            poop_Sound.play(volume);
-                            System.out.println("Hearthballon_clicked");
+                    int help=10;//текстуора на help пикслей больше для клика
+                    if ((hearth_balloon.getPosition().x-help<touchPos.x)&(hearth_balloon.getPosition().x+95+help>touchPos.x)){
+                        if ((hearth_balloon.getPosition().y-help<touchPos.y)&(hearth_balloon.getPosition().y+95+help>touchPos.y)) {
+                            if (!hearth_balloon.isPooped()) {
+                                poop_Sound.play(volume);
+                                System.out.println("Hearthballon_clicked, clickes: " + hearth_balloon.getClicks());
 
-                            shaker.shake(0.40f);
-                            if (hearth_balloon.getClicks()==3) {
-                                current_alpha_background = 2.0f;
-                                //if (miss_ball>1) {
-                                miss_ball--;
-                                //}
-                                hearth_balloon.setFly(false);
-                                hearth_balloon.restart();
-                                counter_of_h_ballons++;
-                            }else
-                                hearth_balloon.clicked();
+                                shaker.shake(0.40f);
+                                if (hearth_balloon.getClicks() == 2) {
+                                    current_alpha_background = 2.0f;
+                                    //if (miss_ball>1) {
+                                    miss_ball--;
+                                    //}
+                                    hearth_balloon.setFly(false);
+                                    hearth_balloon.setPooped();
+                                    counter_of_h_ballons++;
+                                } else
+                                    hearth_balloon.clicked();
+                            }
                         }
                     }
                 }
@@ -443,7 +447,7 @@ public class PlayState extends State {
                                     score_num.addScore(1);
 
 
-                                    if (counter_of_h_ballons<=score_num.getScore()/400){
+                                    if (counter_of_h_ballons<=score_num.getScore()/40){
                                         //System.out.println("counter: "+counter_of_h_ballons);
                                         //System.out.println("score_num.getScore()/50: "+score_num.getScore()/50);
                                         if (miss_ball>=1) {
@@ -805,12 +809,16 @@ public class PlayState extends State {
                     cloud.change_texture();
                 }
             }
-            if (hearth_balloon.isFly()){
+            if ((hearth_balloon.isFly())|(hearth_balloon.isPooped())){
                 hearth_balloon.update(dt);
                 if (hearth_balloon.getPosition().x>=480+95){
                     counter_of_h_ballons++;
                     hearth_balloon.setFly(false);
                     hearth_balloon.restart();
+                }
+                if (hearth_balloon.isDispose()){
+                    hearth_balloon.dispose();
+                    hearth_balloon=new Hearth_balloon();
                 }
             }
 
@@ -910,7 +918,7 @@ public class PlayState extends State {
             sb.draw(tap_to_play,80,360,335,51);
             score_num.draw(sb,190,50);
         }
-        if (hearth_balloon.isFly()) {
+        if (hearth_balloon.isFly()|hearth_balloon.isPooped()) {
             sb.draw(hearth_balloon.getTexture(), hearth_balloon.getPosition().x, hearth_balloon.getPosition().y, 95, 169);
         }
 
@@ -1091,8 +1099,9 @@ public class PlayState extends State {
         switch (miss_ball){
             default:
                 //gsm.set(new GameoverState(gsm,position.x));
+                //miss_ball=3;
                 break;
-            case 3:
+            case 6:
                 if (!game_over_start) {
                     for (Balloon balloon : balloons) {
                         balloon.setPooped();
@@ -1134,7 +1143,7 @@ public class PlayState extends State {
 
                 break;
             case 2:
-                //miss_ball--;
+                miss_ball--;
                // if (change_background) {
                //     change_background=false;
                     //miss_ball++;
