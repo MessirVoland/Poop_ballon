@@ -447,7 +447,7 @@ public class PlayState extends State {
                                     score_num.addScore(1);
 
 
-                                    if (counter_of_h_ballons<=score_num.getScore()/40){
+                                    if (counter_of_h_ballons<=score_num.getScore()/400){
                                         //System.out.println("counter: "+counter_of_h_ballons);
                                         //System.out.println("score_num.getScore()/50: "+score_num.getScore()/50);
                                         if (miss_ball>=1) {
@@ -1101,7 +1101,7 @@ public class PlayState extends State {
                 //gsm.set(new GameoverState(gsm,position.x));
                 //miss_ball=3;
                 break;
-            case 6:
+            case 3:
                 if (!game_over_start) {
                     for (Balloon balloon : balloons) {
                         balloon.setPooped();
@@ -1143,7 +1143,7 @@ public class PlayState extends State {
 
                 break;
             case 2:
-                miss_ball--;
+               // miss_ball--;
                // if (change_background) {
                //     change_background=false;
                     //miss_ball++;
