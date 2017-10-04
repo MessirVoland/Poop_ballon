@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
+import java.util.Locale;
+
 import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Workers.Assets;
 
@@ -93,8 +95,9 @@ public class MenuState extends State {
                 break;
         }
         // = 30;
-        FontRed1.draw(sb," Pop Balloons v.0.9.7-beta-pre-release.rev.A.build.15", 15, 70);
-        FontRed1.draw(sb," Android API level :"+Gdx.app.getVersion(), 15, 40);
+        FontRed1.draw(sb," Pop Balloons v.0.9.7-beta-pre-release.rev.A.build.15", 15, 100);
+        FontRed1.draw(sb," Android API level :"+Gdx.app.getVersion(), 15, 70);
+        FontRed1.draw(sb," Локализация :"+ Locale.getDefault().getCountry(), 15, 40);
         sb.end();
 
     }
