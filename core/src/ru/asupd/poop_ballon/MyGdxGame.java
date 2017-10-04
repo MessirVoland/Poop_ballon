@@ -20,6 +20,7 @@ public class MyGdxGame implements ApplicationListener {
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800; // 800
 	private AdsController adsController;
+
 	public MyGdxGame(AdsController adsController) {
 		if (adsController != null) {
 			this.adsController = adsController;
@@ -99,4 +100,5 @@ public class MyGdxGame implements ApplicationListener {
 
 		}
 	}
+
 }

@@ -314,6 +314,7 @@ public class PlayState extends State {
     @Override
     protected void handleInput() {
         if(Gdx.input.justTouched()) {
+
             touchPos = new Vector3();
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             //System.out.println("touchPos :"+touchPos);

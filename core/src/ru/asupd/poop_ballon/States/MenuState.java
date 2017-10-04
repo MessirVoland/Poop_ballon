@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Workers.Assets;
@@ -21,6 +22,7 @@ public class MenuState extends State {
     private Texture balloon;
     private float current_dt=0;
     private BitmapFont FontRed1;
+    final String FONT_CHARS = "абвгдежзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyzАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|\\/?-+=()*&.;:,{}\"´`'<>";
 
 
 
@@ -30,7 +32,15 @@ public class MenuState extends State {
         background = new Texture("background_start.png");
         balloon  = new Texture("tap.png");
         FontRed1 = new BitmapFont();
-        FontRed1.setColor(Color.RED);
+        final String FONT_PATH = "coquettec.ttf";
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(FONT_PATH));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.characters = FONT_CHARS;
+        parameter.size = 25;
+        parameter.color = Color.BLACK;
+        FontRed1 = generator.generateFont(parameter);
+        generator.dispose();
+        //FontRed1.setColor(Color.RED);
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {
@@ -41,8 +51,8 @@ public class MenuState extends State {
     }
     @Override
     public void handleInput() {
-        //if(Gdx.input.justTouched()){
-          //  gsm.set(new PlayState(gsm));
+       // if(Gdx.input.justTouched()){
+        //    gsm.set(new PlayState(gsm));
        // }
 
     }
@@ -51,7 +61,7 @@ public class MenuState extends State {
     public void update(float dt) {
         handleInput();
         current_dt+=dt;
-        if (current_dt>=3.0f){
+        if (current_dt>=4.0f){
             Assets.make_linear();
             gsm.set(new PlayState(gsm));
         }
@@ -66,22 +76,25 @@ public class MenuState extends State {
 
                 //
         //Assets.loadParticleEffects();
-        FontRed1.draw(sb, " Time to START 3.0f : "+ current_dt, 10, 790);
+        FontRed1.draw(sb, " Время до старта 4.0f : "+ current_dt, 15, 790);
         while (!Assets.instance.manager.update()) {
-            FontRed1.draw(sb, "LOADING >>> " + +Assets.instance.manager.getProgress() * 100 + "%", 10, 775);
+            FontRed1.draw(sb, " Загрузка >>> " + +Assets.instance.manager.getProgress() * 100 + "%", 15, 730);
         }
 
         switch (Gdx.app.getType()){
             case Desktop:
-                FontRed1.draw(sb, "Desktop asigned", 10, 760);
+                FontRed1.draw(sb, " PC Версия", 15, 760);
                 break;
             case Android:
-                FontRed1.draw(sb, "Android asigned", 10, 760);
+                FontRed1.draw(sb, " Android Версия", 15, 760);
                 break;
             case WebGL:
-                FontRed1.draw(sb, "HTML5 asigned", 10, 760);
+                FontRed1.draw(sb, " HTML5 asigned", 15, 760);
                 break;
         }
+        // = 30;
+        FontRed1.draw(sb," Pop Balloons v.0.9.7-beta-pre-release.rev.A.build.15", 15, 70);
+        FontRed1.draw(sb," Android API level :"+Gdx.app.getVersion(), 15, 40);
         sb.end();
 
     }
