@@ -13,6 +13,8 @@ import java.util.Locale;
 import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Workers.Assets;
 
+import static com.badlogic.gdx.math.MathUtils.random;
+
 /**
  * Меню
  * Created by Voland on 04.08.2017.
@@ -24,17 +26,20 @@ public class MenuState extends State {
     private Texture balloon;
     private float current_dt=0;
     private BitmapFont FontRed1;
-    final String FONT_CHARS = "абвгдежзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyzАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|\\/?-+=()*&.;:,{}\"´`'<>";
+    int var;
+    final String FONT_CHARS = "本土化ローカリゼーションабвгдежзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyzАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|\\/?-+=()*&.;:,{}\"´`'<>";
 
 
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
+        var = random(5);
         camera.setToOrtho(false,640,800 );
         background = new Texture("background_start.png");
         balloon  = new Texture("tap.png");
         FontRed1 = new BitmapFont();
         final String FONT_PATH = "coquettec.ttf";
+        //final String FONT_PATH = "Arialuni.ttf";
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(FONT_PATH));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.characters = FONT_CHARS;
@@ -97,7 +102,34 @@ public class MenuState extends State {
         // = 30;
         FontRed1.draw(sb," Pop Balloons v.0.9.7-beta-pre-release.rev.A.build.15", 15, 100);
         FontRed1.draw(sb," Android API level :"+Gdx.app.getVersion(), 15, 70);
-        FontRed1.draw(sb," Локализация :"+ Locale.getDefault().getCountry(), 15, 40);
+        String st_locale=new String("");
+        switch (var){
+            case 0:
+                st_locale=" Локализация :";
+                //Locale.setDefault(Locale.ROOT);
+                break;
+            case 1:
+                st_locale=" 本土化 :";
+                Locale.setDefault(Locale.TRADITIONAL_CHINESE);
+                break;
+            case 2:
+                st_locale=" Localisation :";
+                Locale.setDefault(Locale.FRANCE);
+                break;
+            case 3:
+                st_locale=" ローカリゼーション :";
+                Locale.setDefault(Locale.JAPAN);
+                break;
+            case 4:
+                st_locale=" Localization :";
+                Locale.setDefault(Locale.ENGLISH);
+                break;
+        }
+        FontRed1.draw(sb,st_locale + Locale.getDefault(), 15, 40);
+        //FontRed1.draw(sb," Локализация :"+ Locale.getDefault().getCountry(), 15, 40);
+        //FontRed1.draw(sb," Локализация :"+ Locale.getDefault().getCountry(), 15, 40);
+        //FontRed1.draw(sb," Локализация :"+ Locale.getDefault().getCountry(), 15, 40);
+
         sb.end();
 
     }
