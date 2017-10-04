@@ -39,14 +39,14 @@ public class MenuState extends State {
         balloon  = new Texture("tap.png");
         FontRed1 = new BitmapFont();
         final String FONT_PATH = "coquettec.ttf";
-        //final String FONT_PATH = "Arialuni.ttf";
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(FONT_PATH));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.characters = FONT_CHARS;
-        parameter.size = 25;
-        parameter.color = Color.BLACK;
-        FontRed1 = generator.generateFont(parameter);
-        generator.dispose();
+   //     //final String FONT_PATH = "Arialuni.ttf";
+//        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(FONT_PATH));
+ //       FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+  //      parameter.characters = FONT_CHARS;
+   //     parameter.size = 25;
+  //      parameter.color = Color.BLACK;
+   //     FontRed1 = generator.generateFont(parameter);
+   //     generator.dispose();
         //FontRed1.setColor(Color.RED);
         Gdx.app.postRunnable(new Runnable() {
             @Override

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" translatable="false">Pop ballon</string>
-    <string name="test_for_libgdx">Test</string>
-
+    <string name="app_name">Pop ballon</string>
 
 </resources>

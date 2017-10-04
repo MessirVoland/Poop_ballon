@@ -1,4 +1,12 @@
 android {
+    signingConfigs {
+        Full_key {
+            keyAlias 'Pop balloons'
+            keyPassword '4815162342zZ'
+            storeFile file('C:/Users/Asup.D/Desktop/key/key_pop_balloon.jks')
+            storePassword '4815162342zZ'
+        }
+    }
     buildToolsVersion "26.0.1"
     compileSdkVersion 25
     sourceSets {
@@ -22,7 +30,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 25
         versionCode 1
-        versionName "0.9.6"
+        versionName "0.9.7"
     }
     productFlavors {
         free {
@@ -34,7 +42,10 @@ android {
         }
         full {
             applicationId "ru.asupd.poop_ballon.full"
-            versionName "0.9.6"
+            versionName "0.9.7"
+            minSdkVersion 16
+            targetSdkVersion 16
+            versionCode 1
         }
     }
     buildTypes {
