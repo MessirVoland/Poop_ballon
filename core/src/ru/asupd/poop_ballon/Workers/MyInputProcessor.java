@@ -46,7 +46,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
         screenX= (int) touchPos.x;
         screenY= (int) touchPos.y;
 
-        System.out.println("td screenX:"+screenX+" td screenY:"+screenY);
+       // System.out.println("td screenX:"+screenX+" td screenY:"+screenY);
         if ((480 - 69 < screenX) & (480 - 69 + 64 > screenY)) {
             if ((800-20 < screenY) & (800-20 + 64 > screenY)) {
                 PlayState.setPAUSE(!PlayState.isPause());
@@ -153,9 +153,12 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                                             PlayState.current_step = 0;
                                             // System.out.println("New balloon generated");
                                             PlayState.STEP_for_balloon += 20;
+                                            PlayState.balloons_count++;
+                                            PlayState.balloons_number++;
                                             PlayState.balloons.add(new Balloon(random(4) * 96, -195 - random(50), PlayState.get_speed_for_balloon(), !PlayState.boss_balloon.isStarted()));
 
                                         }
+                                        PlayState.balloons_number++;
                                         PlayState.balloons.add(new Balloon(random(4) * 96, -195 - random(50), PlayState.get_speed_for_balloon(), !PlayState.boss_balloon.isStarted()));
                                     }
                                 }

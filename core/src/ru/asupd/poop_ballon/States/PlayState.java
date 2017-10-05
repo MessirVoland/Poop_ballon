@@ -58,6 +58,7 @@ public class PlayState extends State {
 
     private Texture texture_poop_balloon;//Название игры
     private Resizer resizer_poop_balloon;
+    int get_avr_speed=0;
 
     private Texture your_high_score,tap_to_play,score;//наибольший счет, таб ту плей, напись счет
 
@@ -81,6 +82,8 @@ public class PlayState extends State {
     public static Sound poop_Sound;//звук лопания
     public static final float minX = 0.75f;//Диапазон изменения хлопка
     public static final float maxX = 1.7f;
+    public static int balloons_count=0;
+    public static int balloons_number=0;
 
     //private int max_combo=0;
 
@@ -132,6 +135,7 @@ public class PlayState extends State {
     public static int STEP_for_balloon=50;
     public static final int MAX_STEP=401;
     public static int current_step=1;
+    float cureunt_dt_for_speed=0;
 
     //Комбо
     public static int current_combo=0;
@@ -158,6 +162,7 @@ public class PlayState extends State {
         }
 
         pause_bgnd = new Texture("pause.png");
+        STEP_for_balloon=50;
 
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
@@ -167,6 +172,9 @@ public class PlayState extends State {
 
         position = new Vector3(10,500,0);
         velosity=new Vector3(0,200,0);
+        cautch_ball=0;
+        balloons_count=0;
+        balloons_number=0;
 
         //инициализация музыки
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
@@ -387,8 +395,16 @@ public class PlayState extends State {
     }
 
     @Override
-    public void update(float dt) {
+    public void update(final float dt) {
         handleInput();
+
+
+        cureunt_dt_for_speed+=dt;
+        if (cureunt_dt_for_speed>=0.6f){
+            cureunt_dt_for_speed=0;
+            get_avr_speed=get_speed_for_balloon();
+        }
+
         //resizer_poop_balloon.update(dt); ресайзер заглавия?
         if (game_over_start) {
             well_played_resizer.update(dt);
@@ -516,28 +532,48 @@ public class PlayState extends State {
 
 
             if (started) {
-                for (Balloon balloon : balloons) {
-                    balloon.update(dt, shaker);
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (Balloon balloon : balloons) {
+                            balloon.update(dt, shaker);
 
-                    if (balloon.getPosition().y > 720) {
-                        balloon.setPosition(balloon.getPosition().x, -220 - random(50));
+                            if (balloon.getPosition().y > 720) {
+                                balloon.setPosition(balloon.getPosition().x, -220 - random(50));
 
-                        balloon.setVelosity(get_speed_for_balloon());
-                        miss_ball++;
-                        current_alpha_background=0.0f;
-                        change_background = true;
-                        if (vibro) {
-                            Gdx.input.vibrate(125);
+                                balloon.setVelosity(get_speed_for_balloon());
+                                miss_ball++;
+                                current_alpha_background=0.0f;
+                                change_background = true;
+                                if (vibro) {
+                                    Gdx.input.vibrate(125);
+                                }
+                            }
+
+
                         }
                     }
+                });
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+                        index=0;
+                        for (Balloon balloon : balloons){
+                            if (balloon.isLive_out()) {
+                                balloon.dispose();
+                                //System.out.println("balloon disposed :"+cautch_ball);
+                                try {
+                                    balloons.removeIndex(index);
+                                }catch (Throwable e){
+                                    System.out.println(e);
+                                }
 
-                    if (balloon.isLive_out()) {
-                        balloon.dispose();
-                        //System.out.println("balloon disposed :"+cautch_ball);
-                        balloons.removeIndex(index);
+                            }
+                            index++;
+                        }
                     }
-                    index++;
-                }
+                });
+
             }
 
             for (Cloud cloud : clouds) {
@@ -591,18 +627,26 @@ public class PlayState extends State {
         if (current_alpha_background<1.0f)
         {
             if (miss_ball!=1) {
-                sb.setColor(1, 1, 1, current_alpha_background);
-                sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
-                sb.setColor(1, 1.0f-0.07f*current_alpha_background, 1.0f-0.43f*current_alpha_background, 1.0f - current_alpha_background);
-                sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
-                current_alpha_background += currnent_dt_background;
+                try {
+                    sb.setColor(1, 1, 1, current_alpha_background);
+                    sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
+                    sb.setColor(1, 1.0f - 0.07f * current_alpha_background, 1.0f - 0.43f * current_alpha_background, 1.0f - current_alpha_background);
+                    sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
+                    current_alpha_background += currnent_dt_background;
+                }catch (Throwable e){
+
+                }
             }else
             {
-                sb.setColor(1, 1, 1, current_alpha_background);
-                sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
-                sb.setColor(1, 1, 1, 1.0f - current_alpha_background);
-                sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
-                current_alpha_background += currnent_dt_background;
+                try {
+                    sb.setColor(1, 1, 1, current_alpha_background);
+                    sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
+                    sb.setColor(1, 1, 1, 1.0f - current_alpha_background);
+                    sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
+                    current_alpha_background += currnent_dt_background;
+                }catch (Throwable e){
+
+                }
             }
             if (current_alpha_background>=1.0f){
                 current_alpha_background=1.0f;
@@ -818,6 +862,13 @@ public class PlayState extends State {
 
         FontRed1.draw(sb, " FPS : "+  fps, 10, 790);
         FontRed1.setColor(1, 1, 1, 1);
+        index=0;
+        for (Balloon balloon:balloons){
+            index++;
+        }
+        FontRed1.draw(sb,"balloons_count: "+(4+balloons_count)+" Real: "+(index),10,30);
+        FontRed1.draw(sb,"balloons_number: "+(balloons_number),10,45);
+        FontRed1.draw(sb,"Speed: "+get_avr_speed,10,60);
 
         long memUsageJavaHeap = Gdx.app.getJavaHeap();
         long memUsageNativeHeap = Gdx.app.getNativeHeap();
@@ -944,6 +995,7 @@ public class PlayState extends State {
         unmuted.dispose();
 
     }
+
 
     public static int get_speed_for_balloon(){
         int speed = 550;
