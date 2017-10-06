@@ -300,7 +300,7 @@ public class PlayState extends State {
             }
         }
 
-        currnent_dt_background=dt*8; //2;
+        currnent_dt_background= dt*8;//8; //2;
         
 		if (game_over_start){
             game_over_dt+=dt;
@@ -501,12 +501,13 @@ public class PlayState extends State {
         //потеря жизни
         if (current_alpha_background<1.0f)
         {
-            if (miss_ball!=1) {
+            if (miss_ball==5) {
                 try {
                     sb.setColor(1, 1, 1, current_alpha_background);
                     sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
-                    sb.setColor(1, 1.0f - 0.07f * current_alpha_background, 1.0f - 0.43f * current_alpha_background, 1.0f - current_alpha_background);
+                    sb.setColor(1, 1.0f - 0.07f * current_alpha_background, 1.0f - 0.43f * current_alpha_background, 1.0f);
                     sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
+                    //current_alpha_background += currnent_dt_background;
                     current_alpha_background += currnent_dt_background;
                 }catch (Throwable ignored){
 
@@ -514,10 +515,12 @@ public class PlayState extends State {
             }else
             {
                 try {
-                    sb.setColor(1, 1, 1, current_alpha_background);
-                    sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
-                    sb.setColor(1, 1, 1, 1.0f - current_alpha_background);
+                    sb.setColor(1, 1, 1, 1.0f);
                     sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
+                    sb.setColor(1, 1, 1, current_alpha_background);
+                    //System.out.println(current_alpha_background);
+                    sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
+
                     current_alpha_background += currnent_dt_background;
                 }catch (Throwable ignored){
 
