@@ -38,7 +38,12 @@ public class MyGdxGame implements ApplicationListener {
 		gsm = new GameStateManager();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
         PlayState.setUNPAUSE();
-		//show_banner();
+		new Gdx().app.postRunnable(new Runnable() {
+			@Override
+			public void run() {
+				//show_banner();
+			}
+		});
 		gsm.push(new MenuState(gsm));
 	}
 
