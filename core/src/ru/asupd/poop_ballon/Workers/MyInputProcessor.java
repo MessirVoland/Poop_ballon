@@ -1,23 +1,19 @@
 package ru.asupd.poop_ballon.Workers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector3;
-
-import java.util.Random;
-
 import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.States.PlayState;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 
 /**
+ * Модуль обработки нажатий
  * Created by Asup.D on 05.10.2017.
  */
 
 public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
-    Vector3 touchPos;
-
+    
     public MyInputProcessor() {
     }
 
@@ -40,7 +36,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         //System.out.println("touchDown");
         //нажатие для двух режимов
-        touchPos = new Vector3();
+        Vector3 touchPos = new Vector3();
         touchPos.set(screenX, screenY, 0);
         PlayState.camera.unproject(touchPos);
         screenX= (int) touchPos.x;

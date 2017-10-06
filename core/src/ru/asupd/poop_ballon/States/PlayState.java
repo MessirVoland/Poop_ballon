@@ -498,7 +498,7 @@ public class PlayState extends State {
                                 try {
                                     balloons.removeIndex(index);
                                 }catch (Throwable e){
-                                    System.out.println(e);
+                                   // System.out.println(e);
                                 }
 
                             }
