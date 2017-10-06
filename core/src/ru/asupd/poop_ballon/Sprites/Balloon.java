@@ -196,8 +196,12 @@ public class Balloon {
     }
     public void part_start(){
         if (part_start) {
-            effect.start();
-            effect.setPosition(position.x + 45, position.y + 145);
+           // effect.start();
+            PlayState.combo_effects.add(new ParticleEffect(effect));
+            PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
+            PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(position.x+45,position.y+145);
+
+          //  effect.setPosition(position.x + 45, position.y + 145);
             part_start=false;
         }
 
@@ -261,12 +265,11 @@ public class Balloon {
        if (currentTime>ANIMATION_TIME)
        {
            if ((!combo)&(!make_orange)) {
-               if (effect.isComplete()) {
+              // if (effect.isComplete()) {
                    live_out = true;
                    //PlayState.null_Current_combo();
                    animation_current_balloon.dispose();
-               }
-
+            //   }
 
                anim_end=true;
 

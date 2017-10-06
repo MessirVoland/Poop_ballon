@@ -187,6 +187,11 @@ public class Hearth_balloon extends Creature {
 
     @Override
     public void dispose() {
-
+        if (effect1!=null) {
+            effect1.dispose();
+        }
+        if (effect2!=null) {
+            effect2.dispose();
+        }
     }
 }

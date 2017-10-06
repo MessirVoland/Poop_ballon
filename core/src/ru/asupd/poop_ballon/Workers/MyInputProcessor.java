@@ -46,9 +46,9 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
         screenX= (int) touchPos.x;
         screenY= (int) touchPos.y;
 
-       // System.out.println("td screenX:"+screenX+" td screenY:"+screenY);
-        if ((480 - 69 < screenX) & (480 - 69 + 64 > screenY)) {
-            if ((800-20 < screenY) & (800-20 + 64 > screenY)) {
+        //System.out.println("td screenX:"+screenX+" td screenY:"+screenY);
+        if ((480 - 69 < screenX) & (480 - 69 + 64 > screenX)) {
+            if ((720 < screenY) & (720 + 64 > screenY)) {
                 PlayState.setPAUSE(!PlayState.isPause());
             }
         }
@@ -63,7 +63,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                 if ((PlayState.hearth_balloon.getPosition().x-help<screenX)&(PlayState.hearth_balloon.getPosition().x+95+help>screenX)){
                     if ((PlayState.hearth_balloon.getPosition().y-help<800-screenY)&(PlayState.hearth_balloon.getPosition().y+95+help>800-screenY)) {
                         if (!PlayState.hearth_balloon.isPooped()) {
-                            PlayState.poop_Sound.play(PlayState.volume);
+                            PlayState.make_poop_Sound();
                             System.out.println("Hearthballon_clicked, clickes: " + PlayState.hearth_balloon.getClicks());
 
                             PlayState.shaker.shake(0.40f);
@@ -109,21 +109,16 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                         if ((balloon.getPosition().x < finalScreenX) & (balloon.getPosition().x + 100 > finalScreenX)) {
                             if ((balloon.getPosition().y < finalScreenY) & (balloon.getPosition().y + 200 > finalScreenY)) {
                                 if (!balloon.isPooped()) {
-                                    if (800-finalScreenY < 750) {
+                                    //if (800-finalScreenY < 750) {
                                         //System.out.println("touched the ball :");
-
-                                        long id = PlayState.poop_Sound.play(PlayState.volume);
-                                        Random rand = new Random();
-                                        float finalX = rand.nextFloat() * (PlayState.maxX - PlayState.minX) + PlayState.minX;
-                                        PlayState.poop_Sound.setPitch(id, finalX);
-                                        PlayState.poop_Sound.setVolume(id, PlayState.volume);
+                                        PlayState.make_poop_Sound();
 
                                         PlayState.shaker.shake(0.276f); // 0.2f
                                         PlayState.cautch_ball++;
                                         PlayState.score_num.addScore(1);
 
 
-                                        if (PlayState.counter_of_h_ballons<=PlayState.score_num.getScore()/400){
+                                        if (PlayState.counter_of_h_ballons<=PlayState.score_num.getScore()/300){
                                             if (PlayState.miss_ball>=1) {
                                                 PlayState.hearth_balloon.setCan_fly(true);
                                                 PlayState.hearth_balloon.setFly(true);
@@ -163,7 +158,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                                     }
                                 }
                             }
-                        }
+                       // }
                         PlayState.index++;
                     }
                 }
