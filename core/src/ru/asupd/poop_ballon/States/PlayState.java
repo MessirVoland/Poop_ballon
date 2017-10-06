@@ -82,8 +82,6 @@ public class PlayState extends State {
     //public final static float ANIMATION_TIME=3.0f;
     private Preferences prefs;//для храниния данных
     private int load_hiscore;//макс счет
-    private static boolean mute;//тишина
-    private boolean vibro=true;//вибратор
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
     private static float volume;//звук хлопков)
 
@@ -189,15 +187,12 @@ public class PlayState extends State {
         score_num = new Score();
 
 		options = new Texture("options.png");
-        vibrated = new Texture("vibro_on.png");
-        unvibrated = new Texture("vibro_off.png");
 
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
         settings= new Settings(prefs);
         load_hiscore = prefs.getInteger("highscore");
 
-        mute=settings.isMute();
-        if (!mute)
+        if (!settings.isMute())
         {
             volume=0.1f;
             background_Music.play();
@@ -254,19 +249,9 @@ public class PlayState extends State {
 
             Vector3 touchPos = new Vector3();
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            //System.out.println("touchPos :"+touchPos);
             camera.unproject(touchPos);
 
             index = 0;
-
-            //клик по боссу
-
-            /*if (!pause){
-                if (touchPos !=null) {
-                    min_x = touchPos.x;
-                    min_y = touchPos.y;
-                }
-            }*/
 
             if (!pause) {
                 //босс
@@ -281,9 +266,6 @@ public class PlayState extends State {
                 }
                 //--------------------------------------//
             }
-            //клик по опциям второй
-
-            //бывшее место паузы
             //cтарт игры
             if ((!started)&(!pause)) {
                 if (!boss_balloon.isStarted()) {
@@ -291,38 +273,8 @@ public class PlayState extends State {
                     score_num.setScore(0);
                 }
             }
-
-            if (pause) {
-
-                //вибро
-                if ((60 < touchPos.x) & (60 +150 > touchPos.x)) {
-                    if ((400 - 78 < touchPos.y) & (400 - 78 + 156 > touchPos.y)) {
-                        if (vibro){
-                            vibro=false;
-                            prefs.putBoolean("vibro",vibro);
-                            prefs.flush();
-                        }
-                        else
-                        {
-                            vibro=true;
-                            Gdx.input.vibrate(125);
-                            prefs.putBoolean("vibro",vibro);
-                            prefs.flush();
-                        }
-
-                    }
-                }
-                //рестарт
-                //settings.clicked(touchPos,gsm);
-            }
         }
-
     }
-
-   /* public static void null_Current_combo() {
-        current_combo = 0;
-    }*/
-
     public static void setPAUSE(){
         pause = true;
     }
@@ -340,7 +292,6 @@ public class PlayState extends State {
             get_avr_speed=get_speed_for_balloon();
         }
 
-        //resizer_poop_balloon.update(dt); ресайзер заглавия?
         if (game_over_start) {
             well_played_resizer.update(dt);
             nice_played_resizer.update(dt);
@@ -396,7 +347,7 @@ public class PlayState extends State {
                 if (boss_balloon.isLive()) {
                     boss_balloon.Start();
                     //started = false;
-                    if (!mute) {
+                    if (!settings.isMute()) {
                         background_Music.stop();
                         boss_Music.play();
                     }
@@ -412,7 +363,7 @@ public class PlayState extends State {
                 current_alpha_background=0.0f;
                 boss_balloon.setMissed(false);
                 //change_background = true;
-                if (vibro) {
+                if (settings.isVibro()) {
                     Gdx.input.vibrate(125);
                 }
             }
@@ -448,7 +399,7 @@ public class PlayState extends State {
             }
             if (!boss_balloon.isLive()) {
                 if (boss_Music.isPlaying()) {
-                    if (!mute) {
+                    if (!settings.isMute()) {
                         boss_Music.stop();
                         background_Music.play();
                     }
@@ -738,53 +689,51 @@ public class PlayState extends State {
 
 		sb.draw(options,((int) (shaker.getCamera_sh().position.x)+240-69),((int) (shaker.getCamera_sh().position.y+400-69)),64,64);
 
-        switch (miss_ball){
-            default:
-                break;
-            case 3:
-                if (!game_over_start) {
-                    for (Balloon balloon : balloons) {
-                        balloon.setPooped();
-                        make_poop_Sound();
-                        balloon.stop_spawn();
-                    }
-                    //убрать шар здоровья
-                    if (hearth_balloon.isFly()){
-                        hearth_balloon.setFly(false);
-                        hearth_balloon.restart();
-                    }
-                    game_over_start=true;
-                    //инициализация массива звезд
-                    stars = new Array<Star>();
-
-                    for (int i = 0; i <=score_num.getScore()/100; i++){
-                        //int local_speed = get_speed_for_balloon();
-                        stars.add(new Star(random(400)+40, random(720)+40));
-                        //balloons.get(i).setAnimation_idle(poof_balloon_g);
-                    }
-                    for (Star star : stars ){
-                        star.resizer.start();
-                    }
-                    nice_played_resizer.start();
-                    well_played_resizer.start();
-                    //  balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(), !boss_balloon.isStarted()));
-                    load_hiscore = prefs.getInteger("highscore");
-                    cautch_ball=score_num.getScore();
-                    prefs.putInteger("last_match_score", cautch_ball);
-                    prefs.flush();
-                    if (load_hiscore<cautch_ball) {
-                        prefs.putInteger("highscore", cautch_ball);
-                        prefs.flush();
-                    }
+        if (miss_ball>=3) {
+            if (!game_over_start) {
+                for (Balloon balloon : balloons) {
+                    balloon.setPooped();
+                    make_poop_Sound();
+                    balloon.stop_spawn();
                 }
-                break;
-            case 2:
-               // miss_ball--;
-                break;
+                //убрать шар здоровья
+                if (hearth_balloon.isFly()) {
+                    hearth_balloon.setFly(false);
+                    hearth_balloon.restart();
+                }
+                game_over_start = true;
+                //инициализация массива звезд
+                stars = new Array<Star>();
+
+                for (int i = 0; i <= score_num.getScore() / 100; i++) {
+                    //int local_speed = get_speed_for_balloon();
+                    stars.add(new Star(random(400) + 40, random(720) + 40));
+                    //balloons.get(i).setAnimation_idle(poof_balloon_g);
+                }
+                for (Star star : stars) {
+                    star.resizer.start();
+                }
+                nice_played_resizer.start();
+                well_played_resizer.start();
+                //  balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(), !boss_balloon.isStarted()));
+                load_hiscore = prefs.getInteger("highscore");
+                cautch_ball = score_num.getScore();
+                prefs.putInteger("last_match_score", cautch_ball);
+                prefs.flush();
+                if (load_hiscore < cautch_ball) {
+                    prefs.putInteger("highscore", cautch_ball);
+                    prefs.flush();
+                }
+            }
+        }else
+        {
+            //бессмертие)
+            //missball--;
         }
+
         if (pause){
             sb.draw(pause_bgnd,((int) shaker.getCamera_sh().position.x)-240,((int) shaker.getCamera_sh().position.y)-400,480,800);
-            if (vibro){
+            if (settings.isVibro()){
                 sb.draw(vibrated,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78,150,156);
             }else{
                 sb.draw(unvibrated,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78,150,156);
@@ -800,6 +749,7 @@ public class PlayState extends State {
         sb.end();
     }
 
+
     public static void set_mute(){
         if (boss_balloon.isStarted()){
             boss_Music.pause();
@@ -807,11 +757,9 @@ public class PlayState extends State {
             background_Music.pause();
         }
         volume=0.0f;
-        mute=true;
     }
 
     public static void set_unmute(){
-        mute=false;
         if (boss_balloon.isStarted()){
             boss_Music.play();
         }else {
@@ -820,7 +768,7 @@ public class PlayState extends State {
         volume=0.1f;
     }
     public static void make_poop_Sound(){
-        if (!mute) {
+        if (!settings.isMute()) {
             long id = PlayState.poop_Sound.play(PlayState.volume);
             Random rand = new Random();
             float finalX = rand.nextFloat() * (PlayState.maxX - PlayState.minX) + PlayState.minX;

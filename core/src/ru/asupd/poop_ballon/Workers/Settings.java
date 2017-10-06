@@ -1,5 +1,6 @@
 package ru.asupd.poop_ballon.Workers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,8 +17,10 @@ public class Settings {
     private boolean mute,vibro;//звук вибро
     private Texture restart;
     private Texture mute_tex,unmute_tex;
+    private Texture vibro_tex,unvibro_tex;
     private Vector3 pos_restart;
     private Vector3 pos_mute;
+    private Vector3 pos_vibro;
     private static final float POS_X_RESTART=-75,POS_Y_RESTART=-278;
 
     private boolean one_click=false;
@@ -44,6 +47,11 @@ public class Settings {
         mute_tex= new Texture("sound_off.png");
         unmute_tex = new Texture("sound_on.png");
         pos_mute = new Vector3(270,400-78,0);
+
+        vibro_tex = new Texture("vibro_on.png");
+        unvibro_tex = new Texture("vibro_off.png");
+        pos_vibro = new Vector3(60,400 - 78,0);
+
 
     }
     public void draw(SpriteBatch sb,Shaker shaker){
@@ -76,6 +84,25 @@ public class Settings {
             }
             pref.putBoolean("mute", mute);
             pref.flush();
+        }
+        else
+        //вибро
+        if (((ScreenY>pos_vibro.y)&(ScreenY<pos_vibro.y+vibro_tex.getHeight()))&
+             ((ScreenX>pos_vibro.x)&(ScreenX<pos_vibro.x+vibro_tex.getWidth()))) {
+                {
+                    if (vibro){
+                        vibro=false;
+                        pref.putBoolean("vibro",vibro);
+                        pref.flush();
+                    }
+                    else
+                    {
+                        vibro=true;
+                        Gdx.input.vibrate(125);
+                        pref.putBoolean("vibro",vibro);
+                        pref.flush();
+                    }
+                }
         }
         else
         //вывод из паузы
