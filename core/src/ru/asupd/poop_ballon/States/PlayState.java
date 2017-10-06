@@ -480,12 +480,10 @@ public class PlayState extends State {
                                 miss_ball++;
                                 current_alpha_background=0.0f;
                                 change_background = true;
-                                if (vibro) {
+                                if (settings.isVibro()) {
                                     Gdx.input.vibrate(125);
                                 }
                             }
-
-
                         }
                     }
                 });

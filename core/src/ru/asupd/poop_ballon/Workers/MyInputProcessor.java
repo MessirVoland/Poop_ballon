@@ -61,7 +61,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
             if (PlayState.hearth_balloon.isFly()){
                 int help=10;//текстуора на help пикслей больше для клика
                 if ((PlayState.hearth_balloon.getPosition().x-help<screenX)&(PlayState.hearth_balloon.getPosition().x+95+help>screenX)){
-                    if ((PlayState.hearth_balloon.getPosition().y-help<800-screenY)&(PlayState.hearth_balloon.getPosition().y+95+help>800-screenY)) {
+                    if ((PlayState.hearth_balloon.getPosition().y-help<screenY)&(PlayState.hearth_balloon.getPosition().y+95+help>screenY)) {
                         if (!PlayState.hearth_balloon.isPooped()) {
                             PlayState.make_poop_Sound();
                             System.out.println("Hearthballon_clicked, clickes: " + PlayState.hearth_balloon.getClicks());

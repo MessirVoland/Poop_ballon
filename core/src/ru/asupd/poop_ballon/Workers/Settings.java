@@ -1,19 +1,13 @@
 package ru.asupd.poop_ballon.Workers;
 
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-
-import javax.swing.text.Position;
-
-import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.States.PlayState;
 
 /**
+ * Класс для храния и обработки настроек
  * Created by Asup.D on 05.10.2017.
  */
 
@@ -61,14 +55,7 @@ public class Settings {
         sb.draw(restart,((int) shaker.getCamera_sh().position.x)+POS_X_RESTART,((int) shaker.getCamera_sh().position.y)+POS_Y_RESTART,150,156);
     }
 
-    public void clicked(Vector3 touchPos,GameStateManager gsm) {
-        if (((touchPos.y>pos_restart.y)&(touchPos.y<pos_restart.y+restart.getHeight()))&&
-        ((touchPos.x>pos_restart.x)&(touchPos.x<pos_restart.x+restart.getWidth()))){
-            gsm.set(new PlayState(gsm));
-            PlayState.setUNPAUSE();
-        }
-    }
-    public void clicked(int ScreenX, int ScreenY) {
+    void clicked(int ScreenX, int ScreenY) {
         if (((ScreenY>pos_restart.y)&(ScreenY<pos_restart.y+restart.getHeight()))&
                 ((ScreenX>pos_restart.x)&(ScreenX<pos_restart.x+restart.getWidth()))){
             //gsm.set(new PlayState(gsm));
