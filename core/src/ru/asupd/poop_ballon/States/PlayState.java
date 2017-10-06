@@ -42,11 +42,11 @@ public class PlayState extends State {
     private Array<Cloud> clouds;//массив шаров
     private Array<Star> stars;//звезды
 
-    private Texture background,pause_bgnd;//задник
+    private Texture pause_bgnd;//задник
     private TextureRegion back_ground_atlas;
     private Array<TextureRegion> background_frames;
     //private boolean change_background;//хз
-    public float currnent_dt_background=0;
+    private float currnent_dt_background;
     public static float current_alpha_background=1.0f;
 
     private BitmapFont FontRed1;//для фпс
@@ -118,7 +118,6 @@ public class PlayState extends State {
     public static Hearth_balloon hearth_balloon;
     public static byte counter_of_h_ballons=0;
 
-    private int chance_of_boss=20;//20%
     private int chance_100_150=random(50)+100;
 
     public static int STEP_for_balloon=50;
@@ -136,13 +135,14 @@ public class PlayState extends State {
 
     public static Settings settings;
 
-    private MyInputProcessor inputProcessor= new MyInputProcessor();//обработчик событий
+    private MyInputProcessor inputProcessor;//обработчик событий
 
-    public PlayState(GameStateManager gsm) {
+    PlayState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
+        inputProcessor = new MyInputProcessor();
         Gdx.input.setInputProcessor(inputProcessor);
-        background = Assets.instance.manager.get(Assets.back_ground_atlas);
+        Texture background = Assets.instance.manager.get(Assets.back_ground_atlas);
         background_frames = new Array<TextureRegion>();
         back_ground_atlas = new TextureRegion(background);
         int frameWidth=back_ground_atlas.getRegionWidth()/4;
@@ -229,7 +229,8 @@ public class PlayState extends State {
         }
         //инициализация босса
         boss_balloon = new Boss_balloon(random(4)*96,-195-random(50),80);
-        if (random(100)>=chance_of_boss){
+        int chance_of_boss = 20;
+        if (random(100)>= chance_of_boss){
             boss_balloon.setLive(false);
         }
         hearth_balloon = new Hearth_balloon();
@@ -239,6 +240,7 @@ public class PlayState extends State {
         well_played_resizer=new Resizer(323,164);
 
 
+        currnent_dt_background = 0;
     }
 // Input
 
@@ -297,7 +299,6 @@ public class PlayState extends State {
                     if ((400 - 78 < touchPos.y) & (400 - 78 + 156 > touchPos.y)) {
                         if (vibro){
                             vibro=false;
-
                             prefs.putBoolean("vibro",vibro);
                             prefs.flush();
                         }
@@ -318,14 +319,14 @@ public class PlayState extends State {
 
     }
 
-    public static void null_Current_combo() {
+   /* public static void null_Current_combo() {
         current_combo = 0;
-    }
+    }*/
 
-    public static final void setPAUSE(){
+    public static void setPAUSE(){
         pause = true;
     }
-    public static final void setUNPAUSE(){
+    public static void setUNPAUSE(){
         pause = false;
     }
 
@@ -556,7 +557,7 @@ public class PlayState extends State {
                     sb.setColor(1, 1.0f - 0.07f * current_alpha_background, 1.0f - 0.43f * current_alpha_background, 1.0f - current_alpha_background);
                     sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
                     current_alpha_background += currnent_dt_background;
-                }catch (Throwable e){
+                }catch (Throwable ignored){
 
                 }
             }else
@@ -567,7 +568,7 @@ public class PlayState extends State {
                     sb.setColor(1, 1, 1, 1.0f - current_alpha_background);
                     sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
                     current_alpha_background += currnent_dt_background;
-                }catch (Throwable e){
+                }catch (Throwable ignored){
 
                 }
             }
@@ -724,11 +725,7 @@ public class PlayState extends State {
         }
         FontRed1.draw(sb, " FPS : "+  fps, 10, 790);
         FontRed1.setColor(1, 1, 1, 1);
-        index=0;
-        for (Balloon balloon:balloons){
-            index++;
-        }
-        FontRed1.draw(sb,"balloons_count: "+(4+balloons_count)+" Real: "+(index),10,30);
+        FontRed1.draw(sb,"balloons_count: "+(4+balloons_count)+" Real: "+balloons.size,10,30);
         FontRed1.draw(sb,"balloons_number: "+(balloons_number),10,45);
         FontRed1.draw(sb,"Speed: "+get_avr_speed,10,60);
 
@@ -840,7 +837,7 @@ public class PlayState extends State {
 
 
     public static int get_speed_for_balloon(){
-        int speed = 550;
+        int speed;
         speed = 100+(int)(Math.sqrt(cautch_ball)*8)+random( ((int)Math.log(cautch_ball+2))*40);
         if (speed>=500){
             speed=500;//Ограничитель скорости шаров
