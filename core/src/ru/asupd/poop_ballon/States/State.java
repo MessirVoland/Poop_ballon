@@ -12,9 +12,9 @@ import ru.asupd.poop_ballon.GameStateManager;
 
 public abstract class State {
 
-    protected OrthographicCamera camera;
+    public static OrthographicCamera camera;
     protected Vector3 mouse;
-    protected GameStateManager gsm;
+    protected static GameStateManager gsm;
 
     public State(GameStateManager gsm){
         this.gsm = gsm;

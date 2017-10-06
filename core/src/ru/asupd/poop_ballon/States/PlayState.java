@@ -2,7 +2,6 @@ package ru.asupd.poop_ballon.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -17,15 +16,16 @@ import com.badlogic.gdx.utils.Array;
 import java.util.Random;
 
 import ru.asupd.poop_ballon.GameStateManager;
-import ru.asupd.poop_ballon.Sprites.Animation;
 import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.Sprites.Boss_balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
 import ru.asupd.poop_ballon.Sprites.Hearth_balloon;
 import ru.asupd.poop_ballon.Sprites.Star;
 import ru.asupd.poop_ballon.Workers.Assets;
+import ru.asupd.poop_ballon.Workers.MyInputProcessor;
 import ru.asupd.poop_ballon.Workers.Resizer;
 import ru.asupd.poop_ballon.Workers.Score;
+import ru.asupd.poop_ballon.Workers.Settings;
 import ru.asupd.poop_ballon.Workers.Shaker;
 
 import static com.badlogic.gdx.math.MathUtils.random;
@@ -38,7 +38,7 @@ import static com.badlogic.gdx.math.MathUtils.random;
 
 public class PlayState extends State {
 
-    private Array<Balloon> balloons;//массив шаров
+    public static Array<Balloon> balloons;//массив шаров
     private Array<Cloud> clouds;//массив шаров
     private Array<Star> stars;//звезды
 
@@ -46,7 +46,8 @@ public class PlayState extends State {
     private TextureRegion back_ground_atlas;
     private Array<TextureRegion> background_frames;
     private boolean change_background;//хз
-    private float currnent_dt_background=0,current_alpha_background=1.0f;
+    public float currnent_dt_background=0;
+    public static float current_alpha_background=1.0f;
 
     private BitmapFont FontRed1;//для фпс
 
@@ -57,6 +58,7 @@ public class PlayState extends State {
 
     private Texture texture_poop_balloon;//Название игры
     private Resizer resizer_poop_balloon;
+    int get_avr_speed=0;
 
     private Texture your_high_score,tap_to_play,score;//наибольший счет, таб ту плей, напись счет
 
@@ -66,7 +68,7 @@ public class PlayState extends State {
 
     //private Texture numbers;//числа
     //private Array<TextureRegion> frames_numbers;//числа
-    private Score score_num;
+    public static Score score_num;
 
 
 
@@ -74,12 +76,14 @@ public class PlayState extends State {
 
     //private Animation poof_balloon_g,poof_balloon_y,poof_balloon_b,poof_balloon_r,poof_balloon_p,poof_balloon_o;
 
-    private int cautch_ball = 0;//поймано шаров
-    private int miss_ball = 0;//пропущено шаров
+    public static int cautch_ball = 0;//поймано шаров
+    public static int miss_ball = 0;//пропущено шаров
 
-    private Sound poop_Sound;//звук лопания
-    private static final float minX = 0.75f;//Диапазон изменения хлопка
-    private static final float maxX = 1.7f;
+    public static Sound poop_Sound;//звук лопания
+    public static final float minX = 0.75f;//Диапазон изменения хлопка
+    public static final float maxX = 1.7f;
+    public static int balloons_count=0;
+    public static int balloons_number=0;
 
     //private int max_combo=0;
 
@@ -92,7 +96,7 @@ public class PlayState extends State {
     private boolean mute;//тишина
     private boolean vibro=true;//вибратор
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
-    private float volume;//звук хлопков)
+    public static float volume;//звук хлопков)
 
     //гейм овер
     private boolean game_over_start=false;//перероход в гейм овер
@@ -103,12 +107,13 @@ public class PlayState extends State {
     private Texture well_played;
     private Texture nice_played;
     private Texture big_balloon;
+
     private float x_game_over=-480,y_game_over=0;
     private Resizer well_played_resizer;
     private Resizer nice_played_resizer;
 
-    private Shaker shaker;//шейкео
-    private int index;//хз
+    public static Shaker shaker;//шейкео
+    public static int index;//хз
     private static boolean pause=false;
     private float min_x=0.0f,min_y=0.0f;
 
@@ -119,43 +124,35 @@ public class PlayState extends State {
     private Vector3 position;//Координаты заголовка игры
     private Vector3 velosity;//вектор движения заголовка
 
-    private Boss_balloon boss_balloon;//босс
+    public static Boss_balloon boss_balloon;//босс
 
-    private Hearth_balloon hearth_balloon;
-    private byte counter_of_h_ballons=0;
+    public static Hearth_balloon hearth_balloon;
+    public static byte counter_of_h_ballons=0;
 
     private int chance_of_boss=20;//20%
     private int chance_100_150=random(50)+100;
 
-    private int STEP_for_balloon=50;
+    public static int STEP_for_balloon=50;
     public static final int MAX_STEP=401;
-    int current_step=1;
-
-    //частицы
-    //private ParticleEffect effect;
-    //private ParticleEffect effect_pop;
+    public static int current_step=1;
+    float cureunt_dt_for_speed=0;
 
     //Комбо
-    private static int current_combo=0;
+    public static int current_combo=0;
     private static final float TIME_FOR_COMBO = 1.25f;//максимальное время отображения значка комбо
     float current_time_for_combo = 0.0f;//текущее время комбо
     public static Array<ParticleEffect> combo_effects = new Array<ParticleEffect>();
 
     private Vector3 touchPos;//вектор прикосновния
 
+    public static Settings settings;
 
+    private MyInputProcessor inputProcessor= new MyInputProcessor();//обработчик событий
 
-
-    protected PlayState(GameStateManager gsm) {
+    public PlayState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
-       // Assets.load();
-       // while (!Assets.manager.update()){
-        //    System.out.println("LOading... : "+Assets.manager.getProgress()*100+ "%");
-        //}
-
-
-        //background = new Texture("background_clean.png");
+        Gdx.input.setInputProcessor(inputProcessor);
         background = Assets.instance.manager.get(Assets.back_ground_atlas);
         background_frames = new Array<TextureRegion>();
         back_ground_atlas = new TextureRegion(background);
@@ -165,36 +162,30 @@ public class PlayState extends State {
         }
 
         pause_bgnd = new Texture("pause.png");
+        STEP_for_balloon=50;
 
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
-
 
         shaker = new Shaker(camera);
         started=false;//начало игры
 
         position = new Vector3(10,500,0);
         velosity=new Vector3(0,200,0);
-
+        cautch_ball=0;
+        balloons_count=0;
+        balloons_number=0;
 
         //инициализация музыки
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
         boss_Music = Gdx.audio.newMusic(Gdx.files.internal("Sound_19272 [Wav_Library_Net].mp3"));
-        background_Music = Gdx.audio.newMusic(Gdx.files.internal("sound.mp3"));
+
+        background_Music = Assets.instance.manager.get(Assets.background_Music);
         background_Music.setVolume(0.3f);
         background_Music.setLooping(true);
 
         boss_Music.setVolume(0.3f);
         boss_Music.setLooping(true);
-
-        //Assets assets = new Assets();
-        //хорошо бы сделать отдельный текстур менеджер с полосой загрузки
-        //texture_b_b =  new Texture("Balloon_blue.png");
-        //texture_b_r =  new Texture("Balloon_red.png");
-        //texture_b_g =  new Texture("Balloon_green.png");
-        //texture_b_y =  new Texture("Balloon_yellow.png");
-        //texture_b_p =  new Texture("Balloon_purple.png");
-        //texture_b_o =  new Texture("round_b_o.png");
 
         your_high_score = new Texture("best_score_g.png");
         texture_poop_balloon = new Texture("poop_balloon.png");
@@ -202,30 +193,11 @@ public class PlayState extends State {
         tap_to_play = new Texture("tap_to_play.png");
         score =  new Texture("score.png");
 
-        //multi_x2 = new Texture("x2.png");
-        //multi_x3 = new Texture("x3.png");
-        //multi_x4 = new Texture("x4.png");
-        //multi_x5 = new Texture("x5.png");
-        //multi_x6 = new Texture("x6.png");
-
         well_played = new Texture("wp.png");
         nice_played = new Texture("nice_try.png");
         big_balloon= new Texture("big_balloon.png");
 
         score_num = new Score();
-
-        //poof_balloon_atlas = new Texture("pop_g.png");
-        //poof_balloon_g = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
-        //poof_balloon_atlas = new Texture("pop_y.png");
-        //poof_balloon_y = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
-        //poof_balloon_atlas = new Texture("pop_b.png");
-        //poof_balloon_b = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
-        //poof_balloon_atlas = new Texture("pop_r.png");
-        //poof_balloon_r = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
-        //poof_balloon_atlas = new Texture("pop_p.png");
-        //poof_balloon_p = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
-        //poof_balloon_atlas = new Texture("pop_color.png");
-        //poof_balloon_o = new Animation(new TextureRegion(poof_balloon_atlas),3,ANIMATION_TIME);
 
 		options = new Texture("options.png");
         muted = new Texture("sound_off.png");
@@ -233,9 +205,13 @@ public class PlayState extends State {
         vibrated = new Texture("vibro_on.png");
         unvibrated = new Texture("vibro_off.png");
 
+
+
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
+        settings= new Settings(prefs);
         load_hiscore = prefs.getInteger("highscore");
         boolean first_start = true;
+        /*
         if (first_start !=prefs.getBoolean("first_start")){
             prefs.putBoolean("first_start",true);
             mute=false;
@@ -247,13 +223,15 @@ public class PlayState extends State {
             mute = prefs.getBoolean("mute");
             vibro = prefs.getBoolean("vibro");
         }
-        if (!mute)
+        if (!settings.isMute())
         {
             volume=0.1f;
             background_Music.play();
-        }
+        }*/
+        mute=true;
+        miss_ball=0;
 
-        System.out.println("mute:"+mute);
+        System.out.println("settings.isMute():"+settings.isMute());
         prefs.putInteger("last_match_score", 0);
 
         //Вывод макс очков
@@ -287,30 +265,17 @@ public class PlayState extends State {
         }
         hearth_balloon = new Hearth_balloon();
 
-
-        //частицы
-       // effect = new ParticleEffect();
-      //  effect.loadEmitters(Gdx.files.internal("particles/red_balls.p"));
-      //  effect.loadEmitterImages(Gdx.files.internal("particles"));
-      //  effect.start();
-
-        //effect_pop = new ParticleEffect();
-        //effect_pop.loadEmitters(Gdx.files.internal("particles/pop_b"));
-        //effect_pop.loadEmitterImages(Gdx.files.internal("particles"));
-        //effect_pop.start();
         resizer_poop_balloon.start();
         nice_played_resizer=new Resizer(384,88);
         well_played_resizer=new Resizer(323,164);
 
-        //combo_effects.add(Assets.combo_2x);
-        //combo_effects.add(Assets.combo_3x);
-        //combo_effects.add(Assets.combo_4x);
-        //combo_effects.add(Assets.combo_5x);
-        //combo_effects.add(Assets.combo_6x);
-        //combo_effects.add(Assets.combo_7x);
 
     }
 // Input
+
+    public static boolean isPause() {
+        return pause;
+    }
 
     @Override
     protected void handleInput() {
@@ -320,6 +285,7 @@ public class PlayState extends State {
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             //System.out.println("touchPos :"+touchPos);
             camera.unproject(touchPos);
+
             index = 0;
 
             //клик по боссу
@@ -341,247 +307,26 @@ public class PlayState extends State {
                         }
                     }
                 }
-				
-                if (hearth_balloon.isFly()){
-                    int help=10;//текстуора на help пикслей больше для клика
-                    if ((hearth_balloon.getPosition().x-help<touchPos.x)&(hearth_balloon.getPosition().x+95+help>touchPos.x)){
-                        if ((hearth_balloon.getPosition().y-help<touchPos.y)&(hearth_balloon.getPosition().y+95+help>touchPos.y)) {
-                            if (!hearth_balloon.isPooped()) {
-                                poop_Sound.play(volume);
-                                System.out.println("Hearthballon_clicked, clickes: " + hearth_balloon.getClicks());
-
-                                shaker.shake(0.40f);
-                                if (hearth_balloon.getClicks() == 2) {
-                                    current_alpha_background = 2.0f;
-                                    //if (miss_ball>1) {
-                                    miss_ball--;
-                                    //}
-                                    hearth_balloon.setFly(false);
-                                    hearth_balloon.setPooped();
-                                    counter_of_h_ballons++;
-                                } else
-                                    hearth_balloon.clicked();
-                            }
-                        }
-                    }
-                }
-
-
-
-                //max_combo=0;
-                current_combo = 0;
-
-                //Клик по шарам для проверки комбо, да долго проверять клик по шарам дважды но ничего лучше не придумал
-                for (Balloon balloon : balloons) {
-                    if ((balloon.getPosition().x < touchPos.x) & (balloon.getPosition().x + 100 > touchPos.x)) {
-                        if ((balloon.getPosition().y < touchPos.y) & (balloon.getPosition().y + 200 > touchPos.y)) {
-                            if (!balloon.isPooped()) {
-                                current_combo++;
-                                current_step++;
-                                balloon.setCombo(current_combo);
-                                // System.out.println("Current combo on click: "+current_combo);
-                            }
-                        }
-                    }
-                }
-                //System.out.println("Current combo: "+current_combo);
-                //current_step=0;
-                int mini_step=0;
-                //клик по шарам
-                /*if (current_combo >= 2) {
-                    //balloon.setCombo(current_combo);
-                    switch (current_combo) {
-                        case 2:
-                           // combo_effects.add(new ParticleEffect(Assets.combo_2x));
-                           // combo_effects.get(combo_effects.size - 1).start();
-                           // combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
-                            break;
-                        case 3:
-                            combo_effects.add(new ParticleEffect(Assets.combo_3x));
-                            combo_effects.get(combo_effects.size - 1).start();
-                            combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
-                            break;
-                        case 4:
-                            combo_effects.add(new ParticleEffect(Assets.combo_4x));
-                            combo_effects.get(combo_effects.size - 1).start();
-                            combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
-                            break;
-                        case 5:
-                            combo_effects.add(new ParticleEffect(Assets.combo_5x));
-                            combo_effects.get(combo_effects.size - 1).start();
-                            combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
-                            break;
-                        case 6:
-                            combo_effects.add(new ParticleEffect(Assets.combo_6x));
-                            combo_effects.get(combo_effects.size - 1).start();
-                            combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
-                            break;
-                       /* case 7:
-                            combo_effects.add(new ParticleEffect(Assets.combo_7x));
-                            combo_effects.get(combo_effects.size - 1).start();
-                            combo_effects.get(combo_effects.size - 1).setPosition(touchPos.x, touchPos.y+15);
-                            break;
-
-                    }
-                }*/
-
-                if (miss_ball>=1){
-                    hearth_balloon.setCan_fly(true);
-                }
-
-                for (Balloon balloon : balloons) {
-                    if ((balloon.getPosition().x < touchPos.x) & (balloon.getPosition().x + 100 > touchPos.x)) {
-                        if ((balloon.getPosition().y < touchPos.y) & (balloon.getPosition().y + 200 > touchPos.y)) {
-                            if (!balloon.isPooped()) {
-                                if (touchPos.y < 750) {
-                                    //System.out.println("touched the ball :");
-
-                                    long id = poop_Sound.play(volume);
-                                    Random rand = new Random();
-                                    float finalX = rand.nextFloat() * (maxX - minX) + minX;
-                                    poop_Sound.setPitch(id, finalX);
-                                    poop_Sound.setVolume(id, volume);
-
-                                    shaker.shake(0.276f); // 0.2f
-                                    cautch_ball++;
-                                    score_num.addScore(1);
-
-
-                                    if (counter_of_h_ballons<=score_num.getScore()/400){
-                                        //System.out.println("counter: "+counter_of_h_ballons);
-                                        //System.out.println("score_num.getScore()/50: "+score_num.getScore()/50);
-                                        if (miss_ball>=1) {
-                                            hearth_balloon.setCan_fly(true);
-                                            hearth_balloon.setFly(true);
-                                        }
-                                        else
-                                        {
-                                            counter_of_h_ballons++;
-                                        }
-                                    }
-
-                                        //if ((score_num.getScore()%50==1) & (score_num.getScore()%50 == 0)) {
-                                        //    hearth_balloon.setFly(true);
-                                        //}
-
-
-                                    //current_combo++;
-
-                                    if (current_combo >= 2) {
-                                        mini_step++;
-                                        //System.out.println("current_step :"+current_step);
-                                        //System.out.println("current_combo:"+current_combo);
-                                        if (mini_step==1){
-                                            balloon.start_combo_part();
-                                        }
-                                        //balloon.setCombo(current_combo);
-
-                                        //combo_effects.get(current_combo-2).start();
-                                        score_num.addScore(current_combo * current_combo - current_combo);
-                                        score_num.setCombo(current_combo);
-                                        //balloon.setAnimation(poof_balloon_o);
-                                        balloon.setMax_combo(current_combo);
-                                        //shaker.shake(0.20f*current_combo);
-                                    } else {
-                                        balloon.setCombo(0);
-                                    }
-
-                                    //poof_balloon_g.setCurrentFrameTime(0.0f);
-                                    //poof_balloon_g.setFrame(0);
-                                    //poof_balloon_y.setCurrentFrameTime(0.0f);
-                                    //poof_balloon_y.setFrame(0);
-                                    //poof_balloon_b.setCurrentFrameTime(0.0f);
-                                    //poof_balloon_b.setFrame(0);
-                                    //poof_balloon_r.setCurrentFrameTime(0.0f);
-                                    //poof_balloon_r.setFrame(0);
-                                    //poof_balloon_p.setCurrentFrameTime(0.0f);
-                                    //poof_balloon_p.setFrame(0);
-                                    //poof_balloon_o.setCurrentFrameTime(0.0f);
-                                    //poof_balloon_o.setFrame(0);
-
-                                    //int local_highscore;
-                                    //local_highscore = cautch_ball;
-                                    //score_num.setScore(cautch_ball);
-                                    //for (int k=0;k<=4;k++) {
-                                    //     megred_high_score[k] = local_highscore % 10;
-                                    //    local_highscore = local_highscore / 10;
-                                    //}
-
-                                    balloon.setPooped();
-
-                                    if ((current_step >= STEP_for_balloon) & (cautch_ball <= 500)) {
-                                        current_step = 0;
-                                        // System.out.println("New balloon generated");
-                                        STEP_for_balloon += 20;
-                                        balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(), !boss_balloon.isStarted()));
-
-                                    }
-                                    balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(), !boss_balloon.isStarted()));
-                                }
-                            }
-                        }
-                    }
-                    index++;
-                }
-
-
-                //клик по иконке звука
-            /*if ((480-69<touchPos.x)&(480-69+64>touchPos.x)){
-                if((700+20<touchPos.y)&(700+20+64>touchPos.y)){
-                    if (mute) {
-                        if (boss_balloon.isStarted()){
-                            boss_Music.play();
-                        }else {
-                            background_Music.play();
-                        }
-                        volume=0.1f;
-                        mute=false;
-                        prefs.putBoolean("mute",mute);
-                        prefs.flush();
-                    }
-                    else {
-                        if (boss_balloon.isStarted()){
-                            boss_Music.pause();
-                        }else {
-                            background_Music.pause();
-                        }
-                        volume=0.0f;
-                        mute=true;
-                        prefs.putBoolean("mute",mute);
-                        prefs.flush();
-                    }
-                }
-            }*/
-
             }
             //клик по опциям второй
-            if ((480 - 69 < touchPos.x) & (480 - 69 + 64 > touchPos.x)) {
-                if ((700 + 20 < touchPos.y) & (700 + 20 + 64 > touchPos.y)) {
-                   pause=!pause;
-                   /* if (pause) {
-                        pause = false;
-                    } else {
-                        pause = true;
-                    }*/
+
+            //бывшее место паузы
+
+            if ((!started)&(!pause)) {
+                if (!boss_balloon.isStarted()) {
+                    started = true;
+                    score_num.setScore(0);
+
+                    //int local_highscore;
+                    //local_highscore = 0;
+                    //for (int k=0;k<=4;k++) {
+
+                    //  megred_high_score[k] = local_highscore % 10;
+                    // local_highscore = local_highscore / 10;
+                    //}
                 }
             }
-                else
-            {
-                if ((!started)&(!pause)) {
-                    if (!boss_balloon.isStarted()) {
-                        started = true;
-                        score_num.setScore(0);
 
-                        //int local_highscore;
-                        //local_highscore = 0;
-                        //for (int k=0;k<=4;k++) {
-
-                        //  megred_high_score[k] = local_highscore % 10;
-                        // local_highscore = local_highscore / 10;
-                        //}
-                    }
-                }
-            }
             if (pause) {
                 //звук
                 if ((270 < touchPos.x) & (270+150 > touchPos.x)) {
@@ -631,6 +376,8 @@ public class PlayState extends State {
 
                     }
                 }
+                //рестарт
+                //settings.clicked(touchPos,gsm);
             }
         }
 
@@ -641,7 +388,6 @@ public class PlayState extends State {
     }
 
     public static final void setPAUSE(){
-
         pause = true;
     }
     public static final void setUNPAUSE(){
@@ -649,8 +395,16 @@ public class PlayState extends State {
     }
 
     @Override
-    public void update(float dt) {
+    public void update(final float dt) {
         handleInput();
+
+
+        cureunt_dt_for_speed+=dt;
+        if (cureunt_dt_for_speed>=0.6f){
+            cureunt_dt_for_speed=0;
+            get_avr_speed=get_speed_for_balloon();
+        }
+
         //resizer_poop_balloon.update(dt); ресайзер заглавия?
         if (game_over_start) {
             well_played_resizer.update(dt);
@@ -778,28 +532,48 @@ public class PlayState extends State {
 
 
             if (started) {
-                for (Balloon balloon : balloons) {
-                    balloon.update(dt, shaker);
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (Balloon balloon : balloons) {
+                            balloon.update(dt, shaker);
 
-                    if (balloon.getPosition().y > 720) {
-                        balloon.setPosition(balloon.getPosition().x, -220 - random(50));
+                            if (balloon.getPosition().y > 720) {
+                                balloon.setPosition(balloon.getPosition().x, -220 - random(50));
 
-                        balloon.setVelosity(get_speed_for_balloon());
-                        miss_ball++;
-                        current_alpha_background=0.0f;
-                        change_background = true;
-                        if (vibro) {
-                            Gdx.input.vibrate(125);
+                                balloon.setVelosity(get_speed_for_balloon());
+                                miss_ball++;
+                                current_alpha_background=0.0f;
+                                change_background = true;
+                                if (vibro) {
+                                    Gdx.input.vibrate(125);
+                                }
+                            }
+
+
                         }
                     }
+                });
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+                        index=0;
+                        for (Balloon balloon : balloons){
+                            if (balloon.isLive_out()) {
+                                balloon.dispose();
+                                //System.out.println("balloon disposed :"+cautch_ball);
+                                try {
+                                    balloons.removeIndex(index);
+                                }catch (Throwable e){
+                                    System.out.println(e);
+                                }
 
-                    if (balloon.isLive_out()) {
-                        balloon.dispose();
-                        //System.out.println("balloon disposed :"+cautch_ball);
-                        balloons.removeIndex(index);
+                            }
+                            index++;
+                        }
                     }
-                    index++;
-                }
+                });
+
             }
 
             for (Cloud cloud : clouds) {
@@ -853,18 +627,26 @@ public class PlayState extends State {
         if (current_alpha_background<1.0f)
         {
             if (miss_ball!=1) {
-                sb.setColor(1, 1, 1, current_alpha_background);
-                sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
-                sb.setColor(1, 1.0f-0.07f*current_alpha_background, 1.0f-0.43f*current_alpha_background, 1.0f - current_alpha_background);
-                sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
-                current_alpha_background += currnent_dt_background;
+                try {
+                    sb.setColor(1, 1, 1, current_alpha_background);
+                    sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
+                    sb.setColor(1, 1.0f - 0.07f * current_alpha_background, 1.0f - 0.43f * current_alpha_background, 1.0f - current_alpha_background);
+                    sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
+                    current_alpha_background += currnent_dt_background;
+                }catch (Throwable e){
+
+                }
             }else
             {
-                sb.setColor(1, 1, 1, current_alpha_background);
-                sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
-                sb.setColor(1, 1, 1, 1.0f - current_alpha_background);
-                sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
-                current_alpha_background += currnent_dt_background;
+                try {
+                    sb.setColor(1, 1, 1, current_alpha_background);
+                    sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
+                    sb.setColor(1, 1, 1, 1.0f - current_alpha_background);
+                    sb.draw(background_frames.get(miss_ball - 1), -25, -25, 550, 900);
+                    current_alpha_background += currnent_dt_background;
+                }catch (Throwable e){
+
+                }
             }
             if (current_alpha_background>=1.0f){
                 current_alpha_background=1.0f;
@@ -1080,6 +862,13 @@ public class PlayState extends State {
 
         FontRed1.draw(sb, " FPS : "+  fps, 10, 790);
         FontRed1.setColor(1, 1, 1, 1);
+        index=0;
+        for (Balloon balloon:balloons){
+            index++;
+        }
+        FontRed1.draw(sb,"balloons_count: "+(4+balloons_count)+" Real: "+(index),10,30);
+        FontRed1.draw(sb,"balloons_number: "+(balloons_number),10,45);
+        FontRed1.draw(sb,"Speed: "+get_avr_speed,10,60);
 
         long memUsageJavaHeap = Gdx.app.getJavaHeap();
         long memUsageNativeHeap = Gdx.app.getNativeHeap();
@@ -1177,6 +966,8 @@ public class PlayState extends State {
             }else{
                 sb.draw(unvibrated,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78,150,156);
             }
+            settings.draw(sb,shaker);
+
 
         }
         if (game_over_ball_fly) {
@@ -1188,8 +979,9 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
-        poop_Sound.dispose();
-        background_Music.dispose();
+        //poop_Sound.dispose();
+       // background_Music.dispose();
+
         boss_Music.dispose();
        // background.dispose();
         //texture_b_b.dispose();
@@ -1204,7 +996,8 @@ public class PlayState extends State {
 
     }
 
-    public int get_speed_for_balloon(){
+
+    public static int get_speed_for_balloon(){
         int speed = 550;
         speed = 100+(int)(Math.sqrt(cautch_ball)*8)+random( ((int)Math.log(cautch_ball+2))*40);
         if (speed>=500){
@@ -1216,6 +1009,14 @@ public class PlayState extends State {
     }
     public void missed_ball(){
         miss_ball--;
+    }
+
+    public static void setPAUSE(boolean pause) {
+        PlayState.pause = pause;
+    }
+    public static void RESTART_STAGE() {
+        gsm.set(new PlayState(gsm));
+        PlayState.setUNPAUSE();
     }
 
 

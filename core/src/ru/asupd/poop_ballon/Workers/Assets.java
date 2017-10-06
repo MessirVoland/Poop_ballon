@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -57,9 +58,12 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> heart_baloon_hole2 = new AssetDescriptor<Texture>("heart_baloon_hole2.png",Texture.class);
     public static final AssetDescriptor<Texture> heart_baloon_anim = new AssetDescriptor<Texture>("pop_HB.png",Texture.class);
 
-
-
     public static final AssetDescriptor<Texture> back_ground_atlas = new AssetDescriptor<Texture>("bacgound_atlas.png",Texture.class);
+
+    //Меню
+    public static final AssetDescriptor<Texture> restart_ico = new AssetDescriptor<Texture>("restart_ico.png",Texture.class);
+
+    public static final AssetDescriptor<Music> background_Music = new AssetDescriptor<Music>("sound.mp3",Music.class);
 
 
     //Частицы
@@ -131,6 +135,10 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(heart_baloon_anim);
 
         manager.load(back_ground_atlas);
+
+        manager.load(restart_ico);
+
+        manager.load(background_Music);
 
         //manager.load(poof_balloon_atlas_o_Texture_region, TextureRegion.class);
         //effect = new ParticleEffect();

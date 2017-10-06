@@ -100,6 +100,7 @@ public class GameoverState extends State {
     protected void handleInput() {
         if(Gdx.input.justTouched()){
            gsm.set(new PlayState(gsm));
+           PlayState.RESTART_STAGE();
            // gsm.pop();
         }
     }
