@@ -34,7 +34,7 @@ public class Settings {
             pref.putBoolean("vibro",false);
             pref.flush();
             mute=false;
-            vibro=false;
+            vibro=true;
         }
         else {
             mute=pref.getBoolean("mute");
@@ -60,7 +60,7 @@ public class Settings {
         }else{
             sb.draw(unmute_tex,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78,150,156);
         }
-        if (vibro){
+        if (!vibro){
             sb.draw(vibro_tex,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78,150,156);
         }else{
             sb.draw(unvibro_tex,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78,150,156);
