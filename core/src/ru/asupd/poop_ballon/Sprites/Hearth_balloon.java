@@ -80,10 +80,12 @@ public class Hearth_balloon extends Creature {
 
 
         //+5
+
         ParticleEffect effect = Assets.hearth_ballon_part;
         PlayState.combo_effects.add(new ParticleEffect(effect));
         PlayState.combo_effects.get(PlayState.combo_effects.size-1).setPosition(position.x+45,position.y+145);
         PlayState.combo_effects.get(PlayState.combo_effects.size-1).start();
+        PlayState.score_num.addScore(5);
 
 
 

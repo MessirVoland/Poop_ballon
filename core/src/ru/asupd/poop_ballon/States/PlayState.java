@@ -68,7 +68,7 @@ public class PlayState extends State {
     public static int cautch_ball = 0;//поймано шаров
     public static int miss_ball = 0;//пропущено шаров
 
-    public static Sound poop_Sound;//звук лопания
+    private static Sound poop_Sound;//звук лопания
     public static final float minX = 0.75f;//Диапазон изменения хлопка
     public static final float maxX = 1.7f;
     public static int balloons_count=0;
@@ -85,7 +85,7 @@ public class PlayState extends State {
     private static boolean mute;//тишина
     private boolean vibro=true;//вибратор
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
-    public static float volume;//звук хлопков)
+    private static float volume;//звук хлопков)
 
     //гейм овер
     private boolean game_over_start=false;//перероход в гейм овер
@@ -104,7 +104,7 @@ public class PlayState extends State {
     public static Shaker shaker;//шейкео
     public static int index;//хз
     private static boolean pause=false;
-    private float min_x=0.0f,min_y=0.0f;
+    //private float min_x=0.0f,min_y=0.0f;
 
     boolean started;//для страрта игры
     private GameoverState gameoverState;
@@ -113,6 +113,7 @@ public class PlayState extends State {
     private Vector3 position;//Координаты заголовка игры
     private Vector3 velosity;//вектор движения заголовка
 
+    private final static int CHANSE_OF_BOSS = 20;//Шанс появления босса
     public static Boss_balloon boss_balloon;//босс
 
     public static Hearth_balloon hearth_balloon;
@@ -121,7 +122,7 @@ public class PlayState extends State {
     private int chance_100_150=random(50)+100;
 
     public static int STEP_for_balloon=50;
-    public static final int MAX_STEP=401;
+    //public static final int MAX_STEP=401;
     public static int current_step=1;
     float cureunt_dt_for_speed=0;
 
@@ -130,8 +131,6 @@ public class PlayState extends State {
     private static final float TIME_FOR_COMBO = 1.25f;//максимальное время отображения значка комбо
     float current_time_for_combo = 0.0f;//текущее время комбо
     public static Array<ParticleEffect> combo_effects = new Array<ParticleEffect>();
-
-    private Vector3 touchPos;//вектор прикосновния
 
     public static Settings settings;
 
@@ -164,6 +163,7 @@ public class PlayState extends State {
         cautch_ball=0;
         balloons_count=0;
         balloons_number=0;
+        counter_of_h_ballons=0;
 
         //инициализация музыки
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
@@ -229,8 +229,8 @@ public class PlayState extends State {
         }
         //инициализация босса
         boss_balloon = new Boss_balloon(random(4)*96,-195-random(50),80);
-        int chance_of_boss = 20;
-        if (random(100)>= chance_of_boss){
+
+        if (random(100)>= CHANSE_OF_BOSS){
             boss_balloon.setLive(false);
         }
         hearth_balloon = new Hearth_balloon();
@@ -252,7 +252,7 @@ public class PlayState extends State {
     protected void handleInput() {
         if(Gdx.input.justTouched()) {
 
-            touchPos = new Vector3();
+            Vector3 touchPos = new Vector3();
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             //System.out.println("touchPos :"+touchPos);
             camera.unproject(touchPos);
@@ -261,13 +261,13 @@ public class PlayState extends State {
 
             //клик по боссу
 
-            if (!pause){
-                if (touchPos!=null) {
+            /*if (!pause){
+                if (touchPos !=null) {
                     min_x = touchPos.x;
                     min_y = touchPos.y;
                 }
-            }
-			
+            }*/
+
             if (!pause) {
                 //босс
                 if (boss_balloon.isStarted()) {
