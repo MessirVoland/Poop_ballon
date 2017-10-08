@@ -58,6 +58,8 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> heart_baloon_hole2 = new AssetDescriptor<Texture>("heart_baloon_hole2.png",Texture.class);
     public static final AssetDescriptor<Texture> heart_baloon_anim = new AssetDescriptor<Texture>("pop_HB.png",Texture.class);
 
+    //не
+
     public static final AssetDescriptor<Texture> back_ground_atlas = new AssetDescriptor<Texture>("bacgound_atlas.png",Texture.class);
 
     //Меню
