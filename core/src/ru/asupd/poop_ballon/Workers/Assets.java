@@ -58,7 +58,9 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> heart_baloon_hole2 = new AssetDescriptor<Texture>("heart_baloon_hole2.png",Texture.class);
     public static final AssetDescriptor<Texture> heart_baloon_anim = new AssetDescriptor<Texture>("pop_HB.png",Texture.class);
 
-    //не
+    //нестандартные шары
+    public static final AssetDescriptor<Texture> balloon_wooden = new AssetDescriptor<Texture>("wood_b.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_stone = new AssetDescriptor<Texture>("stone_b.png",Texture.class);
 
     public static final AssetDescriptor<Texture> back_ground_atlas = new AssetDescriptor<Texture>("bacgound_atlas.png",Texture.class);
 
@@ -135,6 +137,9 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(heart_baloon_hole1);
         manager.load(heart_baloon_hole2);
         manager.load(heart_baloon_anim);
+
+        manager.load(balloon_wooden);
+        manager.load(balloon_stone);
 
         manager.load(back_ground_atlas);
 

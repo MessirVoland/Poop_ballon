@@ -38,6 +38,11 @@ public class Balloon {
     private boolean part_start=true;
     private boolean anim_end=false;
 
+    private boolean N_ST_color=false;
+    private int dice;
+    private static final float CHANSE_OF_WOODEN_BALLOON=0.10f;
+   // private static final float CHANSE_OF_STONE_BALLOON=0.10f;
+
     public ParticleEffect effect;
 
     private int max_combo;
@@ -129,8 +134,8 @@ public class Balloon {
         currentTime=0;
         // texture_pooped=new Texture("blow.png");
         // texture_bloody=new Texture("Blood_Splatter.png");
-
         //color_of_balloon=random(3);
+
         if (grav<260){
             color_of_balloon=0;
             effect = new ParticleEffect(Assets.effect_green);
