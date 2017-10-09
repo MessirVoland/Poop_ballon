@@ -100,7 +100,7 @@ public class MenuState extends State {
                 break;
         }
         // = 30;
-        FontRed1.draw(sb," Pop Balloons v.0.9.7-beta-pre-release.rev.A.build.17", 15, 100);
+        FontRed1.draw(sb," Pop Balloons v.0.9.7-beta-pre-release.rev.B.build.10", 15, 100);
         FontRed1.draw(sb," Android API level :"+Gdx.app.getVersion(), 15, 70);
         String st_locale=new String("");
         switch (var){

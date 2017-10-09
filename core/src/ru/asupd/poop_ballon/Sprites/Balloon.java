@@ -46,7 +46,7 @@ public class Balloon {
     }
 
     private int dice;
-    private static final int CHANSE_OF_WOODEN_BALLOON=10;
+    private static final int CHANSE_OF_WOODEN_BALLOON=15;
    // private static final float CHANSE_OF_STONE_BALLOON=0.10f;
 
     public ParticleEffect effect;

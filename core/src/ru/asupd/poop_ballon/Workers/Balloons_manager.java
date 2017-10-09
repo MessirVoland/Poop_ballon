@@ -54,7 +54,7 @@ public class Balloons_manager {
 
 
 
-                                if (PlayState.counter_of_h_ballons<=PlayState.score_num.getScore()/300){
+                                if (PlayState.counter_of_h_ballons<=PlayState.score_num.getScore()/120*(PlayState.settings.hi_score()/500+1)){
                                     if (PlayState.miss_ball>=1) {
                                         PlayState.hearth_balloon.setCan_fly(true);
                                         PlayState.hearth_balloon.setFly(true);
