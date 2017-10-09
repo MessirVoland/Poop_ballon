@@ -138,9 +138,10 @@ public class Balloon {
         //effect = Assets.manager.get(Assets.Particles_of_balloon_g,ParticleEffect.class);
         //new ParticleEffect(Assets.effect);
 
-        if (random(99) < CHANSE_OF_WOODEN_BALLOON) {
-            N_ST_color = true;
-
+        if (PlayState.settings.hi_score()>=500) {
+            if (random(99) < CHANSE_OF_WOODEN_BALLOON) {
+                N_ST_color = true;
+            }
         }
         // zerovelosity = new Vector3(0, 0, 0);
         this.velosity.y = grav;
@@ -189,7 +190,6 @@ public class Balloon {
         }
         else
         {
-
             color_of_balloon = 12;
             effect = new ParticleEffect(Assets.effect_purple);
             animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_p, Texture.class)), 3, ANIMATION_TIME);

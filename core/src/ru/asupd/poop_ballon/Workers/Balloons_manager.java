@@ -74,8 +74,8 @@ public class Balloons_manager {
                                         balloon.setWooden_color(true);
                                     }
                                     if (wooden){
-                                        PlayState.score_num.addScore(PlayState.current_combo *2);
-                                        System.out.println("Added W "+PlayState.current_combo *2);
+                                        PlayState.score_num.addScore(PlayState.current_combo *(PlayState.settings.hi_score()/500+1));
+                                        System.out.println("Added W "+PlayState.current_combo *(PlayState.settings.hi_score()/500+1));
                                     }else {
                                         PlayState.score_num.addScore(PlayState.current_combo);
                                         System.out.println("Added Nw"+(PlayState.current_combo));
@@ -166,9 +166,18 @@ public class Balloons_manager {
                         balloon.part_start();
                         break;
                     case 12:
-                        sb.setColor(1, 1, 1, 1);
-                        sb.draw(Assets.instance.manager.get(Assets.balloon_wooden), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                        break;
+                        switch (PlayState.settings.hi_score()/500) {
+                            case 0:
+                                break;
+                            case 1:
+                                sb.setColor(1, 1, 1, 1);
+                                sb.draw(Assets.instance.manager.get(Assets.balloon_wooden), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                break;
+                            default:
+                                sb.setColor(1, 1, 1, 1);
+                                sb.draw(Assets.instance.manager.get(Assets.balloon_stone), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                break;
+                        }break;
                     case 13:
                         sb.setColor(1, 1, 1, 1);
                         sb.draw(balloon.getFrames(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);

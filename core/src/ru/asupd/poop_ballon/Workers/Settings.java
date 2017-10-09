@@ -131,4 +131,8 @@ public class Settings {
     public boolean isVibro() {
         return vibro;
     }
+
+    public int hi_score(){
+        return pref.getInteger("highscore");
+    }
 }
