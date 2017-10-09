@@ -22,6 +22,7 @@ import ru.asupd.poop_ballon.Sprites.Cloud;
 import ru.asupd.poop_ballon.Sprites.Hearth_balloon;
 import ru.asupd.poop_ballon.Sprites.Star;
 import ru.asupd.poop_ballon.Workers.Assets;
+import ru.asupd.poop_ballon.Workers.Balloons_manager;
 import ru.asupd.poop_ballon.Workers.MyInputProcessor;
 import ru.asupd.poop_ballon.Workers.Resizer;
 import ru.asupd.poop_ballon.Workers.Score;
@@ -124,6 +125,8 @@ public class PlayState extends State {
     public static int current_step=1;
     float cureunt_dt_for_speed=0;
 
+    public static Balloons_manager balloons_manager;
+
     //Комбо
     public static int current_combo=0;
     private static final float TIME_FOR_COMBO = 1.25f;//максимальное время отображения значка комбо
@@ -152,6 +155,8 @@ public class PlayState extends State {
 
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
+
+
 
         shaker = new Shaker(camera);
         started=false;//начало игры
@@ -215,6 +220,7 @@ public class PlayState extends State {
             balloons.add(new Balloon(i * 96,-195-random(50),get_speed_for_balloon(),true));
             //balloons.get(i).setAnimation_idle(poof_balloon_g);
         }
+        balloons_manager=new Balloons_manager(balloons);
 
         //инициализация массива облаков
         clouds = new Array<Cloud>();
@@ -602,69 +608,7 @@ public class PlayState extends State {
             }
         }
 
-        for (Balloon balloon : balloons) {
-            sb.setColor(1,1,1,0.9f);
-            if (!balloon.isAnim_end()) {
-                switch (balloon.getColor_of_balloon()) {
-
-                    case 0:
-                         sb.draw(Assets.instance.manager.get(Assets.balloon_green, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                        break;
-                    case 1:
-                        sb.draw(Assets.instance.manager.get(Assets.balloon_yellow, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                        break;
-                    case 2:
-                       sb.draw(Assets.instance.manager.get(Assets.balloon_blue, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                        break;
-                    case 3:
-                        sb.draw(Assets.instance.manager.get(Assets.balloon_red, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                        break;
-                    case 4:
-                        sb.draw(Assets.instance.manager.get(Assets.balloon_purple, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                        break;
-                    case 5:
-                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
-                        balloon.part_start();
-                        break;
-                    case 6:
-                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
-                        balloon.part_start();
-                        break;
-                    case 7:
-                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
-                        balloon.part_start();
-                        break;
-                    case 8:
-                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
-                        balloon.part_start();
-                        break;
-                    case 9:
-                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
-                        balloon.part_start();
-                      break;
-                    case 10:
-                        sb.setColor(1, 1, 1, 1);
-                        sb.draw(Assets.instance.manager.get(Assets.balloon_orange, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                        break;
-                    case 11:
-                        sb.setColor(1, 1, 1, 1);
-                        sb.draw(balloon.getFrames(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
-                        balloon.part_start();
-                        break;
-                    case 12:
-                        sb.setColor(1, 1, 1, 1);
-                        sb.draw(Assets.instance.manager.get(Assets.balloon_wooden), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
-                        break;
-                    case 13:
-                        sb.setColor(1, 1, 1, 1);
-                        sb.draw(balloon.getFrames(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
-                        balloon.part_start();
-                        break;
-                }
-            }
-
-        }
-        sb.setColor(1,1,1,1);
+        balloons_manager.draw(sb);
 
         if (combo_effects.size>=1) {
             for (int j = 0; j <= combo_effects.size - 1; j++) {

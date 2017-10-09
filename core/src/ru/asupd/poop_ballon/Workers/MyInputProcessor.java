@@ -84,89 +84,9 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
             //Клик по шарам для проверки комбо, да долго проверять клик по шарам дважды но ничего лучше не придумал
             final int finalScreenX = screenX;
             final int finalScreenY = screenY;
-            final boolean[] wooden = {false};
+            //final boolean[] wooden = {false};
 
-            Gdx.app.postRunnable(new Runnable() {
-                @Override
-                public void run() {
-                    for(Balloon balloon :PlayState.balloons) {
-                        if ((balloon.getPosition().x < finalScreenX) & (balloon.getPosition().x + 100 > finalScreenX)) {
-                            if ((balloon.getPosition().y < finalScreenY) & (balloon.getPosition().y + 200 > finalScreenY)) {
-                                if (!balloon.isPooped()) {
-                                    PlayState.current_combo++;
-                                    PlayState.current_step++;
-                                    balloon.setCombo(PlayState.current_combo);
-                                    if (!wooden[0]){
-                                        wooden[0] =balloon.isN_ST_color();
-                                    }
-                                    // System.out.println("Current combo on click: "+current_combo);
-                                }
-                            }
-                        }
-                    }
-                    int mini_step=0;
-                    for (Balloon balloon :PlayState.balloons) {
-                        if ((balloon.getPosition().x < finalScreenX) & (balloon.getPosition().x + 100 > finalScreenX)) {
-                            if ((balloon.getPosition().y < finalScreenY) & (balloon.getPosition().y + 200 > finalScreenY)) {
-                                if (!balloon.isPooped()) {
-                                    //if (800-finalScreenY < 750) {
-                                        //System.out.println("touched the ball :");
-                                        PlayState.make_poop_Sound();
-
-                                        PlayState.shaker.shake(0.276f); // 0.2f
-                                        PlayState.cautch_ball++;
-                                        PlayState.score_num.addScore(1);
-
-
-                                        if (PlayState.counter_of_h_ballons<=PlayState.score_num.getScore()/300){
-                                            if (PlayState.miss_ball>=1) {
-                                                PlayState.hearth_balloon.setCan_fly(true);
-                                                PlayState.hearth_balloon.setFly(true);
-                                            }
-                                            else
-                                            {
-                                                PlayState.counter_of_h_ballons++;
-                                            }
-                                        }
-
-                                        if (PlayState.current_combo >= 2) {
-                                            mini_step++;
-                                            if (mini_step==1){
-                                                balloon.start_combo_part();
-                                            }
-                                            if (wooden[0]) {
-                                                balloon.setWooden_color(true);
-                                            }
-
-                                            PlayState.score_num.addScore(PlayState.current_combo * PlayState.current_combo - PlayState.current_combo);
-                                            PlayState.score_num.setCombo(PlayState.current_combo);
-
-                                            balloon.setMax_combo(PlayState.current_combo);
-
-                                        } else {
-                                            balloon.setCombo(0);
-                                        }
-                                        balloon.setPooped();
-                                        if ((PlayState.current_step >= PlayState.STEP_for_balloon) & (PlayState.cautch_ball <= 500)) {
-                                            PlayState.current_step = 0;
-                                            // System.out.println("New balloon generated");
-                                            PlayState.STEP_for_balloon += 20;
-                                            PlayState.balloons_count++;
-                                            PlayState.balloons_number++;
-                                            PlayState.balloons.add(new Balloon(random(4) * 96, -195 - random(50), PlayState.get_speed_for_balloon(), !PlayState.boss_balloon.isStarted()));
-
-                                        }
-                                        PlayState.balloons_number++;
-                                        PlayState.balloons.add(new Balloon(random(4) * 96, -195 - random(50), PlayState.get_speed_for_balloon(), !PlayState.boss_balloon.isStarted()));
-                                    }
-                                }
-                            }
-                       // }
-                        PlayState.index++;
-                    }
-                }
-            });
-
+            PlayState.balloons_manager.click(finalScreenX,finalScreenY);
 
 
             if (PlayState.miss_ball>=1){

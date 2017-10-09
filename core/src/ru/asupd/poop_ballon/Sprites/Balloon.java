@@ -90,7 +90,11 @@ public class Balloon {
 
         }
         else{
-            color_of_balloon+=5;
+            if (N_ST_color){
+                color_of_balloon++;
+            }else {
+                color_of_balloon += 5;
+            }
             this.pooped = true;
         }
 
@@ -250,7 +254,7 @@ public class Balloon {
             make_orange=false;
             shaker.inc();
             if (wooden_color){
-                color_of_balloon=11;
+                color_of_balloon=12;
             }else {
                 color_of_balloon = 10;
             }
@@ -334,6 +338,7 @@ public class Balloon {
                 combo = false;
                 currentTime = 0;
                // animation_current_balloon.update(dt);
+                System.out.println(color_of_balloon);
                 color_of_balloon++;
            }
        }
