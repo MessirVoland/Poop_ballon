@@ -112,7 +112,8 @@ public class PlayState extends State {
     private Vector3 position;//Координаты заголовка игры
     private Vector3 velosity;//вектор движения заголовка
 
-    private final static int CHANSE_OF_BOSS = 20;//Шанс появления босса
+    //с v.0.9.7.rev.B.build.11 босс отключен
+    private final static int CHANSE_OF_BOSS = -1;//20  Шанс появления босса
     public static Boss_balloon boss_balloon;//босс
 
     public static Hearth_balloon hearth_balloon;

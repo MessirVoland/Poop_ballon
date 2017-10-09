@@ -88,7 +88,7 @@ public class MenuState extends State {
             FontRed1.draw(sb, " Загрузка >>> " + +Assets.instance.manager.getProgress() * 100 + "%", 15, 730);
         }
 
-        
+
         switch (Gdx.app.getType()){
             case Desktop:
                 FontRed1.draw(sb, " PC Версия", 15, 760);
