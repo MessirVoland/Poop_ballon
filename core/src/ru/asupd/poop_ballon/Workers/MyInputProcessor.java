@@ -84,6 +84,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
             //Клик по шарам для проверки комбо, да долго проверять клик по шарам дважды но ничего лучше не придумал
             final int finalScreenX = screenX;
             final int finalScreenY = screenY;
+            final boolean[] wooden = {false};
 
             Gdx.app.postRunnable(new Runnable() {
                 @Override
@@ -95,6 +96,9 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                                     PlayState.current_combo++;
                                     PlayState.current_step++;
                                     balloon.setCombo(PlayState.current_combo);
+                                    if (!wooden[0]){
+                                        wooden[0] =balloon.isN_ST_color();
+                                    }
                                     // System.out.println("Current combo on click: "+current_combo);
                                 }
                             }
@@ -129,6 +133,9 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                                             mini_step++;
                                             if (mini_step==1){
                                                 balloon.start_combo_part();
+                                            }
+                                            if (wooden[0]) {
+                                                balloon.setWooden_color(true);
                                             }
 
                                             PlayState.score_num.addScore(PlayState.current_combo * PlayState.current_combo - PlayState.current_combo);

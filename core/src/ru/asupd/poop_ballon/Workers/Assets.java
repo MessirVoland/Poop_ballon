@@ -60,6 +60,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     //нестандартные шары
     public static final AssetDescriptor<Texture> balloon_wooden = new AssetDescriptor<Texture>("wood_b.png",Texture.class);
+    public static final String anim_balloon_wooden = "pop_o.png";
     public static final AssetDescriptor<Texture> balloon_stone = new AssetDescriptor<Texture>("stone_b.png",Texture.class);
 
     public static final AssetDescriptor<Texture> back_ground_atlas = new AssetDescriptor<Texture>("bacgound_atlas.png",Texture.class);

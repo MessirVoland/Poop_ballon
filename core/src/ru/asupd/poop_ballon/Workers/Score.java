@@ -100,6 +100,9 @@ public class Score {
         sb.draw(frames_numbers.get(megred_high_score[2]),x+20,y,25,31);    //245
         sb.draw(frames_numbers.get(megred_high_score[3]),x,y,25,31);    //225
     }
+    public int getBuffer() {
+        return buffer;
+    }
     public void dispose(){
 
     }

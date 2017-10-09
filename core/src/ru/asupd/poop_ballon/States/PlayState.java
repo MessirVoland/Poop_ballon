@@ -312,8 +312,10 @@ public class PlayState extends State {
                     }
                 }
                 if ((!game_over_ball_fly)&(game_over_well_play)){
-                    game_over_ball_fly=true;
-                    game_over_dt=0;
+                    if (score_num.getBuffer()>=0) {
+                        game_over_ball_fly = true;
+                        game_over_dt = 0;
+                    }
                 }
 
                 if (!game_over_well_play){
@@ -645,6 +647,15 @@ public class PlayState extends State {
                         sb.draw(Assets.instance.manager.get(Assets.balloon_orange, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                         break;
                     case 11:
+                        sb.setColor(1, 1, 1, 1);
+                        sb.draw(balloon.getFrames(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                        balloon.part_start();
+                        break;
+                    case 12:
+                        sb.setColor(1, 1, 1, 1);
+                        sb.draw(Assets.instance.manager.get(Assets.balloon_wooden), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                        break;
+                    case 13:
                         sb.setColor(1, 1, 1, 1);
                         sb.draw(balloon.getFrames(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
                         balloon.part_start();
