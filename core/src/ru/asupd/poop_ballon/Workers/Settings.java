@@ -60,7 +60,7 @@ public class Settings {
         }else{
             sb.draw(unmute_tex,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78,150,156);
         }
-        if (!vibro){
+        if (vibro){
             sb.draw(vibro_tex,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78,150,156);
         }else{
             sb.draw(unvibro_tex,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78,150,156);
@@ -112,14 +112,14 @@ public class Settings {
         else
         //вывод из паузы
         {
-            if (one_click) {
+           // if (one_click) {
                 PlayState.setUNPAUSE();
-                System.out.println("Unpause()");
-                one_click=false;
-            }
-             else {
-                one_click=true;
-            }
+           //     System.out.println("Unpause()");
+            //    one_click=false;
+          //  }
+           //  else {
+           //     one_click=true;
+          //  }
         }
 
     }

@@ -43,11 +43,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
         screenY= (int) touchPos.y;
 
         //System.out.println("td screenX:"+screenX+" td screenY:"+screenY);
-        if ((480 - 69 < screenX) & (480 - 69 + 64 > screenX)) {
-            if ((720 < screenY) & (720 + 64 > screenY)) {
-                PlayState.setPAUSE(!PlayState.isPause());
-            }
-        }
+
         //если пауза
         if (PlayState.isPause()){
             PlayState.settings.clicked(screenX,screenY);
@@ -87,6 +83,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
             //final boolean[] wooden = {false};
 
             PlayState.balloons_manager.click(finalScreenX,finalScreenY);
+
 
 
             if (PlayState.miss_ball>=1){
