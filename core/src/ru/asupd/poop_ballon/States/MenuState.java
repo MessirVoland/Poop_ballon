@@ -1,17 +1,11 @@
 package ru.asupd.poop_ballon.States;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Net;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Calendar;
 import java.util.Locale;
 
 import ru.asupd.poop_ballon.GameStateManager;
@@ -52,49 +46,7 @@ public class MenuState extends State {
    //     FontRed1 = generator.generateFont(parameter);
    //     generator.dispose();
         //FontRed1.setColor(Color.RED);
-        Net.HttpRequest httpRequest = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpRequest.setUrl("http://currentmillis.com/time/minutes-since-unix-epoch.php");
-        Net.HttpResponseListener request = new Net.HttpResponseListener() {
 
-            @Override
-            public void handleHttpResponse(Net.HttpResponse httpResponse) {
-                final InputStream resultAsStream = httpResponse.getResultAsStream();
-                byte[] b=new byte[100];
-                String s="";
-                try {
-                    resultAsStream.read(b);
-                    String ss = new String(b) ;
-                    long millis = System.currentTimeMillis();
-                    System.out.println(millis);
-
-                    System.out.println(ss);
-                   // long longe= Long.parseLong(ss);
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(millis);
-                    System.out.println(calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
-                    System.out.println(calendar.get(Calendar.DAY_OF_MONTH) + ":" + calendar.get(Calendar.MONTH));
-
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                System.out.println("ok");
-
-            }
-
-            @Override
-            public void failed(Throwable t) {
-                System.out.println(t.toString());
-
-            }
-
-            @Override
-            public void cancelled() {
-                // TODO Auto-generated method stub
-
-            }
-        };
-        Gdx.net.sendHttpRequest(httpRequest, request);
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {
