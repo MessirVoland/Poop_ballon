@@ -15,11 +15,23 @@ import static com.badlogic.gdx.math.MathUtils.random;
  */
 
 public class Balloons_manager {
+    private static int current_difficult;
     private static Array<Balloon> balloons;//массив шаров
+
     public Balloons_manager(Array<Balloon> balloons_input) {
+        current_difficult=(PlayState.settings.hi_score()/500+1);
         balloons = balloons_input;
     }
-    public void click(final int finalScreenX,final int finalScreenY){
+
+    public int getCurrent_difficult_up() {
+        current_difficult=(PlayState.settings.hi_score()/500+1);
+        if (current_difficult>=3){
+            current_difficult=3;//ограничение для камня
+        }
+        return current_difficult;
+    }
+
+    public void click(final int finalScreenX, final int finalScreenY){
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {
@@ -54,7 +66,7 @@ public class Balloons_manager {
 
 
 
-                                if (PlayState.counter_of_h_ballons<=PlayState.score_num.getScore()/120*(PlayState.settings.hi_score()/500+1)){
+                                if (PlayState.counter_of_h_ballons<=PlayState.score_num.getScore()/120*getCurrent_difficult_up()){
                                     if (PlayState.miss_ball>=1) {
                                         PlayState.hearth_balloon.setCan_fly(true);
                                         PlayState.hearth_balloon.setFly(true);
@@ -74,11 +86,11 @@ public class Balloons_manager {
                                         balloon.setWooden_color(true);
                                     }
                                     if (wooden){
-                                        PlayState.score_num.addScore(PlayState.current_combo *(PlayState.settings.hi_score()/500+1));
-                                        System.out.println("Added W "+PlayState.current_combo *(PlayState.settings.hi_score()/500+1));
+                                        PlayState.score_num.addScore(PlayState.current_combo *getCurrent_difficult_up());
+                                        //System.out.println("Added W "+PlayState.current_combo *(PlayState.settings.hi_score()/500+1));
                                     }else {
                                         PlayState.score_num.addScore(PlayState.current_combo);
-                                        System.out.println("Added Nw"+(PlayState.current_combo));
+                                        //System.out.println("Added Nw"+(PlayState.current_combo));
                                     }
                                     PlayState.score_num.setCombo(PlayState.current_combo);
 
@@ -86,7 +98,7 @@ public class Balloons_manager {
 
                                 } else {
                                     if (wooden){
-                                        PlayState.score_num.addScore(2);
+                                        PlayState.score_num.addScore(getCurrent_difficult_up());
                                         System.out.println("Added 2 W score");
                                     }else {
                                         PlayState.score_num.addScore(1);

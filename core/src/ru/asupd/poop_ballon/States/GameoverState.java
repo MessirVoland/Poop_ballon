@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 
 import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Sprites.Star;
+import ru.asupd.poop_ballon.Workers.Achievement;
 import ru.asupd.poop_ballon.Workers.Assets;
 
 /**
@@ -23,6 +24,7 @@ public class GameoverState extends State {
     TextureRegion background;
     Texture tap_to_restart,your_score,your_best_score,awesome;
     Texture numbers;
+
     Array<TextureRegion> frames_numbers;
     float  currentdt, waiting;
     final BitmapFont FontRed1;
@@ -35,6 +37,7 @@ public class GameoverState extends State {
 
     Vector3 velosity,position;
     Texture big_balloon;
+    Achievement achievement;
 
 
     public void setPosition(Vector3 position) {
@@ -47,6 +50,7 @@ public class GameoverState extends State {
         //System.out.println("redball_x: "+redball_x);
         camera.setToOrtho(false, 480 , 800 );
         this.final_stars=stars;
+        achievement = new Achievement();
 
         //background = new Texture("background_night.png");
         background = new TextureRegion((Texture)(Assets.instance.manager.get(Assets.back_ground_atlas)));
@@ -147,6 +151,7 @@ public class GameoverState extends State {
         sb.draw(frames_numbers.get(score_best[3]),185,50,25,31);
         sb.draw(big_balloon,position.x,position.y,860,800);
 
+        achievement.draw_current_medal(sb,270,200);
 
 
 
