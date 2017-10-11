@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Workers.Assets;
+import ru.asupd.poop_ballon.Workers.Network_time;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 
@@ -24,6 +25,7 @@ public class MenuState extends State {
     private Texture balloon;
     private float current_dt=0;
     private BitmapFont FontRed1;
+    private Network_time network_time;
     int var;
     final String FONT_CHARS = "本土化ローカリゼーションабвгдежзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyzАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|\\/?-+=()*&.;:,{}\"´`'<>";
 
@@ -32,6 +34,11 @@ public class MenuState extends State {
     public MenuState(GameStateManager gsm) {
         super(gsm);
         var = random(5);
+
+        //network_time = new Network_time();
+        network_time = new Network_time();
+        //network_time.get();
+
         camera.setToOrtho(false,640,800 );
         background = new Texture("background_start.png");
         balloon  = new Texture("tap.png");
