@@ -15,7 +15,7 @@ import ru.asupd.poop_ballon.States.PlayState;
 public final class Sound_effects {
     private Sound poop_Sound;//звук лопания
     public Sound_effects() {
-        poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
+        poop_Sound = Gdx.audio.newSound(Gdx.files.internal("sounds/poop.mp3"));
     }
     static {
 

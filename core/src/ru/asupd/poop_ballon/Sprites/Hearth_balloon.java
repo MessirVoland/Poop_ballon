@@ -63,7 +63,7 @@ public class Hearth_balloon extends Creature {
         {
             texture = Assets.instance.manager.get(Assets.heart_baloon_hole1);
             effect1 = new ParticleEffect();
-            effect1.load(Gdx.files.internal("particles/heart_hole1"),Gdx.files.internal("particles"));
+            effect1.load(Gdx.files.internal("particles/heart_hole1.p"),Gdx.files.internal("particles"));
             PlayState.combo_effects.add(effect1);
             PlayState.combo_effects.get(PlayState.combo_effects.size-1).setPosition(position.x,position.y);
             PlayState.combo_effects.get(PlayState.combo_effects.size-1).start();
@@ -72,7 +72,7 @@ public class Hearth_balloon extends Creature {
         {
             texture = Assets.instance.manager.get(Assets.heart_baloon_hole2);
             effect2 = new ParticleEffect();
-            effect2.load(Gdx.files.internal("particles/heart_hole2"),Gdx.files.internal("particles"));
+            effect2.load(Gdx.files.internal("particles/heart_hole2.p"),Gdx.files.internal("particles"));
             PlayState.combo_effects.add(effect2);
             PlayState.combo_effects.get(PlayState.combo_effects.size-1).setPosition(position.x,position.y);
             PlayState.combo_effects.get(PlayState.combo_effects.size-1).start();
@@ -93,6 +93,10 @@ public class Hearth_balloon extends Creature {
     public void restart(){
         texture = Assets.instance.manager.get(Assets.heart_baloon);
         ParticleEffect effect = Assets.hearth_ballon_part_heart;
+        PlayState.combo_effects.add(new ParticleEffect(effect));
+        PlayState.combo_effects.get(PlayState.combo_effects.size-1).setPosition(position.x+45,position.y+145);
+        PlayState.combo_effects.get(PlayState.combo_effects.size-1).start();
+        effect = Assets.hearth_ballon_part_basket;
         PlayState.combo_effects.add(new ParticleEffect(effect));
         PlayState.combo_effects.get(PlayState.combo_effects.size-1).setPosition(position.x+45,position.y+145);
         PlayState.combo_effects.get(PlayState.combo_effects.size-1).start();

@@ -95,6 +95,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect hearth_ballon_part_hole1 = new ParticleEffect();
     public static ParticleEffect hearth_ballon_part_hole2 = new ParticleEffect();
     public static ParticleEffect hearth_ballon_part_heart = new ParticleEffect();
+    public static ParticleEffect hearth_ballon_part_basket = new ParticleEffect();
 
 
     //private AssetManager assetManager;
@@ -159,12 +160,12 @@ public class Assets implements Disposable, AssetErrorListener {
 
         //manager.load(poof_balloon_atlas_o_Texture_region, TextureRegion.class);
         //effect = new ParticleEffect();
-        effect_green.loadEmitters(Gdx.files.internal("particles/pop_green"));
-        effect_yellow.loadEmitters(Gdx.files.internal("particles/pop_yellow"));
-        effect_blue.loadEmitters(Gdx.files.internal("particles/pop_blue"));
-        effect_red.loadEmitters(Gdx.files.internal("particles/pop_red"));
-        effect_purple.loadEmitters(Gdx.files.internal("particles/pop_perp"));
-        effect_orange.loadEmitters(Gdx.files.internal("particles/pop_orange"));
+        effect_green.loadEmitters(Gdx.files.internal("particles/pop_green.p"));
+        effect_yellow.loadEmitters(Gdx.files.internal("particles/pop_yellow.p"));
+        effect_blue.loadEmitters(Gdx.files.internal("particles/pop_blue.p"));
+        effect_red.loadEmitters(Gdx.files.internal("particles/pop_red.p"));
+        effect_purple.loadEmitters(Gdx.files.internal("particles/pop_perp.p"));
+        effect_orange.loadEmitters(Gdx.files.internal("particles/pop_orange.p"));
 
         effect_green.loadEmitterImages(Gdx.files.internal("particles"));
         effect_yellow.loadEmitterImages(Gdx.files.internal("particles"));
@@ -173,11 +174,11 @@ public class Assets implements Disposable, AssetErrorListener {
         effect_purple.loadEmitterImages(Gdx.files.internal("particles"));
         effect_orange.loadEmitterImages(Gdx.files.internal("particles"));
 
-        combo_2x.loadEmitters(Gdx.files.internal("particles/2x_combo"));
-        combo_3x.loadEmitters(Gdx.files.internal("particles/3x_combo"));
-        combo_4x.loadEmitters(Gdx.files.internal("particles/4x_combo"));
-        combo_5x.loadEmitters(Gdx.files.internal("particles/5x_combo"));
-        combo_6x.loadEmitters(Gdx.files.internal("particles/6x_combo"));
+        combo_2x.loadEmitters(Gdx.files.internal("particles/2x_combo.p"));
+        combo_3x.loadEmitters(Gdx.files.internal("particles/3x_combo.p"));
+        combo_4x.loadEmitters(Gdx.files.internal("particles/4x_combo.p"));
+        combo_5x.loadEmitters(Gdx.files.internal("particles/5x_combo.p"));
+        combo_6x.loadEmitters(Gdx.files.internal("particles/6x_combo.p"));
         //combo_7x.loadEmitters(Gdx.files.internal("particles/7x_combo"));
 
         combo_2x.loadEmitterImages(Gdx.files.internal("particles"));
@@ -187,10 +188,11 @@ public class Assets implements Disposable, AssetErrorListener {
         combo_6x.loadEmitterImages(Gdx.files.internal("particles"));
         //combo_7x.loadEmitterImages(Gdx.files.internal("particles/pop_green"));
 
-        hearth_ballon_part.load(Gdx.files.internal("particles/plus5"),Gdx.files.internal("particles"));
-        hearth_ballon_part_hole1.load(Gdx.files.internal("particles/heart_hole1"),Gdx.files.internal("particles"));
-        hearth_ballon_part_hole2.load(Gdx.files.internal("particles/heart_hole2"),Gdx.files.internal("particles"));
-        hearth_ballon_part_heart.load(Gdx.files.internal("particles/heart"),Gdx.files.internal("particles"));
+        hearth_ballon_part.load(Gdx.files.internal("particles/plus5.p"),Gdx.files.internal("particles"));
+        hearth_ballon_part_hole1.load(Gdx.files.internal("particles/heart_hole1.p"),Gdx.files.internal("particles"));
+        hearth_ballon_part_hole2.load(Gdx.files.internal("particles/heart_hole2.p"),Gdx.files.internal("particles"));
+        hearth_ballon_part_heart.load(Gdx.files.internal("particles/heart.p"),Gdx.files.internal("particles"));
+        hearth_ballon_part_basket.load(Gdx.files.internal("particles/basket.p"),Gdx.files.internal("particles"));
 
 
 
