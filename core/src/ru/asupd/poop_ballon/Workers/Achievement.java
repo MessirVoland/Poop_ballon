@@ -12,16 +12,32 @@ import ru.asupd.poop_ballon.States.PlayState;
  */
 
 public class Achievement {
+    Resizer resizer_medal;
     Array<Texture> medals;
+    private int local_x=270,local_y=200;
     public Achievement() {
         medals=new Array<Texture>();
+
         medals.add(Assets.instance.manager.get(Assets.medal_wooden));
         medals.add(Assets.instance.manager.get(Assets.medal_stone));
+        resizer_medal = new Resizer(local_x,local_y);
     }
     public void draw_current_medal(SpriteBatch sb,int x,int y){
         int diff= PlayState.balloons_manager.getCurrent_difficult_up();
         if (diff>=2){
             sb.draw(medals.get(diff-2),x,y);
         }
+    }
+    public void start_anim(){
+        resizer_medal.start();
+    }
+    public void draw_current_medal(SpriteBatch sb){
+        int diff= PlayState.balloons_manager.getCurrent_difficult_up();
+        if (diff>=2){
+            sb.draw(medals.get(diff-2),local_x-(resizer_medal.getSize_x()/2),local_y-(resizer_medal.getSize_y()/2),resizer_medal.getSize_x(),resizer_medal.getSize_y());
+        }
+    }
+    public void update(float dt){
+        resizer_medal.update(dt);
     }
 }

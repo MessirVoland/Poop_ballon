@@ -483,6 +483,7 @@ public class PlayState extends State {
             shaker.update(dt);
             score_num.update(dt);
 
+
             //if (balloons.size>=1) {
             //    effect.setPosition(balloons.get(0).getPosition().x, balloons.get(0).getPosition().y);
             //}
@@ -646,8 +647,12 @@ public class PlayState extends State {
         //-------------------------------------------------------------/
 
 
-		sb.draw(options,((int) (shaker.getCamera_sh().position.x)+240-69),((int) (shaker.getCamera_sh().position.y+400-69)),64,64);
-
+        if (!started) {
+            sb.draw(options, ((int) (shaker.getCamera_sh().position.x) + 240 - 69), ((int) (shaker.getCamera_sh().position.y + 400 - 69)), 64, 64);
+        }else
+        {
+            sb.draw(Assets.instance.manager.get(Assets.pause_button), ((int) (shaker.getCamera_sh().position.x) + 240 - 69), ((int) (shaker.getCamera_sh().position.y + 400 - 69)), 64, 64);
+        }
         if (miss_ball>=3) {
             if (!game_over_start) {
                 for (Balloon balloon : balloons) {
@@ -659,6 +664,7 @@ public class PlayState extends State {
                 if (hearth_balloon.isFly()) {
                     hearth_balloon.setFly(false);
                     hearth_balloon.restart();
+                    hearth_balloon.dispose();
                 }
                 game_over_start = true;
                 //инициализация массива звезд

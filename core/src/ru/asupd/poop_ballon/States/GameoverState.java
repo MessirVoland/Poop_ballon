@@ -97,7 +97,7 @@ public class GameoverState extends State {
         FontRed1.setColor(Color.RED); //Красный
         currentdt=0;
         waiting=1.5f;
-
+        achievement.start_anim();
     }
 
     @Override
@@ -111,6 +111,7 @@ public class GameoverState extends State {
 
     @Override
     public void update(float dt) {
+        achievement.update(dt);
         if (currentdt>=waiting) {
             handleInput();
         }
@@ -151,7 +152,8 @@ public class GameoverState extends State {
         sb.draw(frames_numbers.get(score_best[3]),185,50,25,31);
         sb.draw(big_balloon,position.x,position.y,860,800);
 
-        achievement.draw_current_medal(sb,270,200);
+        //achievement.draw_current_medal(sb,270,200);
+        achievement.draw_current_medal(sb);
 
 
 

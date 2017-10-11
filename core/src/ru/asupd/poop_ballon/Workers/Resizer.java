@@ -17,6 +17,14 @@ public class Resizer {
         size_x=x;
         size_y=y;
     }
+    public Resizer() {
+       // size_x=x;
+       // size_y=y;
+    }
+    public void set_coords(float x, float y){
+        size_x=x;
+        size_y=y;
+    }
 
     public void setPosition(int position) {
         this.position = position;

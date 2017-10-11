@@ -70,6 +70,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     //Меню
     public static final AssetDescriptor<Texture> restart_ico = new AssetDescriptor<Texture>("restart_ico.png",Texture.class);
+    public static final AssetDescriptor<Texture> pause_button = new AssetDescriptor<Texture>("pause_but.png",Texture.class);
 
     public static final AssetDescriptor<Music> background_Music = new AssetDescriptor<Music>("sound.mp3",Music.class);
 
@@ -151,6 +152,8 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(back_ground_atlas);
 
         manager.load(restart_ico);
+        manager.load(pause_button);
+
 
         manager.load(background_Music);
 
