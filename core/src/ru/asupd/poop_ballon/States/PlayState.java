@@ -28,6 +28,7 @@ import ru.asupd.poop_ballon.Workers.Resizer;
 import ru.asupd.poop_ballon.Workers.Score;
 import ru.asupd.poop_ballon.Workers.Settings;
 import ru.asupd.poop_ballon.Workers.Shaker;
+import ru.asupd.poop_ballon.Workers.Sound_effects;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 
@@ -69,7 +70,7 @@ public class PlayState extends State {
     public static int cautch_ball = 0;//поймано шаров
     public static int miss_ball = 0;//пропущено шаров
 
-    private static Sound poop_Sound;//звук лопания
+    //private static Sound poop_Sound;//звук лопания
     public static final float minX = 0.75f;//Диапазон изменения хлопка
     public static final float maxX = 1.7f;
     public static int balloons_count=0;
@@ -84,7 +85,7 @@ public class PlayState extends State {
     private Preferences prefs;//для храниния данных
     private int load_hiscore;//макс счет
     private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
-    private static float volume;//звук хлопков)
+    public static float volume;//звук хлопков)
 
     //гейм овер
     private boolean game_over_start=false;//перероход в гейм овер
@@ -138,6 +139,8 @@ public class PlayState extends State {
 
     private MyInputProcessor inputProcessor;//обработчик событий
 
+    public static Sound_effects sound_effects=new Sound_effects();
+
     PlayState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, 480 , 800 );
@@ -170,7 +173,7 @@ public class PlayState extends State {
         counter_of_h_ballons=0;
 
         //инициализация музыки
-        poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
+        //poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
         boss_Music = Gdx.audio.newMusic(Gdx.files.internal("Sound_19272 [Wav_Library_Net].mp3"));
 
         background_Music = Assets.instance.manager.get(Assets.background_Music);
@@ -265,7 +268,7 @@ public class PlayState extends State {
                 if (boss_balloon.isStarted()) {
                     if ((boss_balloon.getPosition().x < touchPos.x) & (boss_balloon.getPosition().x + 100 > touchPos.x)) {
                         if ((boss_balloon.getPosition().y < touchPos.y) & (boss_balloon.getPosition().y + 200 > touchPos.y)) {
-                            poop_Sound.play(volume);
+                            //poop_Sound.play(volume);
                             shaker.shake(0.40f);
                             boss_balloon.clicked_boss();
                         }
@@ -663,7 +666,7 @@ public class PlayState extends State {
                 //убрать шар здоровья
                 if (hearth_balloon.isFly()) {
                     hearth_balloon.setFly(false);
-                    hearth_balloon.restart();
+                    hearth_balloon.remove();
                     hearth_balloon.dispose();
                 }
                 game_over_start = true;
@@ -728,13 +731,7 @@ public class PlayState extends State {
         volume=0.1f;
     }
     public static void make_poop_Sound(){
-        if (!settings.isMute()) {
-            long id = PlayState.poop_Sound.play(PlayState.volume);
-            Random rand = new Random();
-            float finalX = rand.nextFloat() * (PlayState.maxX - PlayState.minX) + PlayState.minX;
-            PlayState.poop_Sound.setPitch(id, finalX);
-            PlayState.poop_Sound.setVolume(id, PlayState.volume);
-        }
+        sound_effects.poop_sound();
     }
 
     @Override

@@ -100,6 +100,16 @@ public class Hearth_balloon extends Creature {
         clicks=0;
         pooped=false;
     }
+    public void remove(){
+        texture = Assets.instance.manager.get(Assets.heart_baloon);
+       // ParticleEffect effect = Assets.hearth_ballon_part_heart;
+       // PlayState.combo_effects.add(new ParticleEffect(effect));
+       // PlayState.combo_effects.get(PlayState.combo_effects.size-1).setPosition(position.x+45,position.y+145);
+       // PlayState.combo_effects.get(PlayState.combo_effects.size-1).start();
+        position.x=-95;
+        clicks=0;
+        pooped=false;
+    }
 
     public Vector3 getPosition() {
 
