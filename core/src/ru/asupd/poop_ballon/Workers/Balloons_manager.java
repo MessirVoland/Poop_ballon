@@ -201,9 +201,13 @@ public class Balloons_manager {
                                 break;
                             case 1:
                                 sb.setColor(1, 1, 1, 1);
-                                sb.draw(Assets.instance.manager.get(Assets.balloon_wooden), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                sb.draw(Assets.instance.manager.get(Assets.balloon_ice), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                                 break;
                             case 2:
+                                sb.setColor(1, 1, 1, 1);
+                                sb.draw(Assets.instance.manager.get(Assets.balloon_wooden), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                break;
+                            case 3:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_stone), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                                 break;

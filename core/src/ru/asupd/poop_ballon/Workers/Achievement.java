@@ -17,10 +17,10 @@ public class Achievement {
     private int local_x=270,local_y=200;
     public Achievement() {
         medals=new Array<Texture>();
-
+        medals.add(Assets.instance.manager.get(Assets.medal_ice));
         medals.add(Assets.instance.manager.get(Assets.medal_wooden));   //1
         medals.add(Assets.instance.manager.get(Assets.medal_stone));    //2
-        medals.add(Assets.instance.manager.get(Assets.medal_stone));    //3
+            //3
         medals.add(Assets.instance.manager.get(Assets.medal_stone));    //4
         medals.add(Assets.instance.manager.get(Assets.medal_stone));    //5
         medals.add(Assets.instance.manager.get(Assets.medal_stone));    //6
