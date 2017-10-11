@@ -27,8 +27,8 @@ public class Balloons_manager {
 
     public int getCurrent_difficult_up() {
         current_difficult=(PlayState.settings.hi_score()/500+1);
-        if (current_difficult>=3){
-            current_difficult=3;//ограничение для камня
+        if (current_difficult>=10){
+            current_difficult=10;//ограничение для золота
         }
         return current_difficult;
     }
@@ -202,6 +202,22 @@ public class Balloons_manager {
                             case 1:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_wooden), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                break;
+                            case 2:
+                                sb.setColor(1, 1, 1, 1);
+                                sb.draw(Assets.instance.manager.get(Assets.balloon_stone), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                break;
+                            case 8:
+                                sb.setColor(1, 1, 1, 1);
+                                sb.draw(Assets.instance.manager.get(Assets.balloon_bronze), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                break;
+                            case 9:
+                                sb.setColor(1, 1, 1, 1);
+                                sb.draw(Assets.instance.manager.get(Assets.balloon_silver), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                break;
+                            case 10:
+                                sb.setColor(1, 1, 1, 1);
+                                sb.draw(Assets.instance.manager.get(Assets.balloon_gold), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                                 break;
                             default:
                                 sb.setColor(1, 1, 1, 1);

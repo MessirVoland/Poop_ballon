@@ -18,8 +18,16 @@ public class Achievement {
     public Achievement() {
         medals=new Array<Texture>();
 
-        medals.add(Assets.instance.manager.get(Assets.medal_wooden));
-        medals.add(Assets.instance.manager.get(Assets.medal_stone));
+        medals.add(Assets.instance.manager.get(Assets.medal_wooden));   //1
+        medals.add(Assets.instance.manager.get(Assets.medal_stone));    //2
+        medals.add(Assets.instance.manager.get(Assets.medal_stone));    //3
+        medals.add(Assets.instance.manager.get(Assets.medal_stone));    //4
+        medals.add(Assets.instance.manager.get(Assets.medal_stone));    //5
+        medals.add(Assets.instance.manager.get(Assets.medal_stone));    //6
+        medals.add(Assets.instance.manager.get(Assets.medal_stone));    //7
+        medals.add(Assets.instance.manager.get(Assets.medal_bronze));    //8
+        medals.add(Assets.instance.manager.get(Assets.medal_silver));    //9
+        medals.add(Assets.instance.manager.get(Assets.medal_gold));    //2
         resizer_medal = new Resizer(local_x,local_y);
     }
     public void draw_current_medal(SpriteBatch sb,int x,int y){
