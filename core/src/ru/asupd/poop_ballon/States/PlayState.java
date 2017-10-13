@@ -1,10 +1,12 @@
 package ru.asupd.poop_ballon.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
@@ -12,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.PerformanceCounter;
 
 import java.util.Random;
 
@@ -140,14 +143,24 @@ public class PlayState extends State {
     public static Settings settings;
 
     private MyInputProcessor inputProcessor;//обработчик событий
+    private MyInputProcessor inputProcessor2;
+    InputMultiplexer inputMultiplexer = new InputMultiplexer();
+    PerformanceCounter perfomancecounter;
 
     public static Sound_effects sound_effects=new Sound_effects();
 
     PlayState(GameStateManager gsm) {
         super(gsm);
+        perfomancecounter = new PerformanceCounter("Counter");
         camera.setToOrtho(false, 480 , 800 );
+
         inputProcessor = new MyInputProcessor();
-        Gdx.input.setInputProcessor(inputProcessor);
+        inputProcessor2 = new MyInputProcessor();
+        inputMultiplexer.addProcessor(inputProcessor);
+        inputMultiplexer.addProcessor(inputProcessor2);
+        Gdx.input.setInputProcessor(inputMultiplexer);
+        //Gdx.input.setInputProcessor(inputProcessor);
+
         Texture background = Assets.instance.manager.get(Assets.back_ground_atlas);
         background_frames = new Array<TextureRegion>();
         back_ground_atlas = new TextureRegion(background);
@@ -300,6 +313,7 @@ public class PlayState extends State {
     public void update(final float dt) {
         handleInput();
         //супер костыль)
+        perfomancecounter.start();
         if (one_cast_music){
             current_dt_one_cast+=dt;
             if(current_dt_one_cast>=0.25f){
@@ -365,6 +379,8 @@ public class PlayState extends State {
                 }
             }
         }
+        perfomancecounter.stop();
+        System.out.println("Perf :"+perfomancecounter.current);
 
         if (!pause) {
 
