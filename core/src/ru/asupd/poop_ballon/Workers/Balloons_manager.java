@@ -49,7 +49,7 @@ public class Balloons_manager {
                         if ((balloon.getPosition().y < finalScreenY) & (balloon.getPosition().y + 200 > finalScreenY)) {
                             if (!balloon.isPooped()) {
                                 get_clicked = true;
-                                System.out.println("true");
+                                //System.out.println("true");
                                 PlayState.current_combo++;
                                 PlayState.current_step++;
                                 balloon.setCombo(PlayState.current_combo);
@@ -116,10 +116,10 @@ public class Balloons_manager {
                                     } else {
                                         if (wooden) {
                                             PlayState.score_num.addScore(getCurrent_difficult_up());
-                                            System.out.println("Added 2 W score");
+                                           // System.out.println("Added 2 W score");
                                         } else {
                                             PlayState.score_num.addScore(1);
-                                            System.out.println("Added 1 nW score");
+                                          //  System.out.println("Added 1 nW score");
                                         }
                                         balloon.setCombo(0);
                                     }

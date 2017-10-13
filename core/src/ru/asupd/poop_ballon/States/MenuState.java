@@ -25,7 +25,7 @@ public class MenuState extends State {
     private Texture balloon;
     private float current_dt=0;
     private BitmapFont FontRed1;
-    private Network_time network_time;
+    //private Network_time network_time;
     int var;
     final String FONT_CHARS = "本土化ローカリゼーションабвгдежзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyzАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|\\/?-+=()*&.;:,{}\"´`'<>";
 
@@ -36,7 +36,7 @@ public class MenuState extends State {
         var = random(5);
 
         //network_time = new Network_time();
-        network_time = new Network_time();
+       // network_time = new Network_time();
         //network_time.get();
 
         camera.setToOrtho(false,640,800 );
@@ -107,7 +107,7 @@ public class MenuState extends State {
                 break;
         }
         // = 30;
-        FontRed1.draw(sb," Pop Balloons v.0.9.7-beta-pre-release.rev.B.build.10", 15, 100);
+        FontRed1.draw(sb," Pop Balloons v.0.9.7-beta-pre-release.rev.B.build.21", 15, 100);
         FontRed1.draw(sb," Android API level :"+Gdx.app.getVersion(), 15, 70);
         String st_locale=new String("");
         switch (var){

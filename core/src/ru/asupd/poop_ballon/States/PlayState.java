@@ -135,6 +135,8 @@ public class PlayState extends State {
     float current_time_for_combo = 0.0f;//текущее время комбо
     public static Array<ParticleEffect> combo_effects = new Array<ParticleEffect>();
 
+    private boolean one_cast_music;
+    private float current_dt_one_cast;
     public static Settings settings;
 
     private MyInputProcessor inputProcessor;//обработчик событий
@@ -201,15 +203,11 @@ public class PlayState extends State {
         settings= new Settings(prefs);
         load_hiscore = prefs.getInteger("highscore");
 
-        if (!settings.isMute())
-        {
-            volume=0.1f;
-            background_Music.play();
-        }
+
 
         miss_ball=0;
 
-        System.out.println("settings.isMute():"+settings.isMute());
+        //System.out.println("settings.isMute():"+settings.isMute());
         prefs.putInteger("last_match_score", 0);
 
         //Вывод макс очков
@@ -235,6 +233,8 @@ public class PlayState extends State {
         //инициализация босса
         boss_balloon = new Boss_balloon(random(4)*96,-195-random(50),80);
 
+
+
         if (random(100)>= CHANSE_OF_BOSS){
             boss_balloon.setLive(false);
         }
@@ -246,6 +246,10 @@ public class PlayState extends State {
 
 
         currnent_dt_background = 0;
+
+        one_cast_music=true;
+        current_dt_one_cast=0.0f;
+
     }
 // Input
 
@@ -295,6 +299,20 @@ public class PlayState extends State {
     @Override
     public void update(final float dt) {
         handleInput();
+        //супер костыль)
+        if (one_cast_music){
+            current_dt_one_cast+=dt;
+            if(current_dt_one_cast>=0.25f){
+                if (!settings.isMute())
+                {
+                    volume=0.1f;
+                    //System.out.println("Воспроизвести звук");
+                    //set_mute();
+                    set_unmute();
+                }
+                one_cast_music=false;
+            }
+        }
 
         cureunt_dt_for_speed+=dt;
         if (cureunt_dt_for_speed>=0.6f){
@@ -508,6 +526,7 @@ public class PlayState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
+
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         //sb.disableBlending();
@@ -536,7 +555,6 @@ public class PlayState extends State {
 
                     current_alpha_background += currnent_dt_background;
                 }catch (Throwable ignored){
-
                 }
             }
             if (current_alpha_background>=1.0f){
@@ -615,6 +633,7 @@ public class PlayState extends State {
 
         balloons_manager.draw(sb);
 
+
         if (combo_effects.size>=1) {
             for (int j = 0; j <= combo_effects.size - 1; j++) {
                 if (!combo_effects.get(j).isComplete()) {
@@ -624,6 +643,8 @@ public class PlayState extends State {
                 }
             }
         }
+
+
 
         //Справочная информация
         int fps = Gdx.graphics.getFramesPerSecond();
@@ -702,13 +723,10 @@ public class PlayState extends State {
         if (pause){
             sb.draw(pause_bgnd,((int) shaker.getCamera_sh().position.x)-240,((int) shaker.getCamera_sh().position.y)-400,480,800);
             settings.draw(sb,shaker);
-
-
         }
         if (game_over_ball_fly) {
             sb.draw(big_balloon, position.x, position.y,860, 800);
         }
-
         sb.end();
     }
 
@@ -738,6 +756,9 @@ public class PlayState extends State {
     public void dispose() {
         boss_Music.dispose();
         background_frames.clear();
+        background_Music.stop();
+        background_Music.setPosition(0.0f);
+        //background_Music=null;
     }
 
 

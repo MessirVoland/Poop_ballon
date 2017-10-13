@@ -338,7 +338,7 @@ public class Balloon {
                 combo = false;
                 currentTime = 0;
                // animation_current_balloon.update(dt);
-                System.out.println(color_of_balloon);
+                //System.out.println(color_of_balloon);
                 color_of_balloon++;
            }
        }
