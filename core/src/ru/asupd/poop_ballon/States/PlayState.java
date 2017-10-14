@@ -143,8 +143,8 @@ public class PlayState extends State {
     public static Settings settings;
 
     private MyInputProcessor inputProcessor;//обработчик событий
-    private MyInputProcessor inputProcessor2;
-    InputMultiplexer inputMultiplexer = new InputMultiplexer();
+    //private MyInputProcessor inputProcessor2;
+    //InputMultiplexer inputMultiplexer = new InputMultiplexer();
     PerformanceCounter perfomancecounter;
 
     public static Sound_effects sound_effects=new Sound_effects();
@@ -155,10 +155,10 @@ public class PlayState extends State {
         camera.setToOrtho(false, 480 , 800 );
 
         inputProcessor = new MyInputProcessor();
-        inputProcessor2 = new MyInputProcessor();
-        inputMultiplexer.addProcessor(inputProcessor);
-        inputMultiplexer.addProcessor(inputProcessor2);
-        Gdx.input.setInputProcessor(inputMultiplexer);
+        //inputProcessor2 = new MyInputProcessor();
+        //inputMultiplexer.addProcessor(inputProcessor);
+        //inputMultiplexer.addProcessor(inputProcessor2);
+        Gdx.input.setInputProcessor(inputProcessor);
         //Gdx.input.setInputProcessor(inputProcessor);
 
         Texture background = Assets.instance.manager.get(Assets.back_ground_atlas);
@@ -380,7 +380,7 @@ public class PlayState extends State {
             }
         }
         perfomancecounter.stop();
-        System.out.println("Perf :"+perfomancecounter.current);
+       // System.out.println("Perf :"+perfomancecounter.current);
 
         if (!pause) {
 

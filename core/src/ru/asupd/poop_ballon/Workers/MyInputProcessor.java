@@ -19,17 +19,17 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean keyTyped(char character) {
-        return false;
+        return true;
     }
 
     @Override
@@ -47,6 +47,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
         //если пауза
         if (PlayState.isPause()){
             PlayState.settings.clicked(screenX,screenY);
+            return true;
         }//Если не пауза
         else{
             //Обработка нажатия на шар сздоровья
@@ -67,6 +68,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                                 PlayState.counter_of_h_ballons++;
                             } else
                                 PlayState.hearth_balloon.clicked();
+                            return true;
                         }
                     }
                 }
@@ -93,28 +95,29 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
 
             //---------------------------------------------------------------------------------------//
 
+            return false;
         }//конец не паузы
 
-        return false;
+
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean scrolled(int amount) {
-        return false;
+        return true;
     }
 }

@@ -80,11 +80,13 @@ public class Settings {
                 ((ScreenX>pos_mute.x)&(ScreenX<pos_mute.x+mute_tex.getWidth()))) {
             if (mute) {
                 mute=false;
+                System.out.println("unmute");
                 PlayState.set_unmute();
             }
             else
             {
                 mute=true;
+                System.out.println("mute");
                 PlayState.set_mute();
             }
             pref.putBoolean("mute", mute);

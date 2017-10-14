@@ -91,14 +91,7 @@ public class Hearth_balloon extends Creature {
     }
     public void restart(){
         texture = Assets.instance.manager.get(Assets.heart_baloon);
-        ParticleEffect effect = Assets.hearth_ballon_part_heart;
-        PlayState.combo_effects.add(new ParticleEffect(effect));
-        PlayState.combo_effects.get(PlayState.combo_effects.size-1).setPosition(position.x+45,position.y+145);
-        PlayState.combo_effects.get(PlayState.combo_effects.size-1).start();
-        effect = Assets.hearth_ballon_part_basket;
-        PlayState.combo_effects.add(new ParticleEffect(effect));
-        PlayState.combo_effects.get(PlayState.combo_effects.size-1).setPosition(position.x+45,position.y+145);
-        PlayState.combo_effects.get(PlayState.combo_effects.size-1).start();
+
         position.x=-95;
         clicks=0;
         pooped=false;
@@ -124,6 +117,14 @@ public class Hearth_balloon extends Creature {
         animation.setCurrentFrameTime(0);
         animation.setFrame(0);
         current_time_dt=0;
+        ParticleEffect effect = Assets.hearth_ballon_part_heart;
+        PlayState.combo_effects.add(new ParticleEffect(effect));
+        PlayState.combo_effects.get(PlayState.combo_effects.size-1).setPosition(position.x+45,position.y+145);
+        PlayState.combo_effects.get(PlayState.combo_effects.size-1).start();
+        effect = Assets.hearth_ballon_part_basket;
+        PlayState.combo_effects.add(new ParticleEffect(effect));
+        PlayState.combo_effects.get(PlayState.combo_effects.size-1).setPosition(position.x+45,position.y+145);
+        PlayState.combo_effects.get(PlayState.combo_effects.size-1).start();
 
         effect1.dispose();
         effect2.dispose();
