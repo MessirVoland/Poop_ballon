@@ -5,7 +5,6 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import ru.asupd.poop_ballon.States.MenuState;
 import ru.asupd.poop_ballon.States.PlayState;
@@ -38,6 +37,7 @@ public class MyGdxGame implements ApplicationListener {
 	public void create () {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
+        //Gdx.gl20.glEnable(GL30.GL_BLEND);
 		Gdx.gl.glClearColor(0, 0, 0, 1);
         PlayState.setUNPAUSE();
 		new Gdx().app.postRunnable(new Runnable() {
@@ -56,15 +56,18 @@ public class MyGdxGame implements ApplicationListener {
 
     @Override
 	public void render () {
-		//perfomancecounter.reset();
-		//perfomancecounter.start();
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
+        //Gdx.gl.glGenBuffer();
         if (gsm!=null) {
             gsm.update(Gdx.graphics.getDeltaTime());
             gsm.render(batch);
         }
-		//perfomancecounter.stop();
-		//System.out.println("Perf :"+perfomancecounter.current);
+
+        Gdx.gl.glFlush();
 	}
 
 	@Override

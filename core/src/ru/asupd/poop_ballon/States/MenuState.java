@@ -75,7 +75,7 @@ public class MenuState extends State {
         handleInput();
         current_dt+=dt;
         if (current_dt>=4.0f){
-            Assets.make_linear();
+          //  Assets.make_linear();
             gsm.set(new PlayState(gsm));
         }
     }

@@ -36,17 +36,16 @@ public class Balloons_manager {
         return get_clicked;
     }
 
+
     public void click(final int finalScreenX, final int finalScreenY){
         get_clicked=false;
-        Gdx.app.postRunnable(new Runnable() {
 
-            @Override
-            public void run() {
                 boolean wooden = false;
                 boolean g_clicked = false;
+
                 for (Balloon balloon : PlayState.balloons) {
-                    if ((balloon.getPosition().x < finalScreenX) & (balloon.getPosition().x + 100 > finalScreenX)) {
-                        if ((balloon.getPosition().y < finalScreenY) & (balloon.getPosition().y + 200 > finalScreenY)) {
+                    if (((balloon.getPosition().x < finalScreenX) & (balloon.getPosition().x + 100 > finalScreenX))&
+                         ((balloon.getPosition().y < finalScreenY) & (balloon.getPosition().y + 200 > finalScreenY))) {
                             if (!balloon.isPooped()) {
                                 get_clicked = true;
                                 //System.out.println("true");
@@ -61,21 +60,22 @@ public class Balloons_manager {
 
                             }
                         }
-                    }
+
                 }
+
                 if (!g_clicked) {
-                    if ((480 - 69 < finalScreenX) & (480 - 69 + 64 > finalScreenX)) {
-                        if ((720 < finalScreenY) & (720 + 64 > finalScreenY)) {
+                    if (((480 - 69 < finalScreenX) & (480 - 69 + 64 > finalScreenX)) &
+                         ((720 < finalScreenY) & (720 + 64 > finalScreenY))) {
                             if (!PlayState.isPause()) {
                                 PlayState.setPAUSE(true);
                             }
                         }
-                    }
+
                 } else {
                     int mini_step = 0;
                     for (Balloon balloon : PlayState.balloons) {
-                        if ((balloon.getPosition().x < finalScreenX) & (balloon.getPosition().x + 100 > finalScreenX)) {
-                            if ((balloon.getPosition().y < finalScreenY) & (balloon.getPosition().y + 200 > finalScreenY)) {
+                        if (((balloon.getPosition().x < finalScreenX) & (balloon.getPosition().x + 100 > finalScreenX)) &
+                             ((balloon.getPosition().y < finalScreenY) & (balloon.getPosition().y + 200 > finalScreenY))) {
                                 if (!balloon.isPooped()) {
                                     //if (800-finalScreenY < 750) {
                                     //System.out.println("touched the ball :");
@@ -136,13 +136,11 @@ public class Balloons_manager {
                                     PlayState.balloons.add(new Balloon(random(4) * 96, -195 - random(50), PlayState.get_speed_for_balloon(), !PlayState.boss_balloon.isStarted()));
                                 }
                             }
-                        }
+
                         // }
                         PlayState.index++;
                     }
                 }
-            }
-        });
     }
 
     public void draw(SpriteBatch sb){
@@ -167,23 +165,23 @@ public class Balloons_manager {
                         sb.draw(Assets.instance.manager.get(Assets.balloon_purple, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                         break;
                     case 5:
-                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                        //sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
                         balloon.part_start();
                         break;
                     case 6:
-                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                       // sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
                         balloon.part_start();
                         break;
                     case 7:
-                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                       // sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
                         balloon.part_start();
                         break;
                     case 8:
-                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                       // sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
                         balloon.part_start();
                         break;
                     case 9:
-                        sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                      //  sb.draw(balloon.getFrames_idle(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
                         balloon.part_start();
                         break;
                     case 10:
@@ -192,7 +190,7 @@ public class Balloons_manager {
                         break;
                     case 11:
                         sb.setColor(1, 1, 1, 1);
-                        sb.draw(balloon.getFrames(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                       // sb.draw(balloon.getFrames(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
                         balloon.part_start();
                         break;
                     case 12:
@@ -202,47 +200,57 @@ public class Balloons_manager {
                             case 1:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_ice), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                balloon.setNumber_of_n_st(1);
                                 break;
                             case 2:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_wooden), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                balloon.setNumber_of_n_st(2);
                                 break;
                             case 3:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_stone), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                balloon.setNumber_of_n_st(3);
                                 break;
                             case 4:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_kript), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                balloon.setNumber_of_n_st(4);
                                 break;
                             case 5:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_blueinit), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                balloon.setNumber_of_n_st(5);
                                 break;
                             case 6:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_pheon), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                balloon.setNumber_of_n_st(6);
                                 break;
                             case 7:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_bronze), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                balloon.setNumber_of_n_st(7);
                                 break;
                             case 8:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_silver), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                balloon.setNumber_of_n_st(8);
                                 break;
                             case 9:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_gold), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                balloon.setNumber_of_n_st(9);
                                 break;
                             default:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_gold), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                balloon.setNumber_of_n_st(9);
                                 break;
                         }break;
                     case 13:
                         sb.setColor(1, 1, 1, 1);
-                        sb.draw(balloon.getFrames(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+                       // sb.draw(balloon.getFrames(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
                         balloon.part_start();
                         break;
                 }

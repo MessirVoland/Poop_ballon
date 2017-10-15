@@ -12,7 +12,7 @@ import static ru.asupd.poop_ballon.States.PlayState.perfomancecounter;
  */
 
 public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
-    
+    Vector3 touchPos = new Vector3();
     public MyInputProcessor() {
     }
 
@@ -34,12 +34,8 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-
-
-
         //System.out.println("touchDown");
         //нажатие для двух режимов
-        Vector3 touchPos = new Vector3();
         touchPos.set(screenX, screenY, 0);
         PlayState.camera.unproject(touchPos);
         screenX= (int) touchPos.x;

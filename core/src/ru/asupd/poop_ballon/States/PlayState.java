@@ -455,9 +455,7 @@ public class PlayState extends State {
 
 
             if (started) {
-                Gdx.app.postRunnable(new Runnable() {
-                    @Override
-                    public void run() {
+                {
                         for (Balloon balloon : balloons) {
                             balloon.update(dt, shaker);
 
@@ -474,10 +472,7 @@ public class PlayState extends State {
                             }
                         }
                     }
-                });
-                Gdx.app.postRunnable(new Runnable() {
-                    @Override
-                    public void run() {
+                {
                         index=0;
                         for (Balloon balloon : balloons){
                             if (balloon.isLive_out()) {
@@ -493,7 +488,6 @@ public class PlayState extends State {
                             index++;
                         }
                     }
-                });
 
             }
 
@@ -544,12 +538,11 @@ public class PlayState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
-
-
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         //sb.disableBlending();
         //потеря жизни
+        /*
         if (current_alpha_background<1.0f)
         {
             if (miss_ball==5) {
@@ -608,6 +601,7 @@ public class PlayState extends State {
             sb.setColor(1,1,1,1.0f);
             sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
         }
+*/
 
         if ((started)|(boss_balloon.isStarted())){
             sb.draw(score,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)+360,115,31);
@@ -624,11 +618,11 @@ public class PlayState extends State {
             sb.draw(hearth_balloon.getTexture(), hearth_balloon.getPosition().x, hearth_balloon.getPosition().y, 95, 169);
         }
 
+
         for (Cloud cloud : clouds) {
             sb.setColor(1,1,1,0.9f);
             sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
             sb.setColor(1,1,1,1);
-
         }
         if (!game_over_ball_fly) {
             sb.draw(texture_poop_balloon, position.x, position.y, 463, 218);//заголовок
@@ -653,6 +647,7 @@ public class PlayState extends State {
         balloons_manager.draw(sb);
 
 
+
         if (combo_effects.size>=1) {
             for (int j = 0; j <= combo_effects.size - 1; j++) {
                 if (!combo_effects.get(j).isComplete()) {
@@ -662,6 +657,7 @@ public class PlayState extends State {
                 }
             }
         }
+
 
 
 
@@ -683,10 +679,10 @@ public class PlayState extends State {
         FontRed1.draw(sb,"balloons_number: "+(balloons_number),10,45);
         FontRed1.draw(sb,"Speed: "+get_avr_speed,10,60);
 
-        long memUsageJavaHeap = Gdx.app.getJavaHeap();
-        long memUsageNativeHeap = Gdx.app.getNativeHeap();
-        FontRed1.draw(sb, "JavaHeap : "+memUsageJavaHeap, 10, 775);
-        FontRed1.draw(sb, "NativeHeap : "+memUsageNativeHeap,10,760);
+        //long memUsageJavaHeap = Gdx.app.getJavaHeap();
+        //long memUsageNativeHeap = Gdx.app.getNativeHeap();
+        //FontRed1.draw(sb, "JavaHeap : "+memUsageJavaHeap, 10, 775);
+        //FontRed1.draw(sb, "NativeHeap : "+memUsageNativeHeap,10,760);
         //-------------------------------------------------------------/
 
 
