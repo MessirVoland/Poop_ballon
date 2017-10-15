@@ -483,7 +483,6 @@ public class PlayState extends State {
                                 }catch (Throwable e){
                                    // System.out.println(e);
                                 }
-
                             }
                             index++;
                         }
