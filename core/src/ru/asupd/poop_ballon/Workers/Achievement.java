@@ -21,19 +21,18 @@ public class Achievement {
         medals.add(Assets.instance.manager.get(Assets.medal_wooden));   //1
         medals.add(Assets.instance.manager.get(Assets.medal_stone));    //2
             //3
-        medals.add(Assets.instance.manager.get(Assets.medal_stone));    //4
-        medals.add(Assets.instance.manager.get(Assets.medal_stone));    //5
-        medals.add(Assets.instance.manager.get(Assets.medal_stone));    //6
-        medals.add(Assets.instance.manager.get(Assets.medal_stone));    //7
-        medals.add(Assets.instance.manager.get(Assets.medal_bronze));    //8
-        medals.add(Assets.instance.manager.get(Assets.medal_silver));    //9
-        medals.add(Assets.instance.manager.get(Assets.medal_gold));    //2
+        medals.add(Assets.instance.manager.get(Assets.medal_kript));    //4
+        medals.add(Assets.instance.manager.get(Assets.medal_blueinit));    //5
+        medals.add(Assets.instance.manager.get(Assets.medal_pheon));    //6//7
+        medals.add(Assets.instance.manager.get(Assets.medal_bronze));    //7
+        medals.add(Assets.instance.manager.get(Assets.medal_silver));    //8
+        medals.add(Assets.instance.manager.get(Assets.medal_gold));    //9
         resizer_medal = new Resizer(local_x,local_y);
     }
     public void draw_current_medal(SpriteBatch sb,int x,int y){
         int diff= PlayState.balloons_manager.getCurrent_difficult_up();
         if (diff>=2){
-            sb.draw(medals.get(diff-2),x,y);
+            sb.draw(medals.get(9),x,y);
         }
     }
     public void start_anim(){
@@ -42,7 +41,7 @@ public class Achievement {
     public void draw_current_medal(SpriteBatch sb){
         int diff= PlayState.balloons_manager.getCurrent_difficult_up();
         if (diff>=2){
-            sb.draw(medals.get(diff-2),local_x-(resizer_medal.getSize_x()/2),local_y-(resizer_medal.getSize_y()/2),resizer_medal.getSize_x(),resizer_medal.getSize_y());
+                sb.draw(medals.get(diff - 2), local_x - (resizer_medal.getSize_x() / 2), local_y - (resizer_medal.getSize_y() / 2), resizer_medal.getSize_x(), resizer_medal.getSize_y());
         }
     }
     public void update(float dt){

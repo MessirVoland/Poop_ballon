@@ -63,6 +63,9 @@ public class Assets implements Disposable, AssetErrorListener {
     //public static final String anim_balloon_wooden = "pop_o.png";
     public static final AssetDescriptor<Texture> balloon_ice = new AssetDescriptor<Texture>("ice_b.png",Texture.class);
     public static final AssetDescriptor<Texture> balloon_stone = new AssetDescriptor<Texture>("stone_b.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_kript = new AssetDescriptor<Texture>("kriptonit_b.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_blueinit = new AssetDescriptor<Texture>("blueinit_b.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_pheon = new AssetDescriptor<Texture>("pheolit_b.png",Texture.class);
     public static final AssetDescriptor<Texture> balloon_bronze = new AssetDescriptor<Texture>("bronze_b.png",Texture.class);
     public static final AssetDescriptor<Texture> balloon_silver = new AssetDescriptor<Texture>("silver_b.png",Texture.class);
     public static final AssetDescriptor<Texture> balloon_gold = new AssetDescriptor<Texture>("gold_b.png",Texture.class);
@@ -70,6 +73,9 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> medal_ice = new AssetDescriptor<Texture>("medal_ice.png",Texture.class);
     public static final AssetDescriptor<Texture> medal_wooden = new AssetDescriptor<Texture>("medal_wood.png",Texture.class);
     public static final AssetDescriptor<Texture> medal_stone = new AssetDescriptor<Texture>("medal_stone.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_kript = new AssetDescriptor<Texture>("medal_kript.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_blueinit = new AssetDescriptor<Texture>("medal_blue.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_pheon = new AssetDescriptor<Texture>("medal_pheon.png",Texture.class);
     public static final AssetDescriptor<Texture> medal_bronze = new AssetDescriptor<Texture>("medal_bronze.png",Texture.class);
     public static final AssetDescriptor<Texture> medal_silver = new AssetDescriptor<Texture>("medal_silver.png",Texture.class);
     public static final AssetDescriptor<Texture> medal_gold = new AssetDescriptor<Texture>("medal_gold.png",Texture.class);
@@ -104,6 +110,17 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect hearth_ballon_part_hole2 = new ParticleEffect();
     public static ParticleEffect hearth_ballon_part_heart = new ParticleEffect();
     public static ParticleEffect hearth_ballon_part_basket = new ParticleEffect();
+
+    //xfcnbws ytcnfylhfnys[ ifhjd
+    public static ParticleEffect ballon_n_st_ice= new ParticleEffect();
+    public static ParticleEffect ballon_n_st_wood= new ParticleEffect();
+    public static ParticleEffect ballon_n_st_stone= new ParticleEffect();
+    public static ParticleEffect ballon_n_st_kript= new ParticleEffect();
+    public static ParticleEffect ballon_n_st_initblue= new ParticleEffect();
+    public static ParticleEffect ballon_n_st_pheon= new ParticleEffect();
+    public static ParticleEffect ballon_n_st_bronze= new ParticleEffect();
+    public static ParticleEffect ballon_n_st_silver= new ParticleEffect();
+    public static ParticleEffect ballon_n_st_gold= new ParticleEffect();
 
 
     //private AssetManager assetManager;
@@ -155,6 +172,9 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(balloon_ice);
         manager.load(balloon_wooden);
         manager.load(balloon_stone);
+        manager.load(balloon_kript);
+        manager.load(balloon_blueinit);
+        manager.load(balloon_pheon);
         manager.load(balloon_bronze);
         manager.load(balloon_silver);
         manager.load(balloon_gold);
@@ -162,6 +182,9 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(medal_ice);
         manager.load(medal_wooden);
         manager.load(medal_stone);
+        manager.load(medal_kript);
+        manager.load(medal_blueinit);
+        manager.load(medal_pheon);
         manager.load(medal_bronze);
         manager.load(medal_silver);
         manager.load(medal_gold);
@@ -210,8 +233,15 @@ public class Assets implements Disposable, AssetErrorListener {
         hearth_ballon_part_heart.load(Gdx.files.internal("particles/heart.p"),Gdx.files.internal("particles"));
         hearth_ballon_part_basket.load(Gdx.files.internal("particles/basket.p"),Gdx.files.internal("particles"));
 
-
-
+        ballon_n_st_ice.load(Gdx.files.internal("particles/pop_ice.p"),Gdx.files.internal("particles"));
+        ballon_n_st_wood.load(Gdx.files.internal("particles/pop_wood.p"),Gdx.files.internal("particles"));
+        ballon_n_st_stone.load(Gdx.files.internal("particles/pop_stone.p"),Gdx.files.internal("particles"));
+        ballon_n_st_kript.load(Gdx.files.internal("particles/pop_kriptr.p"),Gdx.files.internal("particles"));
+        ballon_n_st_initblue.load(Gdx.files.internal("particles/pop_blueinit.p"),Gdx.files.internal("particles"));
+        ballon_n_st_pheon.load(Gdx.files.internal("particles/pop_pheonit.p"),Gdx.files.internal("particles"));
+        ballon_n_st_bronze.load(Gdx.files.internal("particles/pop_bronze.p"),Gdx.files.internal("particles"));
+        ballon_n_st_silver.load(Gdx.files.internal("particles/pop_silver.p"),Gdx.files.internal("particles"));
+        ballon_n_st_gold.load(Gdx.files.internal("particles/pop_gold.p"),Gdx.files.internal("particles"));
 
         //assetManager.finishLoading();
 

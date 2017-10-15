@@ -21,7 +21,7 @@ public class Score {
     private boolean combo=false;
     private int combo_num=0;
 
-    private static final float ONE_FRAME_COUNT=0.035f;
+    private static final float ONE_FRAME_COUNT=0.0025f;
     private static final float COMBO_TIME=0.455f;
 
     public Score() {

@@ -86,7 +86,40 @@ public class Balloon {
             combo=false;
            // System.out.println("Current_time: "+currentTime);
             make_orange=true;
-            effect = new ParticleEffect(Assets.effect_orange);
+            if (!N_ST_color) {
+                effect = new ParticleEffect(Assets.effect_orange);
+            }else
+                switch (PlayState.settings.hi_score()/500) {
+                    case 0:
+                        break;
+                    case 1:
+                        effect = new ParticleEffect(Assets.ballon_n_st_ice);
+                        break;
+                    case 2:
+                        effect = new ParticleEffect(Assets.ballon_n_st_wood);
+                        break;
+                    case 3:
+                        effect = new ParticleEffect(Assets.ballon_n_st_stone);
+                        break;
+                    case 4:
+                        effect = new ParticleEffect(Assets.ballon_n_st_kript);
+                        break;
+                    case 5:
+                        effect = new ParticleEffect(Assets.ballon_n_st_initblue);
+                        break;
+                    case 6:
+                        effect = new ParticleEffect(Assets.ballon_n_st_pheon);
+                        break;
+                    case 7:
+                        effect = new ParticleEffect(Assets.ballon_n_st_bronze);
+                        break;
+                    case 8:
+                        effect = new ParticleEffect(Assets.ballon_n_st_silver);
+                        break;
+                    default:
+                        effect = new ParticleEffect(Assets.ballon_n_st_gold);
+                        break;
+                }
 
         }
         else{
@@ -191,7 +224,37 @@ public class Balloon {
         else
         {
             color_of_balloon = 12;
-            effect = new ParticleEffect(Assets.effect_purple);
+            switch (PlayState.settings.hi_score()/500) {
+                case 0:
+                    break;
+                case 1:
+                effect = new ParticleEffect(Assets.ballon_n_st_ice);
+                    break;
+                case 2:
+                    effect = new ParticleEffect(Assets.ballon_n_st_wood);
+                    break;
+                case 3:
+                    effect = new ParticleEffect(Assets.ballon_n_st_stone);
+                    break;
+                case 4:
+                    effect = new ParticleEffect(Assets.ballon_n_st_kript);
+                    break;
+                case 5:
+                    effect = new ParticleEffect(Assets.ballon_n_st_initblue);
+                    break;
+                case 6:
+                    effect = new ParticleEffect(Assets.ballon_n_st_pheon);
+                    break;
+                case 7:
+                    effect = new ParticleEffect(Assets.ballon_n_st_bronze);
+                    break;
+                case 8:
+                    effect = new ParticleEffect(Assets.ballon_n_st_silver);
+                    break;
+                default:
+                    effect = new ParticleEffect(Assets.ballon_n_st_gold);
+                    break;
+            }
             animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_p, Texture.class)), 3, ANIMATION_TIME);
             animation_current_balloon = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_o, Texture.class)), 3, ANIMATION_TIME);
         }

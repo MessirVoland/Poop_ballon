@@ -12,6 +12,8 @@ import ru.asupd.poop_ballon.States.PlayState;
 import ru.asupd.poop_ballon.Workers.AdsController;
 import ru.asupd.poop_ballon.Workers.Assets;
 
+import static ru.asupd.poop_ballon.States.PlayState.perfomancecounter;
+
 
 public class MyGdxGame implements ApplicationListener {
 	private GameStateManager gsm;
@@ -54,11 +56,15 @@ public class MyGdxGame implements ApplicationListener {
 
     @Override
 	public void render () {
+		//perfomancecounter.reset();
+		//perfomancecounter.start();
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         if (gsm!=null) {
             gsm.update(Gdx.graphics.getDeltaTime());
             gsm.render(batch);
         }
+		//perfomancecounter.stop();
+		//System.out.println("Perf :"+perfomancecounter.current);
 	}
 
 	@Override

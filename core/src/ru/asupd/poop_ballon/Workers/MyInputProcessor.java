@@ -1,11 +1,10 @@
 package ru.asupd.poop_ballon.Workers;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
-import ru.asupd.poop_ballon.Sprites.Balloon;
+
 import ru.asupd.poop_ballon.States.PlayState;
 
-import static com.badlogic.gdx.math.MathUtils.random;
+import static ru.asupd.poop_ballon.States.PlayState.perfomancecounter;
 
 /**
  * Модуль обработки нажатий
@@ -34,6 +33,10 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+
+
+
         //System.out.println("touchDown");
         //нажатие для двух режимов
         Vector3 touchPos = new Vector3();
@@ -94,6 +97,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
 
 
             //---------------------------------------------------------------------------------------//
+
 
             return false;
         }//конец не паузы

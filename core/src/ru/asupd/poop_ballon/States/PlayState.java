@@ -145,7 +145,7 @@ public class PlayState extends State {
     private MyInputProcessor inputProcessor;//обработчик событий
     //private MyInputProcessor inputProcessor2;
     //InputMultiplexer inputMultiplexer = new InputMultiplexer();
-    PerformanceCounter perfomancecounter;
+    public static PerformanceCounter perfomancecounter;
 
     public static Sound_effects sound_effects=new Sound_effects();
 
@@ -311,9 +311,10 @@ public class PlayState extends State {
 
     @Override
     public void update(final float dt) {
+
         handleInput();
         //супер костыль)
-        perfomancecounter.start();
+
         if (one_cast_music){
             current_dt_one_cast+=dt;
             if(current_dt_one_cast>=0.25f){
@@ -379,8 +380,8 @@ public class PlayState extends State {
                 }
             }
         }
-        perfomancecounter.stop();
-       // System.out.println("Perf :"+perfomancecounter.current);
+        //0.0
+
 
         if (!pause) {
 
@@ -538,10 +539,12 @@ public class PlayState extends State {
                 }
             }
         }
+
     }
 
     @Override
     public void render(SpriteBatch sb) {
+
 
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
@@ -743,6 +746,7 @@ public class PlayState extends State {
         if (game_over_ball_fly) {
             sb.draw(big_balloon, position.x, position.y,860, 800);
         }
+
         sb.end();
     }
 

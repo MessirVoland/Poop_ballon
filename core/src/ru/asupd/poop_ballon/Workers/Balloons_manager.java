@@ -211,21 +211,33 @@ public class Balloons_manager {
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_stone), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                                 break;
-                            case 8:
+                            case 4:
+                                sb.setColor(1, 1, 1, 1);
+                                sb.draw(Assets.instance.manager.get(Assets.balloon_kript), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                break;
+                            case 5:
+                                sb.setColor(1, 1, 1, 1);
+                                sb.draw(Assets.instance.manager.get(Assets.balloon_blueinit), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                break;
+                            case 6:
+                                sb.setColor(1, 1, 1, 1);
+                                sb.draw(Assets.instance.manager.get(Assets.balloon_pheon), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                break;
+                            case 7:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_bronze), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                                 break;
-                            case 9:
+                            case 8:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_silver), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                                 break;
-                            case 10:
+                            case 9:
                                 sb.setColor(1, 1, 1, 1);
                                 sb.draw(Assets.instance.manager.get(Assets.balloon_gold), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                                 break;
                             default:
                                 sb.setColor(1, 1, 1, 1);
-                                sb.draw(Assets.instance.manager.get(Assets.balloon_stone), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+                                sb.draw(Assets.instance.manager.get(Assets.balloon_gold), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
                                 break;
                         }break;
                     case 13:
