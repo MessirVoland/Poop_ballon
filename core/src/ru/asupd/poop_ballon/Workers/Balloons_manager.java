@@ -17,6 +17,7 @@ import static com.badlogic.gdx.math.MathUtils.random;
 public class Balloons_manager {
     private static int current_difficult;
     private static boolean get_clicked;
+    public boolean wooden;
     private static Array<Balloon> balloons;//массив шаров
 
     public Balloons_manager(Array<Balloon> balloons_input) {
@@ -40,7 +41,7 @@ public class Balloons_manager {
     public void click(final int finalScreenX, final int finalScreenY){
         get_clicked=false;
 
-                boolean wooden = false;
+                wooden = false;
                 boolean g_clicked = false;
 
                 for (Balloon balloon : PlayState.balloons) {
@@ -124,6 +125,7 @@ public class Balloons_manager {
                                         balloon.setCombo(0);
                                     }
                                     balloon.setPooped();
+                                    PlayState.bomb_balloon.try_to_fly();
                                     if ((PlayState.current_step >= PlayState.STEP_for_balloon) & (PlayState.cautch_ball <= 500)) {
                                         PlayState.current_step = 0;
                                         // System.out.println("New balloon generated");

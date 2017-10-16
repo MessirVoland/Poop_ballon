@@ -84,6 +84,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
             //final boolean[] wooden = {false};
 
             PlayState.balloons_manager.click(finalScreenX,finalScreenY);
+            PlayState.bomb_balloon.clicked(finalScreenX,finalScreenY);
 
 
 

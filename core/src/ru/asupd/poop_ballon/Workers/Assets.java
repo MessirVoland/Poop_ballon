@@ -69,6 +69,8 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> balloon_bronze = new AssetDescriptor<Texture>("bronze_b.png",Texture.class);
     public static final AssetDescriptor<Texture> balloon_silver = new AssetDescriptor<Texture>("silver_b.png",Texture.class);
     public static final AssetDescriptor<Texture> balloon_gold = new AssetDescriptor<Texture>("gold_b.png",Texture.class);
+
+    public static final AssetDescriptor<Texture> bomb_balloon_t = new AssetDescriptor<Texture>("bomb_balloon.png",Texture.class);
     //медали
     public static final AssetDescriptor<Texture> medal_ice = new AssetDescriptor<Texture>("medal_ice.png",Texture.class);
     public static final AssetDescriptor<Texture> medal_wooden = new AssetDescriptor<Texture>("medal_wood.png",Texture.class);
@@ -85,6 +87,7 @@ public class Assets implements Disposable, AssetErrorListener {
     //Меню
     public static final AssetDescriptor<Texture> restart_ico = new AssetDescriptor<Texture>("restart_ico.png",Texture.class);
     public static final AssetDescriptor<Texture> pause_button = new AssetDescriptor<Texture>("pause_but.png",Texture.class);
+
 
     public static final AssetDescriptor<Music> background_Music = new AssetDescriptor<Music>("sound.mp3",Music.class);
 
@@ -179,6 +182,7 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(balloon_bronze);
         manager.load(balloon_silver);
         manager.load(balloon_gold);
+        manager.load(bomb_balloon_t);
 
         manager.load(medal_ice);
         manager.load(medal_wooden);

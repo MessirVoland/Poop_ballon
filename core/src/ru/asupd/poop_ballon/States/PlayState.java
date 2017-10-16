@@ -20,6 +20,7 @@ import java.util.Random;
 
 import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Sprites.Balloon;
+import ru.asupd.poop_ballon.Sprites.Bomb_balloon;
 import ru.asupd.poop_ballon.Sprites.Boss_balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
 import ru.asupd.poop_ballon.Sprites.Hearth_balloon;
@@ -149,6 +150,8 @@ public class PlayState extends State {
 
     public static Sound_effects sound_effects=new Sound_effects();
 
+    public static Bomb_balloon bomb_balloon;
+
     PlayState(GameStateManager gsm) {
         super(gsm);
         perfomancecounter = new PerformanceCounter("Counter");
@@ -262,6 +265,7 @@ public class PlayState extends State {
 
         one_cast_music=true;
         current_dt_one_cast=0.0f;
+        bomb_balloon = new Bomb_balloon();
 
     }
 // Input
@@ -531,6 +535,7 @@ public class PlayState extends State {
                     current_combo=0;
                 }
             }
+            bomb_balloon.update(dt);
         }
 
     }
@@ -601,6 +606,7 @@ public class PlayState extends State {
             sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
         }
 */
+        bomb_balloon.draw(sb);
 
         if ((started)|(boss_balloon.isStarted())){
             sb.draw(score,((int) shaker.getCamera_sh().position.x)-140,((int) shaker.getCamera_sh().position.y)+360,115,31);
