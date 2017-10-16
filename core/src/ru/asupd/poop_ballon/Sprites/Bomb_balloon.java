@@ -1,5 +1,6 @@
 package ru.asupd.poop_ballon.Sprites;
 
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
@@ -10,6 +11,7 @@ import ru.asupd.poop_ballon.Workers.Assets;
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.PlayState.balloons;
 import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
+import static ru.asupd.poop_ballon.States.PlayState.combo_effects;
 import static ru.asupd.poop_ballon.States.PlayState.make_poop_Sound;
 
 /**
@@ -71,6 +73,9 @@ public class Bomb_balloon extends Creature{
             ((x>bomb_sprite.getX())&(x< bomb_sprite.getX()+ bomb_sprite.getHeight()))){
                 restart();
                 ballons_disposed=0;
+                combo_effects.add(new ParticleEffect(Assets.bomb_blow));
+                combo_effects.get(combo_effects.size - 1).start();
+                combo_effects.get(combo_effects.size - 1).setPosition(bomb_sprite.getX(),bomb_sprite.getY());
                 for (Balloon balloon : balloons) {
                     if (balloons_manager.wooden) {
                         PlayState.score_num.addScore(balloons_manager.getCurrent_difficult_up());

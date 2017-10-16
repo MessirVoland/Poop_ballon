@@ -63,6 +63,9 @@ public class Balloons_manager {
                         }
 
                 }
+                if (PlayState.current_combo>=3){
+                    PlayState.bomb_balloon.try_to_fly();
+                }
 
                 if (!g_clicked) {
                     if (((480 - 69 < finalScreenX) & (480 - 69 + 64 > finalScreenX)) &
@@ -125,7 +128,7 @@ public class Balloons_manager {
                                         balloon.setCombo(0);
                                     }
                                     balloon.setPooped();
-                                    PlayState.bomb_balloon.try_to_fly();
+
                                     if ((PlayState.current_step >= PlayState.STEP_for_balloon) & (PlayState.cautch_ball <= 500)) {
                                         PlayState.current_step = 0;
                                         // System.out.println("New balloon generated");

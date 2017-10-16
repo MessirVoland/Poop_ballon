@@ -71,6 +71,10 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> balloon_gold = new AssetDescriptor<Texture>("gold_b.png",Texture.class);
 
     public static final AssetDescriptor<Texture> bomb_balloon_t = new AssetDescriptor<Texture>("bomb_balloon.png",Texture.class);
+    public static ParticleEffect fire_bomb1= new ParticleEffect();
+    public static ParticleEffect fire_bomb2= new ParticleEffect();
+    public static ParticleEffect bomb_blow= new ParticleEffect();
+
     //медали
     public static final AssetDescriptor<Texture> medal_ice = new AssetDescriptor<Texture>("medal_ice.png",Texture.class);
     public static final AssetDescriptor<Texture> medal_wooden = new AssetDescriptor<Texture>("medal_wood.png",Texture.class);
@@ -248,6 +252,9 @@ public class Assets implements Disposable, AssetErrorListener {
         ballon_n_st_silver.load(Gdx.files.internal("particles/pop_silver.p"),Gdx.files.internal("particles"));
         ballon_n_st_gold.load(Gdx.files.internal("particles/pop_gold.p"),Gdx.files.internal("particles"));
         gold_stars.load(Gdx.files.internal("particles/gold_stars.p"),Gdx.files.internal("particles"));
+        fire_bomb1.load(Gdx.files.internal("particles/fire_bomb1.p"),Gdx.files.internal("particles"));
+        fire_bomb2.load(Gdx.files.internal("particles/fire_bomb2.p"),Gdx.files.internal("particles"));
+        bomb_blow.load(Gdx.files.internal("particles/bomb_blow.p"),Gdx.files.internal("particles"));
 
         //assetManager.finishLoading();
 
