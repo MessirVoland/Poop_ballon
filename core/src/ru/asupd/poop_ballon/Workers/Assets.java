@@ -71,6 +71,8 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> balloon_gold = new AssetDescriptor<Texture>("gold_b.png",Texture.class);
 
     public static final AssetDescriptor<Texture> bomb_balloon_t = new AssetDescriptor<Texture>("bomb_balloon.png",Texture.class);
+    public static final AssetDescriptor<Texture> bomb_balloon_tt = new AssetDescriptor<Texture>("bomb_balloon1.png",Texture.class);
+
     public static ParticleEffect fire_bomb1= new ParticleEffect();
     public static ParticleEffect fire_bomb2= new ParticleEffect();
     public static ParticleEffect bomb_blow= new ParticleEffect();
@@ -187,6 +189,7 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(balloon_silver);
         manager.load(balloon_gold);
         manager.load(bomb_balloon_t);
+        manager.load(bomb_balloon_tt);
 
         manager.load(medal_ice);
         manager.load(medal_wooden);

@@ -13,6 +13,7 @@ import static ru.asupd.poop_ballon.States.PlayState.balloons;
 import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
 import static ru.asupd.poop_ballon.States.PlayState.combo_effects;
 import static ru.asupd.poop_ballon.States.PlayState.make_poop_Sound;
+import static ru.asupd.poop_ballon.States.PlayState.shaker;
 
 /**
  * Класс бомбы
@@ -25,10 +26,16 @@ public class Bomb_balloon extends Creature{
     private Sprite bomb_sprite;
     private boolean fly=false;
     private boolean left_side;
+    private int heals;
     private boolean pooped;
     private float current_delay;
     private int ballons_disposed;
+    private ParticleEffect fire_bomb1,fire_bomb2;
+    boolean sin_grav_bool=random.nextBoolean();
     public Bomb_balloon() {
+        heals=0;
+      //  fire_bomb1=new ParticleEffect(Assets.fire_bomb1);
+      //  fire_bomb2=new ParticleEffect(Assets.fire_bomb2);
         bomb_sprite = new Sprite(Assets.instance.manager.get(Assets.bomb_balloon_t));
         //bomb_sprite.setPosition(random(480-105),-140);
         if (random(2)==1)
@@ -56,10 +63,32 @@ public class Bomb_balloon extends Creature{
             if (((!left_side)&(bomb_sprite.getX()<-105))|((left_side)&(bomb_sprite.getX()>480))){
                     restart();
                 }
+            if (fire_bomb1!=null){
+                fire_bomb1.update(dt);
+                fire_bomb1.setPosition(bomb_sprite.getX()+99,bomb_sprite.getY()+113);
+            }
+            if (fire_bomb2!=null){
+                fire_bomb2.update(dt);
+                fire_bomb2.setPosition(bomb_sprite.getX()+74,bomb_sprite.getY()+116);
+            }
+            int sin_grav = 50;
+
+            if ((velosity.y < sin_grav) & (sin_grav_bool)) {
+                velosity.y++;
+            }
+            if ((velosity.y > -sin_grav) & (!sin_grav_bool)) {
+                velosity.y--;
+            }
+            if (velosity.y > sin_grav) {
+                sin_grav_bool = false;
+            }
+            if (velosity.y < -sin_grav) {
+                sin_grav_bool = true;
+            }
         }
         if (pooped){
             current_delay+=dt;
-            if (current_delay>=0.2f){
+            if (current_delay>=0.4f){
                 pooped=false;
                 setPooped();
             }
@@ -74,24 +103,63 @@ public class Bomb_balloon extends Creature{
     public void draw(SpriteBatch sb){
         if (fly) {
             bomb_sprite.draw(sb);
+            if (fire_bomb1!=null){
+                fire_bomb1.draw(sb);
+            }
+            if (fire_bomb2!=null){
+                fire_bomb2.draw(sb);
+            }
         }
     }
     public void clicked(int x,int y){
         if (fly){
-            if (((y>bomb_sprite.getY())&(y< bomb_sprite.getY()+ bomb_sprite.getWidth()))&
-            ((x>bomb_sprite.getX())&(x< bomb_sprite.getX()+ bomb_sprite.getHeight()))){
+            if (((y > bomb_sprite.getY()) & (y < bomb_sprite.getY() + bomb_sprite.getWidth())) &
+                ((x > bomb_sprite.getX()) & (x < bomb_sprite.getX() + bomb_sprite.getHeight()))) {
+                switch (heals) {
+                    case 0:
+                        heals++;
+                        fire_bomb1=new ParticleEffect(Assets.fire_bomb1);
+                        fire_bomb1.setPosition(bomb_sprite.getX()+99,bomb_sprite.getY()+113);
+                        fire_bomb1.start();
 
-                ballons_disposed=0;
-                combo_effects.add(new ParticleEffect(Assets.bomb_blow));
-                combo_effects.get(combo_effects.size - 1).setPosition(bomb_sprite.getX()+50,bomb_sprite.getY()+65);
-                combo_effects.get(combo_effects.size - 1).start();
-                restart();
-                current_delay=0;
-                pooped=true;
+                        break;
+                    case 1:
+                        heals++;
+                        float xx=bomb_sprite.getX(), yy=bomb_sprite.getY();
+                        bomb_sprite = new Sprite(Assets.instance.manager.get(Assets.bomb_balloon_tt));
+                        bomb_sprite.setPosition(xx,yy);
+                        fire_bomb2=new ParticleEffect(Assets.fire_bomb2);
+                        fire_bomb2.setPosition(bomb_sprite.getX()+74,bomb_sprite.getY()+116);
+                        fire_bomb2.start();
+                        if (fire_bomb1!=null){
+                            fire_bomb1.setDuration(0);
+                            fire_bomb1.dispose();
+
+                        }
+                        break;
+                    case 2:
+                        if (fire_bomb2!=null){
+                            fire_bomb2.setDuration(0);
+                            fire_bomb2.dispose();
+                        }
+                        ballons_disposed = 0;
+                        combo_effects.add(new ParticleEffect(Assets.bomb_blow));
+                        combo_effects.get(combo_effects.size - 1).setPosition(bomb_sprite.getX() + 50, bomb_sprite.getY() + 65);
+                        combo_effects.get(combo_effects.size - 1).start();
+                        restart();
+                        current_delay = 0;
+                        pooped = true;
+                        break;
+                    case 3:
+                        heals=2;
+                        break;
+                }
             }
+
         }
     }
     private void setPooped(){
+        shaker.shake(0.7f);
         for (Balloon balloon : balloons) {
             if (balloons_manager.wooden) {
                 PlayState.score_num.addScore(balloons_manager.getCurrent_difficult_up());
@@ -108,11 +176,17 @@ public class Bomb_balloon extends Creature{
             // balloons.add(new Balloon(random(4) * 96, -195 - random(50), PlayState.get_speed_for_balloon(), !PlayState.boss_balloon.isStarted()));
         }
         for (int i=0;i<ballons_disposed;i++){
-            balloons.add(new Balloon(random(4) * 96, -195 - random(50), PlayState.get_speed_for_balloon(), !PlayState.boss_balloon.isStarted()));
+            balloons.add(new Balloon(random(4) * 96, -260 - random(80), PlayState.get_speed_for_balloon(), !PlayState.boss_balloon.isStarted()));
         }
     }
     private void restart(){
         fly=false;
+        sin_grav_bool=random.nextBoolean();
+        heals=0;
+        bomb_sprite = new Sprite(Assets.instance.manager.get(Assets.bomb_balloon_t));
+        fire_bomb1.setPosition(bomb_sprite.getX()+99,bomb_sprite.getY()+113);
+       // fire_bomb1=new ParticleEffect(Assets.fire_bomb1);
+       // fire_bomb2=new ParticleEffect(Assets.fire_bomb2);
         if (random(2)==1) {
             left_side = true;
             bomb_sprite.setPosition(-105,400-139/2);
