@@ -18,29 +18,46 @@ import static ru.asupd.poop_ballon.States.PlayState.make_poop_Sound;
  */
 
 public class Bomb_balloon extends Creature{
-    private int CHANSE_OF_SPAWN=5;//5%
+    private int CHANSE_OF_SPAWN=2;//5%
     private Vector3 velosity;
     private Sprite bomb_sprite;
     private boolean fly=false;
+    private boolean left_side;
     private int ballons_disposed;
     public Bomb_balloon() {
         bomb_sprite = new Sprite(Assets.instance.manager.get(Assets.bomb_balloon_t));
-        bomb_sprite.setPosition(random(480-105),-140);
-        velosity = new Vector3(0,120,0);
+        //bomb_sprite.setPosition(random(480-105),-140);
+        if (random(2)==1)
+            left_side=true;
+        else
+            left_side=false;
+
+        if (left_side) {
+            bomb_sprite.setPosition(-105, 400 - 139 / 2);
+            velosity = new Vector3(120, 0, 0);
+        }
+        else {
+            bomb_sprite.setPosition(480, 400 - 139 / 2);
+            velosity = new Vector3(-120, 0, 0);
+        }
     }
 
     @Override
     public void update(float dt) {
         if (fly) {
+
             velosity.scl(dt);
             bomb_sprite.setPosition(bomb_sprite.getX() + velosity.x, bomb_sprite.getY() + velosity.y);
             velosity.scl(1 / dt);
+            if (((!left_side)&(bomb_sprite.getX()<-105))|((left_side)&(bomb_sprite.getX()>480))){
+                    restart();
+                }
         }
     }
     public void try_to_fly(){
         if ((!fly)&(random(99)<CHANSE_OF_SPAWN)){
             fly=true;
-            System.out.println("gjkt");
+
         }
     }
     public void draw(SpriteBatch sb){
@@ -79,8 +96,17 @@ public class Bomb_balloon extends Creature{
     }
     private void restart(){
         fly=false;
-        bomb_sprite.setPosition(random(480-105),-140);
-        velosity.y=random(40)+100;
+        if (random(2)==1) {
+            left_side = true;
+            bomb_sprite.setPosition(-105,400-139/2);
+            velosity.x=(random(40)+100);
+        }
+        else {
+            left_side = false;
+            bomb_sprite.setPosition(480,400-139/2);
+            velosity.x=-(random(40)+100);
+        }
+
     }
 
     @Override
