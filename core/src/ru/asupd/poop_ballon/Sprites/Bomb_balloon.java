@@ -22,7 +22,7 @@ import static ru.asupd.poop_ballon.States.PlayState.shaker;
  */
 
 public class Bomb_balloon extends Creature{
-    private int CHANSE_OF_SPAWN=100;//5%
+    private int CHANSE_OF_SPAWN=5;//5%
     private Vector3 velosity;
     private Sprite bomb_sprite;
     private boolean fly=false;
@@ -63,10 +63,12 @@ public class Bomb_balloon extends Creature{
             velosity.scl(1 / dt);
             if (((!left_side)&(bomb_sprite.getX()<-105))|((left_side)&(bomb_sprite.getX()>480))){
                     restart();
+
                 }
             if (fire_bomb1!=null){
                 fire_bomb1.update(dt);
                 fire_bomb1.setPosition(bomb_sprite.getX()+99,bomb_sprite.getY()+113);
+
             }
             if (fire_bomb2!=null){
                 fire_bomb2.update(dt);
@@ -142,7 +144,6 @@ public class Bomb_balloon extends Creature{
                             fire_bomb1.setDuration(0);
                             fire_bomb1.dispose();
                             fire_bomb1=null;
-
                         }
                         break;
                     case 2:
@@ -190,6 +191,16 @@ public class Bomb_balloon extends Creature{
     }
     private void restart(){
         fly=false;
+        if (fire_bomb1!=null){
+            fire_bomb1.setDuration(0);
+            fire_bomb1.dispose();
+            fire_bomb1=null;
+        }
+        if (fire_bomb2!=null){
+            fire_bomb2.setDuration(0);
+            fire_bomb2.dispose();
+            fire_bomb2=null;
+        }
         sin_grav_bool=random.nextBoolean();
         heals=0;
         bomb_sprite = new Sprite(Assets.instance.manager.get(Assets.bomb_balloon_t));

@@ -15,7 +15,7 @@ import static com.badlogic.gdx.math.MathUtils.random;
 public class Cloud extends Creature {
     private Vector3 position;
     private Vector3 velosity;
-    private Texture texture;
+    private static Texture texture;
     private Rectangle bounds;
     int color_of_cloud;
 

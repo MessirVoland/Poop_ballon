@@ -36,7 +36,7 @@ public class Balloon {
     private boolean pooped,live_out;
     private boolean can_respawn,sin_grav_bool;
     private boolean part_start=true;
-    private boolean anim_end=false;
+    //private boolean anim_end=false;
 
     private boolean N_ST_color=false;
     private boolean wooden_color=false;
@@ -282,7 +282,7 @@ public class Balloon {
 
     }
 
-    public Vector3 getPosition() {
+    public  Vector3 getPosition() {
         return position;
     }
 
@@ -352,9 +352,9 @@ public class Balloon {
         //this.animation_idle = animation_idle;
     //}
 
-    public boolean isAnim_end() {
-        return anim_end;
-    }
+  //  public boolean isAnim_end() {
+  //      return anim_end;
+  //  }
     public void update_part(float dt){
         effect.update(dt);
     }
@@ -420,7 +420,7 @@ public class Balloon {
                    //animation_current_balloon.dispose();
             //   }
 
-               anim_end=true;
+               //anim_end=true;
 
 //               poof_balloon_atlas.dispose();
            }else

@@ -1,19 +1,22 @@
 package ru.asupd.poop_ballon.Workers;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
 /**
+ * ускорение счета
  * Created by Voland on 16.09.2017.
  */
 
 public class Score {
     private Texture numbers;//числа
     private Texture plus;//плюсик
-    private Array<TextureRegion> frames_numbers;//числа'
-    private int[] megred_high_score = new int[5];//для отображения счета
+
+    private static Array<Sprite> frames_numbers;//числа'
+    private static int[] megred_high_score = new int[5];//для отображения счета
     private int buffer=0;
     private float current_dt=0.0f;
     private float current_dt_combo=0.0f;
@@ -27,9 +30,9 @@ public class Score {
     public Score() {
         numbers = new Texture("numbers.png");
         plus = new Texture("plus.png");
-        frames_numbers = new Array<TextureRegion>();
+        frames_numbers = new Array<Sprite>();
         for (int j=0;j<=9;j++){
-            frames_numbers.add(new TextureRegion(numbers,j*25,0,25,31));
+            frames_numbers.add(new Sprite(numbers,j*25,0,25,31));
         }
 		buffer=0;
 
@@ -70,6 +73,7 @@ public class Score {
     public void addScore(int added_score){
         buffer+=added_score;
     }
+
     public void draw(SpriteBatch sb,int x,int y){
         if (combo){
             sb.draw(plus,x+80,y-3,25+6,31+6);
@@ -95,6 +99,7 @@ public class Score {
 
             }
         }
+
         sb.draw(frames_numbers.get(megred_high_score[0]),x+60,y,25,31);
         sb.draw(frames_numbers.get(megred_high_score[1]),x+40,y,25,31);
         sb.draw(frames_numbers.get(megred_high_score[2]),x+20,y,25,31);    //245
