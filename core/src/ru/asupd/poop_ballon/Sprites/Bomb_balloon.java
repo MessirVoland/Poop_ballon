@@ -13,6 +13,7 @@ import static ru.asupd.poop_ballon.States.PlayState.balloons;
 import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
 import static ru.asupd.poop_ballon.States.PlayState.combo_effects;
 import static ru.asupd.poop_ballon.States.PlayState.make_poop_Sound;
+import static ru.asupd.poop_ballon.States.PlayState.score_num;
 import static ru.asupd.poop_ballon.States.PlayState.shaker;
 
 /**
@@ -115,6 +116,11 @@ public class Bomb_balloon extends Creature{
         if (fly){
             if (((y > bomb_sprite.getY()) & (y < bomb_sprite.getY() + bomb_sprite.getWidth())) &
                 ((x > bomb_sprite.getX()) & (x < bomb_sprite.getX() + bomb_sprite.getHeight()))) {
+
+                combo_effects.add(new ParticleEffect(Assets.hearth_ballon_part));
+                combo_effects.get(PlayState.combo_effects.size-1).setPosition(bomb_sprite.getX()+50, bomb_sprite.getY()+140);
+                combo_effects.get(PlayState.combo_effects.size-1).start();
+                score_num.addScore(5);
                 switch (heals) {
                     case 0:
                         heals++;
@@ -165,10 +171,10 @@ public class Bomb_balloon extends Creature{
         shaker.shake(0.7f);
         for (Balloon balloon : balloons) {
             if (balloons_manager.wooden) {
-                PlayState.score_num.addScore(balloons_manager.getCurrent_difficult_up());
+                score_num.addScore(balloons_manager.getCurrent_difficult_up());
                 // System.out.println("Added 2 W score");
             } else {
-                PlayState.score_num.addScore(1);
+                score_num.addScore(1);
                 //  System.out.println("Added 1 nW score");
             }
             if (!balloon.isPooped()) {

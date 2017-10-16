@@ -546,7 +546,7 @@ public class PlayState extends State {
         sb.begin();
         //sb.disableBlending();
         //потеря жизни
-        /*
+
         if (current_alpha_background<1.0f)
         {
             if (miss_ball==5) {
@@ -605,7 +605,7 @@ public class PlayState extends State {
             sb.setColor(1,1,1,1.0f);
             sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
         }
-*/
+
         bomb_balloon.draw(sb);
 
         if ((started)|(boss_balloon.isStarted())){

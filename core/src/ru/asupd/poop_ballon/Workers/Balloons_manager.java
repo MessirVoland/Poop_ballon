@@ -63,7 +63,7 @@ public class Balloons_manager {
                         }
 
                 }
-                if (PlayState.current_combo>=1){
+                if (PlayState.current_combo>=3){
                     PlayState.bomb_balloon.try_to_fly();
                 }
 
