@@ -118,6 +118,7 @@ public class Bomb_balloon extends Creature{
                 switch (heals) {
                     case 0:
                         heals++;
+
                         fire_bomb1=new ParticleEffect(Assets.fire_bomb1);
                         fire_bomb1.setPosition(bomb_sprite.getX()+99,bomb_sprite.getY()+113);
                         fire_bomb1.start();
@@ -134,6 +135,7 @@ public class Bomb_balloon extends Creature{
                         if (fire_bomb1!=null){
                             fire_bomb1.setDuration(0);
                             fire_bomb1.dispose();
+                            fire_bomb1=null;
 
                         }
                         break;
@@ -141,6 +143,7 @@ public class Bomb_balloon extends Creature{
                         if (fire_bomb2!=null){
                             fire_bomb2.setDuration(0);
                             fire_bomb2.dispose();
+                            fire_bomb2=null;
                         }
                         ballons_disposed = 0;
                         combo_effects.add(new ParticleEffect(Assets.bomb_blow));
@@ -184,7 +187,9 @@ public class Bomb_balloon extends Creature{
         sin_grav_bool=random.nextBoolean();
         heals=0;
         bomb_sprite = new Sprite(Assets.instance.manager.get(Assets.bomb_balloon_t));
-        fire_bomb1.setPosition(bomb_sprite.getX()+99,bomb_sprite.getY()+113);
+        if (fire_bomb1!=null) {
+            fire_bomb1.setPosition(bomb_sprite.getX() + 99, bomb_sprite.getY() + 113);
+        }
        // fire_bomb1=new ParticleEffect(Assets.fire_bomb1);
        // fire_bomb2=new ParticleEffect(Assets.fire_bomb2);
         if (random(2)==1) {
