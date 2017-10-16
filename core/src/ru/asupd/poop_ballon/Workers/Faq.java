@@ -2,6 +2,8 @@ package ru.asupd.poop_ballon.Workers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
+
 /**
  * меню подсказки
  *
@@ -10,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Faq {
     boolean show;
+    int b_y=140;
     private int current_slide;
     public Faq() {
         show = false;
@@ -17,7 +20,11 @@ public class Faq {
     }
 
     public boolean click(int x, int y){
-        if (((x>340)&(y<140))&(!show)){
+        if (showed_ads){
+            b_y+=70;
+        }
+
+        if (((x>340)&(y<b_y))&(!show)){
             show=true;
 
             return true;

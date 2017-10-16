@@ -111,7 +111,8 @@ public class Settings {
                     }
                 }
         }
-        else
+        /*else
+
         if ((ScreenY>600)&(ScreenX>240)){
             PlayState.score_num.addScore(200);
         }
@@ -119,7 +120,7 @@ public class Settings {
         if ((ScreenY>600)&(ScreenX<240)){
             pref.putInteger("highscore",0) ;
             pref.flush();
-        }
+        }*/
         else
         //вывод из паузы
         {
