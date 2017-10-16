@@ -22,7 +22,7 @@ import static ru.asupd.poop_ballon.States.PlayState.shaker;
  */
 
 public class Bomb_balloon extends Creature{
-    private int CHANSE_OF_SPAWN=100;//5%
+    private int CHANSE_OF_SPAWN=5;//5%
     private Vector3 velosity;
     private Sprite bomb_sprite;
     private boolean fly=false;

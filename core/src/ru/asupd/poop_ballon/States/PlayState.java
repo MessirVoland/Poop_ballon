@@ -784,7 +784,7 @@ public class PlayState extends State {
     @Override
     public void dispose() {
         boss_Music.dispose();
-        background_frames.clear();
+        //background_frames.clear();
         background_Music.stop();
         background_Music.setPosition(0.0f);
         //background_Music=null;
