@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.PerformanceCounter;
 
 import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.States.PlayState;
@@ -149,9 +150,12 @@ public class Balloons_manager {
     }
 
     public void draw(SpriteBatch sb){
+        //PlayState.perfomancecounter.start();
         for (Balloon balloon : balloons) {
+            //sb.draw(Assets.instance.manager.get(Assets.balloon_green, Texture.class), balloon.getPosition().x, balloon.getPosition().y, 95, 190);
+
             sb.setColor(1,1,1,0.9f);
-            if (!balloon.isAnim_end()) {
+            if (!balloon.isLive_out()) {
                 switch (balloon.getColor_of_balloon()) {
 
                     case 0:
@@ -276,5 +280,8 @@ public class Balloons_manager {
             }
         }
         sb.setColor(1,1,1,1);
+       // PlayState.perfomancecounter.stop();
+       // PlayState.FontRed1.draw(sb,"Current dt : " +PlayState.perfomancecounter.current,10, 750);
+       // PlayState.perfomancecounter.reset();
     }
 }

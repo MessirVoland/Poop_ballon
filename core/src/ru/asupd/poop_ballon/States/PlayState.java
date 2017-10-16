@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.PerformanceCounter;
 import java.util.Random;
 
 import ru.asupd.poop_ballon.GameStateManager;
+import ru.asupd.poop_ballon.Sprites.BackGround;
 import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.Sprites.Bomb_balloon;
 import ru.asupd.poop_ballon.Sprites.Boss_balloon;
@@ -55,7 +56,7 @@ public class PlayState extends State {
     private float currnent_dt_background;
     public static float current_alpha_background=1.0f;
 
-    private BitmapFont FontRed1;//для фпс
+    public static BitmapFont FontRed1;//для фпс
 
     private Texture vibrated,unvibrated;//иконка звука
 
@@ -151,6 +152,7 @@ public class PlayState extends State {
     public static Sound_effects sound_effects=new Sound_effects();
 
     public static Bomb_balloon bomb_balloon;
+    BackGround background;
 
     PlayState(GameStateManager gsm) {
         super(gsm);
@@ -163,14 +165,15 @@ public class PlayState extends State {
         //inputMultiplexer.addProcessor(inputProcessor2);
         Gdx.input.setInputProcessor(inputProcessor);
         //Gdx.input.setInputProcessor(inputProcessor);
+        background=new BackGround();
 
-        Texture background = Assets.instance.manager.get(Assets.back_ground_atlas);
-        background_frames = new Array<TextureRegion>();
-        back_ground_atlas = new TextureRegion(background);
-        int frameWidth=back_ground_atlas.getRegionWidth()/4;
-        for (int i=0;i<4;i++){
-            background_frames.add(new TextureRegion(back_ground_atlas,i*frameWidth,0,frameWidth,back_ground_atlas.getRegionHeight()));
-        }
+        //Texture background = Assets.instance.manager.get(Assets.back_ground_atlas);
+       // background_frames = new Array<TextureRegion>();
+       // back_ground_atlas = new TextureRegion(background);
+       // int frameWidth=back_ground_atlas.getRegionWidth()/4;
+      //  for (int i=0;i<4;i++){
+      //      background_frames.add(new TextureRegion(back_ground_atlas,i*frameWidth,0,frameWidth,back_ground_atlas.getRegionHeight()));
+      //  }
 
         pause_bgnd = new Texture("pause.png");
         STEP_for_balloon=50;
@@ -546,7 +549,7 @@ public class PlayState extends State {
         sb.begin();
         //sb.disableBlending();
         //потеря жизни
-
+        /*
         if (current_alpha_background<1.0f)
         {
             if (miss_ball==5) {
@@ -604,7 +607,8 @@ public class PlayState extends State {
         { //обычный режим
             sb.setColor(1,1,1,1.0f);
             sb.draw(background_frames.get(miss_ball), -25, -25, 550, 900);
-        }
+        }*/
+        background.draw(sb);
 
         bomb_balloon.draw(sb);
 
@@ -629,6 +633,7 @@ public class PlayState extends State {
             sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y,221,100);
             sb.setColor(1,1,1,1);
         }
+
         if (!game_over_ball_fly) {
             sb.draw(texture_poop_balloon, position.x, position.y, 463, 218);//заголовок
             //sb.draw(texture_poop_balloon, position.x+(texture_poop_balloon.getWidth()/2)-(resizer_poop_balloon.getSize_x()/2), position.y+(texture_poop_balloon.getHeight()/2)-(resizer_poop_balloon.getSize_y()/2), resizer_poop_balloon.getSize_x(), resizer_poop_balloon.getSize_y());//заголовок
@@ -648,6 +653,7 @@ public class PlayState extends State {
                // sb.draw(Assets.instance.manager.get(Assets.star1),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
             }
         }
+
 
         balloons_manager.draw(sb);
 
@@ -679,11 +685,13 @@ public class PlayState extends State {
             FontRed1.setColor(1, 0, 0, 1);
         }
         FontRed1.draw(sb, " FPS : "+  fps, 10, 790);
+
         FontRed1.setColor(1, 1, 1, 1);
+        /*
         FontRed1.draw(sb,"balloons_count: "+(4+balloons_count)+" Real: "+balloons.size,10,30);
         FontRed1.draw(sb,"balloons_number: "+(balloons_number),10,45);
         FontRed1.draw(sb,"Speed: "+get_avr_speed,10,60);
-
+*/
         //long memUsageJavaHeap = Gdx.app.getJavaHeap();
         //long memUsageNativeHeap = Gdx.app.getNativeHeap();
         //FontRed1.draw(sb, "JavaHeap : "+memUsageJavaHeap, 10, 775);
