@@ -37,6 +37,7 @@ import ru.asupd.poop_ballon.Workers.Shaker;
 import ru.asupd.poop_ballon.Workers.Sound_effects;
 
 import static com.badlogic.gdx.math.MathUtils.random;
+import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
 
 /**Игровой модуль
  * Created by Voland on 04.08.2017.
@@ -272,6 +273,7 @@ public class PlayState extends State {
         one_cast_music=true;
         current_dt_one_cast=0.0f;
         bomb_balloon = new Bomb_balloon();
+
 
     }
 // Input
@@ -616,11 +618,22 @@ public class PlayState extends State {
         }
 
         if ((!started)&(!boss_balloon.isStarted())){
-            sb.draw(your_high_score,130,100,211,74);
+
             sb.draw(tap_to_play,80,360,335,51);
-            score_num.draw(sb,190,50);
+            if (showed_ads) {
+                sb.draw(your_high_score,130,170,211,74);
+                score_num.draw(sb,190,120);
+            }else
+            {
+                sb.draw(your_high_score,130,100,211,74);
+                score_num.draw(sb,190,50);
+            }
+
             if (!faq.isShow()) {
-                sb.draw(Assets.instance.manager.get(Assets.faq), 380, 0);
+                if (showed_ads) {
+                    sb.draw(Assets.instance.manager.get(Assets.faq), 380, 70);
+                }else
+                    sb.draw(Assets.instance.manager.get(Assets.faq), 380, 0);
             }
         }
         if (hearth_balloon.isFly()|hearth_balloon.isPooped()) {

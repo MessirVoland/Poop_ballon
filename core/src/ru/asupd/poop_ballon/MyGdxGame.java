@@ -21,6 +21,7 @@ public class MyGdxGame implements ApplicationListener {
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800; // 800
 	private static AdsController adsController;
+    public static boolean showed_ads=false;
 	public static void show_banner(){
 		adsController.showBannerAd();
 	}
@@ -43,7 +44,9 @@ public class MyGdxGame implements ApplicationListener {
 		new Gdx().app.postRunnable(new Runnable() {
 			@Override
 			public void run() {
-				//show_banner();
+                if(adsController.isWifiConnected())
+				{adsController.showBannerAd();
+				showed_ads=true;}
 			}
 		});
 		gsm.push(new MenuState(gsm));
@@ -116,6 +119,11 @@ public class MyGdxGame implements ApplicationListener {
 		public void hideBannerAd() {
 
 		}
-	}
+
+        @Override
+        public boolean isWifiConnected() {
+            return true;
+        }
+    }
 
 }

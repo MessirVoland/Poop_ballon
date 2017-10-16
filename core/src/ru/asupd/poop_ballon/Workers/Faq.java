@@ -30,7 +30,7 @@ public class Faq {
                     return true;
                 }
                 //обработчик когда была нажата
-                System.out.println("Show");
+                //System.out.println("Show");
                 if (((x>87)&(x<87+45))&
                         ((y>270)&(y<270+45)))
                 {

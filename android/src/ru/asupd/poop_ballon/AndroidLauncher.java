@@ -1,5 +1,8 @@
 package ru.asupd.poop_ballon;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -100,5 +103,16 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 				adView.setVisibility(View.INVISIBLE);
 			}
 		});
+	}
+
+	@Override
+	public boolean isWifiConnected() {
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo ni;
+		ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+		if (ni == null && ni.isConnected()) {
+			ni = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+		}
+		return (ni != null && ni.isConnected());
 	}
 }

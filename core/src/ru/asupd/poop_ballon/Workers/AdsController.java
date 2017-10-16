@@ -7,4 +7,5 @@ package ru.asupd.poop_ballon.Workers;
 public interface AdsController {
     public void showBannerAd();
     public void hideBannerAd();
+    public boolean isWifiConnected();
 }

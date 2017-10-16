@@ -16,6 +16,8 @@ import ru.asupd.poop_ballon.Sprites.Star;
 import ru.asupd.poop_ballon.Workers.Achievement;
 import ru.asupd.poop_ballon.Workers.Assets;
 
+import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
+
 /**
  * Created by Voland on 22.08.2017.
  */
@@ -137,6 +139,7 @@ public class GameoverState extends State {
         if (last_score>=load_hiscore) {
             sb.draw(awesome, 95, 480, 290, 55);
         }
+
         sb.draw(your_score,175,400,120,75);
 
         sb.draw(frames_numbers.get(score_last[0]),245,320,25,31);
@@ -144,13 +147,22 @@ public class GameoverState extends State {
         sb.draw(frames_numbers.get(score_last[2]),205,320,25,31);
         sb.draw(frames_numbers.get(score_last[3]),185,320,25,31);
 
-        sb.draw(your_best_score,125,100,210,75);
+        if (showed_ads){
+            sb.draw(your_best_score, 125, 170, 210, 75);
+            sb.draw(frames_numbers.get(score_best[0]), 245, 130, 25, 31);
+            sb.draw(frames_numbers.get(score_best[1]), 225, 130, 25, 31);
+            sb.draw(frames_numbers.get(score_best[2]), 205, 130, 25, 31);
+            sb.draw(frames_numbers.get(score_best[3]), 185, 130, 25, 31);
+            sb.draw(big_balloon, position.x, position.y, 860, 800);
+        }else {
+            sb.draw(your_best_score, 125, 100, 210, 75);
 
-        sb.draw(frames_numbers.get(score_best[0]),245,50,25,31);
-        sb.draw(frames_numbers.get(score_best[1]),225,50,25,31);
-        sb.draw(frames_numbers.get(score_best[2]),205,50,25,31);
-        sb.draw(frames_numbers.get(score_best[3]),185,50,25,31);
-        sb.draw(big_balloon,position.x,position.y,860,800);
+            sb.draw(frames_numbers.get(score_best[0]), 245, 50, 25, 31);
+            sb.draw(frames_numbers.get(score_best[1]), 225, 50, 25, 31);
+            sb.draw(frames_numbers.get(score_best[2]), 205, 50, 25, 31);
+            sb.draw(frames_numbers.get(score_best[3]), 185, 50, 25, 31);
+            sb.draw(big_balloon, position.x, position.y, 860, 800);
+        }
 
         //achievement.draw_current_medal(sb,270,200);
         achievement.draw_current_medal(sb);
