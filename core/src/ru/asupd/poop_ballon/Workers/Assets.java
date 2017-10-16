@@ -121,6 +121,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect ballon_n_st_bronze= new ParticleEffect();
     public static ParticleEffect ballon_n_st_silver= new ParticleEffect();
     public static ParticleEffect ballon_n_st_gold= new ParticleEffect();
+    public static ParticleEffect gold_stars= new ParticleEffect();
 
 
     //private AssetManager assetManager;
@@ -242,6 +243,7 @@ public class Assets implements Disposable, AssetErrorListener {
         ballon_n_st_bronze.load(Gdx.files.internal("particles/pop_bronze.p"),Gdx.files.internal("particles"));
         ballon_n_st_silver.load(Gdx.files.internal("particles/pop_silver.p"),Gdx.files.internal("particles"));
         ballon_n_st_gold.load(Gdx.files.internal("particles/pop_gold.p"),Gdx.files.internal("particles"));
+        gold_stars.load(Gdx.files.internal("particles/gold_stars.p"),Gdx.files.internal("particles"));
 
         //assetManager.finishLoading();
 

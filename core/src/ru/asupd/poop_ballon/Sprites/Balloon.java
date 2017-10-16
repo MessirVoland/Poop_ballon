@@ -55,6 +55,7 @@ public class Balloon {
    // private static final float CHANSE_OF_STONE_BALLOON=0.10f;
 
     public ParticleEffect effect;
+    public ParticleEffect effect_gold;
 
     private int max_combo;
     private boolean with_combo_multi=false;
@@ -84,6 +85,9 @@ public class Balloon {
     }
 
     public void setPooped() {
+        if (effect_gold!=null){
+            effect_gold.dispose();
+        }
 
         if (combo){
            // color_of_balloon=10;
@@ -244,26 +248,38 @@ public class Balloon {
                     break;
                 case 4:
                     effect = new ParticleEffect(Assets.ballon_n_st_kript);
+                    effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 case 5:
                     effect = new ParticleEffect(Assets.ballon_n_st_initblue);
+                    effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 case 6:
                     effect = new ParticleEffect(Assets.ballon_n_st_pheon);
+                    effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 case 7:
                     effect = new ParticleEffect(Assets.ballon_n_st_bronze);
+                    effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 case 8:
                     effect = new ParticleEffect(Assets.ballon_n_st_silver);
+                    effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 default:
                     effect = new ParticleEffect(Assets.ballon_n_st_gold);
+                    effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
             }
             //animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_p, Texture.class)), 3, ANIMATION_TIME);
            // animation_current_balloon = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_o, Texture.class)), 3, ANIMATION_TIME);
+            if (effect_gold!=null) {
+                effect_gold.setPosition(position.x + 45, position.y + 45);
+                effect_gold.start();
+            }
+
         }
+
     }
 
     public Vector3 getPosition() {
@@ -344,6 +360,10 @@ public class Balloon {
     }
 
     public void update(float dt, Shaker shaker){
+        if (effect_gold!=null){
+            effect_gold.update(dt);
+            effect_gold.setPosition(position.x + 45, position.y + 45);
+        }
 
     if (make_orange){
         currentTime_or+=dt;
