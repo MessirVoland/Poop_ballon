@@ -96,6 +96,13 @@ public class Assets implements Disposable, AssetErrorListener {
 
 
     public static final AssetDescriptor<Music> background_Music = new AssetDescriptor<Music>("sound.mp3",Music.class);
+    public static final AssetDescriptor<Texture> faq = new AssetDescriptor<Texture>("faq.png",Texture.class);
+    public static final AssetDescriptor<Texture> instr_pause_screen = new AssetDescriptor<Texture>("instr_pause_screen.png",Texture.class);
+    public static final AssetDescriptor<Texture> plate = new AssetDescriptor<Texture>("plate.png",Texture.class);
+    public static final AssetDescriptor<Texture> instr1 = new AssetDescriptor<Texture>("instr1.png",Texture.class);
+    public static final AssetDescriptor<Texture> instr2 = new AssetDescriptor<Texture>("instr2.png",Texture.class);
+    public static final AssetDescriptor<Texture> instr3 = new AssetDescriptor<Texture>("instr3.png",Texture.class);
+    public static final AssetDescriptor<Texture> arrow = new AssetDescriptor<Texture>("arrow.png",Texture.class);
 
 
     //Частицы
@@ -209,6 +216,14 @@ public class Assets implements Disposable, AssetErrorListener {
 
         manager.load(background_Music);
 
+        manager.load(faq);
+        manager.load(instr_pause_screen);
+        manager.load(plate);
+        manager.load(arrow);
+        manager.load(instr1);
+        manager.load(instr2);
+        manager.load(instr3);
+
         //manager.load(poof_balloon_atlas_o_Texture_region, TextureRegion.class);
         //effect = new ParticleEffect();
         effect_green.loadEmitters(Gdx.files.internal("particles/pop_green.p"));
@@ -258,6 +273,7 @@ public class Assets implements Disposable, AssetErrorListener {
         fire_bomb1.load(Gdx.files.internal("particles/fire_bomb1.p"),Gdx.files.internal("particles"));
         fire_bomb2.load(Gdx.files.internal("particles/fire_bomb2.p"),Gdx.files.internal("particles"));
         bomb_blow.load(Gdx.files.internal("particles/bomb_blow.p"),Gdx.files.internal("particles"));
+
 
         //assetManager.finishLoading();
 

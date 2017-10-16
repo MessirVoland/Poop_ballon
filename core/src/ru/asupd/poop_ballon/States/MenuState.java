@@ -39,9 +39,9 @@ public class MenuState extends State {
        // network_time = new Network_time();
         //network_time.get();
 
-        camera.setToOrtho(false,640,800 );
+        camera.setToOrtho(false,480,800 );
         background = new Texture("background_start.png");
-        balloon  = new Texture("tap.png");
+        balloon  = new Texture("c_logo.png");
         FontRed1 = new BitmapFont();
         final String FONT_PATH = "coquettec.ttf";
    //     //final String FONT_PATH = "Arialuni.ttf";
@@ -64,9 +64,12 @@ public class MenuState extends State {
     }
     @Override
     public void handleInput() {
-       // if(Gdx.input.justTouched()){
-        //    gsm.set(new PlayState(gsm));
-       // }
+        if(Gdx.input.justTouched()){
+            if (current_dt>=0.25f){
+                current_dt=4.5f;
+            }
+        }
+
 
     }
 
@@ -84,8 +87,8 @@ public class MenuState extends State {
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
-        sb.draw(background, 0, 0,640,800);
-        sb.draw(balloon,120,100,405,88);
+        sb.draw(background, 0, 0,480,800);
+        sb.draw(balloon,76,320,328,314);
 
                 //
         //Assets.loadParticleEffects();

@@ -28,6 +28,7 @@ import ru.asupd.poop_ballon.Sprites.Hearth_balloon;
 import ru.asupd.poop_ballon.Sprites.Star;
 import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Balloons_manager;
+import ru.asupd.poop_ballon.Workers.Faq;
 import ru.asupd.poop_ballon.Workers.MyInputProcessor;
 import ru.asupd.poop_ballon.Workers.Resizer;
 import ru.asupd.poop_ballon.Workers.Score;
@@ -108,10 +109,10 @@ public class PlayState extends State {
 
     public static Shaker shaker;//шейкео
     public static int index;//хз
-    private static boolean pause=false;
+    public static boolean pause=false;
     //private float min_x=0.0f,min_y=0.0f;
 
-    boolean started;//для страрта игры
+    public static boolean started;//для страрта игры
     private GameoverState gameoverState;
     //int[] megred_high_score = new int[5];//для отображения счета
 
@@ -153,6 +154,7 @@ public class PlayState extends State {
 
     public static Bomb_balloon bomb_balloon;
     BackGround background;
+    public static Faq faq;
 
     PlayState(GameStateManager gsm) {
         super(gsm);
@@ -177,6 +179,7 @@ public class PlayState extends State {
 
         pause_bgnd = new Texture("pause.png");
         STEP_for_balloon=50;
+        faq = new Faq();
 
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
@@ -300,13 +303,7 @@ public class PlayState extends State {
                 }
                 //--------------------------------------//
             }
-            //cтарт игры
-            if ((!started)&(!pause)) {
-                if (!boss_balloon.isStarted()) {
-                    started = true;
-                    score_num.setScore(0);
-                }
-            }
+
         }
     }
     public static void setPAUSE(){
@@ -622,10 +619,14 @@ public class PlayState extends State {
             sb.draw(your_high_score,130,100,211,74);
             sb.draw(tap_to_play,80,360,335,51);
             score_num.draw(sb,190,50);
+            if (!faq.isShow()) {
+                sb.draw(Assets.instance.manager.get(Assets.faq), 380, 0);
+            }
         }
         if (hearth_balloon.isFly()|hearth_balloon.isPooped()) {
             sb.draw(hearth_balloon.getTexture(), hearth_balloon.getPosition().x, hearth_balloon.getPosition().y, 95, 169);
         }
+
 
 
         for (Cloud cloud : clouds) {
@@ -634,10 +635,13 @@ public class PlayState extends State {
             sb.setColor(1,1,1,1);
         }
 
+
         if (!game_over_ball_fly) {
             sb.draw(texture_poop_balloon, position.x, position.y, 463, 218);//заголовок
             //sb.draw(texture_poop_balloon, position.x+(texture_poop_balloon.getWidth()/2)-(resizer_poop_balloon.getSize_x()/2), position.y+(texture_poop_balloon.getHeight()/2)-(resizer_poop_balloon.getSize_y()/2), resizer_poop_balloon.getSize_x(), resizer_poop_balloon.getSize_y());//заголовок
         }
+
+        faq.draw(sb);
         if (boss_balloon.isStarted()){
             sb.draw(boss_balloon.getTexture_boss(),boss_balloon.getPosition().x,boss_balloon.getPosition().y,95,190);
         }

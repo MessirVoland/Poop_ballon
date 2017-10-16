@@ -4,7 +4,11 @@ import com.badlogic.gdx.math.Vector3;
 
 import ru.asupd.poop_ballon.States.PlayState;
 
+import static ru.asupd.poop_ballon.States.PlayState.faq;
+import static ru.asupd.poop_ballon.States.PlayState.pause;
 import static ru.asupd.poop_ballon.States.PlayState.perfomancecounter;
+import static ru.asupd.poop_ballon.States.PlayState.score_num;
+import static ru.asupd.poop_ballon.States.PlayState.started;
 
 /**
  * Модуль обработки нажатий
@@ -43,10 +47,24 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
 
         //System.out.println("td screenX:"+screenX+" td screenY:"+screenY);
 
+        //cтарт игры
+        if ((!started)&(!pause)) {
+            if (!PlayState.boss_balloon.isStarted()) {
+                if (faq.click(screenX,screenY)) {
+
+                }else {
+                    if (!faq.isShow()) {
+                        started = true;
+                        score_num.setScore(0);
+                    }
+                }
+            }
+        }
         //если пауза
         if (PlayState.isPause()){
             PlayState.settings.clicked(screenX,screenY);
             return true;
+
         }//Если не пауза
         else{
             //Обработка нажатия на шар сздоровья
