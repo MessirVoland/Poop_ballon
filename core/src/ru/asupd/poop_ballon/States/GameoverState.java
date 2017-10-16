@@ -135,19 +135,35 @@ public class GameoverState extends State {
             sb.draw(star.getTexture(),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
             // sb.draw(Assets.instance.manager.get(Assets.star1),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
         }
-        sb.draw(tap_to_restart,60,600,360,50);
-        if (last_score>=load_hiscore) {
-            sb.draw(awesome, 95, 480, 290, 55);
+        sb.draw(tap_to_restart,60,650,360,50);
+
+
+        if(achievement.draw_current_medal(sb)){
+            if (last_score>=load_hiscore) {
+                sb.draw(awesome, 95, 530, 290, 55);
+            }
+            sb.draw(your_score,105,400,120,75);
+
+            sb.draw(frames_numbers.get(score_last[0]),175,320,25,31);
+            sb.draw(frames_numbers.get(score_last[1]),155,320,25,31);
+            sb.draw(frames_numbers.get(score_last[2]),135,320,25,31);
+            sb.draw(frames_numbers.get(score_last[3]),115,320,25,31);
+        }
+        else{
+            if (last_score>=load_hiscore) {
+                sb.draw(awesome, 95, 480, 290, 55);
+            }
+            sb.draw(your_score,175,400,120,75);
+
+            sb.draw(frames_numbers.get(score_last[0]),245,320,25,31);
+            sb.draw(frames_numbers.get(score_last[1]),225,320,25,31);
+            sb.draw(frames_numbers.get(score_last[2]),205,320,25,31);
+            sb.draw(frames_numbers.get(score_last[3]),185,320,25,31);
         }
 
-        sb.draw(your_score,175,400,120,75);
-
-        sb.draw(frames_numbers.get(score_last[0]),245,320,25,31);
-        sb.draw(frames_numbers.get(score_last[1]),225,320,25,31);
-        sb.draw(frames_numbers.get(score_last[2]),205,320,25,31);
-        sb.draw(frames_numbers.get(score_last[3]),185,320,25,31);
 
         if (showed_ads){
+
             sb.draw(your_best_score, 125, 170, 210, 75);
             sb.draw(frames_numbers.get(score_best[0]), 245, 130, 25, 31);
             sb.draw(frames_numbers.get(score_best[1]), 225, 130, 25, 31);
@@ -165,7 +181,7 @@ public class GameoverState extends State {
         }
 
         //achievement.draw_current_medal(sb,270,200);
-        achievement.draw_current_medal(sb);
+
 
 
 
