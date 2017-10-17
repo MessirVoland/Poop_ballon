@@ -9,6 +9,7 @@ import ru.asupd.poop_ballon.States.PlayState;
 import ru.asupd.poop_ballon.Workers.Assets;
 
 import static com.badlogic.gdx.math.MathUtils.random;
+import static ru.asupd.poop_ballon.States.PlayState.CHANSE_OF_SPAWN_BOMB;
 import static ru.asupd.poop_ballon.States.PlayState.balloons;
 import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
 import static ru.asupd.poop_ballon.States.PlayState.combo_effects;
@@ -22,7 +23,7 @@ import static ru.asupd.poop_ballon.States.PlayState.shaker;
  */
 
 public class Bomb_balloon extends Creature{
-    private int CHANSE_OF_SPAWN=5;//5%
+
     private Vector3 velosity;
     private Sprite bomb_sprite;
     private boolean fly=false;
@@ -98,7 +99,7 @@ public class Bomb_balloon extends Creature{
         }
     }
     public void try_to_fly(){
-        if ((!fly)&(random(99)<CHANSE_OF_SPAWN)){
+        if ((!fly)&(random(99)<CHANSE_OF_SPAWN_BOMB)){
             fly=true;
 
         }

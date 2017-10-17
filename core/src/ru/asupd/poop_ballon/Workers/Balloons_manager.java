@@ -10,6 +10,9 @@ import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.States.PlayState;
 
 import static com.badlogic.gdx.math.MathUtils.random;
+import static ru.asupd.poop_ballon.States.PlayState.MEDAL_SCORE;
+import static ru.asupd.poop_ballon.States.PlayState.SEQUENCE_OF_HEARTH_BALLOON;
+import static ru.asupd.poop_ballon.States.PlayState.SIZE_OF_COMBO_FOR_BOMB_SPAWN;
 
 /** менеджер шаров
  * Created by Asup.D on 09.10.2017.
@@ -28,7 +31,7 @@ public class Balloons_manager {
     }
 
     public int getCurrent_difficult_up() {
-        current_difficult=(PlayState.settings.hi_score()/500+1);
+        current_difficult=(PlayState.settings.hi_score()/MEDAL_SCORE+1);
         if (current_difficult>=10){
             current_difficult=10;//ограничение для золота
         }
@@ -64,7 +67,7 @@ public class Balloons_manager {
                         }
 
                 }
-                if (PlayState.current_combo>=3){
+                if (PlayState.current_combo>=SIZE_OF_COMBO_FOR_BOMB_SPAWN){
                     PlayState.bomb_balloon.try_to_fly();
                 }
 
@@ -90,7 +93,7 @@ public class Balloons_manager {
                                     PlayState.cautch_ball++;
 
 
-                                    if (PlayState.counter_of_h_ballons <= PlayState.score_num.getScore() / 120 * getCurrent_difficult_up()) {
+                                    if (PlayState.counter_of_h_ballons <= PlayState.score_num.getScore() /SEQUENCE_OF_HEARTH_BALLOON * getCurrent_difficult_up()) {
                                         if (PlayState.miss_ball >= 1) {
                                             PlayState.hearth_balloon.setCan_fly(true);
                                             PlayState.hearth_balloon.setFly(true);

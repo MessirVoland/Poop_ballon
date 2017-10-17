@@ -46,7 +46,15 @@ import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
 
 
 public class PlayState extends State {
+    //Раздел констант для баланса игры-----------------------------------------/
 
+    public static final int MEDAL_SCORE=500;//медали
+    public static final int SEQUENCE_OF_HEARTH_BALLOON=120;//шары здоровья каждые 120 умноженные на текущую медаль
+    public static final int CHANSE_OF_WOODEN_BALLOON=15;//15% Шанс нестандартного шара вместо обычного
+    public static final int CHANSE_OF_SPAWN_BOMB=5;//5% Шанс бомбы после клика х3 комбо
+    public static final int SIZE_OF_COMBO_FOR_BOMB_SPAWN=3;//х3 Размер комбо для проверки спавна бомбы
+
+    //-------------------------------------------------------------------------/
     public static Array<Balloon> balloons;//массив шаров
     private Array<Cloud> clouds;//массив шаров
     private Array<Star> stars;//звезды

@@ -12,6 +12,7 @@ import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Shaker;
 
 import static com.badlogic.gdx.math.MathUtils.random;
+import static ru.asupd.poop_ballon.States.PlayState.CHANSE_OF_WOODEN_BALLOON;
 import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
 
 /**
@@ -51,7 +52,7 @@ public class Balloon {
     }
 
     private int dice;
-    private static final int CHANSE_OF_WOODEN_BALLOON=15;
+
    // private static final float CHANSE_OF_STONE_BALLOON=0.10f;
 
     public ParticleEffect effect;
