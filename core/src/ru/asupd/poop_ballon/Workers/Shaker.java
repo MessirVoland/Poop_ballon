@@ -15,15 +15,6 @@ public class Shaker {
     private float baseX=0,baseY=0;
     private float x, y;
 
-
-    public float getBaseX() {
-        return baseX;
-    }
-
-    public float getBaseY() {
-        return baseY;
-    }
-
     public Shaker(OrthographicCamera camera) {
         camera_sh=camera;
        baseX+= camera.position.x ;

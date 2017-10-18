@@ -1,6 +1,7 @@
 package ru.asupd.poop_ballon.Sprites;
 
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import java.util.Random;
 import ru.asupd.poop_ballon.States.PlayState;
@@ -15,6 +16,7 @@ import static ru.asupd.poop_ballon.States.PlayState.MEDAL_SCORE;
  * Created by Voland on 04.08.2017.
  */
 public class Balloon {
+    private Sprite sprite;
     private Vector3 position;
     private Vector3 velosity;
     private static final Random rand = new Random();
