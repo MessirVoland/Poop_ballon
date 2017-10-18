@@ -14,6 +14,7 @@ import ru.asupd.poop_ballon.Workers.Shaker;
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.PlayState.CHANSE_OF_WOODEN_BALLOON;
 import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
+import static ru.asupd.poop_ballon.States.PlayState.MEDAL_SCORE;
 
 /**
  * Шарик)
@@ -99,7 +100,7 @@ public class Balloon {
             if (!N_ST_color) {
                 effect = new ParticleEffect(Assets.effect_orange);
             }else
-                switch (PlayState.settings.hi_score()/500) {
+                switch (PlayState.settings.hi_score()/MEDAL_SCORE) {
                     case 0:
                         break;
                     case 1:
