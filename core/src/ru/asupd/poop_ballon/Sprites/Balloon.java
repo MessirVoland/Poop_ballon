@@ -1,5 +1,6 @@
 package ru.asupd.poop_ballon.Sprites;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
@@ -33,7 +34,7 @@ public class Balloon {
     private int number_of_n_st;
 
     private ParticleEffect effect;
-    private ParticleEffect effect_gold;
+    public ParticleEffect effect_gold;
 
     private short max_combo;
     private boolean with_combo_multi=false;
@@ -64,22 +65,32 @@ public class Balloon {
         if (!N_ST_color) {
             if (grav < 260) {
                 color_of_balloon = 0;
+                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_green, Texture.class));
+                sprite.setPosition(position.x,position.y);
                 effect = new ParticleEffect(Assets.effect_green);
             }
             else if (grav < 320) {
                 color_of_balloon = 1;
+                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_yellow, Texture.class));
+                sprite.setPosition(position.x,position.y);
                 effect = new ParticleEffect(Assets.effect_yellow);
             }
             else if (grav < 380) {
                 color_of_balloon = 2;
+                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_blue, Texture.class));
+                sprite.setPosition(position.x,position.y);
                 effect = new ParticleEffect(Assets.effect_blue);
             }
             else if (grav < 420) {
                 color_of_balloon = 3;
+                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_red, Texture.class));
+                sprite.setPosition(position.x,position.y);
                 effect = new ParticleEffect(Assets.effect_red);
             }
             else {
                 color_of_balloon = 4;
+                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_purple, Texture.class));
+                sprite.setPosition(position.x,position.y);
                 effect = new ParticleEffect(Assets.effect_purple);
             }
            }
@@ -135,6 +146,10 @@ public class Balloon {
     }
     public void setNumber_of_n_st(int number_of_n_st) {
         this.number_of_n_st = number_of_n_st;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 
     public void setMax_combo(short max_combo) {
@@ -409,6 +424,9 @@ public class Balloon {
             if (can_respawn) {
                 velosity.scl(dt);
                 position.add(velosity.x, velosity.y, 0);
+                if (sprite!=null){
+                    sprite.setPosition(position.x,position.y);
+                }
                 if (position.x > 390) {
                     position.x = 390;
                 }

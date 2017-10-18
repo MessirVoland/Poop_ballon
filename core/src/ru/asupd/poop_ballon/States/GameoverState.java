@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
@@ -17,6 +16,7 @@ import ru.asupd.poop_ballon.Workers.Achievement;
 import ru.asupd.poop_ballon.Workers.Assets;
 
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
+import static ru.asupd.poop_ballon.States.PlayState.settings;
 
 /**
  * Created by Voland on 22.08.2017.
@@ -99,6 +99,7 @@ public class GameoverState extends State {
         FontRed1.setColor(Color.RED); //Красный
         currentdt=0;
         waiting=1.5f;
+        settings.hi_score_refresh();
         achievement.start_anim();
     }
 
@@ -136,6 +137,7 @@ public class GameoverState extends State {
             // sb.draw(Assets.instance.manager.get(Assets.star1),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
         }
         sb.draw(tap_to_restart,60,650,360,50);
+
 
 
         if(achievement.draw_current_medal(sb)){
