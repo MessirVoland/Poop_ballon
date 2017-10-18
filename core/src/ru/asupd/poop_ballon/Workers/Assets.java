@@ -154,12 +154,12 @@ public class Assets implements Disposable, AssetErrorListener {
         this.manager = assetManager;
         assetManager.setErrorListener(this);
 
-        manager.load(poof_balloon_atlas_idle_o, Texture.class);
-        manager.load(poof_balloon_atlas_idle_g,Texture.class);
-        manager.load(poof_balloon_atlas_idle_b,Texture.class);
-        manager.load(poof_balloon_atlas_idle_y,Texture.class);
-        manager.load(poof_balloon_atlas_idle_r,Texture.class);
-        manager.load(poof_balloon_atlas_idle_p,Texture.class);
+        //manager.load(poof_balloon_atlas_idle_o, Texture.class);
+        //manager.load(poof_balloon_atlas_idle_g,Texture.class);
+       // manager.load(poof_balloon_atlas_idle_b,Texture.class);
+        //manager.load(poof_balloon_atlas_idle_y,Texture.class);
+       // manager.load(poof_balloon_atlas_idle_r,Texture.class);
+       // manager.load(poof_balloon_atlas_idle_p,Texture.class);
 
         manager.load(balloon_green,Texture.class);
         manager.load(balloon_yellow,Texture.class);
@@ -289,12 +289,12 @@ public class Assets implements Disposable, AssetErrorListener {
        // }
     }
     public static void make_linear(){
-        Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_o,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_g,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_b,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_y,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_r,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_p,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+       // Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_o,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+       // Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_g,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+       // Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_b,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+       // Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_y,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+       // Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_r,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+      //  Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_p,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Assets.instance.manager.get(Assets.balloon_green,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Assets.instance.manager.get(Assets.balloon_yellow,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -309,10 +309,8 @@ public class Assets implements Disposable, AssetErrorListener {
         Assets.instance.manager.get(Assets.cloud4).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         Assets.instance.manager.get(Assets.heart_baloon).setFilter(Texture.TextureFilter.Linear,Texture.TextureFilter.Linear);
-
-
-
-
+        Assets.instance.manager.get(Assets.heart_baloon_hole1).setFilter(Texture.TextureFilter.Linear,Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.heart_baloon_hole2).setFilter(Texture.TextureFilter.Linear,Texture.TextureFilter.Linear);
 
 
     }
