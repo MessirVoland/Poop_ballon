@@ -183,7 +183,7 @@ public class Balloon {
         //effect = Assets.manager.get(Assets.Particles_of_balloon_g,ParticleEffect.class);
         //new ParticleEffect(Assets.effect);
 
-        if (PlayState.settings.hi_score()>=500) {
+        if (PlayState.settings.hi_score()>=MEDAL_SCORE) {
             if (random(99) < CHANSE_OF_WOODEN_BALLOON) {
                 N_ST_color = true;
             }
@@ -236,7 +236,7 @@ public class Balloon {
         else
         {
             color_of_balloon = 12;
-            switch (PlayState.settings.hi_score()/500) {
+            switch (PlayState.settings.hi_score()/MEDAL_SCORE) {
                 case 0:
                     break;
                 case 1:
