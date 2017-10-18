@@ -206,7 +206,7 @@ public class Balloons_manager {
                         balloon.part_start();
                         break;
                     case 12:
-                        switch (PlayState.settings.hi_score()/500) {
+                        switch (PlayState.settings.hi_score()/MEDAL_SCORE) {
                             case 0:
                                 break;
                             case 1:

@@ -14,6 +14,7 @@ import ru.asupd.poop_ballon.States.PlayState;
 
 public class Settings {
     private Preferences pref;//для храниния данных
+    private static int hi_score;
     private boolean mute,vibro;//звук вибро
     private Texture restart;
     private Texture mute_tex,unmute_tex;
@@ -51,6 +52,7 @@ public class Settings {
         vibro_tex = new Texture("vibro_on.png");
         unvibro_tex = new Texture("vibro_off.png");
         pos_vibro = new Vector3(60,400 - 78,0);
+        hi_score_refresh();
 
 
     }
@@ -144,7 +146,10 @@ public class Settings {
         return vibro;
     }
 
+    public void hi_score_refresh(){
+        hi_score= pref.getInteger("highscore");
+    }
     public int hi_score(){
-        return pref.getInteger("highscore");
+        return hi_score;
     }
 }

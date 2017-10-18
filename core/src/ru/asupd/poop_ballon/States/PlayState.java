@@ -145,7 +145,7 @@ public class PlayState extends State {
     public static Balloons_manager balloons_manager;
 
     //Комбо
-    public static int current_combo=0;
+    public static short current_combo=0;
     private static final float TIME_FOR_COMBO = 1.25f;//максимальное время отображения значка комбо
     float current_time_for_combo = 0.0f;//текущее время комбо
     public static Array<ParticleEffect> combo_effects = new Array<ParticleEffect>();
@@ -232,6 +232,7 @@ public class PlayState extends State {
 
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
         settings= new Settings(prefs);
+        settings.hi_score_refresh();
         load_hiscore = prefs.getInteger("highscore");
 
 
