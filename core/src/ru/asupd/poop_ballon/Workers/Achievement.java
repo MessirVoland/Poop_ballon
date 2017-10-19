@@ -67,6 +67,7 @@ public class Achievement {
                 sb.draw(medals.get(diff - 2), local_x - (resizer_medal.getSize_x() / 2), local_y - (resizer_medal.getSize_y() / 2), resizer_medal.getSize_x(), resizer_medal.getSize_y());
         return true;
         }
+        
         return false;
     }
     public void clicked(boolean wooden, short current_combo, int current_step_wooden) {
