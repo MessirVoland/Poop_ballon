@@ -10,9 +10,11 @@ import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.States.PlayState;
 
 import static com.badlogic.gdx.math.MathUtils.random;
+import static ru.asupd.poop_ballon.States.GameoverState.achievement;
 import static ru.asupd.poop_ballon.States.PlayState.MEDAL_SCORE;
 import static ru.asupd.poop_ballon.States.PlayState.SEQUENCE_OF_HEARTH_BALLOON;
 import static ru.asupd.poop_ballon.States.PlayState.SIZE_OF_COMBO_FOR_BOMB_SPAWN;
+import static ru.asupd.poop_ballon.States.PlayState.current_combo;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
 
 /** менеджер шаров
@@ -78,6 +80,7 @@ public class Balloons_manager {
                 if (PlayState.current_combo>=SIZE_OF_COMBO_FOR_BOMB_SPAWN){
                     PlayState.bomb_balloon.try_to_fly();
                 }
+                achievement.clicked(wooden,current_combo,current_step_wooden);
 
                 if (!g_clicked) {
                     if (((480 - 69 < finalScreenX) & (480 - 69 + 64 > finalScreenX)) &

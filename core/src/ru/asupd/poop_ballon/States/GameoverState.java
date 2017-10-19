@@ -39,7 +39,7 @@ public class GameoverState extends State {
 
     Vector3 velosity,position;
     Texture big_balloon;
-    Achievement achievement;
+    public static final Achievement achievement= new Achievement();
 
 
     public void setPosition(Vector3 position) {
@@ -52,7 +52,7 @@ public class GameoverState extends State {
         //System.out.println("redball_x: "+redball_x);
         camera.setToOrtho(false, 480 , 800 );
         this.final_stars=stars;
-        achievement = new Achievement();
+
 
         //background = new Texture("background_night.png");
         background = new TextureRegion((Texture)(Assets.instance.manager.get(Assets.back_ground_atlas)));
@@ -107,6 +107,7 @@ public class GameoverState extends State {
     protected void handleInput() {
         if(Gdx.input.justTouched()){
            gsm.set(new PlayState(gsm));
+            achievement.refr();
            PlayState.RESTART_STAGE();
            // gsm.pop();
         }
