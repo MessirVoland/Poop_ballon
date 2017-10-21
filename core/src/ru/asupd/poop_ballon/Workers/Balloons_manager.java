@@ -35,7 +35,7 @@ public class Balloons_manager {
     }
 
     public int getCurrent_difficult_up() {
-        current_difficult=(settings.hi_score()/MEDAL_SCORE+1);
+        current_difficult=(settings.hi_score()+500/MEDAL_SCORE+1);
         if (current_difficult>=10){
             current_difficult=10;//ограничение для золота
         }
@@ -122,8 +122,8 @@ public class Balloons_manager {
                                             balloon.setWooden_color(true);
                                         }
                                         if (wooden) {
-                                            PlayState.score_num.addScore((int) (PlayState.current_combo * Math.pow(getCurrent_difficult_up(),current_step_wooden)));
-                                            System.out.println("Added W "+(int) (PlayState.current_combo * Math.pow(getCurrent_difficult_up(),current_step_wooden)));
+                                            PlayState.score_num.addScore((int) (PlayState.current_combo * (getCurrent_difficult_up()*current_step_wooden)));
+                                            System.out.println("Added W "+(int) (PlayState.current_combo * (getCurrent_difficult_up()*current_step_wooden)));
                                         } else {
                                             PlayState.score_num.addScore(PlayState.current_combo);
                                             //System.out.println("Added Nw"+(PlayState.current_combo));
