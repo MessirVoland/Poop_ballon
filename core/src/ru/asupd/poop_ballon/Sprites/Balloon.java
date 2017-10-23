@@ -52,6 +52,7 @@ public class Balloon {
         position = new Vector3(x, y, 0);
         velosity = new Vector3(random(100) - 50, grav, 0);
 
+        //Генерация нестандартного шара
         if ((PlayState.settings.hi_score()-500)>=MEDAL_SCORE) {
             if (rand.nextInt(99) < CHANSE_OF_WOODEN_BALLOON-balloons_manager.getCurrent_difficult_up()+1) {
                 N_ST_color = true;
