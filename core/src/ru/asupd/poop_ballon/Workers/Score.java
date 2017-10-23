@@ -3,10 +3,9 @@ package ru.asupd.poop_ballon.Workers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
-import static ru.asupd.poop_ballon.Workers.Balloons_manager.getCurrent_difficult_up;
+import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
 
 /**
  * ускорение счета
@@ -46,7 +45,7 @@ public class Score {
             combo_num = combo_in;
             wooden = wood;
             //System.out.println("Combo in " +combo_in+" curr_wood "+current_wood+" diff "+getCurrent_difficult_up());
-            current_wooden = combo_in * combo_in * current_wood * getCurrent_difficult_up();
+            current_wooden = combo_in * combo_in * current_wood * balloons_manager.getCurrent_difficult_up();
             //System.out.println("Added +" + current_wooden);
             combo = true;
         }

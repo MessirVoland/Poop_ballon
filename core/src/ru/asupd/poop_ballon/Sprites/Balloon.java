@@ -50,7 +50,7 @@ public class Balloon {
         position = new Vector3(x, y, 0);
         velosity = new Vector3(random(100) - 50, grav, 0);
 
-        if ((PlayState.settings.hi_score()+500)>=MEDAL_SCORE) {
+        if ((PlayState.settings.hi_score()-500)>=MEDAL_SCORE) {
             if (rand.nextInt(99) < CHANSE_OF_WOODEN_BALLOON) {
                 N_ST_color = true;
             }
@@ -97,7 +97,7 @@ public class Balloon {
         else
         {
             color_of_balloon = 12;
-            switch ((PlayState.settings.hi_score()+500)/MEDAL_SCORE) {
+            switch ((PlayState.settings.hi_score()-500)/MEDAL_SCORE) {
                 case 0:
                     break;
                 case 1:

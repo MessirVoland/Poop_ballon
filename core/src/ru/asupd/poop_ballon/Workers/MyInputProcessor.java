@@ -8,6 +8,7 @@ import static ru.asupd.poop_ballon.States.PlayState.faq;
 import static ru.asupd.poop_ballon.States.PlayState.pause;
 import static ru.asupd.poop_ballon.States.PlayState.perfomancecounter;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
+import static ru.asupd.poop_ballon.States.PlayState.settings;
 import static ru.asupd.poop_ballon.States.PlayState.started;
 
 /**
@@ -56,13 +57,14 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                     if (!faq.isShow()) {
                         started = true;
                         score_num.setScore(0);
+                        settings.hi_score_refresh();
                     }
                 }
             }
         }
         //если пауза
         if (PlayState.isPause()){
-            PlayState.settings.clicked(screenX,screenY);
+            settings.clicked(screenX,screenY);
             return true;
 
         }//Если не пауза
