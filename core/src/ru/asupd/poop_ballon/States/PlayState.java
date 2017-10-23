@@ -443,7 +443,7 @@ public class PlayState extends State {
                 boss_balloon.setGive_score(false);
                 //System.out.println("add_score");
                 score_num.addScore(50);
-                score_num.setCombo(9);
+                //score_num.setCombo(9);
             }
 
 

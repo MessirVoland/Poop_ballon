@@ -46,7 +46,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 		// Create the libgdx View
 		View gameView = initializeForView(new MyGdxGame(this), config);
-		gameView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+		//gameView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 		layout.addView(gameView);
 
 		// Create and setup the AdMob view
