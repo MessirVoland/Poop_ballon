@@ -40,11 +40,13 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useAccelerometer = false;
 		config.useCompass = false;
+
         //config.useGL30=true;//не использовать с рекламой
 		//** Лучше вообще не использовать
 
 		// Create the libgdx View
 		View gameView = initializeForView(new MyGdxGame(this), config);
+		gameView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 		layout.addView(gameView);
 
 		// Create and setup the AdMob view
