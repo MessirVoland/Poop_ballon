@@ -44,7 +44,7 @@ public class MyGdxGame implements ApplicationListener {
 		new Gdx().app.postRunnable(new Runnable() {
 			@Override
 			public void run() {
-                if(adsController.isWifiConnected())
+                if(adsController.isOnline())
 				{adsController.showBannerAd();
 				showed_ads=true;}
 			}
@@ -124,6 +124,11 @@ public class MyGdxGame implements ApplicationListener {
         public boolean isWifiConnected() {
             return true;
         }
-    }
+
+		@Override
+		public boolean isOnline() {
+			return true;
+		}
+	}
 
 }

@@ -81,7 +81,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		adView.setVisibility(View.INVISIBLE);
 		adView.setBackgroundColor(0xff000000); // black
 		//adView.setAdUnitId("ca-app-pub-6755493316893566/6656095586");//now samsung
-		adView.setAdUnitId("ca-app-pub-6755493316893566/8454794770"); // gogle
+		adView.setAdUnitId("ca-app-pub-6755493316893566/8454794770"); // google
 		adView.setAdSize(AdSize.SMART_BANNER);
 	}
 
@@ -117,5 +117,11 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 			ni = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 		}
 		return (ni != null && ni.isConnected());
+	}
+	public boolean isOnline() {
+		ConnectivityManager cm =
+				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		return netInfo != null && netInfo.isConnectedOrConnecting();
 	}
 }
