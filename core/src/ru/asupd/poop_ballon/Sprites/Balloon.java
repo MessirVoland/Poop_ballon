@@ -12,6 +12,8 @@ import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.PlayState.CHANSE_OF_WOODEN_BALLOON;
 import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
 import static ru.asupd.poop_ballon.States.PlayState.MEDAL_SCORE;
+import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
+
 /**
  * Шарик)
  * Created by Voland on 04.08.2017.
@@ -51,7 +53,7 @@ public class Balloon {
         velosity = new Vector3(random(100) - 50, grav, 0);
 
         if ((PlayState.settings.hi_score()-500)>=MEDAL_SCORE) {
-            if (rand.nextInt(99) < CHANSE_OF_WOODEN_BALLOON) {
+            if (rand.nextInt(99) < CHANSE_OF_WOODEN_BALLOON-balloons_manager.getCurrent_difficult_up()+1) {
                 N_ST_color = true;
             }
         }

@@ -819,9 +819,9 @@ public class PlayState extends State {
     public static int get_speed_for_balloon(){
         int speed;
         speed = 100+(int)(Math.sqrt(cautch_ball)*8)+random( ((int)Math.log(cautch_ball+2))*40);
-        if (speed>=500){
+        /*if (speed>=500){
             speed=500;//Ограничитель скорости шаров
-        }
+        }*/
         return speed;
     }
     public void missed_ball(){
