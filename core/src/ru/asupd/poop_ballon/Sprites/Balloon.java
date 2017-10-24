@@ -19,7 +19,7 @@ import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
  * Created by Voland on 04.08.2017.
  */
 public class Balloon {
-    private Sprite sprite;
+    private Sprite sprite,sprite_or;
     private Vector3 position;
     private Vector3 velosity;
     private static final Random rand = new Random();
@@ -345,16 +345,22 @@ public class Balloon {
 
         //Групповое изменение цвета в комбо
         if (make_orange) {
+
             currentTime_or += dt;
             if (currentTime_or >= 0.08f * max_combo) {
                 //System.out.println("Combo_number: "+combo_number);
                 //if (currentTime_or>=1.0f){
                 make_orange = false;
                 shaker.inc();
+
                 if (wooden_color) {
                     color_of_balloon = 12;
+
                 } else {
                     color_of_balloon = 10;
+                    sprite_or= new Sprite(Assets.instance.manager.get(Assets.balloon_orange, Texture.class));
+                    sprite_or.setPosition(sprite.getX(),sprite.getY());
+                    sprite=sprite_or;
                 }
                 combo = true;
                 this.pooped = true;
@@ -448,6 +454,9 @@ public class Balloon {
 
     public void dispose() {
        // System.out.println("Balloon disposed");
+    }
+    public void scale(float x){
+        sprite.scale(x);
     }
     public void stop_spawn(){
         can_respawn=false;

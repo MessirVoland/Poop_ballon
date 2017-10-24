@@ -214,11 +214,14 @@ public class Balloons_manager {
                         break;
                     case 10:
                         sb.setColor(1, 1, 1, 1);
-                        sb.draw(Assets.instance.manager.get(Assets.balloon_orange, Texture.class), balloon.getPosition().x, balloon.getPosition().y);
+                        //sb.draw(Assets.instance.manager.get(Assets.balloon_orange, Texture.class), balloon.getPosition().x, balloon.getPosition().y);
+                        balloon.getSprite().draw(sb);
+                        balloon.scale(0.01f);
                         break;
                     case 11:
                         sb.setColor(1, 1, 1, 1);
                        // sb.draw(balloon.getFrames(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
+
                         balloon.part_start();
                         break;
                     case 12:
