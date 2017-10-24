@@ -179,6 +179,7 @@ public class Balloon {
         with_combo_multi=true;
     }
 
+
     public void setPooped() {
         if (effect_gold!=null){
             effect_gold.dispose();

@@ -54,8 +54,8 @@ public class Balloons_manager {
                 current_step_wooden=0;
 
                 for (Balloon balloon : PlayState.balloons) {
-                    if (((balloon.getPosition().x < finalScreenX) & (balloon.getPosition().x + 100 > finalScreenX))&
-                         ((balloon.getPosition().y < finalScreenY) & (balloon.getPosition().y + 200 > finalScreenY))) {
+                   if (balloon.getSprite().getBoundingRectangle().contains(finalScreenX,finalScreenY))
+                     {
                             if (!balloon.isPooped()) {
                                 get_clicked = true;
                                 //System.out.println("true");
@@ -95,8 +95,7 @@ public class Balloons_manager {
                 } else {
                     int mini_step = 0;
                     for (Balloon balloon : PlayState.balloons) {
-                        if (((balloon.getPosition().x < finalScreenX) & (balloon.getPosition().x + 100 > finalScreenX)) &
-                             ((balloon.getPosition().y < finalScreenY) & (balloon.getPosition().y + 200 > finalScreenY))) {
+                        if (balloon.getSprite().getBoundingRectangle().contains(finalScreenX,finalScreenY)) {
                                 if (!balloon.isPooped()) {
                                     //if (800-finalScreenY < 750) {
                                     //System.out.println("touched the ball :");
