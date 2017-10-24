@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.PerformanceCounter;
 
 import ru.asupd.poop_ballon.Sprites.Balloon;
 import ru.asupd.poop_ballon.States.PlayState;
@@ -15,6 +14,7 @@ import static ru.asupd.poop_ballon.States.PlayState.MEDAL_SCORE;
 import static ru.asupd.poop_ballon.States.PlayState.SEQUENCE_OF_HEARTH_BALLOON;
 import static ru.asupd.poop_ballon.States.PlayState.SIZE_OF_COMBO_FOR_BOMB_SPAWN;
 import static ru.asupd.poop_ballon.States.PlayState.current_combo;
+import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
 
 /** менеджер шаров
@@ -34,13 +34,6 @@ public class Balloons_manager {
         get_clicked = false;
     }
 
-    public int getCurrent_difficult_up() {
-        current_difficult=((settings.hi_score()-500)/MEDAL_SCORE+1);
-        if (current_difficult>=10){
-            current_difficult=10;//ограничение для золота
-        }
-        return current_difficult;
-    }
     public boolean get_clicked(){
         return get_clicked;
     }
@@ -224,22 +217,30 @@ public class Balloons_manager {
                         balloon.part_start();
                         break;
                     case 12:
+
+                        if(balloon.isCombo()){
+                            balloon.scale(0.01f);
+                        }
                         switch ((settings.hi_score()-500)/MEDAL_SCORE) {
                             case 0:
                                 break;
                             case 1:
                                 sb.setColor(1, 1, 1, 1);
-                                sb.draw(Assets.instance.manager.get(Assets.balloon_ice), balloon.getPosition().x, balloon.getPosition().y);
+                                //sb.draw(Assets.instance.manager.get(Assets.balloon_ice), balloon.getPosition().x, balloon.getPosition().y);
+
+                                balloon.getSprite().draw(sb);
                                 balloon.setNumber_of_n_st(1);
                                 break;
                             case 2:
                                 sb.setColor(1, 1, 1, 1);
-                                sb.draw(Assets.instance.manager.get(Assets.balloon_wooden), balloon.getPosition().x, balloon.getPosition().y);
+                                //sb.draw(Assets.instance.manager.get(Assets.balloon_wooden), balloon.getPosition().x, balloon.getPosition().y);
+                                balloon.getSprite().draw(sb);
                                 balloon.setNumber_of_n_st(2);
                                 break;
                             case 3:
                                 sb.setColor(1, 1, 1, 1);
-                                sb.draw(Assets.instance.manager.get(Assets.balloon_stone), balloon.getPosition().x, balloon.getPosition().y);
+                                //sb.draw(Assets.instance.manager.get(Assets.balloon_stone), balloon.getPosition().x, balloon.getPosition().y);
+                                balloon.getSprite().draw(sb);
                                 balloon.setNumber_of_n_st(3);
                                 break;
                             case 4:

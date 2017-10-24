@@ -13,6 +13,7 @@ import static ru.asupd.poop_ballon.States.PlayState.CHANSE_OF_SPAWN_BOMB;
 import static ru.asupd.poop_ballon.States.PlayState.balloons;
 import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
 import static ru.asupd.poop_ballon.States.PlayState.combo_effects;
+import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.PlayState.make_poop_Sound;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
 import static ru.asupd.poop_ballon.States.PlayState.shaker;
@@ -173,7 +174,7 @@ public class Bomb_balloon extends Creature{
         shaker.shake(0.7f);
         for (Balloon balloon : balloons) {
             if (balloons_manager.wooden) {
-                score_num.addScore(balloons_manager.getCurrent_difficult_up());
+                score_num.addScore(getCurrent_difficult_up());
                 // System.out.println("Added 2 W score");
             } else {
                 score_num.addScore(1);

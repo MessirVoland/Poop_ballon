@@ -247,6 +247,7 @@ public class PlayState extends State {
 
         //change_background = false;
 
+
         //инициализация массива шаров
         balloons = new Array<Balloon>();
         for (int i = 0; i <= 3; i++){
@@ -254,7 +255,9 @@ public class PlayState extends State {
             balloons.add(new Balloon(i * 96,-195-random(50),get_speed_for_balloon(),true));
             //balloons.get(i).setAnimation_idle(poof_balloon_g);
         }
+
         balloons_manager=new Balloons_manager(balloons);
+
 
         //инициализация массива облаков
         clouds = new Array<Cloud>();
@@ -834,6 +837,14 @@ public class PlayState extends State {
     public static void RESTART_STAGE() {
         gsm.set(new PlayState(gsm));
         PlayState.setUNPAUSE();
+    }
+
+    public static int getCurrent_difficult_up() {
+        int current_difficult=((settings.hi_score()-500)/MEDAL_SCORE+1);
+        if (current_difficult>=10){
+            current_difficult=10;//ограничение для золота
+        }
+        return current_difficult;
     }
 
 }

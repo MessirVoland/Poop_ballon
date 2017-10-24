@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.Array;
 
 import ru.asupd.poop_ballon.States.PlayState;
 
+import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
+
 /**
  * Менеджер ачивок
  * Created by Asup.D on 05.10.2017.
@@ -43,7 +45,7 @@ public class Achievement {
 
     }
     public void draw_current_medal(SpriteBatch sb,int x,int y){
-        int diff= PlayState.balloons_manager.getCurrent_difficult_up();
+        int diff= getCurrent_difficult_up();
         if (diff>=2){
             sb.draw(medals.get(9),x,y);
         }
@@ -60,7 +62,7 @@ public class Achievement {
         int st_x5=0,nst_x5=0;
     }
     public boolean draw_current_medal(SpriteBatch sb){
-        int diff= PlayState.balloons_manager.getCurrent_difficult_up();
+        int diff= getCurrent_difficult_up();
         font.draw(sb," x1 :"+st_x1+" x2 :"+st_x2+" x3 :"+st_x3+" x4 :"+st_x4+" x5 :"+st_x5,10,780);
         font.draw(sb," n1 :"+nst_x1+" n2 :"+nst_x2+" n3 :"+nst_x3+" n4 :"+nst_x4+" n5 :"+nst_x5,10,760);
         if (diff>=2){

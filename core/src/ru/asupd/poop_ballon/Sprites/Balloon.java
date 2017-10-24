@@ -13,6 +13,7 @@ import static ru.asupd.poop_ballon.States.PlayState.CHANSE_OF_WOODEN_BALLOON;
 import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
 import static ru.asupd.poop_ballon.States.PlayState.MEDAL_SCORE;
 import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
+import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 
 /**
  * Шарик)
@@ -30,6 +31,10 @@ public class Balloon {
     private boolean pooped,live_out;
     private boolean can_respawn,sin_grav_bool;
     private boolean part_start=true;
+
+    public boolean isCombo() {
+        return combo;
+    }
 
     private boolean N_ST_color=false;
     private boolean wooden_color=false;
@@ -54,7 +59,7 @@ public class Balloon {
 
         //Генерация нестандартного шара
         if ((PlayState.settings.hi_score()-500)>=MEDAL_SCORE) {
-            if (rand.nextInt(99) < CHANSE_OF_WOODEN_BALLOON-balloons_manager.getCurrent_difficult_up()+1) {
+            if (rand.nextInt(99) < CHANSE_OF_WOODEN_BALLOON-getCurrent_difficult_up()+1) {
                 N_ST_color = true;
             }
         }
@@ -104,12 +109,18 @@ public class Balloon {
                 case 0:
                     break;
                 case 1:
+                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ice));
+                    sprite.setPosition(position.x,position.y);
                     effect = new ParticleEffect(Assets.ballon_n_st_ice);
                     break;
                 case 2:
+                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_wooden));
+                    sprite.setPosition(position.x,position.y);
                     effect = new ParticleEffect(Assets.ballon_n_st_wood);
                     break;
                 case 3:
+                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_stone));
+                    sprite.setPosition(position.x,position.y);
                     effect = new ParticleEffect(Assets.ballon_n_st_stone);
                     break;
                 case 4:
@@ -197,6 +208,8 @@ public class Balloon {
                     case 0:
                         break;
                     case 1:
+                       // sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ice));
+                       // sprite.setPosition(position.x,position.y);
                         effect = new ParticleEffect(Assets.ballon_n_st_ice);
                         break;
                     case 2:
@@ -356,6 +369,13 @@ public class Balloon {
 
                 if (wooden_color) {
                     color_of_balloon = 12;
+
+                    switch (getCurrent_difficult_up()) {
+                        case 2:
+                            sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ice));
+                            sprite.setPosition(position.x, position.y);
+                            break;
+                    }
 
                 } else {
                     color_of_balloon = 10;
