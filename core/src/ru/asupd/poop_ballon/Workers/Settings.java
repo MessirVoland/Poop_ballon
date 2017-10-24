@@ -32,7 +32,7 @@ public class Settings {
         if (pref.getBoolean("first_start")){
             pref.putBoolean("first_start",false);
             pref.putBoolean("mute",false);
-            pref.putBoolean("vibro",false);
+            pref.putBoolean("vibro",true);
             pref.flush();
             mute=false;
             vibro=true;
