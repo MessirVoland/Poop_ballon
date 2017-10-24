@@ -1,11 +1,11 @@
 android {
     signingConfigs {
-        Full_key {
-            keyAlias 'Pop balloons'
-            keyPassword '4815162342zZ'
-            storeFile file('C:/Users/Asup.D/Desktop/key/key_pop_balloon.jks')
-            storePassword '4815162342zZ'
-        }
+     //   Full_key {
+    //        keyAlias 'Pop balloons'
+     //       keyPassword '4815162342zZ'
+     //       storeFile file('C:/Users/Asup.D/Desktop/key/key_pop_balloon.jks')
+     //       storePassword '4815162342zZ'
+      //  }
     }
     buildToolsVersion "26.0.1"
     compileSdkVersion 25
