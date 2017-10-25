@@ -39,6 +39,7 @@ import ru.asupd.poop_ballon.Workers.Sound_effects;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
 
 /**Игровой модуль
  * Created by Voland on 04.08.2017.
@@ -108,7 +109,7 @@ public class PlayState extends State {
     //public final static float ANIMATION_TIME=3.0f;
     private Preferences prefs;//для храниния данных
     private int load_hiscore;//макс счет
-    private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
+
     public static float volume;//звук хлопков)
 
     //гейм овер

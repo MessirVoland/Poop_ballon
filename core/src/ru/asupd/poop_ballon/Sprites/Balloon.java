@@ -10,11 +10,10 @@ import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Shaker;
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.PlayState.CHANSE_OF_WOODEN_BALLOON;
-import static ru.asupd.poop_ballon.Workers.Balloons_manager.ANIMATION_TIME;
 import static ru.asupd.poop_ballon.States.PlayState.MEDAL_SCORE;
 import static ru.asupd.poop_ballon.States.PlayState.MEDAL_START;
-import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME;
 
 /**
  * Шарик)

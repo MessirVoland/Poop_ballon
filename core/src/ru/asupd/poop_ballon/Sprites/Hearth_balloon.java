@@ -19,7 +19,7 @@ public class Hearth_balloon extends Creature {
     private Vector3 position;
     private Vector3 velosity;
     private boolean fly=false;
-    private Animation animation;
+    //private Animation animation;
     boolean pooped=false;
     private int clicks;
     private float current_time_dt=0.0f;
@@ -41,7 +41,7 @@ public class Hearth_balloon extends Creature {
         position = new Vector3(-95,400-84,0);
         velosity = new Vector3(80,0,0);
         texture = Assets.instance.manager.get(Assets.heart_baloon);
-        animation = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.heart_baloon_anim)),3,ANIMATION_TIME);
+        //animation = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.heart_baloon_anim)),3,ANIMATION_TIME);
         //animation = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_o,Texture.class)),3,ANIMATION_TIME);
         clicks=0;
 
@@ -114,8 +114,8 @@ public class Hearth_balloon extends Creature {
     public void setPooped() {
         //pop_HB.png
         pooped=true;
-        animation.setCurrentFrameTime(0);
-        animation.setFrame(0);
+        //animation.setCurrentFrameTime(0);
+        //animation.setFrame(0);
         current_time_dt=0;
         ParticleEffect effect = Assets.hearth_ballon_part_heart;
         PlayState.combo_effects.add(new ParticleEffect(effect));
@@ -144,7 +144,7 @@ public class Hearth_balloon extends Creature {
             //System.out.println(position.x +" "+position.y);
 
             current_time_dt+=dt;
-            animation.update(dt);
+           // animation.update(dt);
             if (current_time_dt>=ANIMATION_TIME){
                 restart();
                 dispose=true;
@@ -195,7 +195,8 @@ public class Hearth_balloon extends Creature {
 
     public TextureRegion getTexture() {
         if (pooped){
-            return animation.getFrames();
+           // return animation.getFrames();
+            return null;
         }else {
             return new TextureRegion(texture);
         }

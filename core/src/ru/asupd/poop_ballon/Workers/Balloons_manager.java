@@ -16,14 +16,14 @@ import static ru.asupd.poop_ballon.States.PlayState.SIZE_OF_COMBO_FOR_BOMB_SPAWN
 import static ru.asupd.poop_ballon.States.PlayState.current_combo;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_SPEED_RESIZE;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME;
 
 /** менеджер шаров
  * Created by Asup.D on 09.10.2017.
  */
 
 public class Balloons_manager {
-    private static float ANIMATION_SPEED_RESIZE=0.04f;
-    public final static float ANIMATION_TIME=0.28f;
     private static int current_difficult;
     private static boolean get_clicked;
     int current_step_wooden;
