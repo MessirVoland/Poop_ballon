@@ -53,6 +53,7 @@ public class PlayState extends State {
     public static final int CHANSE_OF_WOODEN_BALLOON=15;//15% Шанс нестандартного шара вместо обычного
     public static final int CHANSE_OF_SPAWN_BOMB=5;//5% Шанс бомбы после клика х3 комбо
     public static final int SIZE_OF_COMBO_FOR_BOMB_SPAWN=3;//х3 Размер комбо для проверки спавна бомбы
+    public static final float IMMORTAL_TIME=0.5f;
 
     //-------------------------------------------------------------------------/
     public static Array<Balloon> balloons;//массив шаров
@@ -70,6 +71,7 @@ public class PlayState extends State {
 
     private Texture vibrated,unvibrated;//иконка звука
 
+    private float current_immotal;
     private Texture texture_poop_balloon;//Название игры
     private Resizer resizer_poop_balloon;
     int get_avr_speed=0;
@@ -204,6 +206,7 @@ public class PlayState extends State {
         balloons_count=0;
         balloons_number=0;
         counter_of_h_ballons=0;
+        current_immotal=1.0f;
 
         //инициализация музыки
         //poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
@@ -475,6 +478,9 @@ public class PlayState extends State {
 
             if (started) {
                 {
+                    if (current_immotal<=IMMORTAL_TIME) {
+                        current_immotal += dt;
+                    }
                         for (Balloon balloon : balloons) {
                             balloon.update(dt, shaker);
 
@@ -482,11 +488,14 @@ public class PlayState extends State {
                                 balloon.setPosition(balloon.getPosition().x, -220 - random(50));
 
                                 balloon.setVelosity(get_speed_for_balloon());
-                                miss_ball++;
-                                current_alpha_background=0.0f;
-                                //change_background = true;
-                                if (settings.isVibro()) {
-                                    Gdx.input.vibrate(125);
+                                if (current_immotal>=IMMORTAL_TIME) {
+                                    miss_ball++;
+                                    current_alpha_background = 0.0f;
+                                    current_immotal = 0;
+                                    //change_background = true;
+                                    if (settings.isVibro()) {
+                                        Gdx.input.vibrate(125);
+                                    }
                                 }
                             }
                         }
@@ -700,6 +709,11 @@ public class PlayState extends State {
 
 
 
+
+        if (current_immotal<=IMMORTAL_TIME) {
+            FontRed1.setColor(1, 0, 0, 1);
+            FontRed1.draw(sb, "IMMORTAL", 10, 770);
+        }
 
         //Справочная информация
         int fps = Gdx.graphics.getFramesPerSecond();

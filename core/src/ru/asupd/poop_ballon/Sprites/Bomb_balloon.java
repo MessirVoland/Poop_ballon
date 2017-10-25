@@ -1,5 +1,6 @@
 package ru.asupd.poop_ballon.Sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,6 +17,7 @@ import static ru.asupd.poop_ballon.States.PlayState.combo_effects;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.PlayState.make_poop_Sound;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
+import static ru.asupd.poop_ballon.States.PlayState.settings;
 import static ru.asupd.poop_ballon.States.PlayState.shaker;
 
 /**
@@ -155,6 +157,9 @@ public class Bomb_balloon extends Creature{
                             fire_bomb2=null;
                         }
                         ballons_disposed = 0;
+                        if (settings.isVibro()){
+                            Gdx.input.vibrate(250);
+                        }
                         combo_effects.add(new ParticleEffect(Assets.bomb_blow));
                         combo_effects.get(combo_effects.size - 1).setPosition(bomb_sprite.getX() + 50, bomb_sprite.getY() + 65);
                         combo_effects.get(combo_effects.size - 1).start();
