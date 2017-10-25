@@ -209,9 +209,9 @@ public class Balloons_manager {
                         //sb.draw(Assets.instance.manager.get(Assets.balloon_orange, Texture.class), balloon.getPosition().x, balloon.getPosition().y);
                         balloon.getSprite().draw(sb);
                         if (balloon.getCurrentTime()<=0.133f) {
-                              balloon.scale(0.08f);
+                              balloon.scale(0.06f);
                         }else{
-                              balloon.scale(-0.08f);
+                              balloon.scale(-0.06f);
                         }
                         break;
                     case 11:
@@ -225,9 +225,9 @@ public class Balloons_manager {
                         if(balloon.isCombo()){
 
                             if (balloon.getCurrentTime()<=0.133f) {
-                                balloon.scale(0.08f);
+                                balloon.scale(0.06f);
                             }else{
-                                balloon.scale(-0.08f);
+                                balloon.scale(-0.06f);
                             }
                         }
                         switch ((settings.hi_score()-500)/MEDAL_SCORE) {
