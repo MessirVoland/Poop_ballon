@@ -82,8 +82,8 @@ public class PlayState extends State {
     private Texture your_high_score,score;//наибольший счет, таб ту плей, напись счет
     private Sprite tap_to_play;
     private float current_tap_to_play;
-    private static final float ANIMATION_TIME_TAP_TO_PLAY=1.75f;
-    private static float ANIMATIO_TIME_TO_PLAY_SIZE=0.0025f;
+    private static final float ANIMATION_TIME_TAP_TO_PLAY=0.45f;
+    private static float ANIMATIO_TIME_TO_PLAY_SIZE=0.0050f;
 
 	private Texture options;//кнопка опции
 
