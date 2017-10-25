@@ -356,6 +356,10 @@ public class Balloon {
         effect.update(dt);
     }*/
 
+    public float getCurrentTime() {
+        return currentTime;
+    }
+
     public void update(float dt, Shaker shaker) {
         //Зололые звездочки
         if (effect_gold != null) {

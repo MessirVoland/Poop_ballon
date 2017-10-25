@@ -208,7 +208,11 @@ public class Balloons_manager {
                         sb.setColor(1, 1, 1, 1);
                         //sb.draw(Assets.instance.manager.get(Assets.balloon_orange, Texture.class), balloon.getPosition().x, balloon.getPosition().y);
                         balloon.getSprite().draw(sb);
-                        balloon.scale(0.01f);
+                        if (balloon.getCurrentTime()<=0.133f) {
+                              balloon.scale(0.08f);
+                        }else{
+                              balloon.scale(-0.08f);
+                        }
                         break;
                     case 11:
                         sb.setColor(1, 1, 1, 1);
@@ -219,7 +223,12 @@ public class Balloons_manager {
                     case 12:
 
                         if(balloon.isCombo()){
-                            balloon.scale(0.01f);
+
+                            if (balloon.getCurrentTime()<=0.133f) {
+                                balloon.scale(0.08f);
+                            }else{
+                                balloon.scale(-0.08f);
+                            }
                         }
                         switch ((settings.hi_score()-500)/MEDAL_SCORE) {
                             case 0:
