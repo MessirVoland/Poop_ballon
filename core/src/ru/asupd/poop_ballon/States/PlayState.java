@@ -244,6 +244,7 @@ public class PlayState extends State {
 
         //Вывод макс очков
         score_num.setScore(load_hiscore);
+        //score_num.addScore(950);
 
         //change_background = false;
 
@@ -252,7 +253,7 @@ public class PlayState extends State {
         balloons = new Array<Balloon>();
         for (int i = 0; i <= 3; i++){
             //int local_speed = get_speed_for_balloon();
-            balloons.add(new Balloon(i * 96,-195-random(50),get_speed_for_balloon(),true));
+            balloons.add(new Balloon(i * 96,-200-random(50),get_speed_for_balloon(),true));
             //balloons.get(i).setAnimation_idle(poof_balloon_g);
         }
 

@@ -124,26 +124,32 @@ public class Balloon {
                     effect = new ParticleEffect(Assets.ballon_n_st_stone);
                     break;
                 case 4:
+                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_kript));
                     effect = new ParticleEffect(Assets.ballon_n_st_kript);
                     effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 case 5:
+                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_blueinit));
                     effect = new ParticleEffect(Assets.ballon_n_st_initblue);
                     effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 case 6:
+                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_pheon));
                     effect = new ParticleEffect(Assets.ballon_n_st_pheon);
                     effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 case 7:
+                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_bronze));
                     effect = new ParticleEffect(Assets.ballon_n_st_bronze);
                     effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 case 8:
+                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_silver));
                     effect = new ParticleEffect(Assets.ballon_n_st_silver);
                     effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 default:
+                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_gold));
                     effect = new ParticleEffect(Assets.ballon_n_st_gold);
                     effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
@@ -368,20 +374,55 @@ public class Balloon {
                 shaker.inc();
 
                 if (wooden_color) {
-                    color_of_balloon = 12;
-
-                    switch (getCurrent_difficult_up()) {
-                        case 2:
-                            sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ice));
-                            sprite.setPosition(position.x, position.y);
-                            break;
+                    if (!N_ST_color) {
+                        color_of_balloon = 12;
+                        switch (getCurrent_difficult_up()) {
+                            case 2:
+                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ice));
+                                sprite.setPosition(position.x, position.y);
+                                break;
+                            case 3:
+                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_wooden));
+                                sprite.setPosition(position.x, position.y);
+                                break;
+                            case 4:
+                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_stone));
+                                sprite.setPosition(position.x, position.y);
+                                break;
+                            case 5:
+                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_kript));
+                                sprite.setPosition(position.x, position.y);
+                                break;
+                            case 6:
+                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_blueinit));
+                                sprite.setPosition(position.x, position.y);
+                                break;
+                            case 7:
+                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_pheon));
+                                sprite.setPosition(position.x, position.y);
+                                break;
+                            case 8:
+                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_bronze));
+                                sprite.setPosition(position.x, position.y);
+                                break;
+                            case 9:
+                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_silver));
+                                sprite.setPosition(position.x, position.y);
+                                break;
+                            default:
+                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_gold));
+                                sprite.setPosition(position.x, position.y);
+                                break;
+                        }
                     }
 
                 } else {
-                    color_of_balloon = 10;
-                    sprite_or= new Sprite(Assets.instance.manager.get(Assets.balloon_orange, Texture.class));
-                    sprite_or.setPosition(sprite.getX(),sprite.getY());
-                    sprite=sprite_or;
+                    if (color_of_balloon!=10) {
+                        color_of_balloon = 10;
+                        sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_orange, Texture.class));
+                        sprite.setPosition(position.x, position.y);
+                        //sprite = sprite_or;
+                    }
                 }
                 combo = true;
                 this.pooped = true;
