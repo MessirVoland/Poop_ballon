@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
@@ -74,10 +75,15 @@ public class PlayState extends State {
 
     private float current_immotal;
     private Texture texture_poop_balloon;//Название игры
+
     private Resizer resizer_poop_balloon;
     int get_avr_speed=0;
 
-    private Texture your_high_score,tap_to_play,score;//наибольший счет, таб ту плей, напись счет
+    private Texture your_high_score,score;//наибольший счет, таб ту плей, напись счет
+    private Sprite tap_to_play;
+    private float current_tap_to_play;
+    private static final float ANIMATION_TIME_TAP_TO_PLAY=1.75f;
+    private static float ANIMATIO_TIME_TO_PLAY_SIZE=0.0025f;
 
 	private Texture options;//кнопка опции
 
@@ -223,7 +229,13 @@ public class PlayState extends State {
         your_high_score = new Texture("best_score_g.png");
         texture_poop_balloon = new Texture("poop_balloon.png");
         resizer_poop_balloon = new Resizer(texture_poop_balloon.getWidth(),texture_poop_balloon.getHeight());
-        tap_to_play = new Texture("tap_to_play.png");
+
+        Texture text = new Texture("tap_to_play.png");
+        text.setFilter(Texture.TextureFilter.Linear,Texture.TextureFilter.Linear);
+        tap_to_play = new Sprite(text);
+        tap_to_play.setPosition(80,360);
+        current_tap_to_play=0;
+
         score =  new Texture("score.png");
 
         well_played = new Texture("wp.png");
@@ -352,11 +364,12 @@ public class PlayState extends State {
             }
         }
 
+        /*
         cureunt_dt_for_speed+=dt;
         if (cureunt_dt_for_speed>=0.6f){
             cureunt_dt_for_speed=0;
             get_avr_speed=get_speed_for_balloon();
-        }
+        }*/
 
         if (game_over_start) {
             well_played_resizer.update(dt);
@@ -366,7 +379,7 @@ public class PlayState extends State {
             }
         }
 
-        currnent_dt_background= dt*8;//8; //2;
+        //currnent_dt_background= dt*8;//8; //2;
         
 		if (game_over_start){
             game_over_dt+=dt;
@@ -516,6 +529,16 @@ public class PlayState extends State {
                             index++;
                         }
                     }
+            }else{
+                current_tap_to_play+=dt;
+                if (current_tap_to_play<=ANIMATION_TIME_TAP_TO_PLAY){
+                    tap_to_play.scale(ANIMATIO_TIME_TO_PLAY_SIZE);
+                }
+                else
+                {
+                    current_tap_to_play=0;
+                    ANIMATIO_TIME_TO_PLAY_SIZE=-ANIMATIO_TIME_TO_PLAY_SIZE;
+                }
             }
 
             for (Cloud cloud : clouds) {
@@ -560,6 +583,7 @@ public class PlayState extends State {
                 }
             }
             bomb_balloon.update(dt);
+
         }
 
     }
@@ -641,7 +665,9 @@ public class PlayState extends State {
 
         if ((!started)&(!boss_balloon.isStarted())){
 
-            sb.draw(tap_to_play,80,360,335,51);
+
+            tap_to_play.draw(sb);
+
             if (showed_ads) {
                 sb.draw(your_high_score,130,170,211,74);
                 score_num.draw(sb,190,120);
