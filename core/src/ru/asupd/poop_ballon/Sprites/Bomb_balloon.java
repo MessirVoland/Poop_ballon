@@ -157,9 +157,6 @@ public class Bomb_balloon extends Creature{
                             fire_bomb2=null;
                         }
                         ballons_disposed = 0;
-                        if (settings.isVibro()){
-                            Gdx.input.vibrate(250);
-                        }
                         combo_effects.add(new ParticleEffect(Assets.bomb_blow));
                         combo_effects.get(combo_effects.size - 1).setPosition(bomb_sprite.getX() + 50, bomb_sprite.getY() + 65);
                         combo_effects.get(combo_effects.size - 1).start();
@@ -177,6 +174,9 @@ public class Bomb_balloon extends Creature{
     }
     private void setPooped(){
         shaker.shake(0.7f);
+        if (settings.isVibro()){
+            Gdx.input.vibrate(250);
+        }
         for (Balloon balloon : balloons) {
             if (balloons_manager.wooden) {
                 score_num.addScore(getCurrent_difficult_up());
