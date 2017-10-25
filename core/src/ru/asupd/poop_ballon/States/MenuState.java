@@ -77,7 +77,7 @@ public class MenuState extends State {
     public void update(float dt) {
         handleInput();
         current_dt+=dt;
-        
+
         if (current_dt>=4.0f){
             //Assets.make_linear();
             Assets.make_resized_balloons_linear();

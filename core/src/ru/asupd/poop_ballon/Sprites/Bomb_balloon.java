@@ -174,7 +174,7 @@ public class Bomb_balloon extends Creature{
     }
     private void setPooped(){
         shaker.shake(0.7f);
-        shaker.setUP_intensity(8);
+        shaker.setUP_intensity(8.0f);
         if (settings.isVibro()){
             Gdx.input.vibrate(250);
         }
