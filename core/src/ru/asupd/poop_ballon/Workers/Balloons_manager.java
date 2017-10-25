@@ -22,6 +22,7 @@ import static ru.asupd.poop_ballon.States.PlayState.settings;
  */
 
 public class Balloons_manager {
+    private static float ANIMATION_SPEED_RESIZE=0.06f;
     private static int current_difficult;
     private static boolean get_clicked;
     int current_step_wooden;
@@ -209,9 +210,9 @@ public class Balloons_manager {
                         //sb.draw(Assets.instance.manager.get(Assets.balloon_orange, Texture.class), balloon.getPosition().x, balloon.getPosition().y);
                         balloon.getSprite().draw(sb);
                         if (balloon.getCurrentTime()<=0.133f) {
-                              balloon.scale(0.06f);
+                              balloon.scale(ANIMATION_SPEED_RESIZE);
                         }else{
-                              balloon.scale(-0.06f);
+                              balloon.scale(-ANIMATION_SPEED_RESIZE);
                         }
                         break;
                     case 11:
@@ -225,9 +226,9 @@ public class Balloons_manager {
                         if(balloon.isCombo()){
 
                             if (balloon.getCurrentTime()<=0.133f) {
-                                balloon.scale(0.06f);
+                                balloon.scale(ANIMATION_SPEED_RESIZE);
                             }else{
-                                balloon.scale(-0.06f);
+                                balloon.scale(-ANIMATION_SPEED_RESIZE);
                             }
                         }
                         switch ((settings.hi_score()-500)/MEDAL_SCORE) {
