@@ -23,7 +23,7 @@ import static ru.asupd.poop_ballon.States.PlayState.settings;
 
 public class Balloons_manager {
     private static float ANIMATION_SPEED_RESIZE=0.06f;
-    public final static float ANIMATION_TIME=0.266f;
+    public final static float ANIMATION_TIME=0.95f;
     private static int current_difficult;
     private static boolean get_clicked;
     int current_step_wooden;
