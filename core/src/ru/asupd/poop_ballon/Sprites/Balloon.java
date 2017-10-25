@@ -9,9 +9,9 @@ import ru.asupd.poop_ballon.States.PlayState;
 import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Shaker;
 import static com.badlogic.gdx.math.MathUtils.random;
-import static ru.asupd.poop_ballon.States.PlayState.CHANSE_OF_WOODEN_BALLOON;
-import static ru.asupd.poop_ballon.States.PlayState.MEDAL_SCORE;
-import static ru.asupd.poop_ballon.States.PlayState.MEDAL_START;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.CHANSE_OF_WOODEN_BALLOON;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_SCORE;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_START;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME;
 
@@ -210,7 +210,7 @@ public class Balloon {
             if (!N_ST_color) {
                 effect = new ParticleEffect(Assets.effect_orange);
             }else
-                switch (PlayState.settings.hi_score()/MEDAL_SCORE) {
+                switch ((PlayState.settings.hi_score()-MEDAL_START)/MEDAL_SCORE) {
                     case 0:
                         break;
                     case 1:

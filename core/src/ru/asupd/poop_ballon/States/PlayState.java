@@ -39,7 +39,12 @@ import ru.asupd.poop_ballon.Workers.Sound_effects;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME_TAP_TO_PLAY;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATIO_TIME_TO_PLAY_SIZE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.IMMORTAL_TIME;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_SCORE;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_START;
 
 /**Игровой модуль
  * Created by Voland on 04.08.2017.
@@ -48,17 +53,6 @@ import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
 
 
 public class PlayState extends State {
-    //Раздел констант для баланса игры-----------------------------------------/
-
-    public static final int MEDAL_START=1000;//старт счета медалей
-    public static final int MEDAL_SCORE=500;//медали
-    public static final int SEQUENCE_OF_HEARTH_BALLOON=300;//шары здоровья каждые 120 умноженные на текущую медаль
-    public static final int CHANSE_OF_WOODEN_BALLOON=15;//15% Шанс нестандартного шара вместо обычного
-    public static final int CHANSE_OF_SPAWN_BOMB=5;//5% Шанс бомбы после клика х3 комбо
-    public static final int SIZE_OF_COMBO_FOR_BOMB_SPAWN=3;//х3 Размер комбо для проверки спавна бомбы
-    public static final float IMMORTAL_TIME=0.5f;
-
-    //-------------------------------------------------------------------------/
     public static Array<Balloon> balloons;//массив шаров
     private Array<Cloud> clouds;//массив шаров
     private Array<Star> stars;//звезды
@@ -83,8 +77,7 @@ public class PlayState extends State {
     private Texture your_high_score,score;//наибольший счет, таб ту плей, напись счет
     private Sprite tap_to_play;
     private float current_tap_to_play;
-    private static final float ANIMATION_TIME_TAP_TO_PLAY=0.45f;
-    private static float ANIMATIO_TIME_TO_PLAY_SIZE=0.0050f;
+
 
 	private Texture options;//кнопка опции
 

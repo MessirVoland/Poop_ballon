@@ -10,7 +10,6 @@ import ru.asupd.poop_ballon.States.PlayState;
 import ru.asupd.poop_ballon.Workers.Assets;
 
 import static com.badlogic.gdx.math.MathUtils.random;
-import static ru.asupd.poop_ballon.States.PlayState.CHANSE_OF_SPAWN_BOMB;
 import static ru.asupd.poop_ballon.States.PlayState.balloons;
 import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
 import static ru.asupd.poop_ballon.States.PlayState.combo_effects;
@@ -19,6 +18,7 @@ import static ru.asupd.poop_ballon.States.PlayState.make_poop_Sound;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
 import static ru.asupd.poop_ballon.States.PlayState.shaker;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.CHANSE_OF_SPAWN_BOMB;
 
 /**
  * Класс бомбы

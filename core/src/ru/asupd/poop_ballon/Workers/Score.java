@@ -7,6 +7,8 @@ import com.badlogic.gdx.utils.Array;
 
 import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.COMBO_TIME;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.ONE_FRAME_COUNT;
 
 /**
  * ускорение счета
@@ -28,8 +30,7 @@ public class Score {
     private int current_wooden;
     private int combo_num=0;
 
-    private static final float ONE_FRAME_COUNT=0.0025f;
-    private static final float COMBO_TIME=0.455f;
+
 
     public Score() {
         numbers = new Texture("numbers.png");

@@ -10,14 +10,15 @@ import ru.asupd.poop_ballon.States.PlayState;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.GameoverState.achievement;
-import static ru.asupd.poop_ballon.States.PlayState.MEDAL_SCORE;
-import static ru.asupd.poop_ballon.States.PlayState.SEQUENCE_OF_HEARTH_BALLOON;
-import static ru.asupd.poop_ballon.States.PlayState.SIZE_OF_COMBO_FOR_BOMB_SPAWN;
 import static ru.asupd.poop_ballon.States.PlayState.current_combo;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_SPEED_RESIZE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_SCORE;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_START;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.SEQUENCE_OF_HEARTH_BALLOON;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.SIZE_OF_COMBO_FOR_BOMB_SPAWN;
 
 /** менеджер шаров
  * Created by Asup.D on 09.10.2017.
@@ -232,7 +233,7 @@ public class Balloons_manager {
                                 balloon.scale(-ANIMATION_SPEED_RESIZE);
                             }
                         }
-                        switch ((settings.hi_score()-500)/MEDAL_SCORE) {
+                        switch ((settings.hi_score()-MEDAL_START)/MEDAL_SCORE) {
                             case 0:
                                 break;
                             case 1:
