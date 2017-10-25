@@ -12,6 +12,7 @@ import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.PlayState.CHANSE_OF_WOODEN_BALLOON;
 import static ru.asupd.poop_ballon.States.PlayState.ANIMATION_TIME;
 import static ru.asupd.poop_ballon.States.PlayState.MEDAL_SCORE;
+import static ru.asupd.poop_ballon.States.PlayState.MEDAL_START;
 import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 
@@ -58,7 +59,7 @@ public class Balloon {
         velosity = new Vector3(random(100) - 50, grav, 0);
 
         //Генерация нестандартного шара
-        if ((PlayState.settings.hi_score()-500)>=MEDAL_SCORE) {
+        if ((PlayState.settings.hi_score()-MEDAL_START)>=MEDAL_SCORE) {
             if (rand.nextInt(99) < CHANSE_OF_WOODEN_BALLOON-getCurrent_difficult_up()+1) {
                 N_ST_color = true;
             }
@@ -105,7 +106,7 @@ public class Balloon {
         else
         {
             color_of_balloon = 12;
-            switch ((PlayState.settings.hi_score()-500)/MEDAL_SCORE) {
+            switch ((PlayState.settings.hi_score()-MEDAL_START)/MEDAL_SCORE) {
                 case 0:
                     break;
                 case 1:

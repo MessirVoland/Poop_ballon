@@ -20,6 +20,9 @@ public class Shaker {
        baseX+= camera.position.x ;
        baseY+= camera.position.y ;
     }
+    public void setUP_intensity(int i){
+        intensity=i;
+    }
     public void shake(float duration_in){
         elapsed=0;
         intensity=4;

@@ -48,7 +48,8 @@ import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
 public class PlayState extends State {
     //Раздел констант для баланса игры-----------------------------------------/
 
-    public static final int MEDAL_SCORE=450;//медали
+    public static final int MEDAL_START=1000;//старт счета медалей
+    public static final int MEDAL_SCORE=500;//медали
     public static final int SEQUENCE_OF_HEARTH_BALLOON=300;//шары здоровья каждые 120 умноженные на текущую медаль
     public static final int CHANSE_OF_WOODEN_BALLOON=15;//15% Шанс нестандартного шара вместо обычного
     public static final int CHANSE_OF_SPAWN_BOMB=5;//5% Шанс бомбы после клика х3 комбо
@@ -855,7 +856,7 @@ public class PlayState extends State {
     }
 
     public static int getCurrent_difficult_up() {
-        int current_difficult=((settings.hi_score()-500)/MEDAL_SCORE+1);
+        int current_difficult=((settings.hi_score()-MEDAL_START)/MEDAL_SCORE+1);
         if (current_difficult>=10){
             current_difficult=10;//ограничение для золота
         }
