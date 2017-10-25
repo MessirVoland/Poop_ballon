@@ -314,6 +314,18 @@ public class Assets implements Disposable, AssetErrorListener {
 
 
     }
+    public static void make_resized_balloons_linear(){
+        Assets.instance.manager.get(Assets.balloon_orange,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.balloon_ice).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.balloon_wooden).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.balloon_stone).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.balloon_kript).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.balloon_blueinit).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.balloon_pheon).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.balloon_bronze).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.balloon_silver).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.balloon_gold).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+    }
 
     @Override
     public void error(AssetDescriptor asset, Throwable throwable) {
