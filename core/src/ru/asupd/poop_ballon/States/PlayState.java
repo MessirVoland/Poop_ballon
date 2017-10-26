@@ -498,6 +498,7 @@ public class PlayState extends State {
                                 balloon.setVelosity(get_speed_for_balloon());
                                 if (current_immotal>=IMMORTAL_TIME) {
                                     miss_ball++;
+                                    System.out.println("Missed ball");
                                     current_alpha_background = 0.0f;
                                     current_immotal = 0;
                                     //change_background = true;
@@ -879,6 +880,9 @@ public class PlayState extends State {
         int current_difficult=((settings.hi_score()-MEDAL_START)/MEDAL_SCORE+1);
         if (current_difficult>=10){
             current_difficult=10;//ограничение для золота
+        }
+        if (current_difficult<1){
+            current_difficult=1;
         }
         return current_difficult;
     }

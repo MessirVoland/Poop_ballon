@@ -194,12 +194,7 @@ public class Hearth_balloon extends Creature {
     }
 
     public TextureRegion getTexture() {
-        if (pooped){
-           // return animation.getFrames();
-            return null;
-        }else {
             return new TextureRegion(texture);
-        }
     }
 
     @Override
