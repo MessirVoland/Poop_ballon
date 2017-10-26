@@ -32,9 +32,27 @@ timeline0: 0.0
 - Life Offset - 
 active: false
 - X Offset - 
-active: false
+active: true
+lowMin: 22.0
+lowMax: 22.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Y Offset - 
-active: false
+active: true
+lowMin: 47.0
+lowMax: 47.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Spawn Shape - 
 shape: point
 - Spawn Width - 
@@ -60,8 +78,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 52.0
-highMax: 72.0
+highMin: 32.0
+highMax: 52.0
 relative: false
 scalingCount: 2
 scaling0: 0.4509804
@@ -73,8 +91,8 @@ timeline1: 0.98630136
 active: true
 lowMin: 0.0
 lowMax: 0.0
-highMin: 1000.0
-highMax: 2500.0
+highMin: 500.0
+highMax: 1500.0
 relative: false
 scalingCount: 3
 scaling0: 1.0
@@ -182,9 +200,27 @@ timeline2: 1.0
 - Life Offset - 
 active: false
 - X Offset - 
-active: false
+active: true
+lowMin: 22.0
+lowMax: 22.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Y Offset - 
-active: false
+active: true
+lowMin: 47.0
+lowMax: 47.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Spawn Shape - 
 shape: point
 - Spawn Width - 
@@ -210,8 +246,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 10.0
 lowMax: 10.0
-highMin: 320.0
-highMax: 350.0
+highMin: 120.0
+highMax: 150.0
 relative: false
 scalingCount: 4
 scaling0: 0.7254902
@@ -357,9 +393,27 @@ timeline2: 1.0
 - Life Offset - 
 active: false
 - X Offset - 
-active: false
+active: true
+lowMin: 22.0
+lowMax: 22.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Y Offset - 
-active: false
+active: true
+lowMin: 47.0
+lowMax: 47.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Spawn Shape - 
 shape: point
 - Spawn Width - 
@@ -385,8 +439,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 10.0
 lowMax: 10.0
-highMin: 220.0
-highMax: 250.0
+highMin: 80.0
+highMax: 100.0
 relative: false
 scalingCount: 4
 scaling0: 0.7254902
@@ -545,9 +599,27 @@ timeline2: 1.0
 - Life Offset - 
 active: false
 - X Offset - 
-active: false
+active: true
+lowMin: 22.0
+lowMax: 22.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Y Offset - 
-active: false
+active: true
+lowMin: 47.0
+lowMax: 47.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Spawn Shape - 
 shape: point
 - Spawn Width - 
@@ -573,8 +645,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 10.0
 lowMax: 10.0
-highMin: 120.0
-highMax: 150.0
+highMin: 30.0
+highMax: 60.0
 relative: false
 scalingCount: 4
 scaling0: 0.505618
