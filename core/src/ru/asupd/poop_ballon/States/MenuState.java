@@ -2,6 +2,7 @@ package ru.asupd.poop_ballon.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -42,6 +43,7 @@ public class MenuState extends State {
         camera.setToOrtho(false,480,800 );
         background = new Texture("background_start.png");
         balloon  = new Texture("c_logo.png");
+        balloon.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         FontRed1 = new BitmapFont();
         final String FONT_PATH = "coquettec.ttf";
    //     //final String FONT_PATH = "Arialuni.ttf";
@@ -94,12 +96,13 @@ public class MenuState extends State {
 
                 //
         //Assets.loadParticleEffects();
-        FontRed1.draw(sb, " Время до старта 4.0f : "+ current_dt, 15, 790);
+        //FontRed1.draw(sb, " Время до старта 4.0f : "+ current_dt, 15, 790);
         while (!Assets.instance.manager.update()) {
             FontRed1.draw(sb, " Загрузка >>> " + +Assets.instance.manager.getProgress() * 100 + "%", 15, 730);
         }
 
 
+        /*
         switch (Gdx.app.getType()){
             case Desktop:
                 FontRed1.draw(sb, " PC Версия", 15, 760);
@@ -110,11 +113,12 @@ public class MenuState extends State {
             case WebGL:
                 FontRed1.draw(sb, " HTML5 asigned", 15, 760);
                 break;
-        }
+        }*/
         // = 30;
-        FontRed1.draw(sb," Pop Balloons v.0.9.9-beta-pre-release.rev.A.build.2", 15, 100);
-        FontRed1.draw(sb," Android API level :"+Gdx.app.getVersion(), 15, 70);
-        String st_locale=new String("");
+        FontRed1.setColor(Color.CHARTREUSE);
+        FontRed1.draw(sb,"Pop Balloon v.0.9.9-beta-pre-release.rev.A.build.35", 10, 20);
+        //FontRed1.draw(sb," Android API level :"+Gdx.app.getVersion(), 15, 70);
+        /*String st_locale=new String("");
         switch (var){
             case 0:
                 st_locale=" Локализация :";
@@ -137,7 +141,7 @@ public class MenuState extends State {
                 Locale.setDefault(Locale.ENGLISH);
                 break;
         }
-        FontRed1.draw(sb,st_locale + Locale.getDefault(), 15, 40);
+        FontRed1.draw(sb,st_locale + Locale.getDefault(), 15, 40);*/
         //FontRed1.draw(sb," Локализация :"+ Locale.getDefault().getCountry(), 15, 40);
         //FontRed1.draw(sb," Локализация :"+ Locale.getDefault().getCountry(), 15, 40);
         //FontRed1.draw(sb," Локализация :"+ Locale.getDefault().getCountry(), 15, 40);

@@ -239,6 +239,7 @@ public class PlayState extends State {
         score_num = new Score();
 
 		options = new Texture("options.png");
+		//options.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
         settings= new Settings(prefs);
@@ -765,10 +766,10 @@ public class PlayState extends State {
 
 
         if (!started) {
-            sb.draw(options, ((int) (shaker.getCamera_sh().position.x) + 240 - 69), ((int) (shaker.getCamera_sh().position.y + 400 - 69)), 64, 64);
+            sb.draw(options, ((int) (shaker.getCamera_sh().position.x) + 240 - 69), ((int) (shaker.getCamera_sh().position.y + 400 - 69)));
         }else
         {
-            sb.draw(Assets.instance.manager.get(Assets.pause_button), ((int) (shaker.getCamera_sh().position.x) + 240 - 69), ((int) (shaker.getCamera_sh().position.y + 400 - 69)), 64, 64);
+            sb.draw(Assets.instance.manager.get(Assets.pause_button), ((int) (shaker.getCamera_sh().position.x) + 240 - 69), ((int) (shaker.getCamera_sh().position.y + 400 - 69)));
         }
         if (miss_ball>=3) {
             if (!game_over_start) {

@@ -103,20 +103,15 @@ public class Balloons_manager {
 
                                     if (PlayState.counter_of_h_ballons <= PlayState.score_num.getScore() /SEQUENCE_OF_HEARTH_BALLOON * getCurrent_difficult_up()) {
                                         if (PlayState.miss_ball >= 1) {
-                                            System.out.println("Spawned");
+                                            //System.out.println("Spawned");
                                             PlayState.hearth_balloon.setCan_fly(true);
                                             PlayState.hearth_balloon.setFly(true);
                                             PlayState.counter_of_h_ballons++;
                                         } else {
-                                            System.out.println(" NIt Spawned");
+                                            //System.out.println(" NIt Spawned");
                                             PlayState.counter_of_h_ballons++;
                                         }
                                     }
-                                    else
-                                        System.out.println("c: "+PlayState.counter_of_h_ballons+
-                                        " S "+PlayState.score_num.getScore()+
-                                                " SEQ "+SEQUENCE_OF_HEARTH_BALLOON+
-                                                " diff " + getCurrent_difficult_up());
 
                                     if (PlayState.current_combo >= 2) {
                                         mini_step++;
