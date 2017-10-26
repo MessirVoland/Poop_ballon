@@ -80,8 +80,9 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		adView = new AdView(this);
 		adView.setVisibility(View.INVISIBLE);
 		adView.setBackgroundColor(0xff000000); // black
-		//adView.setAdUnitId("ca-app-pub-6755493316893566/6656095586");//now samsung
-		adView.setAdUnitId("ca-app-pub-6755493316893566/8454794770"); // google
+		//adView.setAdUnitId("ca-app-pub-1769194239356799/3445897678");//google
+		//adView.setAdUnitId("ca-app-pub-1769194239356799/9412540227");//samsung
+		adView.setAdUnitId("ca-app-pub-1769194239356799/5197963043"); // test ads
 		adView.setAdSize(AdSize.SMART_BANNER);
 	}
 

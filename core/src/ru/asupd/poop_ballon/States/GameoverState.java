@@ -5,6 +5,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
@@ -17,6 +18,9 @@ import ru.asupd.poop_ballon.Workers.Assets;
 
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME_TAP_TO_PLAY;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATIO_TIME_TO_PLAY_SIZE;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
 
 /**
  * Created by Voland on 22.08.2017.
@@ -24,14 +28,17 @@ import static ru.asupd.poop_ballon.States.PlayState.settings;
 
 public class GameoverState extends State {
     TextureRegion background;
-    Texture tap_to_restart,your_score,your_best_score,awesome;
+    Texture your_score,your_best_score,awesome;
+
+    Sprite tap_to_restart;
+    private float current_tap_to_restart;
+
     Texture numbers;
 
     Array<TextureRegion> frames_numbers;
     float  currentdt, waiting;
     final BitmapFont FontRed1;
     final Preferences prefs;
-    private static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
     int load_hiscore,last_score;
     int[] score_best =new int[5];
     int[] score_last =new int[5];
@@ -52,13 +59,17 @@ public class GameoverState extends State {
         //System.out.println("redball_x: "+redball_x);
         camera.setToOrtho(false, 480 , 800 );
         this.final_stars=stars;
+        current_tap_to_restart=0;
 
 
         //background = new Texture("background_night.png");
         background = new TextureRegion((Texture)(Assets.instance.manager.get(Assets.back_ground_atlas)));
         background = new TextureRegion(background,4*background.getRegionWidth()/4,0,background.getRegionWidth()/4,background.getRegionHeight());
 
-        tap_to_restart = new Texture("restart.png");
+        Texture texture_t=new Texture("restart.png");
+        texture_t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        tap_to_restart =new Sprite(texture_t);
+        tap_to_restart.setPosition(60,660);
 
         your_score = new Texture("your_score.png");
         your_best_score = new Texture("best_score_r.png");
@@ -125,6 +136,16 @@ public class GameoverState extends State {
             position.add(velosity.x, 0, 0);
             velosity.scl(1 / dt);
         }
+        current_tap_to_restart+=dt;
+        if (current_tap_to_restart<=ANIMATION_TIME_TAP_TO_PLAY){
+            tap_to_restart.scale(ANIMATIO_TIME_TO_PLAY_SIZE);
+        }
+        else
+        {
+            current_tap_to_restart=0;
+            ANIMATIO_TIME_TO_PLAY_SIZE=-ANIMATIO_TIME_TO_PLAY_SIZE;
+        }
+
         //System.out.println("position.x: "+position.x);
     }
 
@@ -137,7 +158,7 @@ public class GameoverState extends State {
             sb.draw(star.getTexture(),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
             // sb.draw(Assets.instance.manager.get(Assets.star1),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
         }
-        sb.draw(tap_to_restart,60,650,360,50);
+        tap_to_restart.draw(sb);
 
 
 
