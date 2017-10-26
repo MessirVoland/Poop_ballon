@@ -212,7 +212,7 @@ public class Bomb_balloon extends Creature{
         sin_grav_bool=random.nextBoolean();
         heals=0;
         bomb_sprite = new Sprite(Assets.instance.manager.get(Assets.bomb_balloon_t));
-        
+
         if (fire_bomb1!=null) {
             fire_bomb1.setPosition(bomb_sprite.getX(), bomb_sprite.getY());
         }
