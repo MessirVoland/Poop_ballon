@@ -71,12 +71,12 @@ public class Bomb_balloon extends Creature{
                 }
             if (fire_bomb1!=null){
                 fire_bomb1.update(dt);
-                fire_bomb1.setPosition(bomb_sprite.getX(),bomb_sprite.getY());
+                fire_bomb1.setPosition(bomb_sprite.getX()+bomb_sprite.getWidth()/2,bomb_sprite.getY()+bomb_sprite.getHeight()/2);
 
             }
             if (fire_bomb2!=null){
                 fire_bomb2.update(dt);
-                fire_bomb2.setPosition(bomb_sprite.getX(),bomb_sprite.getY());
+                fire_bomb2.setPosition(bomb_sprite.getX()+bomb_sprite.getWidth()/2,bomb_sprite.getY()+bomb_sprite.getHeight()/2);
             }
             int sin_grav = 50;
 
@@ -132,7 +132,7 @@ public class Bomb_balloon extends Creature{
                         heals++;
 
                         fire_bomb1=new ParticleEffect(Assets.fire_bomb1);
-                        fire_bomb1.setPosition(bomb_sprite.getX(),bomb_sprite.getY());
+                        fire_bomb1.setPosition(bomb_sprite.getX()+bomb_sprite.getWidth()/2,bomb_sprite.getY()+bomb_sprite.getHeight()/2);
                         fire_bomb1.start();
 
                         break;
@@ -142,7 +142,7 @@ public class Bomb_balloon extends Creature{
                         bomb_sprite = new Sprite(Assets.instance.manager.get(Assets.bomb_balloon_tt));
                         bomb_sprite.setPosition(xx,yy);
                         fire_bomb2=new ParticleEffect(Assets.fire_bomb2);
-                        fire_bomb2.setPosition(bomb_sprite.getX(),bomb_sprite.getY());
+                        fire_bomb2.setPosition(bomb_sprite.getX()+bomb_sprite.getWidth()/2,bomb_sprite.getY()+bomb_sprite.getHeight()/2);
                         fire_bomb2.start();
                         if (fire_bomb1!=null){
                             fire_bomb1.setDuration(0);
@@ -214,7 +214,7 @@ public class Bomb_balloon extends Creature{
         bomb_sprite = new Sprite(Assets.instance.manager.get(Assets.bomb_balloon_t));
 
         if (fire_bomb1!=null) {
-            fire_bomb1.setPosition(bomb_sprite.getX(), bomb_sprite.getY());
+            fire_bomb1.setPosition(bomb_sprite.getX()+bomb_sprite.getWidth()/2,bomb_sprite.getY()+bomb_sprite.getHeight()/2);
         }
        // fire_bomb1=new ParticleEffect(Assets.fire_bomb1);
        // fire_bomb2=new ParticleEffect(Assets.fire_bomb2);
