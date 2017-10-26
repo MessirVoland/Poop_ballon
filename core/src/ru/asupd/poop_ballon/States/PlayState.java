@@ -79,7 +79,7 @@ public class PlayState extends State {
     private float current_tap_to_play;
 
 
-	private Texture options;//кнопка опции
+	private Sprite options;//кнопка опции
 
     public static Score score_num;
 
@@ -238,7 +238,8 @@ public class PlayState extends State {
 
         score_num = new Score();
 
-		options = new Texture("options.png");
+		options = new Sprite(new Texture("options.png"));
+		options.setPosition((shaker.getCamera_sh().position.x + 171),(shaker.getCamera_sh().position.y + 331));
 		//options.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
@@ -560,6 +561,7 @@ public class PlayState extends State {
 
             shaker.update(dt);
             score_num.update(dt);
+            options.setPosition((shaker.getCamera_sh().position.x + 171),(shaker.getCamera_sh().position.y + 331));
 
 
             //if (balloons.size>=1) {
@@ -716,6 +718,8 @@ public class PlayState extends State {
         }
 
 
+        options.draw(sb);
+
         balloons_manager.draw(sb);
 
 
@@ -765,12 +769,12 @@ public class PlayState extends State {
         //-------------------------------------------------------------/
 
 
-        if (!started) {
-            sb.draw(options, ((int) (shaker.getCamera_sh().position.x) + 240 - 69), ((int) (shaker.getCamera_sh().position.y + 400 - 69)));
-        }else
-        {
-            sb.draw(Assets.instance.manager.get(Assets.pause_button), ((int) (shaker.getCamera_sh().position.x) + 240 - 69), ((int) (shaker.getCamera_sh().position.y + 400 - 69)));
-        }
+       // if (!started) {
+        //    sb.draw(options, ((int) (shaker.getCamera_sh().position.x) + 240 - 69), ((int) (shaker.getCamera_sh().position.y + 400 - 69)));
+       // }else
+        //{
+       //     sb.draw(Assets.instance.manager.get(Assets.pause_button), ((int) (shaker.getCamera_sh().position.x) + 240 - 69), ((int) (shaker.getCamera_sh().position.y + 400 - 69)));
+        //}
         if (miss_ball>=3) {
             if (!game_over_start) {
                 for (Balloon balloon : balloons) {

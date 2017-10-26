@@ -375,6 +375,7 @@ public class Balloon {
                 //System.out.println("Combo_number: "+combo_number);
                 //if (currentTime_or>=1.0f){
                 make_orange = false;
+                PlayState.make_poop_Sound();
                 shaker.inc();
 
                 if (wooden_color) {
@@ -455,6 +456,7 @@ public class Balloon {
             if (currentTime > ANIMATION_TIME) {
                 if ((!combo) & (!make_orange)) {
                     live_out = true;
+
 
                 } else
 

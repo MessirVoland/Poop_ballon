@@ -95,7 +95,7 @@ public class Balloons_manager {
                                 if (!balloon.isPooped()) {
                                     //if (800-finalScreenY < 750) {
                                     //System.out.println("touched the ball :");
-                                    PlayState.make_poop_Sound();
+
 
                                     PlayState.shaker.shake(0.276f); // 0.2f
                                     PlayState.cautch_ball++;
@@ -134,6 +134,7 @@ public class Balloons_manager {
                                         balloon.setMax_combo(PlayState.current_combo);
 
                                     } else {
+                                        PlayState.make_poop_Sound();
                                         if (wooden) {
                                             PlayState.score_num.addScore(getCurrent_difficult_up());
                                            // System.out.println("Added 2 W score");
