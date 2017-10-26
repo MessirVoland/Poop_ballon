@@ -132,7 +132,7 @@ public class Bomb_balloon extends Creature{
                         heals++;
 
                         fire_bomb1=new ParticleEffect(Assets.fire_bomb1);
-                        fire_bomb1.setPosition(bomb_sprite.getX()+99,bomb_sprite.getY()+113);
+                        fire_bomb1.setPosition(bomb_sprite.getX(),bomb_sprite.getY());
                         fire_bomb1.start();
 
                         break;
@@ -142,7 +142,7 @@ public class Bomb_balloon extends Creature{
                         bomb_sprite = new Sprite(Assets.instance.manager.get(Assets.bomb_balloon_tt));
                         bomb_sprite.setPosition(xx,yy);
                         fire_bomb2=new ParticleEffect(Assets.fire_bomb2);
-                        fire_bomb2.setPosition(bomb_sprite.getX()+74,bomb_sprite.getY()+116);
+                        fire_bomb2.setPosition(bomb_sprite.getX(),bomb_sprite.getY());
                         fire_bomb2.start();
                         if (fire_bomb1!=null){
                             fire_bomb1.setDuration(0);
