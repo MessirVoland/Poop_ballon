@@ -379,13 +379,15 @@ public class PlayState extends State {
         
 		if (game_over_start){
             game_over_dt+=dt;
-            if (game_over_dt>=0.7f){
-                if (game_over_ball_fly){
-                    if (position.x<=-190) {
-                        gameoverState.setPosition(position);
-                         gsm.set(gameoverState);
-                    }
+            if (game_over_ball_fly){
+                if (position.x<=-190) {
+                    gameoverState.setPosition(position);
+                    gsm.set(gameoverState);
                 }
+            }
+            
+            if (game_over_dt>=1.2f){
+
                 if ((!game_over_ball_fly)&(game_over_well_play)){
                     if (score_num.getBuffer()>=0) {
                         game_over_ball_fly = true;
