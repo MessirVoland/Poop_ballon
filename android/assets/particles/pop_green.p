@@ -5,8 +5,8 @@ active: false
 lowMin: 50.0
 lowMax: 50.0
 - Count - 
-min: 7
-max: 12
+min: 5
+max: 10
 - Emission - 
 lowMin: 0.0
 lowMax: 0.0
@@ -66,10 +66,10 @@ scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Scale - 
-lowMin: 30.0
-lowMax: 10.0
-highMin: 80.0
-highMax: 100.0
+lowMin: 25.0
+lowMax: 5.0
+highMin: 70.0
+highMax: 90.0
 relative: false
 scalingCount: 5
 scaling0: 0.7647059

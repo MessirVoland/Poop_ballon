@@ -66,10 +66,10 @@ scaling0: 1.0
 timelineCount: 1
 timeline0: 0.0
 - Scale - 
-lowMin: 30.0
+lowMin: 10.0
 lowMax: 10.0
-highMin: 100.0
-highMax: 150.0
+highMin: 70.0
+highMax: 100.0
 relative: false
 scalingCount: 3
 scaling0: 0.21568628
@@ -83,19 +83,21 @@ timeline2: 1.0
 active: true
 lowMin: -800.0
 lowMax: -800.0
-highMin: 500.0
-highMax: 1000.0
+highMin: 1000.0
+highMax: 1500.0
 relative: false
-scalingCount: 4
+scalingCount: 5
 scaling0: 0.5674157
 scaling1: 1.0
-scaling2: 0.0
+scaling2: 1.0
 scaling3: 0.0
-timelineCount: 4
+scaling4: 0.0
+timelineCount: 5
 timeline0: 0.0
-timeline1: 0.025882352
-timeline2: 0.4164706
-timeline3: 1.0
+timeline1: 0.017077798
+timeline2: 0.06451613
+timeline3: 0.21252371
+timeline4: 1.0
 - Angle - 
 active: true
 lowMin: 0.0
@@ -144,12 +146,16 @@ timeline0: 0.0
 timeline1: 0.41095892
 timeline2: 1.0
 - Tint - 
-colorsCount: 3
-colors0: 1.0
-colors1: 0.9411765
-colors2: 0.9372549
-timelineCount: 1
+colorsCount: 6
+colors0: 0.99215686
+colors1: 0.7137255
+colors2: 0.53333336
+colors3: 1.0
+colors4: 1.0
+colors5: 1.0
+timelineCount: 2
 timeline0: 0.0
+timeline1: 1.0
 - Transparency - 
 lowMin: 0.0
 lowMax: 0.0
@@ -170,11 +176,11 @@ timeline3: 1.0
 attached: false
 continuous: false
 aligned: false
-additive: true
+additive: false
 behind: false
 premultipliedAlpha: false
 - Image Path -
-particle1.png
+wood_par.png
 
 
 blow
@@ -579,3 +585,186 @@ behind: false
 premultipliedAlpha: false
 - Image Path -
 fire_f.png
+
+
+balls
+- Delay -
+active: false
+- Duration - 
+lowMin: 200.0
+lowMax: 200.0
+- Count - 
+min: 50
+max: 100
+- Emission - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 100.0
+highMax: 100.0
+relative: false
+scalingCount: 3
+scaling0: 1.0
+scaling1: 1.0
+scaling2: 1.0
+timelineCount: 3
+timeline0: 0.0
+timeline1: 0.01369863
+timeline2: 1.0
+- Life - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 1000.0
+highMax: 1000.0
+relative: false
+scalingCount: 3
+scaling0: 1.0
+scaling1: 1.0
+scaling2: 0.50980395
+timelineCount: 3
+timeline0: 0.0
+timeline1: 0.60273975
+timeline2: 0.9794521
+- Life Offset - 
+active: false
+- X Offset - 
+active: false
+- Y Offset - 
+active: false
+- Spawn Shape - 
+shape: ellipse
+edges: false
+side: both
+- Spawn Width - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 9.0
+highMax: 9.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
+- Spawn Height - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
+- Scale - 
+lowMin: 10.0
+lowMax: 10.0
+highMin: 70.0
+highMax: 100.0
+relative: false
+scalingCount: 3
+scaling0: 0.21568628
+scaling1: 0.7647059
+scaling2: 0.12921348
+timelineCount: 3
+timeline0: 0.0
+timeline1: 0.56164384
+timeline2: 1.0
+- Velocity - 
+active: true
+lowMin: -800.0
+lowMax: -800.0
+highMin: 1200.0
+highMax: 1500.0
+relative: false
+scalingCount: 3
+scaling0: 1.0
+scaling1: 1.0
+scaling2: 0.0
+timelineCount: 3
+timeline0: 0.0
+timeline1: 0.030758714
+timeline2: 0.19617225
+- Angle - 
+active: true
+lowMin: 0.0
+lowMax: 360.0
+highMin: 0.0
+highMax: 360.0
+relative: false
+scalingCount: 2
+scaling0: 1.0
+scaling1: 1.0
+timelineCount: 2
+timeline0: 0.0
+timeline1: 1.0
+- Rotation - 
+active: false
+- Wind - 
+active: true
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 4
+scaling0: 0.0
+scaling1: 1.0
+scaling2: 0.50980395
+scaling3: 0.98039216
+timelineCount: 4
+timeline0: 0.0
+timeline1: 0.05479452
+timeline2: 0.5
+timeline3: 1.0
+- Gravity - 
+active: true
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 3
+scaling0: 1.0
+scaling1: 0.627451
+scaling2: 0.0
+timelineCount: 3
+timeline0: 0.0
+timeline1: 0.41095892
+timeline2: 1.0
+- Tint - 
+colorsCount: 6
+colors0: 1.0
+colors1: 0.76862746
+colors2: 0.76862746
+colors3: 1.0
+colors4: 1.0
+colors5: 1.0
+timelineCount: 2
+timeline0: 0.0
+timeline1: 1.0
+- Transparency - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 1.0
+highMax: 1.0
+relative: false
+scalingCount: 5
+scaling0: 0.0
+scaling1: 0.0
+scaling2: 0.71929824
+scaling3: 0.7368421
+scaling4: 0.0
+timelineCount: 5
+timeline0: 0.0
+timeline1: 0.2260274
+timeline2: 0.37671232
+timeline3: 0.82191783
+timeline4: 1.0
+- Options - 
+attached: false
+continuous: false
+aligned: false
+additive: false
+behind: false
+premultipliedAlpha: false
+- Image Path -
+wood_par.png
