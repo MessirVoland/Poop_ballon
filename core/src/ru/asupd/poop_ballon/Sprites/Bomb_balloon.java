@@ -71,12 +71,12 @@ public class Bomb_balloon extends Creature{
                 }
             if (fire_bomb1!=null){
                 fire_bomb1.update(dt);
-                fire_bomb1.setPosition(bomb_sprite.getX()+99,bomb_sprite.getY()+113);
+                fire_bomb1.setPosition(bomb_sprite.getX(),bomb_sprite.getY());
 
             }
             if (fire_bomb2!=null){
                 fire_bomb2.update(dt);
-                fire_bomb2.setPosition(bomb_sprite.getX()+74,bomb_sprite.getY()+116);
+                fire_bomb2.setPosition(bomb_sprite.getX(),bomb_sprite.getY());
             }
             int sin_grav = 50;
 
@@ -213,7 +213,7 @@ public class Bomb_balloon extends Creature{
         heals=0;
         bomb_sprite = new Sprite(Assets.instance.manager.get(Assets.bomb_balloon_t));
         if (fire_bomb1!=null) {
-            fire_bomb1.setPosition(bomb_sprite.getX() + 99, bomb_sprite.getY() + 113);
+            fire_bomb1.setPosition(bomb_sprite.getX(), bomb_sprite.getY());
         }
        // fire_bomb1=new ParticleEffect(Assets.fire_bomb1);
        // fire_bomb2=new ParticleEffect(Assets.fire_bomb2);
