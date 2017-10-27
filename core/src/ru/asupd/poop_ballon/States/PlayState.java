@@ -385,7 +385,7 @@ public class PlayState extends State {
                     gsm.set(gameoverState);
                 }
             }
-            
+
             if (game_over_dt>=1.2f){
 
                 if ((!game_over_ball_fly)&(game_over_well_play)){

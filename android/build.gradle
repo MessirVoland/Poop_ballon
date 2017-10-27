@@ -39,6 +39,9 @@ android {
             minSdkVersion 16
             targetSdkVersion 16
             versionCode 1
+            manifestPlaceholders = [
+                    appIcon:"@drawable/ic_launcher_free"
+            ]
         }
         full {
             applicationId "ru.asupd.poop_ballon.full"
@@ -46,6 +49,9 @@ android {
             minSdkVersion 16
             targetSdkVersion 16
             versionCode 1
+            manifestPlaceholders = [
+                    appIcon:"@drawable/ic_launcher_full"
+            ]
         }
     }
     buildTypes {
