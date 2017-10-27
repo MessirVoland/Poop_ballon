@@ -12,6 +12,7 @@ import ru.asupd.poop_ballon.Workers.Assets;
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.PlayState.balloons;
 import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
+import static ru.asupd.poop_ballon.States.PlayState.combo_effects;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.PlayState.make_poop_Sound;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
@@ -157,9 +158,9 @@ public class Bomb_balloon extends Creature{
                             fire_bomb2=null;
                         }
                         ballons_disposed = 0;
-                        special_effects.add(new ParticleEffect(Assets.bomb_blow));
-                        special_effects.get(special_effects.size - 1).setPosition(bomb_sprite.getX() + 50, bomb_sprite.getY() + 65);
-                        special_effects.get(special_effects.size - 1).start();
+                        combo_effects.add(new ParticleEffect(Assets.bomb_blow));
+                        combo_effects.get(combo_effects.size - 1).setPosition(bomb_sprite.getX() + 50, bomb_sprite.getY() + 65);
+                        combo_effects.get(combo_effects.size - 1).start();
                         restart();
                         current_delay = 0;
                         pooped = true;
