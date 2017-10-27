@@ -12,12 +12,12 @@ import ru.asupd.poop_ballon.Workers.Assets;
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.PlayState.balloons;
 import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
-import static ru.asupd.poop_ballon.States.PlayState.combo_effects;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.PlayState.make_poop_Sound;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
 import static ru.asupd.poop_ballon.States.PlayState.shaker;
+import static ru.asupd.poop_ballon.States.PlayState.special_effects;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.CHANSE_OF_SPAWN_BOMB;
 
 /**
@@ -123,9 +123,9 @@ public class Bomb_balloon extends Creature{
             if (((y > bomb_sprite.getY()) & (y < bomb_sprite.getY() + bomb_sprite.getWidth())) &
                 ((x > bomb_sprite.getX()) & (x < bomb_sprite.getX() + bomb_sprite.getHeight()))) {
 
-                combo_effects.add(new ParticleEffect(Assets.hearth_ballon_part));
-                combo_effects.get(PlayState.combo_effects.size-1).setPosition(bomb_sprite.getX()+50, bomb_sprite.getY()+140);
-                combo_effects.get(PlayState.combo_effects.size-1).start();
+                special_effects.add(new ParticleEffect(Assets.hearth_ballon_part));
+                special_effects.get(special_effects.size-1).setPosition(bomb_sprite.getX()+50, bomb_sprite.getY()+140);
+                special_effects.get(special_effects.size-1).start();
                 score_num.addScore(5);
                 switch (heals) {
                     case 0:
@@ -157,9 +157,9 @@ public class Bomb_balloon extends Creature{
                             fire_bomb2=null;
                         }
                         ballons_disposed = 0;
-                        combo_effects.add(new ParticleEffect(Assets.bomb_blow));
-                        combo_effects.get(combo_effects.size - 1).setPosition(bomb_sprite.getX() + 50, bomb_sprite.getY() + 65);
-                        combo_effects.get(combo_effects.size - 1).start();
+                        special_effects.add(new ParticleEffect(Assets.bomb_blow));
+                        special_effects.get(special_effects.size - 1).setPosition(bomb_sprite.getX() + 50, bomb_sprite.getY() + 65);
+                        special_effects.get(special_effects.size - 1).start();
                         restart();
                         current_delay = 0;
                         pooped = true;

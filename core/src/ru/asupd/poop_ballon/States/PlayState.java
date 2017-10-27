@@ -153,6 +153,7 @@ public class PlayState extends State {
     float current_time_for_combo = 0.0f;//текущее время комбо
     public static Array<ParticleEffect> combo_effects = new Array<ParticleEffect>();
     public static Array<ParticleEffect> combo_effects_multi = new Array<ParticleEffect>();
+    public static Array<ParticleEffect> special_effects = new Array<ParticleEffect>();
 
     private boolean one_cast_music;
     private float current_dt_one_cast;
@@ -548,6 +549,7 @@ public class PlayState extends State {
                     cloud.change_texture();
                 }
             }
+
             if ((hearth_balloon.isFly())|(hearth_balloon.isPooped())){
                 hearth_balloon.update(dt);
                 if (hearth_balloon.getPosition().x>=480+95){
@@ -566,18 +568,18 @@ public class PlayState extends State {
             score_num.update(dt);
             options.setPosition((shaker.getCamera_sh().position.x + 171),(shaker.getCamera_sh().position.y + 331));
 
-
-            //if (balloons.size>=1) {
-            //    effect.setPosition(balloons.get(0).getPosition().x, balloons.get(0).getPosition().y);
-            //}
             for(ParticleEffect combo_effect :combo_effects){
                 combo_effect.update(dt);
-               // System.out.print("Update combo");
             }
+
             for(ParticleEffect combo_effect :combo_effects_multi){
                 combo_effect.update(dt);
-                // System.out.print("Update combo");
             }
+
+            for(ParticleEffect combo_effect :special_effects){
+                combo_effect.update(dt);
+            }
+
             if (current_combo>=2){
                 current_time_for_combo+=dt;
 
@@ -727,6 +729,16 @@ public class PlayState extends State {
 
         options.draw(sb);
 
+        if (special_effects.size>=1) {
+            for (int j = 0; j <= special_effects.size - 1; j++) {
+                if (!special_effects.get(j).isComplete()) {
+                    special_effects.get(j).draw(sb);
+                } else {
+                    special_effects.removeIndex(j);
+                }
+            }
+        }
+
         balloons_manager.draw(sb);
 
 
@@ -750,8 +762,6 @@ public class PlayState extends State {
                 }
             }
         }
-
-
 
 
 

@@ -129,6 +129,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+
         return true;
     }
 

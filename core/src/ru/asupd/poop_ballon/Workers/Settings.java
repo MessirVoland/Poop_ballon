@@ -127,7 +127,9 @@ public class Settings {
         //вывод из паузы
         {
            // if (one_click) {
+            if (ScreenY<780) {
                 PlayState.setUNPAUSE();
+            }
            //     System.out.println("Unpause()");
             //    one_click=false;
           //  }
