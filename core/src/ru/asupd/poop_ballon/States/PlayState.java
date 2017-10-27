@@ -745,6 +745,7 @@ public class PlayState extends State {
         }
 
         //Справочная информация
+        /*
         int fps = Gdx.graphics.getFramesPerSecond();
         if (fps >= 45) {
             // 45 or more FPS show up in green
@@ -756,7 +757,9 @@ public class PlayState extends State {
             // less than 30 FPS show up in red
             FontRed1.setColor(1, 0, 0, 1);
         }
+
         FontRed1.draw(sb, " FPS : "+  fps, 10, 790);
+        */
 
         FontRed1.setColor(1, 1, 1, 1);
         /*
