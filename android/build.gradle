@@ -35,26 +35,28 @@ android {
     productFlavors {
         free {
             applicationId "ru.asupd.poop_ballon.free"
-            versionName '0.9.7'
+            versionName '0.9.8'
             minSdkVersion 16
             targetSdkVersion 16
             versionCode 1
             manifestPlaceholders = [
-                    appIcon:"@drawable/ic_launcher_free"
+                    appIcon: "@drawable/ic_launcher_free",
+                    applicationId_n: "ru.asupd.poop_ballon.AndroidLauncher"
             ]
-            applicationId "ru.asupd.poop_ballon.AndroidLauncher"
+
             //resValue "string", "app_name", "Pop Balloon Free"
         }
         full {
             applicationId "ru.asupd.poop_ballon.full"
-            versionName "0.9.7"
+            versionName '0.9.8'
             minSdkVersion 16
             targetSdkVersion 16
             versionCode 1
             manifestPlaceholders = [
-                    appIcon:"@drawable/ic_launcher_full"
+                    appIcon: "@drawable/ic_launcher_full",
+                    applicationId_n: "ru.asupd.poop_ballon.AndroidLauncher_full"
             ]
-            applicationId "ru.asupd.poop_ballon.AndroidLauncher_full"
+
             //resValue "string", "app_name", "Pop Balloon"
         }
     }

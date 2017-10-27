@@ -152,6 +152,7 @@ public class PlayState extends State {
     private static final float TIME_FOR_COMBO = 1.25f;//максимальное время отображения значка комбо
     float current_time_for_combo = 0.0f;//текущее время комбо
     public static Array<ParticleEffect> combo_effects = new Array<ParticleEffect>();
+    public static Array<ParticleEffect> combo_effects_multi = new Array<ParticleEffect>();
 
     private boolean one_cast_music;
     private float current_dt_one_cast;
@@ -573,6 +574,10 @@ public class PlayState extends State {
                 combo_effect.update(dt);
                // System.out.print("Update combo");
             }
+            for(ParticleEffect combo_effect :combo_effects_multi){
+                combo_effect.update(dt);
+                // System.out.print("Update combo");
+            }
             if (current_combo>=2){
                 current_time_for_combo+=dt;
 
@@ -735,6 +740,17 @@ public class PlayState extends State {
                 }
             }
         }
+
+        if (combo_effects_multi.size>=1) {
+            for (int j = 0; j <= combo_effects_multi.size - 1; j++) {
+                if (!combo_effects_multi.get(j).isComplete()) {
+                    combo_effects_multi.get(j).draw(sb);
+                } else {
+                    combo_effects_multi.removeIndex(j);
+                }
+            }
+        }
+
 
 
 

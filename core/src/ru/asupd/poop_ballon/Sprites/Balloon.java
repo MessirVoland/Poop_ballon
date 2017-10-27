@@ -465,26 +465,27 @@ public class Balloon {
                         //System.out.println(max_combo);
                         switch (max_combo) {
                             default:
-                                PlayState.combo_effects.add(new ParticleEffect(Assets.combo_6x));
+                                PlayState.combo_effects_multi.add(new ParticleEffect(Assets.combo_6x));
                                 break;
                             case 2:
-                                PlayState.combo_effects.add(new ParticleEffect(Assets.combo_2x));
+                                PlayState.combo_effects_multi.add(new ParticleEffect(Assets.combo_2x));
+
                                 break;
                             case 3:
-                                PlayState.combo_effects.add(new ParticleEffect(Assets.combo_3x));
+                                PlayState.combo_effects_multi.add(new ParticleEffect(Assets.combo_3x));
                                 break;
                             case 4:
-                                PlayState.combo_effects.add(new ParticleEffect(Assets.combo_4x));
+                                PlayState.combo_effects_multi.add(new ParticleEffect(Assets.combo_4x));
                                 break;
                             case 5:
-                                PlayState.combo_effects.add(new ParticleEffect(Assets.combo_5x));
+                                PlayState.combo_effects_multi.add(new ParticleEffect(Assets.combo_5x));
                                 break;
                             case 6:
-                                PlayState.combo_effects.add(new ParticleEffect(Assets.combo_6x));
+                                PlayState.combo_effects_multi.add(new ParticleEffect(Assets.combo_6x));
                                 break;
                         }
-                        PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
-                        PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(position.x + 45, position.y + 145);
+                        PlayState.combo_effects_multi.get(PlayState.combo_effects_multi.size - 1).start();
+                        PlayState.combo_effects_multi.get(PlayState.combo_effects_multi.size - 1).setPosition(position.x + 45, position.y + 145);
                         //System.out.println("Combo started");
                         with_combo_multi = false;
                     }
