@@ -87,7 +87,41 @@ public class Score {
         buffer+=added_score;
     }
 
-    
+
+    public void draw_center(SpriteBatch sb,int x,int y){
+        int sm_pxl=String.valueOf(local_score).length();
+        int sm_local=0;
+        int peren;
+
+        sm_pxl--;
+        x+=40;
+        peren= 10+sm_pxl*10;
+        switch (sm_pxl){
+            case 5:
+                sb.draw(frames_numbers.get(megred_high_score[5]), x -peren, y);
+                peren-=20;
+                sm_local++;
+            case 4:
+                sb.draw(frames_numbers.get(megred_high_score[4]), x -peren, y);
+                sm_local++;
+                peren-=20;
+            case 3:
+                sb.draw(frames_numbers.get(megred_high_score[3]), x -peren, y);
+                sm_local++;
+                peren-=20;
+            case 2:
+                sb.draw(frames_numbers.get(megred_high_score[2]), x -peren, y);
+                sm_local++;
+                peren-=20;
+            case 1:
+                sb.draw(frames_numbers.get(megred_high_score[1]), x -peren, y);
+                sm_local++;
+                peren-=20;
+            case 0:
+                sb.draw(frames_numbers.get(megred_high_score[0]), x -peren, y);
+                break;
+        }
+    }
 
     public void draw(SpriteBatch sb,int x,int y){
         int sm_pxl=String.valueOf(local_score).length();

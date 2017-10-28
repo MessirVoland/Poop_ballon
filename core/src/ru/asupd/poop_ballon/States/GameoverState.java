@@ -36,6 +36,7 @@ public class GameoverState extends State {
 
     Texture numbers;
     Score score= new Score();
+    Score score_b= new Score();
 
     Array<TextureRegion> frames_numbers;
 
@@ -117,6 +118,7 @@ public class GameoverState extends State {
         settings.hi_score_refresh();
         achievement.start_anim();
         score.setScore(last_score);
+        score_b.setScore(load_hiscore);
     }
 
     @Override
@@ -132,6 +134,7 @@ public class GameoverState extends State {
     @Override
     public void update(float dt) {
         score.update(dt);
+        score_b.update(dt);
         achievement.update(dt);
         if (currentdt>=waiting) {
             handleInput();
@@ -174,7 +177,7 @@ public class GameoverState extends State {
             }
             sb.draw(your_score,105,400,120,75);
 
-            score.draw(sb, 115,320);
+            score.draw_center(sb, 115,320);
             //sb.draw(frames_numbers.get(score_last[0]),175,320,25,31);
             //sb.draw(frames_numbers.get(score_last[1]),155,320,25,31);
             //sb.draw(frames_numbers.get(score_last[2]),135,320,25,31);
@@ -186,7 +189,7 @@ public class GameoverState extends State {
             }
             sb.draw(your_score,175,400,120,75);
 
-            score.draw(sb, 185,320);
+            score.draw_center(sb, 185,320);
 
             //sb.draw(frames_numbers.get(score_last[0]),245,320,25,31);
             //sb.draw(frames_numbers.get(score_last[1]),225,320,25,31);
@@ -198,18 +201,20 @@ public class GameoverState extends State {
         if (showed_ads){
 
             sb.draw(your_best_score, 125, 170, 210, 75);
-            sb.draw(frames_numbers.get(score_best[0]), 245, 130, 25, 31);
-            sb.draw(frames_numbers.get(score_best[1]), 225, 130, 25, 31);
-            sb.draw(frames_numbers.get(score_best[2]), 205, 130, 25, 31);
-            sb.draw(frames_numbers.get(score_best[3]), 185, 130, 25, 31);
+            score_b.draw_center(sb,185,130);
+           // sb.draw(frames_numbers.get(score_best[0]), 245, 130, 25, 31);
+           // sb.draw(frames_numbers.get(score_best[1]), 225, 130, 25, 31);
+           // sb.draw(frames_numbers.get(score_best[2]), 205, 130, 25, 31);
+           // sb.draw(frames_numbers.get(score_best[3]), 185, 130, 25, 31);
             sb.draw(big_balloon, position.x, position.y, 860, 800);
         }else {
             sb.draw(your_best_score, 125, 100, 210, 75);
 
-            sb.draw(frames_numbers.get(score_best[0]), 245, 50, 25, 31);
-            sb.draw(frames_numbers.get(score_best[1]), 225, 50, 25, 31);
-            sb.draw(frames_numbers.get(score_best[2]), 205, 50, 25, 31);
-            sb.draw(frames_numbers.get(score_best[3]), 185, 50, 25, 31);
+            score_b.draw_center(sb,185,50);
+            //sb.draw(frames_numbers.get(score_best[0]), 245, 50, 25, 31);
+            //sb.draw(frames_numbers.get(score_best[1]), 225, 50, 25, 31);
+            //sb.draw(frames_numbers.get(score_best[2]), 205, 50, 25, 31);
+            //sb.draw(frames_numbers.get(score_best[3]), 185, 50, 25, 31);
             sb.draw(big_balloon, position.x, position.y, 860, 800);
         }
 

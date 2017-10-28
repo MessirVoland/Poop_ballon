@@ -677,11 +677,11 @@ public class PlayState extends State {
 
             if (showed_ads) {
                 sb.draw(your_high_score,130,170,211,74);
-                score_num.draw(sb,190,120);
+                score_num.draw_center(sb,190,120);
             }else
             {
                 sb.draw(your_high_score,130,100,211,74);
-                score_num.draw(sb,190,50);
+                score_num.draw_center(sb,190,50);
             }
 
             if (!faq.isShow()) {
