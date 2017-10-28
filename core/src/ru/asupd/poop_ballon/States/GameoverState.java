@@ -15,6 +15,7 @@ import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Sprites.Star;
 import ru.asupd.poop_ballon.Workers.Achievement;
 import ru.asupd.poop_ballon.Workers.Assets;
+import ru.asupd.poop_ballon.Workers.Score;
 
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
@@ -34,8 +35,10 @@ public class GameoverState extends State {
     private float current_tap_to_restart;
 
     Texture numbers;
+    Score score= new Score();
 
     Array<TextureRegion> frames_numbers;
+
     float  currentdt, waiting;
     final BitmapFont FontRed1;
     final Preferences prefs;
@@ -60,6 +63,7 @@ public class GameoverState extends State {
         camera.setToOrtho(false, 480 , 800 );
         this.final_stars=stars;
         current_tap_to_restart=0;
+
 
 
         //background = new Texture("background_night.png");
@@ -112,6 +116,7 @@ public class GameoverState extends State {
         waiting=1.5f;
         settings.hi_score_refresh();
         achievement.start_anim();
+        score.setScore(last_score);
     }
 
     @Override
@@ -126,6 +131,7 @@ public class GameoverState extends State {
 
     @Override
     public void update(float dt) {
+        score.update(dt);
         achievement.update(dt);
         if (currentdt>=waiting) {
             handleInput();
@@ -168,10 +174,11 @@ public class GameoverState extends State {
             }
             sb.draw(your_score,105,400,120,75);
 
-            sb.draw(frames_numbers.get(score_last[0]),175,320,25,31);
-            sb.draw(frames_numbers.get(score_last[1]),155,320,25,31);
-            sb.draw(frames_numbers.get(score_last[2]),135,320,25,31);
-            sb.draw(frames_numbers.get(score_last[3]),115,320,25,31);
+            score.draw(sb, 115,320);
+            //sb.draw(frames_numbers.get(score_last[0]),175,320,25,31);
+            //sb.draw(frames_numbers.get(score_last[1]),155,320,25,31);
+            //sb.draw(frames_numbers.get(score_last[2]),135,320,25,31);
+            //sb.draw(frames_numbers.get(score_last[3]),115,320,25,31);
         }
         else{
             if (last_score>=load_hiscore) {
@@ -179,10 +186,12 @@ public class GameoverState extends State {
             }
             sb.draw(your_score,175,400,120,75);
 
-            sb.draw(frames_numbers.get(score_last[0]),245,320,25,31);
-            sb.draw(frames_numbers.get(score_last[1]),225,320,25,31);
-            sb.draw(frames_numbers.get(score_last[2]),205,320,25,31);
-            sb.draw(frames_numbers.get(score_last[3]),185,320,25,31);
+            score.draw(sb, 185,320);
+
+            //sb.draw(frames_numbers.get(score_last[0]),245,320,25,31);
+            //sb.draw(frames_numbers.get(score_last[1]),225,320,25,31);
+            //sb.draw(frames_numbers.get(score_last[2]),205,320,25,31);
+            //sb.draw(frames_numbers.get(score_last[3]),185,320,25,31);
         }
 
 

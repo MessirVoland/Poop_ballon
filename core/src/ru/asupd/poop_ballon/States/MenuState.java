@@ -41,6 +41,7 @@ public class MenuState extends State {
         //network_time.get();
 
         camera.setToOrtho(false,480,800 );
+
         background = new Texture("background_start.png");
         balloon  = new Texture("c_logo.png");
         balloon.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

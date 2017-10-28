@@ -20,7 +20,7 @@ public class Score {
     private Sprite plus;//плюсик
 
     private static Array<Sprite> frames_numbers;//числа'
-    private static int[] megred_high_score = new int[5];//для отображения счета
+    private static int[] megred_high_score = new int[7];//для отображения счета
     private int buffer=0;
     private float current_dt=0.0f;
     private float current_dt_combo=0.0f;
@@ -88,30 +88,68 @@ public class Score {
     }
 
     public void draw(SpriteBatch sb,int x,int y){
-        if (combo){
-            sb.draw(plus,x+80,y-3,31,37);
-            if (!wooden) {
+        int sm_pxl;
+        if (local_score>=100000){
+            sb.draw(frames_numbers.get(megred_high_score[0]), x + 100, y);
+            sb.draw(frames_numbers.get(megred_high_score[1]), x + 80, y);
+            sb.draw(frames_numbers.get(megred_high_score[2]), x + 60, y);    //245
+            sb.draw(frames_numbers.get(megred_high_score[3]), x + 40, y);    //225
+            sb.draw(frames_numbers.get(megred_high_score[4]), x + 20, y);
+            sb.draw(frames_numbers.get(megred_high_score[5]), x, y);
+            sm_pxl=6;
+        }
+        else if (local_score>=10000){
+            sb.draw(frames_numbers.get(megred_high_score[0]), x + 80, y);
+            sb.draw(frames_numbers.get(megred_high_score[1]), x + 60, y);
+            sb.draw(frames_numbers.get(megred_high_score[2]), x + 40, y);    //245
+            sb.draw(frames_numbers.get(megred_high_score[3]), x + 20, y);    //225
+            sb.draw(frames_numbers.get(megred_high_score[4]), x, y);
+            sm_pxl=5;
+        }
+        else if (local_score>=1000) {
+            sb.draw(frames_numbers.get(megred_high_score[0]), x + 60, y);
+            sb.draw(frames_numbers.get(megred_high_score[1]), x + 40, y);
+            sb.draw(frames_numbers.get(megred_high_score[2]), x + 20, y);    //245
+            sb.draw(frames_numbers.get(megred_high_score[3]), x, y);    //225
+            sm_pxl=4;
+        } else if (local_score>=100){
+            sb.draw(frames_numbers.get(megred_high_score[0]), x + 40, y);
+            sb.draw(frames_numbers.get(megred_high_score[1]), x + 20, y);    //245
+            sb.draw(frames_numbers.get(megred_high_score[2]), x, y);    //225
+            sm_pxl=3;
+        } else if (local_score>=10){
+            sb.draw(frames_numbers.get(megred_high_score[0]), x + 20, y);    //245
+            sb.draw(frames_numbers.get(megred_high_score[1]), x, y);
+            sm_pxl=2;
+        }
+        else
+        {
+            sb.draw(frames_numbers.get(megred_high_score[0]), x, y);
+            sm_pxl=1;
+        }
 
+        if (combo){
+            sm_pxl*=20;
+            sb.draw(plus,x+sm_pxl,y-3,31,37);
+            if (!wooden) {
                 switch (combo_num) {
                     case 2:
-                        //frames_numbers.get(4).setPosition(x+106,y-3);
-                        //frames_numbers.get(4).draw(sb);
-                        sb.draw(frames_numbers.get(4), x + 106, y - 3, 31, 37);
+                        sb.draw(frames_numbers.get(4),x+26+sm_pxl,y - 3, 31, 37);
                         break;
                     case 3:
-                        sb.draw(frames_numbers.get(9), x + 106, y - 3, 31, 37);
+                        sb.draw(frames_numbers.get(9),x+26+sm_pxl,y - 3, 31, 37);
                         break;
                     case 4:
-                        sb.draw(frames_numbers.get(1), x + 106, y - 3, 31, 37);
-                        sb.draw(frames_numbers.get(6), x + 132, y - 3, 31, 37);
+                        sb.draw(frames_numbers.get(1),x+26+sm_pxl,y - 3, 31, 37);
+                        sb.draw(frames_numbers.get(6),x+52+sm_pxl,y - 3, 31, 37);
                         break;
                     case 5:
-                        sb.draw(frames_numbers.get(2), x + 106, y - 3, 31, 37);
-                        sb.draw(frames_numbers.get(5), x + 132, y - 3, 31, 37);
+                        sb.draw(frames_numbers.get(2),x+26+sm_pxl,y - 3, 31, 37);
+                        sb.draw(frames_numbers.get(5),x+52+sm_pxl,y - 3, 31, 37);
                         break;
                     case 9:
-                        sb.draw(frames_numbers.get(5), x + 106, y - 3, 31, 37);
-                        sb.draw(frames_numbers.get(0), x + 132, y - 3, 31, 37);
+                        sb.draw(frames_numbers.get(5),x+26+sm_pxl,y - 3, 31, 37);
+                        sb.draw(frames_numbers.get(0),x+52+sm_pxl,y - 3, 31, 37);
                         break;
 
 
@@ -124,45 +162,42 @@ public class Score {
                 }
                 else if (current_wooden/1000>=1)
                 {
-                    sb.draw(frames_numbers.get(local_current_wood%10), x + 208, y - 3, 31, 37);
+                    sb.draw(frames_numbers.get(local_current_wood%10), x+128+sm_pxl, y - 3, 31, 37);
                     local_current_wood=local_current_wood/10;
-                    sb.draw(frames_numbers.get(local_current_wood%10), x + 158, y - 3, 31, 37);
+                    sb.draw(frames_numbers.get(local_current_wood%10), x+78 +sm_pxl, y - 3, 31, 37);
                     local_current_wood=local_current_wood/10;
-                    sb.draw(frames_numbers.get(local_current_wood%10), x + 132, y - 3, 31, 37);
+                    sb.draw(frames_numbers.get(local_current_wood%10), x+52 +sm_pxl, y - 3, 31, 37);
                     local_current_wood=local_current_wood/10;
-                    sb.draw(frames_numbers.get(local_current_wood),    x + 106, y - 3, 31, 37);
+                    sb.draw(frames_numbers.get(local_current_wood),    x+26 +sm_pxl, y - 3, 31, 37);
                 }
                 else if (current_wooden/100>=1)
                 {
-                    sb.draw(frames_numbers.get(local_current_wood%10), x + 158, y - 3, 31, 37);
+                    sb.draw(frames_numbers.get(local_current_wood%10), x+78 +sm_pxl, y - 3, 31, 37);
                     local_current_wood=local_current_wood/10;
-                    sb.draw(frames_numbers.get(local_current_wood%10), x + 132, y - 3, 31, 37);
+                    sb.draw(frames_numbers.get(local_current_wood%10), x+52 +sm_pxl, y - 3, 31, 37);
                     local_current_wood=local_current_wood/10;
-                    sb.draw(frames_numbers.get(local_current_wood),    x + 106, y - 3, 31, 37);
+                    sb.draw(frames_numbers.get(local_current_wood),    x+26 +sm_pxl, y - 3, 31, 37);
                 }
                 else if (current_wooden/10>=1)
                 {
-                    sb.draw(frames_numbers.get(local_current_wood%10), x + 132, y - 3, 31, 37);
+                    sb.draw(frames_numbers.get(local_current_wood%10), x+52 +sm_pxl, y - 3, 31, 37);
                     local_current_wood=local_current_wood/10;
-                    sb.draw(frames_numbers.get(local_current_wood),    x + 106, y - 3, 31, 37);
+                    sb.draw(frames_numbers.get(local_current_wood),    x+26 +sm_pxl, y - 3, 31, 37);
                 }
                 else
                 {
-                    sb.draw(frames_numbers.get(local_current_wood),    x + 106, y - 3, 31, 37);
+                    sb.draw(frames_numbers.get(local_current_wood),    x+26 +sm_pxl, y - 3, 31, 37);
                 }
 
             }
         }
 
-        sb.draw(frames_numbers.get(megred_high_score[0]),x+60,y);
-        sb.draw(frames_numbers.get(megred_high_score[1]),x+40,y);
-        sb.draw(frames_numbers.get(megred_high_score[2]),x+20,y);    //245
-        sb.draw(frames_numbers.get(megred_high_score[3]),x,   y);    //225
+
+
     }
     public int getBuffer() {
         return buffer;
     }
     public void dispose(){
-
     }
 }
