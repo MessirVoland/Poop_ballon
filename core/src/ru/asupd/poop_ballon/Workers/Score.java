@@ -87,48 +87,36 @@ public class Score {
         buffer+=added_score;
     }
 
+    
+
     public void draw(SpriteBatch sb,int x,int y){
-        int sm_pxl;
-        if (local_score>=100000){
-            sb.draw(frames_numbers.get(megred_high_score[0]), x + 100, y);
-            sb.draw(frames_numbers.get(megred_high_score[1]), x + 80, y);
-            sb.draw(frames_numbers.get(megred_high_score[2]), x + 60, y);    //245
-            sb.draw(frames_numbers.get(megred_high_score[3]), x + 40, y);    //225
-            sb.draw(frames_numbers.get(megred_high_score[4]), x + 20, y);
-            sb.draw(frames_numbers.get(megred_high_score[5]), x, y);
-            sm_pxl=6;
-        }
-        else if (local_score>=10000){
-            sb.draw(frames_numbers.get(megred_high_score[0]), x + 80, y);
-            sb.draw(frames_numbers.get(megred_high_score[1]), x + 60, y);
-            sb.draw(frames_numbers.get(megred_high_score[2]), x + 40, y);    //245
-            sb.draw(frames_numbers.get(megred_high_score[3]), x + 20, y);    //225
-            sb.draw(frames_numbers.get(megred_high_score[4]), x, y);
-            sm_pxl=5;
-        }
-        else if (local_score>=1000) {
-            sb.draw(frames_numbers.get(megred_high_score[0]), x + 60, y);
-            sb.draw(frames_numbers.get(megred_high_score[1]), x + 40, y);
-            sb.draw(frames_numbers.get(megred_high_score[2]), x + 20, y);    //245
-            sb.draw(frames_numbers.get(megred_high_score[3]), x, y);    //225
-            sm_pxl=4;
-        } else if (local_score>=100){
-            sb.draw(frames_numbers.get(megred_high_score[0]), x + 40, y);
-            sb.draw(frames_numbers.get(megred_high_score[1]), x + 20, y);    //245
-            sb.draw(frames_numbers.get(megred_high_score[2]), x, y);    //225
-            sm_pxl=3;
-        } else if (local_score>=10){
-            sb.draw(frames_numbers.get(megred_high_score[0]), x + 20, y);    //245
-            sb.draw(frames_numbers.get(megred_high_score[1]), x, y);
-            sm_pxl=2;
-        }
-        else
-        {
-            sb.draw(frames_numbers.get(megred_high_score[0]), x, y);
-            sm_pxl=1;
+        int sm_pxl=String.valueOf(local_score).length();
+        int sm_local=0;
+        sm_pxl--;
+        switch (sm_pxl){
+            case 5:
+                sb.draw(frames_numbers.get(megred_high_score[5]), x + sm_local*20, y);
+                sm_local++;
+            case 4:
+                sb.draw(frames_numbers.get(megred_high_score[4]), x + sm_local*20, y);
+                sm_local++;
+            case 3:
+                sb.draw(frames_numbers.get(megred_high_score[3]), x + sm_local*20, y);
+                sm_local++;
+            case 2:
+                sb.draw(frames_numbers.get(megred_high_score[2]), x + sm_local*20, y);
+                sm_local++;
+            case 1:
+                sb.draw(frames_numbers.get(megred_high_score[1]), x + sm_local*20, y);
+                sm_local++;
+            case 0:
+                sb.draw(frames_numbers.get(megred_high_score[0]), x + sm_local*20, y);
+                break;
         }
 
+
         if (combo){
+            sm_pxl++;
             sm_pxl*=20;
             sb.draw(plus,x+sm_pxl,y-3,31,37);
             if (!wooden) {
