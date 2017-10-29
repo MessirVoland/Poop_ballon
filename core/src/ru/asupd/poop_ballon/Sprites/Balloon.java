@@ -14,6 +14,7 @@ import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_SCORE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_START;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.TIME_DT_COMBO;
 
 /**
  * Шарик)
@@ -203,7 +204,7 @@ public class Balloon {
         }
         if (combo){
            // color_of_balloon=10;
-            currentTime_or=0.08f*combo_number;
+            currentTime_or=TIME_DT_COMBO*combo_number;
             combo=false;
            // System.out.println("Current_time: "+currentTime);
             make_orange=true;
@@ -371,7 +372,7 @@ public class Balloon {
         if (make_orange) {
 
             currentTime_or += dt;
-            if (currentTime_or >= 0.08f * max_combo) {
+            if (currentTime_or >= TIME_DT_COMBO * max_combo) {
                 //System.out.println("Combo_number: "+combo_number);
                 //if (currentTime_or>=1.0f){
                 make_orange = false;
