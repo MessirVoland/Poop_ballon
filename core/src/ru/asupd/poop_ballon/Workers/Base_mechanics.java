@@ -12,8 +12,8 @@ public class Base_mechanics {
     //Название приложения для хранения настроек
     public static final String APP_STORE_NAME = "Poop_ballons_90471d221cb7702a2b7ab38a5433c26e";
     //Скорость и время анимиции оранжения
-    public static final float ANIMATION_SPEED_RESIZE=0.05f;//скосрость изменения размера 0.04
-    public final static float ANIMATION_TIME=0.22f; //время изменения размера 0.28
+    public static final float ANIMATION_SPEED_RESIZE=0.055f;//скосрость изменения размера 0.04
+    public final static float ANIMATION_TIME=0.18f; //время изменения размера 0.28
     //Cкорость и время анимации надписии tap_to_play
     public static final float ANIMATION_TIME_TAP_TO_PLAY=0.45f;//время
     public static float ANIMATIO_TIME_TO_PLAY_SIZE=0.0050f; //скорость
