@@ -124,7 +124,7 @@ public class GameoverState extends State {
         waiting=1.5f;
         settings.hi_score_refresh();
         achievement.start_anim();
-        score.setScore(last_score);
+        score.addScore(last_score);
         score_b.setScore(load_hiscore);
     }
 
@@ -229,7 +229,9 @@ public class GameoverState extends State {
 
 
         progress_bar_bgnd.draw(sb);
-        patch.draw(sb,progress_bar_bgnd.getX()+13,progress_bar_bgnd.getY()+10,230,50);
+        if (score.getScore()<1500) {
+            patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10, score.getScore(true)/3, 50);
+        }
 
 
        // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 250);

@@ -83,6 +83,10 @@ public class Score {
     public int getScore(){
         return local_score+buffer;
     }
+    public int getScore(boolean with_out_buffer){
+        return local_score;
+    }
+
     public void addScore(int added_score){
         buffer+=added_score;
     }
