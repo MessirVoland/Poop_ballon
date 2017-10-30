@@ -99,7 +99,7 @@ public class MenuState extends State {
         //Assets.loadParticleEffects();
         //FontRed1.draw(sb, " Время до старта 4.0f : "+ current_dt, 15, 790);
         while (!Assets.instance.manager.update()) {
-            FontRed1.draw(sb, " Загрузка >>> " + +Assets.instance.manager.getProgress() * 100 + "%", 15, 730);
+            FontRed1.draw(sb, " Loanding >>> " + +Assets.instance.manager.getProgress() * 100 + "%", 15, 730);
         }
 
 
@@ -117,7 +117,7 @@ public class MenuState extends State {
         }*/
         // = 30;
         FontRed1.setColor(Color.CHARTREUSE);
-        FontRed1.draw(sb,"Pop Balloon v.0.9.9-beta-pre-release.rev.A.build.43", 10, 20);
+        FontRed1.draw(sb,"Pop Balloon v.0.9.9-beta-pre-release.rev.A.build.47", 10, 20);
         //FontRed1.draw(sb," Android API level :"+Gdx.app.getVersion(), 15, 70);
         /*String st_locale=new String("");
         switch (var){

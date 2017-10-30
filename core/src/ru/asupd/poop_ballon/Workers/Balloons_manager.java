@@ -215,11 +215,7 @@ public class Balloons_manager {
                         sb.setColor(1, 1, 1, 1);
                         //sb.draw(Assets.instance.manager.get(Assets.balloon_orange, Texture.class), balloon.getPosition().x, balloon.getPosition().y);
                         balloon.getSprite().draw(sb);
-                        if (balloon.getCurrentTime()<=ANIMATION_TIME/2) {
-                              balloon.scale(ANIMATION_SPEED_RESIZE);
-                        }else{
-                              balloon.scale(-ANIMATION_SPEED_RESIZE);
-                        }
+                        scale(balloon);
                         break;
                     case 11:
                         sb.setColor(1, 1, 1, 1);
@@ -231,11 +227,7 @@ public class Balloons_manager {
 
                         if(balloon.isCombo()){
 
-                            if (balloon.getCurrentTime()<=ANIMATION_TIME/2) {
-                                balloon.scale(ANIMATION_SPEED_RESIZE);
-                            }else{
-                                balloon.scale(-ANIMATION_SPEED_RESIZE);
-                            }
+                            scale(balloon);
                         }
                         switch ((settings.hi_score()-MEDAL_START)/MEDAL_SCORE) {
                             case 0:
@@ -321,5 +313,15 @@ public class Balloons_manager {
        // PlayState.perfomancecounter.stop();
        // PlayState.FontRed1.draw(sb,"Current dt : " +PlayState.perfomancecounter.current,10, 750);
        // PlayState.perfomancecounter.reset();
+    }
+
+    private void scale(Balloon balloon) {
+        if (!PlayState.isPause()) {
+            if (balloon.getCurrentTime() <= ANIMATION_TIME / 2) {
+                balloon.scale(ANIMATION_SPEED_RESIZE);
+            } else {
+                balloon.scale(-ANIMATION_SPEED_RESIZE);
+            }
+        }
     }
 }
