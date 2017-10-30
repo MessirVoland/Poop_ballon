@@ -53,6 +53,8 @@ public class GameoverState extends State {
     Texture big_balloon;
     public static final Achievement achievement= new Achievement();
 
+    Sprite progress_bar_bgnd= new Sprite(new Texture(Gdx.files.internal("bar.png")));
+
     NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("progress.9.png")),10,10,10,10);
 
 
@@ -68,6 +70,7 @@ public class GameoverState extends State {
         camera.setToOrtho(false, 480 , 800 );
         this.final_stars=stars;
         current_tap_to_restart=0;
+        progress_bar_bgnd.setPosition(15,15);
 
 
 
@@ -225,7 +228,8 @@ public class GameoverState extends State {
         //achievement.draw_current_medal(sb,270,200);
 
 
-        patch.draw(sb,10,40,460,50);
+        progress_bar_bgnd.draw(sb);
+        patch.draw(sb,progress_bar_bgnd.getX()+13,progress_bar_bgnd.getY()+10,230,50);
 
 
        // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 250);
