@@ -19,8 +19,8 @@ public class Score {
     private Texture numbers;//числа
     private Sprite plus;//плюсик
 
-    private static Array<Sprite> frames_numbers;//числа'
-    private static int[] megred_high_score = new int[7];//для отображения счета
+    private Array<Sprite> frames_numbers;//числа'
+    private int[] megred_high_score = new int[7];//для отображения счета
     private int buffer=0;
     private float current_dt=0.0f;
     private float current_dt_combo=0.0f;

@@ -394,6 +394,7 @@ public class PlayState extends State {
                     if (score_num.getBuffer()>=0) {
                         game_over_ball_fly = true;
                         game_over_dt = 0;
+                        System.out.println("cautch_ball : "+cautch_ball);
                     }
                 }
 
@@ -837,6 +838,7 @@ public class PlayState extends State {
                 load_hiscore = prefs.getInteger("highscore");
                 cautch_ball = score_num.getScore();
                 prefs.putInteger("last_match_score", cautch_ball);
+
                 prefs.flush();
                 if (load_hiscore < cautch_ball) {
                     prefs.putInteger("highscore", cautch_ball);

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -51,6 +52,9 @@ public class GameoverState extends State {
     Vector3 velosity,position;
     Texture big_balloon;
     public static final Achievement achievement= new Achievement();
+
+    NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("progress.9.png")),10,10,10,10);
+
 
 
     public void setPosition(Vector3 position) {
@@ -221,6 +225,7 @@ public class GameoverState extends State {
         //achievement.draw_current_medal(sb,270,200);
 
 
+        patch.draw(sb,10,40,460,50);
 
 
        // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 250);
