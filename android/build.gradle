@@ -170,5 +170,5 @@ idea {
     }
 }
 dependencies {
-    compile 'com.google.android.gms:play-services:11.4.2'
+
 }

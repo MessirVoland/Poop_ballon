@@ -1,3 +1,5 @@
+
+
 buildscript {
     
 
@@ -36,6 +38,7 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
         maven { url "https://maven.google.com" }
+        //google()
     }
 }
 
@@ -54,11 +57,26 @@ project(":desktop") {
         
     }
 }
+project(":BaseGameUtils"){
+    apply plugin: 'com.android.library'
+
+    dependencies{
+        compile "com.google.android.gms:play-services-games:8.4.0"
+
+        compile "com.google.android.gms:play-services-plus:8.4.0"
+
+    }
+}
 
 project(":android") {
     apply plugin: "android"
 
-    configurations { natives }
+    configurations {
+        all*.exclude group: 'com.google.android.gms', module: 'play-services-plus'
+        all*.exclude group: 'com.google.android.gms', module: 'play-services-games'
+        natives
+
+    }
 
     dependencies {
         compile project(":core")
@@ -77,9 +95,11 @@ project(":android") {
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-android:$gdxVersion"
         compile "com.google.android.gms:play-services-ads:$admobVersion"
+        //compile 'com.google.android.gms:play-services-base:11.4.2'
+        //compile "com.google.android.gms:play-services-games:$admobVersion"
 
         compile project(":BaseGameUtils")
-        compile 'com.android.support:multidex:1.0.1'
+        //compile 'com.android.support:multidex:1.0.1'
         
     }
 }

@@ -17,6 +17,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.example.games.basegameutils.GameHelper;
+//import com.google.example.games.basegameutils.GameHelper;
 
 import ru.asupd.poop_ballon.MyGdxGame;
 import ru.asupd.poop_ballon.Workers.ActionResolver;
