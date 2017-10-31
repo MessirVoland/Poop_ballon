@@ -79,6 +79,7 @@ project(":android") {
         compile "com.google.android.gms:play-services-ads:$admobVersion"
 
         compile project(":BaseGameUtils")
+        compile 'com.android.support:multidex:1.0.1'
         
     }
 }
