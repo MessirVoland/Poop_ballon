@@ -16,14 +16,18 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.example.games.basegameutils.GameHelper;
 
 import ru.asupd.poop_ballon.MyGdxGame;
+import ru.asupd.poop_ballon.Workers.ActionResolver;
 import ru.asupd.poop_ballon.Workers.AdsController;
+import ru.asupd.poop_ballon.Workers.GameHelperListener;
 
-public class AndroidLauncher extends AndroidApplication implements AdsController{
+public class AndroidLauncher extends AndroidApplication implements AdsController,GameHelperListener, ActionResolver {
 	public static final String TAG="AndroidLauncher";
 
 	protected AdView adView;
+	GameHelper gameHelper;
 
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
@@ -124,5 +128,45 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
 		return netInfo != null && netInfo.isConnectedOrConnecting();
+	}
+
+	@Override
+	public boolean getSignedInGPGS() {
+		return false;
+	}
+
+	@Override
+	public void loginGPGS() {
+
+	}
+
+	@Override
+	public void submitScoreGPGS(int score) {
+
+	}
+
+	@Override
+	public void unlockAchievementGPGS(String achievementId) {
+
+	}
+
+	@Override
+	public void getLeaderboardGPGS() {
+
+	}
+
+	@Override
+	public void getAchievementsGPGS() {
+
+	}
+
+	@Override
+	public void onSignInFailed() {
+
+	}
+
+	@Override
+	public void onSignInSucceeded() {
+
 	}
 }
