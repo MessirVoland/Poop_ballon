@@ -27,7 +27,7 @@ public class Achievement {
     int st_x4=0,nst_x4=0;
     int st_x5=0,nst_x5=0;
 
-    private int local_x=330,local_y=400;
+    private int local_x=5,local_y=40;
     public Achievement() {
         font.setColor(Color.RED);
         medals=new Array<Texture>();
@@ -66,7 +66,7 @@ public class Achievement {
         font.draw(sb," x1 :"+st_x1+" x2 :"+st_x2+" x3 :"+st_x3+" x4 :"+st_x4+" x5 :"+st_x5,10,780);
         font.draw(sb," n1 :"+nst_x1+" n2 :"+nst_x2+" n3 :"+nst_x3+" n4 :"+nst_x4+" n5 :"+nst_x5,10,760);
         if (diff>=2){
-                sb.draw(medals.get(diff - 2), local_x - (resizer_medal.getSize_x() / 2), local_y - (resizer_medal.getSize_y() / 2), resizer_medal.getSize_x(), resizer_medal.getSize_y());
+                sb.draw(medals.get(diff - 2), local_x , local_y , 60,80);
         return true;
         }
 

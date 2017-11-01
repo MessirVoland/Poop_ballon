@@ -49,6 +49,7 @@ public class GameoverState extends State {
     int[] score_best =new int[5];
     int[] score_last =new int[5];
     Array<Star> final_stars;
+    Sprite dark_medal;
 
     Vector3 velosity,position;
     Texture big_balloon;
@@ -61,13 +62,10 @@ public class GameoverState extends State {
 
 
 
-    public void setPosition(Vector3 position) {
-        this.position = position;
-    }
-
-
     public GameoverState(GameStateManager gsm, float redball_x, Array<Star> stars) {
         super(gsm);
+        dark_medal = new Sprite(new Texture(Gdx.files.internal("pse-medal.png")));
+        dark_medal.setPosition(420,40);
         //redball_x=-190;
         //System.out.println("redball_x: "+redball_x);
         camera.setToOrtho(false, 480 , 800 );
@@ -104,7 +102,7 @@ public class GameoverState extends State {
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
 
         load_hiscore = prefs.getInteger("highscore");
-        load_hiscore = 0;
+        //load_hiscore = 0;
         int local_score;
 
         local_score = load_hiscore;
@@ -193,22 +191,33 @@ public class GameoverState extends State {
 
         tap_to_restart.draw(sb);
 
-
-        if(achievement.draw_current_medal(sb)){
-            if (!add_hicsore) {
-                sb.draw(awesome, 95, 530, 290, 55);
-            }
-            sb.draw(your_score,105,400,120,75);
-            score.draw_center(sb, 115,320);
+        progress_bar_bgnd.draw(sb);
+        if (score_b.getScore()<1500) {
+            patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10, (score_b.getScore(true)*404)/1500+20, 50);
         }
-        else{
-            if (!add_hicsore) {
-                sb.draw(awesome, 95, 530, 290, 55);
-            }
-            sb.draw(your_score,175,450,120,75);
+        else if ((score_b.getScore()>=1500)&(score_b.getScore()<=2000))
+        {
+            patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10, ((score_b.getScore(true)-1500)*404)/1500+20, 50);        }
 
-            score.draw_center(sb, 185,400);
+        dark_medal.draw(sb);
+
+       // if(
+        achievement.draw_current_medal(sb);
+        //{
+          //  if (!add_hicsore) {
+        //        sb.draw(awesome, 95, 530, 290, 55);
+        //    }
+       //     sb.draw(your_score,105,400,120,75);
+        //    score.draw_center(sb, 115,320);
+       // }
+       // else{
+        if (!add_hicsore) {
+            sb.draw(awesome, 95, 530, 290, 55);
         }
+        sb.draw(your_score,175,450,120,75);
+
+        score.draw_center(sb, 185,400);
+       // }
 
 
         if (showed_ads){
@@ -228,10 +237,8 @@ public class GameoverState extends State {
         //achievement.draw_current_medal(sb,270,200);
 
 
-        progress_bar_bgnd.draw(sb);
-        if (score_b.getScore()<1500) {
-            patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10, (score_b.getScore(true)*404)/1500+20, 50);
-        }
+
+
 
 
        // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 250);
@@ -242,5 +249,9 @@ public class GameoverState extends State {
     @Override
     public void dispose() {
 
+    }
+
+    public void setPosition(Vector3 position) {
+        this.position = position;
     }
 }
