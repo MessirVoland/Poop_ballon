@@ -18,6 +18,7 @@ import ru.asupd.poop_ballon.Workers.Achievement;
 import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Score;
 
+
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME_TAP_TO_PLAY;
@@ -64,6 +65,7 @@ public class GameoverState extends State {
         this.position = position;
     }
 
+
     public GameoverState(GameStateManager gsm, float redball_x, Array<Star> stars) {
         super(gsm);
         //redball_x=-190;
@@ -102,6 +104,7 @@ public class GameoverState extends State {
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
 
         load_hiscore = prefs.getInteger("highscore");
+        load_hiscore = 0;
         int local_score;
 
         local_score = load_hiscore;
@@ -179,13 +182,16 @@ public class GameoverState extends State {
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
+        //фон
         sb.draw(background, 0, 0,480,800);
+
+        //звезды
         for (Star star : final_stars ){
             sb.draw(star.getTexture(),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
             // sb.draw(Assets.instance.manager.get(Assets.star1),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
         }
-        tap_to_restart.draw(sb);
 
+        tap_to_restart.draw(sb);
 
 
         if(achievement.draw_current_medal(sb)){
@@ -193,12 +199,7 @@ public class GameoverState extends State {
                 sb.draw(awesome, 95, 530, 290, 55);
             }
             sb.draw(your_score,105,400,120,75);
-
             score.draw_center(sb, 115,320);
-            //sb.draw(frames_numbers.get(score_last[0]),175,320,25,31);
-            //sb.draw(frames_numbers.get(score_last[1]),155,320,25,31);
-            //sb.draw(frames_numbers.get(score_last[2]),135,320,25,31);
-            //sb.draw(frames_numbers.get(score_last[3]),115,320,25,31);
         }
         else{
             if (!add_hicsore) {
@@ -207,11 +208,6 @@ public class GameoverState extends State {
             sb.draw(your_score,175,450,120,75);
 
             score.draw_center(sb, 185,400);
-
-            //sb.draw(frames_numbers.get(score_last[0]),245,320,25,31);
-            //sb.draw(frames_numbers.get(score_last[1]),225,320,25,31);
-            //sb.draw(frames_numbers.get(score_last[2]),205,320,25,31);
-            //sb.draw(frames_numbers.get(score_last[3]),185,320,25,31);
         }
 
 
@@ -219,19 +215,10 @@ public class GameoverState extends State {
 
             sb.draw(your_best_score, 125, 170, 210, 75);
             score_b.draw_center(sb,185,130);
-           // sb.draw(frames_numbers.get(score_best[0]), 245, 130, 25, 31);
-           // sb.draw(frames_numbers.get(score_best[1]), 225, 130, 25, 31);
-           // sb.draw(frames_numbers.get(score_best[2]), 205, 130, 25, 31);
-           // sb.draw(frames_numbers.get(score_best[3]), 185, 130, 25, 31);
-            //sb.draw(big_balloon, position.x, position.y, 860, 800);
         }else {
             sb.draw(your_best_score, 125, 170, 210, 75);
 
             score_b.draw_center(sb,185,120);
-            //sb.draw(frames_numbers.get(score_best[0]), 245, 50, 25, 31);
-            //sb.draw(frames_numbers.get(score_best[1]), 225, 50, 25, 31);
-            //sb.draw(frames_numbers.get(score_best[2]), 205, 50, 25, 31);
-            //sb.draw(frames_numbers.get(score_best[3]), 185, 50, 25, 31);
 
         }
         if (position.x>=-865){

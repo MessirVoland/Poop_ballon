@@ -1,7 +1,9 @@
 package ru.asupd.poop_ballon.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -14,6 +16,7 @@ import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Network_time;
 
 import static com.badlogic.gdx.math.MathUtils.random;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
 
 /**
  * Меню
@@ -34,6 +37,37 @@ public class MenuState extends State {
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
+
+        //String extRoot = Gdx.files.getExternalStoragePath();
+        //String locRoot = Gdx.files.getLocalStoragePath();
+        //System.out.println("extRoot "+extRoot);
+        //System.out.println("locRoot "+locRoot);
+        //переменные
+        FileHandle file = Gdx.files.external("saved_score.txt");
+        Preferences preferences= Gdx.app.getPreferences(APP_STORE_NAME);;
+        int hi_score=0;
+        //Если существует файл
+        if (file.exists()){
+            hi_score= Integer.parseInt(file.readString());
+        }
+        //если не первый старт
+        if (!preferences.getBoolean("first_start")){
+
+             if (hi_score>preferences.getInteger("highscore")){
+                 preferences.putInteger("highscore",hi_score);
+                 preferences.flush();
+             }
+             else
+             {
+                 file.writeString(String.valueOf(preferences.getInteger("highscore")),false);
+             }
+        }
+        else
+        {
+            preferences.putInteger("highscore",hi_score);
+            preferences.flush();
+        }
+
         var = random(5);
 
         //network_time = new Network_time();
