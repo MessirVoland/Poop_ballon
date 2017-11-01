@@ -327,6 +327,9 @@ public class Assets implements Disposable, AssetErrorListener {
         Assets.instance.manager.get(Assets.balloon_gold).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     }
 
+    public static void make_medals_linear(){
+        Assets.instance.manager.get(Assets.medal_ice).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+    }
     @Override
     public void error(AssetDescriptor asset, Throwable throwable) {
 

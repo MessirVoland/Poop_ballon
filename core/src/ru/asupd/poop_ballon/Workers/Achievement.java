@@ -42,6 +42,7 @@ public class Achievement {
         medals.add(Assets.instance.manager.get(Assets.medal_silver));    //8
         medals.add(Assets.instance.manager.get(Assets.medal_gold));    //9
         resizer_medal = new Resizer(225,290);
+        Assets.make_medals_linear();
 
     }
     public void draw_current_medal(SpriteBatch sb,int x,int y){
