@@ -31,11 +31,13 @@ public class Settings {
         //Первый запуск
         if (pref.getBoolean("first_start")){
             pref.putBoolean("first_start",false);
-            pref.putBoolean("mute",false);
-            pref.putBoolean("vibro",true);
-            pref.flush();
             mute=false;
             vibro=true;
+            pref.putBoolean("mute",mute);
+            pref.putBoolean("vibro",vibro);
+            pref.flush();
+
+            System.out.println("First start vibro : "+vibro);
         }
         else {
             mute=pref.getBoolean("mute");
@@ -58,16 +60,16 @@ public class Settings {
     }
     public void draw(SpriteBatch sb,Shaker shaker){
         if (mute){
-            sb.draw(mute_tex,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78,150,156);
+            sb.draw(mute_tex,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78);
         }else{
-            sb.draw(unmute_tex,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78,150,156);
+            sb.draw(unmute_tex,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78);
         }
         if (vibro){
-            sb.draw(vibro_tex,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78,150,156);
+            sb.draw(vibro_tex,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78);
         }else{
-            sb.draw(unvibro_tex,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78,150,156);
+            sb.draw(unvibro_tex,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78);
         }
-        sb.draw(restart,((int) shaker.getCamera_sh().position.x)+POS_X_RESTART,((int) shaker.getCamera_sh().position.y)+POS_Y_RESTART,150,131);
+        sb.draw(restart,((int) shaker.getCamera_sh().position.x)+POS_X_RESTART,((int) shaker.getCamera_sh().position.y)+POS_Y_RESTART);
     }
 
     void clicked(int ScreenX, int ScreenY) {
