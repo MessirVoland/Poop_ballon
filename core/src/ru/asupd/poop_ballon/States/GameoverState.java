@@ -51,6 +51,7 @@ public class GameoverState extends State {
 
     Vector3 velosity,position;
     Texture big_balloon;
+    private boolean add_hicsore=true;
     public static final Achievement achievement= new Achievement();
 
     Sprite progress_bar_bgnd= new Sprite(new Texture(Gdx.files.internal("bar.png")));
@@ -162,6 +163,15 @@ public class GameoverState extends State {
             ANIMATIO_TIME_TO_PLAY_SIZE=-ANIMATIO_TIME_TO_PLAY_SIZE;
         }
 
+        if (add_hicsore){
+            if (score.getScore(true)>score_b.getScore()){
+                add_hicsore=false;
+                score_b.addScore(score.getScore()-score_b.getScore());
+                prefs.putInteger("highscore", score.getScore());
+                prefs.flush();
+            }
+        }
+
         //System.out.println("position.x: "+position.x);
     }
 
@@ -179,7 +189,7 @@ public class GameoverState extends State {
 
 
         if(achievement.draw_current_medal(sb)){
-            if (last_score>=load_hiscore) {
+            if (!add_hicsore) {
                 sb.draw(awesome, 95, 530, 290, 55);
             }
             sb.draw(your_score,105,400,120,75);
@@ -191,12 +201,12 @@ public class GameoverState extends State {
             //sb.draw(frames_numbers.get(score_last[3]),115,320,25,31);
         }
         else{
-            if (last_score>=load_hiscore) {
-                sb.draw(awesome, 95, 480, 290, 55);
+            if (!add_hicsore) {
+                sb.draw(awesome, 95, 530, 290, 55);
             }
-            sb.draw(your_score,175,400,120,75);
+            sb.draw(your_score,175,450,120,75);
 
-            score.draw_center(sb, 185,320);
+            score.draw_center(sb, 185,400);
 
             //sb.draw(frames_numbers.get(score_last[0]),245,320,25,31);
             //sb.draw(frames_numbers.get(score_last[1]),225,320,25,31);
@@ -213,15 +223,18 @@ public class GameoverState extends State {
            // sb.draw(frames_numbers.get(score_best[1]), 225, 130, 25, 31);
            // sb.draw(frames_numbers.get(score_best[2]), 205, 130, 25, 31);
            // sb.draw(frames_numbers.get(score_best[3]), 185, 130, 25, 31);
-            sb.draw(big_balloon, position.x, position.y, 860, 800);
+            //sb.draw(big_balloon, position.x, position.y, 860, 800);
         }else {
-            sb.draw(your_best_score, 125, 100, 210, 75);
+            sb.draw(your_best_score, 125, 170, 210, 75);
 
-            score_b.draw_center(sb,185,50);
+            score_b.draw_center(sb,185,120);
             //sb.draw(frames_numbers.get(score_best[0]), 245, 50, 25, 31);
             //sb.draw(frames_numbers.get(score_best[1]), 225, 50, 25, 31);
             //sb.draw(frames_numbers.get(score_best[2]), 205, 50, 25, 31);
             //sb.draw(frames_numbers.get(score_best[3]), 185, 50, 25, 31);
+
+        }
+        if (position.x>=-865){
             sb.draw(big_balloon, position.x, position.y, 860, 800);
         }
 
@@ -229,8 +242,8 @@ public class GameoverState extends State {
 
 
         progress_bar_bgnd.draw(sb);
-        if (score.getScore()<1500) {
-            patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10, score.getScore(true)/3, 50);
+        if (score_b.getScore()<1500) {
+            patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10, (score_b.getScore(true)*404)/1500+20, 50);
         }
 
 

@@ -840,10 +840,10 @@ public class PlayState extends State {
                 prefs.putInteger("last_match_score", cautch_ball);
 
                 prefs.flush();
-                if (load_hiscore < cautch_ball) {
-                    prefs.putInteger("highscore", cautch_ball);
-                    prefs.flush();
-                }
+                //if (load_hiscore < cautch_ball) {
+                   // prefs.putInteger("highscore", cautch_ball);
+                  //  prefs.flush();
+                //}
             }
         }else
         {

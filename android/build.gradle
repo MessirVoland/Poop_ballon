@@ -40,7 +40,7 @@ android {
             targetSdkVersion 16
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             versionCode 1
-            multiDexEnabled true
+            //multiDexEnabled true
             manifestPlaceholders = [
                     appIcon: "@drawable/ic_launcher_free",
                     applicationId_n: "ru.asupd.poop_ballon.AndroidLauncher"
@@ -54,7 +54,7 @@ android {
             minSdkVersion 16
             targetSdkVersion 16
             versionCode 1
-            multiDexEnabled true
+            //multiDexEnabled true
             manifestPlaceholders = [
                     appIcon: "@drawable/ic_launcher_full",
                     applicationId_n: "ru.asupd.poop_ballon.AndroidLauncher_full"
