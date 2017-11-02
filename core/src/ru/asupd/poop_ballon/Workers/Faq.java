@@ -65,16 +65,16 @@ public class Faq {
     public void draw(SpriteBatch sb){
         if (show){
             sb.draw(Assets.instance.manager.get(Assets.instr_pause_screen),0,0);
-            sb.draw(Assets.instance.manager.get(Assets.plate),54,90);
+            sb.draw(Assets.instance.manager.get(Assets.plate),0,0);
             switch (current_slide) {
                 case 0:
-                    sb.draw(Assets.instance.manager.get(Assets.instr1), 85, 322);
+                    sb.draw(Assets.instance.manager.get(Assets.instr1), 85, 400);
                     break;
                 case 1:
-                    sb.draw(Assets.instance.manager.get(Assets.instr2), 85, 322);
+                    sb.draw(Assets.instance.manager.get(Assets.instr2), 85, 400);
                     break;
                 case 2:
-                    sb.draw(Assets.instance.manager.get(Assets.instr3), 85, 322);
+                    sb.draw(Assets.instance.manager.get(Assets.instr3), 85, 400);
                     break;
             }
             sb.draw(Assets.instance.manager.get(Assets.arrow),  85, 270,45,45,0,0,45,45,true,false);
