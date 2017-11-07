@@ -138,6 +138,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect ballon_n_st_silver= new ParticleEffect();
     public static ParticleEffect ballon_n_st_gold= new ParticleEffect();
     public static ParticleEffect gold_stars= new ParticleEffect();
+    public static ParticleEffect gem_stars= new ParticleEffect();
 
 
     //private AssetManager assetManager;
@@ -269,7 +270,8 @@ public class Assets implements Disposable, AssetErrorListener {
         ballon_n_st_bronze.load(Gdx.files.internal("particles/pop_bronze.p"),Gdx.files.internal("particles"));
         ballon_n_st_silver.load(Gdx.files.internal("particles/pop_silver.p"),Gdx.files.internal("particles"));
         ballon_n_st_gold.load(Gdx.files.internal("particles/pop_gold.p"),Gdx.files.internal("particles"));
-        gold_stars.load(Gdx.files.internal("particles/gold_stars.p"),Gdx.files.internal("particles"));
+        gold_stars.load(Gdx.files.internal("particles/star_metal.p"),Gdx.files.internal("particles"));
+        gem_stars.load(Gdx.files.internal("particles/star_gem.p"),Gdx.files.internal("particles"));
         fire_bomb1.load(Gdx.files.internal("particles/fire_bomb1.p"),Gdx.files.internal("particles"));
         fire_bomb2.load(Gdx.files.internal("particles/fire_bomb2.p"),Gdx.files.internal("particles"));
         bomb_blow.load(Gdx.files.internal("particles/bomb_blow.p"),Gdx.files.internal("particles"));
