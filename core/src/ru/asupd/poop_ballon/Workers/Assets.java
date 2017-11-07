@@ -59,16 +59,16 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> heart_baloon_anim = new AssetDescriptor<Texture>("pop_HB.png",Texture.class);
 
     //нестандартные шары
-    public static final AssetDescriptor<Texture> balloon_wooden = new AssetDescriptor<Texture>("wood_b.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_wooden = new AssetDescriptor<Texture>("b_x2.png",Texture.class);
     //public static final String anim_balloon_wooden = "pop_o.png";
-    public static final AssetDescriptor<Texture> balloon_ice = new AssetDescriptor<Texture>("ice_b.png",Texture.class);
-    public static final AssetDescriptor<Texture> balloon_stone = new AssetDescriptor<Texture>("stone_b.png",Texture.class);
-    public static final AssetDescriptor<Texture> balloon_kript = new AssetDescriptor<Texture>("kriptonit_b.png",Texture.class);
-    public static final AssetDescriptor<Texture> balloon_blueinit = new AssetDescriptor<Texture>("blueinit_b.png",Texture.class);
-    public static final AssetDescriptor<Texture> balloon_pheon = new AssetDescriptor<Texture>("pheolit_b.png",Texture.class);
-    public static final AssetDescriptor<Texture> balloon_bronze = new AssetDescriptor<Texture>("bronze_b.png",Texture.class);
-    public static final AssetDescriptor<Texture> balloon_silver = new AssetDescriptor<Texture>("silver_b.png",Texture.class);
-    public static final AssetDescriptor<Texture> balloon_gold = new AssetDescriptor<Texture>("gold_b.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_ice = new AssetDescriptor<Texture>("b_x3.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_stone = new AssetDescriptor<Texture>("b_x4.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_kript = new AssetDescriptor<Texture>("b_x5.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_blueinit = new AssetDescriptor<Texture>("b_x6.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_pheon = new AssetDescriptor<Texture>("b_x7.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_bronze = new AssetDescriptor<Texture>("b_x8.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_silver = new AssetDescriptor<Texture>("b_x9.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_gold = new AssetDescriptor<Texture>("b_x10.png",Texture.class);
 
     public static final AssetDescriptor<Texture> bomb_balloon_t = new AssetDescriptor<Texture>("bomb_balloon.png",Texture.class);
     public static final AssetDescriptor<Texture> bomb_balloon_tt = new AssetDescriptor<Texture>("bomb_balloon1.png",Texture.class);
