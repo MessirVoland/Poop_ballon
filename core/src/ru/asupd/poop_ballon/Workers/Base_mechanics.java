@@ -20,7 +20,7 @@ public class Base_mechanics {
     //СЧет
     public static final float ONE_FRAME_COUNT=0.0025f;//время одно кадра смены счета +1
     public static final float COMBO_TIME=0.455f;//время которое висит +4 +9 рядом со счетом
-    public static final float TIME_DT_COMBO=0.15f;//Время между взрывами комбо
+    public static final float TIME_DT_COMBO=0.08f;//Время между взрывами комбо
 
     //-------------------------------------------------------------------------------------------------------/
 
