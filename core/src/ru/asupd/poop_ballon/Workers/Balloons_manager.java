@@ -226,9 +226,14 @@ public class Balloons_manager {
                     case 12:
 
                         if(balloon.isCombo()){
-
                             scale(balloon);
                         }
+                        sb.setColor(1, 1, 1, 1);
+                        balloon.getSprite().draw(sb);
+                        balloon.setNumber_of_n_st((settings.hi_score()-MEDAL_START)/MEDAL_SCORE);
+                        if (balloon.effect_gold!=null)
+                            balloon.effect_gold.draw(sb);
+                        /*
                         switch ((settings.hi_score()-MEDAL_START)/MEDAL_SCORE) {
                             case 0:
                                 break;
@@ -301,7 +306,9 @@ public class Balloons_manager {
                                 if (balloon.effect_gold!=null)
                                 balloon.effect_gold.draw(sb);
                                 break;
-                        }break;
+                        }
+                        */
+                        break;
                     case 13:
                         sb.setColor(1, 1, 1, 1);
                        // sb.draw(balloon.getFrames(), balloon.getPosition().x - 50, balloon.getPosition().y + 40, 190, 190);
