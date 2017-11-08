@@ -195,9 +195,12 @@ public class GameoverState extends State {
         if (score_b.getScore()<1500) {
             patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10, (score_b.getScore(true)*404)/1500+20, 50);
         }
-        else if ((score_b.getScore()>=1500)&(score_b.getScore()<=2000))
+        else //if ((score_b.getScore()>=1500)&(score_b.getScore()<=2000))
         {
-            patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10, ((score_b.getScore(true)-1500)*404)/1500+20, 50);        }
+            int round_max_score_500=score_b.getScore();
+            round_max_score_500=round_max_score_500/500;
+            round_max_score_500=round_max_score_500*500;
+            patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10, ((score_b.getScore(true)-round_max_score_500*404)/round_max_score_500+20), 50);        }
 
         dark_medal.draw(sb);
 
