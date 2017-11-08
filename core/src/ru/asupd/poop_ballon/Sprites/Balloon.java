@@ -145,17 +145,17 @@ public class Balloon {
                 case 7:
                     sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_bronze));
                     effect = new ParticleEffect(Assets.ballon_n_st_bronze);
-                    effect_gold = new ParticleEffect(Assets.gold_stars);
+                    effect_gold = new ParticleEffect(Assets.gem_stars);
                     break;
                 case 8:
                     sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_silver));
                     effect = new ParticleEffect(Assets.ballon_n_st_silver);
-                    effect_gold = new ParticleEffect(Assets.gold_stars);
+                    effect_gold = new ParticleEffect(Assets.gem_stars);
                     break;
                 default:
                     sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_gold));
                     effect = new ParticleEffect(Assets.ballon_n_st_gold);
-                    effect_gold = new ParticleEffect(Assets.gold_stars);
+                    effect_gold = new ParticleEffect(Assets.gem_stars);
                     break;
             }
             //animation_idle = new Animation(new TextureRegion(Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_p, Texture.class)), 3, ANIMATION_TIME);
@@ -473,7 +473,6 @@ public class Balloon {
                                 break;
                             case 2:
                                 PlayState.combo_effects_multi.add(new ParticleEffect(Assets.combo_2x));
-
                                 break;
                             case 3:
                                 PlayState.combo_effects_multi.add(new ParticleEffect(Assets.combo_3x));

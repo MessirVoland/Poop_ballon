@@ -253,7 +253,8 @@ public class Balloons_manager {
                                 break;
                             case 4:
                                 sb.setColor(1, 1, 1, 1);
-                                sb.draw(Assets.instance.manager.get(Assets.balloon_kript), balloon.getPosition().x, balloon.getPosition().y);
+                                //sb.draw(Assets.instance.manager.get(Assets.balloon_kript), balloon.getPosition().x, balloon.getPosition().y);
+                                balloon.getSprite().draw(sb);
                                 balloon.setNumber_of_n_st(4);
                                 if (balloon.effect_gold!=null)
                                 balloon.effect_gold.draw(sb);
