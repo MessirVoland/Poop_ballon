@@ -79,6 +79,7 @@ public class MenuState extends State {
         background = new Texture("background_start.png");
         balloon  = new Texture("c_logo.png");
         balloon.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        //balloon.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         FontRed1 = new BitmapFont();
         final String FONT_PATH = "coquettec.ttf";
    //     //final String FONT_PATH = "Arialuni.ttf";
@@ -105,7 +106,9 @@ public class MenuState extends State {
             if (current_dt>=0.25f){
                 current_dt=4.5f;
             }
+            gsm.set(new PlayState(gsm));
         }
+
 
 
     }
@@ -118,7 +121,8 @@ public class MenuState extends State {
         if (current_dt>=4.0f){
             //Assets.make_linear();
             Assets.make_resized_balloons_linear();
-            gsm.set(new PlayState(gsm));
+            Assets.make_ads_linear();
+           // gsm.set(new PlayState(gsm));
         }
     }
 
@@ -127,7 +131,7 @@ public class MenuState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0,480,800);
-        sb.draw(balloon,76,320,328,314);
+        sb.draw(balloon,22,320,436,370);
 
                 //
         //Assets.loadParticleEffects();

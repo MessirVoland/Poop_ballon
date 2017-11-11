@@ -343,6 +343,11 @@ public class Assets implements Disposable, AssetErrorListener {
     public static void make_medals_linear(){
         Assets.instance.manager.get(Assets.medal_ice).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     }
+    public static void make_ads_linear(){
+        Assets.instance.manager.get(Assets.button_ads_free).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.button_vk).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.button_fb).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+    }
     @Override
     public void error(AssetDescriptor asset, Throwable throwable) {
 
