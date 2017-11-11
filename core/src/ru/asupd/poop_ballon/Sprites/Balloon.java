@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 
-import java.awt.SystemTray;
 import java.util.Random;
 import ru.asupd.poop_ballon.States.PlayState;
 import ru.asupd.poop_ballon.Workers.Assets;
@@ -112,7 +111,7 @@ public class Balloon {
                 case 0:
                     break;
                 case 1:
-                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_wooden));
+                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ns_x2));
                     sprite.setPosition(position.x,position.y);
                     effect = new ParticleEffect(Assets.ballon_n_st_ice);
                     //System.out.println("Assets.ballon_ice");
@@ -153,7 +152,7 @@ public class Balloon {
                     effect_gold = new ParticleEffect(Assets.gem_stars);
                     break;
                 default:
-                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_gold));
+                    sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ns_x10));
                     effect = new ParticleEffect(Assets.ballon_n_st_gold);
                     effect_gold = new ParticleEffect(Assets.gem_stars);
                     break;
@@ -387,7 +386,7 @@ public class Balloon {
                         color_of_balloon = 12;
                         switch (getCurrent_difficult_up()) {
                             case 2:
-                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_wooden));
+                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ns_x2));
                                 sprite.setPosition(position.x, position.y);
                                 break;
                             case 3:
@@ -419,7 +418,7 @@ public class Balloon {
                                 sprite.setPosition(position.x, position.y);
                                 break;
                             default:
-                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_gold));
+                                sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ns_x10));
                                 sprite.setPosition(position.x, position.y);
                                 break;
                         }

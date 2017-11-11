@@ -4,14 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.ParticleEffectLoader;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
-
-import ru.asupd.poop_ballon.Sprites.Animation;
 
 /**
  * Created by Voland on 28.09.2017.
@@ -59,7 +55,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> heart_baloon_anim = new AssetDescriptor<Texture>("pop_HB.png",Texture.class);
 
     //нестандартные шары
-    public static final AssetDescriptor<Texture> balloon_wooden = new AssetDescriptor<Texture>("b_x2.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_ns_x2 = new AssetDescriptor<Texture>("b_x2.png",Texture.class);
     //public static final String anim_balloon_wooden = "pop_o.png";
     public static final AssetDescriptor<Texture> balloon_ice = new AssetDescriptor<Texture>("b_x3.png",Texture.class);
     public static final AssetDescriptor<Texture> balloon_stone = new AssetDescriptor<Texture>("b_x4.png",Texture.class);
@@ -68,7 +64,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> balloon_pheon = new AssetDescriptor<Texture>("b_x7.png",Texture.class);
     public static final AssetDescriptor<Texture> balloon_bronze = new AssetDescriptor<Texture>("b_x8.png",Texture.class);
     public static final AssetDescriptor<Texture> balloon_silver = new AssetDescriptor<Texture>("b_x9.png",Texture.class);
-    public static final AssetDescriptor<Texture> balloon_gold = new AssetDescriptor<Texture>("b_x10.png",Texture.class);
+    public static final AssetDescriptor<Texture> balloon_ns_x10 = new AssetDescriptor<Texture>("b_x10.png",Texture.class);
 
     public static final AssetDescriptor<Texture> bomb_balloon_t = new AssetDescriptor<Texture>("bomb_balloon.png",Texture.class);
     public static final AssetDescriptor<Texture> bomb_balloon_tt = new AssetDescriptor<Texture>("bomb_balloon1.png",Texture.class);
@@ -194,14 +190,14 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(heart_baloon_anim);
 
         manager.load(balloon_ice);
-        manager.load(balloon_wooden);
+        manager.load(balloon_ns_x2);
         manager.load(balloon_stone);
         manager.load(balloon_kript);
         manager.load(balloon_blueinit);
         manager.load(balloon_pheon);
         manager.load(balloon_bronze);
         manager.load(balloon_silver);
-        manager.load(balloon_gold);
+        manager.load(balloon_ns_x10);
         manager.load(bomb_balloon_t);
         manager.load(bomb_balloon_tt);
 
@@ -330,14 +326,14 @@ public class Assets implements Disposable, AssetErrorListener {
     public static void make_resized_balloons_linear(){
         Assets.instance.manager.get(Assets.balloon_orange,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Assets.instance.manager.get(Assets.balloon_ice).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Assets.instance.manager.get(Assets.balloon_wooden).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.balloon_ns_x2).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Assets.instance.manager.get(Assets.balloon_stone).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Assets.instance.manager.get(Assets.balloon_kript).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Assets.instance.manager.get(Assets.balloon_blueinit).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Assets.instance.manager.get(Assets.balloon_pheon).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Assets.instance.manager.get(Assets.balloon_bronze).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Assets.instance.manager.get(Assets.balloon_silver).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Assets.instance.manager.get(Assets.balloon_gold).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.balloon_ns_x10).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     }
 
     public static void make_medals_linear(){

@@ -134,8 +134,11 @@ public class GameoverState extends State {
     protected void handleInput() {
         if(Gdx.input.justTouched()){
            gsm.set(new PlayState(gsm));
-            achievement.refr();
-           PlayState.RESTART_STAGE();
+            //score_b.addScore(score.getScore()-score_b.getScore());
+          //  prefs.putInteger("highscore", score.getScore());
+         //   prefs.flush();
+          // achievement.refr();
+        //   PlayState.RESTART_STAGE();
            // gsm.pop();
         }
     }
@@ -226,18 +229,15 @@ public class GameoverState extends State {
             sb.draw(awesome, 95, 530, 290, 55);
         }
         sb.draw(your_score,175,450,120,75);
-
         score.draw_center(sb, 185,400);
        // }
 
 
         if (showed_ads){
-
             sb.draw(your_best_score, 125, 170, 210, 75);
             score_b.draw_center(sb,185,130);
         }else {
             sb.draw(your_best_score, 125, 170, 210, 75);
-
             score_b.draw_center(sb,185,120);
 
         }
@@ -246,11 +246,6 @@ public class GameoverState extends State {
         }
 
         //achievement.draw_current_medal(sb,270,200);
-
-
-
-
-
 
        // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 250);
         sb.end();
