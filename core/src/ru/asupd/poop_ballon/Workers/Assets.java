@@ -78,15 +78,15 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect bomb_blow= new ParticleEffect();
 
     //медали
-    public static final AssetDescriptor<Texture> medal_ice = new AssetDescriptor<Texture>("medal_ice.png",Texture.class);
-    public static final AssetDescriptor<Texture> medal_wooden = new AssetDescriptor<Texture>("medal_wood.png",Texture.class);
-    public static final AssetDescriptor<Texture> medal_stone = new AssetDescriptor<Texture>("medal_stone.png",Texture.class);
-    public static final AssetDescriptor<Texture> medal_kript = new AssetDescriptor<Texture>("medal_kript.png",Texture.class);
-    public static final AssetDescriptor<Texture> medal_blueinit = new AssetDescriptor<Texture>("medal_blue.png",Texture.class);
-    public static final AssetDescriptor<Texture> medal_pheon = new AssetDescriptor<Texture>("medal_pheon.png",Texture.class);
-    public static final AssetDescriptor<Texture> medal_bronze = new AssetDescriptor<Texture>("medal_bronze.png",Texture.class);
-    public static final AssetDescriptor<Texture> medal_silver = new AssetDescriptor<Texture>("medal_silver.png",Texture.class);
-    public static final AssetDescriptor<Texture> medal_gold = new AssetDescriptor<Texture>("medal_gold.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_ice = new AssetDescriptor<Texture>("medal_x2.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_wooden = new AssetDescriptor<Texture>("medal_x3.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_stone = new AssetDescriptor<Texture>("medal_x4.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_kript = new AssetDescriptor<Texture>("medal_x5.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_blueinit = new AssetDescriptor<Texture>("medal_x6.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_pheon = new AssetDescriptor<Texture>("medal_x7.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_bronze = new AssetDescriptor<Texture>("medal_x8.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_silver = new AssetDescriptor<Texture>("medal_x9.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_gold = new AssetDescriptor<Texture>("medal_x10.png",Texture.class);
 
     public static final AssetDescriptor<Texture> back_ground_atlas = new AssetDescriptor<Texture>("bacgound_atlas.png",Texture.class);
 
