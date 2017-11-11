@@ -105,6 +105,12 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> arrow = new AssetDescriptor<Texture>("arrow.png",Texture.class);
 
 
+    public static final AssetDescriptor<Texture> button_ads_free= new AssetDescriptor<Texture>("button_ads_free.png",Texture.class);
+    public static final AssetDescriptor<Texture> button_vk= new AssetDescriptor<Texture>("button_vk.png",Texture.class);
+    public static final AssetDescriptor<Texture> button_fb= new AssetDescriptor<Texture>("button_facebook.png",Texture.class);
+    public static final AssetDescriptor<Texture> button_tw= new AssetDescriptor<Texture>("button_twitter.png",Texture.class);
+
+
     //Частицы
     //public static final String Particles_of_balloon_g="particles/pop_b";
 
@@ -224,6 +230,11 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(instr1);
         manager.load(instr2);
         manager.load(instr3);
+
+        manager.load(button_ads_free);
+        manager.load(button_vk);
+        manager.load(button_fb);
+        manager.load(button_tw);
 
         //manager.load(poof_balloon_atlas_o_Texture_region, TextureRegion.class);
         //effect = new ParticleEffect();

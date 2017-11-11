@@ -151,7 +151,7 @@ public class MenuState extends State {
         }*/
         // = 30;
         FontRed1.setColor(Color.CHARTREUSE);
-        FontRed1.draw(sb,"Pop Balloon v.0.9.9-beta-pre-release.rev.A.build.50", 10, 20);
+        FontRed1.draw(sb,"Pop Balloon v.0.9.9-beta-pre-release.rev.A.build.51", 10, 20);
         //FontRed1.draw(sb," Android API level :"+Gdx.app.getVersion(), 15, 70);
         /*String st_locale=new String("");
         switch (var){

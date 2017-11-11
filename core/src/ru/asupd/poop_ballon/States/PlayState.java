@@ -170,8 +170,25 @@ public class PlayState extends State {
     BackGround background;
     public static Faq faq;
 
+    private Sprite button_ads_free=new Sprite(Assets.instance.manager.get(Assets.button_ads_free));
+    private Sprite button_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
+    private Sprite button_fb=new Sprite(Assets.instance.manager.get(Assets.button_fb));
+    //private Sprite buuton_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
+
     PlayState(GameStateManager gsm) {
         super(gsm);
+        button_ads_free.setPosition(35,680);
+        button_ads_free.scale(-0.5f);
+
+        button_fb.setPosition(-42,680);
+        button_fb.scale(-0.5f);
+
+        button_vk.setPosition(30,680);
+        button_vk.scale(-0.5f);
+
+
+
+
         perfomancecounter = new PerformanceCounter("Counter");
         camera.setToOrtho(false, 480 , 800 );
 
@@ -684,6 +701,9 @@ public class PlayState extends State {
                 sb.draw(your_high_score,130,100,211,74);
                 score_num.draw_center(sb,190,50);
             }
+            button_ads_free.draw(sb);
+            button_fb.draw(sb);
+            button_vk.draw(sb);
 
             if (!faq.isShow()) {
                 if (showed_ads) {
