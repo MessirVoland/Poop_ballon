@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector3;
 
 import ru.asupd.poop_ballon.States.PlayState;
 
+import static ru.asupd.poop_ballon.States.PlayState.ads_clicker;
 import static ru.asupd.poop_ballon.States.PlayState.faq;
 import static ru.asupd.poop_ballon.States.PlayState.pause;
 import static ru.asupd.poop_ballon.States.PlayState.perfomancecounter;
@@ -54,7 +55,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                 if (faq.click(screenX,screenY)) {
 
                 }else {
-                    if (!faq.isShow()) {
+                    if (!faq.isShow()&!ads_clicker.click(screenX,screenY)) {
                         started = true;
                         score_num.setScore(0);
                         settings.hi_score_refresh();
@@ -65,6 +66,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
         //если пауза
         if (PlayState.isPause()){
             settings.clicked(screenX,screenY);
+
             return true;
 
         }//Если не пауза

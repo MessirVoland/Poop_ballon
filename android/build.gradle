@@ -6,12 +6,12 @@ android {
         //       storeFile file('C:/Users/Asup.D/Desktop/key/key_pop_balloon.jks')
         //       storePassword '4815162342zZ'
         //  }
-        key {
-            keyAlias 'Detone Games'
-            keyPassword 'bzomort39'
-            storeFile file('C:/Users/mortv/Desktop/Detone_games.jks')
-            storePassword 'zorrffff57'
-        }
+        //key {
+        //    keyAlias 'Detone Games'
+        //    keyPassword 'bzomort39'
+        //    storeFile file('C:/Users/mortv/Desktop/Detone_games.jks')
+        //    storePassword 'zorrffff57'
+        //}
     }
     buildToolsVersion "26.0.1"
     compileSdkVersion 25

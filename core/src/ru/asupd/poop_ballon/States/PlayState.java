@@ -27,6 +27,7 @@ import ru.asupd.poop_ballon.Sprites.Boss_balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
 import ru.asupd.poop_ballon.Sprites.Hearth_balloon;
 import ru.asupd.poop_ballon.Sprites.Star;
+import ru.asupd.poop_ballon.Workers.Ads_Clicker;
 import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Balloons_manager;
 import ru.asupd.poop_ballon.Workers.Faq;
@@ -169,16 +170,17 @@ public class PlayState extends State {
     public static Bomb_balloon bomb_balloon;
     BackGround background;
     public static Faq faq;
+    public static Ads_Clicker ads_clicker;
 
-    private Sprite button_ads_free=new Sprite(Assets.instance.manager.get(Assets.button_ads_free));
+    public static Sprite button_ads_free;
     private Sprite button_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
     private Sprite button_fb=new Sprite(Assets.instance.manager.get(Assets.button_fb));
     //private Sprite buuton_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
 
     PlayState(GameStateManager gsm) {
         super(gsm);
-        button_ads_free.setPosition(35,680);
-        button_ads_free.scale(-0.5f);
+
+
 
         button_fb.setPosition(-42,680);
         button_fb.scale(-0.5f);
@@ -211,6 +213,7 @@ public class PlayState extends State {
         pause_bgnd = new Texture("pause.png");
         STEP_for_balloon=50;
         faq = new Faq();
+        ads_clicker = new Ads_Clicker();
 
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
@@ -317,6 +320,9 @@ public class PlayState extends State {
         one_cast_music=true;
         current_dt_one_cast=0.0f;
         bomb_balloon = new Bomb_balloon();
+        button_ads_free=new Sprite(Assets.instance.manager.get(Assets.button_ads_free));
+        button_ads_free.setPosition(35,680);
+        button_ads_free.scale(-0.5f);
 
 
     }
