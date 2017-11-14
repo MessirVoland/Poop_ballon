@@ -53,6 +53,7 @@ public class GameoverState extends State {
     int[] score_last =new int[5];
     Array<Star> final_stars;
     Sprite dark_medal;
+    boolean ads=true;
 
     Vector3 velosity,position;
     Texture big_balloon;
@@ -131,12 +132,9 @@ public class GameoverState extends State {
         score.addScore(last_score);
         score.update_render_time();
         score_b.setScore(load_hiscore);
+        ads=true;
 
-        if (showed_ads){
-            //оказать рекламу
-            System.out.println("adsController show");
-            adsController_my.showBannerAd_full();
-        }
+
     }
 
     @Override
@@ -166,6 +164,14 @@ public class GameoverState extends State {
         achievement.update(dt);
         if (currentdt>=waiting) {
             handleInput();
+            if (ads){
+                if (showed_ads){
+                    ads=false;
+                    //оказать рекламу
+                    System.out.println("adsController show");
+                    adsController_my.showBannerAd_full();
+                }
+            }
         }
         currentdt+=dt;
         if (position.x>=-865) {

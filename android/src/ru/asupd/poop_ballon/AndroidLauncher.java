@@ -80,8 +80,12 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		adParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 
 		layout.addView(adView,adParams);
-		layout.addView(adView_full_ads,adParams);
+//		layout.addView(adView_full_ads,adParams);
 		//adView.loadAd(builder.build());
+
+		mInterstitialAd = new InterstitialAd(this);
+		mInterstitialAd.setAdUnitId("ca-app-pub-1769194239356799/4759804724");
+		mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
 		setContentView(layout);
 	}
@@ -100,9 +104,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		//adView_full_ads.setAdUnitId("ca-app-pub-1769194239356799/4759804724");
 		//adView_full_ads.setAdSize(AdSize.FULL_BANNER);
 
-		mInterstitialAd = new InterstitialAd(this);
-		mInterstitialAd.setAdUnitId("ca-app-pub-1769194239356799/4759804724");
-		mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
 
 	}
 
@@ -124,7 +126,10 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				mInterstitialAd.show();
+				//System.out.println("adLoaded"+mInterstitialAd.isLoaded());
+				if (mInterstitialAd.isLoaded()) {
+					mInterstitialAd.show();
+				}
 				//adView_full_ads.setVisibility(View.VISIBLE);
 				//AdRequest.Builder builder = new AdRequest.Builder();
 				//AdRequest ad = builder.build();
