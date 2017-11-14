@@ -177,6 +177,8 @@ public class PlayState extends State {
     private Sprite button_fb=new Sprite(Assets.instance.manager.get(Assets.button_fb));
     //private Sprite buuton_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
 
+    private int effect_500=0;
+
     PlayState(GameStateManager gsm) {
         super(gsm);
 
@@ -371,6 +373,7 @@ public class PlayState extends State {
         handleInput();
         //супер костыль)
 
+
         if (one_cast_music){
             current_dt_one_cast+=dt;
             if(current_dt_one_cast>=0.25f){
@@ -447,6 +450,38 @@ public class PlayState extends State {
 
             if (boss_balloon.isStarted()) {
                 boss_balloon.update(dt);
+            }
+
+            if (started) {
+                if (score_num.getScore() / 50 > effect_500) {
+                    effect_500++;
+
+
+                    switch (random(2)) {
+                        case 0:
+                            System.out.println("Effect start cool");
+                            combo_effects.add(new ParticleEffect(Assets.score_500_effect_cool));
+                            combo_effects.get(combo_effects.size - 1).setPosition(240, 400);
+                            combo_effects.get(combo_effects.size - 1).start();
+                            break;
+                        case 1:
+                            System.out.println("Effect start wow");
+                            combo_effects.add(new ParticleEffect(Assets.score_500_effect_wow));
+                            combo_effects.get(combo_effects.size - 1).setPosition(240, 400);
+                            combo_effects.get(combo_effects.size - 1).start();
+                            break;
+                        case 2:
+                            System.out.println("Effect start amazing");
+                            combo_effects.add(new ParticleEffect(Assets.score_500_effect_amazing));
+                            combo_effects.get(combo_effects.size - 1).setPosition(240, 400);
+                            combo_effects.get(combo_effects.size - 1).start();
+                            break;
+                        default:
+                            System.out.println("Effect start ERROR!");
+                            break;
+
+                    }
+                }
             }
 
             //Старт босса

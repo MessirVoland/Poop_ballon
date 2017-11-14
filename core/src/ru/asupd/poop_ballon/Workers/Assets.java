@@ -142,6 +142,10 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect gold_stars= new ParticleEffect();
     public static ParticleEffect gem_stars= new ParticleEffect();
 
+    public static ParticleEffect score_500_effect_wow= new ParticleEffect();
+    public static ParticleEffect score_500_effect_cool= new ParticleEffect();
+    public static ParticleEffect score_500_effect_amazing= new ParticleEffect();
+
 
     //private AssetManager assetManager;
 
@@ -282,6 +286,10 @@ public class Assets implements Disposable, AssetErrorListener {
         fire_bomb1.load(Gdx.files.internal("particles/fire_bomb1.p"),Gdx.files.internal("particles"));
         fire_bomb2.load(Gdx.files.internal("particles/fire_bomb2.p"),Gdx.files.internal("particles"));
         bomb_blow.load(Gdx.files.internal("particles/bomb_blow.p"),Gdx.files.internal("particles"));
+        score_500_effect_wow.load(Gdx.files.internal("particles/wow.p"),Gdx.files.internal("particles"));
+        score_500_effect_cool.load(Gdx.files.internal("particles/cool.p"),Gdx.files.internal("particles"));
+        score_500_effect_amazing.load(Gdx.files.internal("particles/amazing.p"),Gdx.files.internal("particles"));
+
 
 
         //assetManager.finishLoading();
