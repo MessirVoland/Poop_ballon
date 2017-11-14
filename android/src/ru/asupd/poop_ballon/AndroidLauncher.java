@@ -101,8 +101,9 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		mInterstitialAd.setAdUnitId("ca-app-pub-1769194239356799/4759804724");
 		mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
-		startSignInIntent();
+
 		setContentView(layout);
+		startSignInIntent();
 	}
 	private void signIn() {
 		Intent signInIntent = mGoogleSignInClient.getSignInIntent();
