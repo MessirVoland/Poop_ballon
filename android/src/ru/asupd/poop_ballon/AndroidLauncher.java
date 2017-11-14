@@ -23,12 +23,14 @@ import ru.asupd.poop_ballon.MyGdxGame;
 import ru.asupd.poop_ballon.Workers.ActionResolver;
 import ru.asupd.poop_ballon.Workers.AdsController;
 import ru.asupd.poop_ballon.Workers.GameHelperListener;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class AndroidLauncher extends AndroidApplication implements AdsController,GameHelperListener, ActionResolver {
 	public static final String TAG="AndroidLauncher";
 
 	protected AdView adView;
 	protected AdView adView_full_ads;
+	private InterstitialAd mInterstitialAd;
 	GameHelper gameHelper;
 
 	@Override
@@ -92,11 +94,15 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		adView.setAdUnitId("ca-app-pub-1769194239356799/5197963043"); // test ads
 		adView.setAdSize(AdSize.SMART_BANNER);
 
-		adView_full_ads=new AdView(this);
-		adView_full_ads.setVisibility(View.INVISIBLE);
+		//adView_full_ads=new AdView(this);
+		//adView_full_ads.setVisibility(View.INVISIBLE);
 		//adView.setBackgroundColor(0xff000000); // black
-		adView_full_ads.setAdUnitId("ca-app-pub-1769194239356799/4759804724");
-		adView_full_ads.setAdSize(AdSize.FULL_BANNER);
+		//adView_full_ads.setAdUnitId("ca-app-pub-1769194239356799/4759804724");
+		//adView_full_ads.setAdSize(AdSize.FULL_BANNER);
+
+		mInterstitialAd = new InterstitialAd(this);
+		mInterstitialAd.setAdUnitId("ca-app-pub-1769194239356799/4759804724");
+		mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
 	}
 
@@ -118,10 +124,11 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				adView_full_ads.setVisibility(View.VISIBLE);
-				AdRequest.Builder builder = new AdRequest.Builder();
-				AdRequest ad = builder.build();
-				adView_full_ads.loadAd(ad);
+				mInterstitialAd.show();
+				//adView_full_ads.setVisibility(View.VISIBLE);
+				//AdRequest.Builder builder = new AdRequest.Builder();
+				//AdRequest ad = builder.build();
+				//adView_full_ads.loadAd(ad);
 			}
 		});
 	}
