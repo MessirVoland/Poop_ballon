@@ -34,7 +34,16 @@ active: false
 - X Offset - 
 active: false
 - Y Offset - 
-active: false
+active: true
+lowMin: 15.0
+lowMax: 15.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Spawn Shape - 
 shape: point
 - Spawn Width - 
@@ -174,7 +183,16 @@ active: false
 - X Offset - 
 active: false
 - Y Offset - 
-active: false
+active: true
+lowMin: 15.0
+lowMax: 15.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Spawn Shape - 
 shape: point
 - Spawn Width - 
@@ -322,7 +340,16 @@ active: false
 - X Offset - 
 active: false
 - Y Offset - 
-active: false
+active: true
+lowMin: 15.0
+lowMax: 15.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
 - Spawn Shape - 
 shape: point
 - Spawn Width - 
@@ -422,4 +449,162 @@ additive: true
 behind: false
 premultipliedAlpha: false
 - Image Path -
-/F:/Programming/Android/PopBalloon/Poop_Ballon/android/assets/particle.png
+wood_pil.png
+
+
+or
+- Delay -
+active: false
+- Duration - 
+lowMin: 6000.0
+lowMax: 6000.0
+- Count - 
+min: 1
+max: 1
+- Emission - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 1.0
+highMax: 1.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
+- Life - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 6000.0
+highMax: 6000.0
+relative: false
+scalingCount: 2
+scaling0: 1.0
+scaling1: 1.0
+timelineCount: 2
+timeline0: 0.0
+timeline1: 1.0
+- Life Offset - 
+active: false
+- X Offset - 
+active: false
+- Y Offset - 
+active: true
+lowMin: 15.0
+lowMax: 15.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
+- Spawn Shape - 
+shape: point
+- Spawn Width - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
+- Spawn Height - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
+- Scale - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 170.0
+highMax: 170.0
+relative: false
+scalingCount: 6
+scaling0: 0.0
+scaling1: 1.0
+scaling2: 0.7058824
+scaling3: 0.9494382
+scaling4: 0.627451
+scaling5: 1.0
+timelineCount: 6
+timeline0: 0.0
+timeline1: 0.10017422
+timeline2: 0.23972602
+timeline3: 0.40069687
+timeline4: 0.60958904
+timeline5: 1.0
+- Velocity - 
+active: true
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 0.5
+timelineCount: 1
+timeline0: 0.0
+- Angle - 
+active: true
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 0.0
+relative: true
+scalingCount: 2
+scaling0: 1.0
+scaling1: 1.0
+timelineCount: 2
+timeline0: 0.0
+timeline1: 1.0
+- Rotation - 
+active: false
+- Wind - 
+active: false
+- Gravity - 
+active: false
+- Tint - 
+colorsCount: 3
+colors0: 1.0
+colors1: 0.972549
+colors2: 0.69803923
+timelineCount: 1
+timeline0: 0.0
+- Transparency - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 1.0
+highMax: 1.0
+relative: false
+scalingCount: 7
+scaling0: 0.0
+scaling1: 1.0
+scaling2: 0.5964912
+scaling3: 1.0
+scaling4: 0.3859649
+scaling5: 1.0
+scaling6: 0.0
+timelineCount: 7
+timeline0: 0.0
+timeline1: 0.08219178
+timeline2: 0.29452056
+timeline3: 0.6232877
+timeline4: 0.760274
+timeline5: 0.89041096
+timeline6: 1.0
+- Options - 
+attached: false
+continuous: false
+aligned: false
+additive: false
+behind: false
+premultipliedAlpha: false
+- Image Path -
+oreol.png
