@@ -1,9 +1,11 @@
 package ru.asupd.poop_ballon;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -16,7 +18,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.example.games.basegameutils.GameHelper;
+//import com.google.example.games.basegameutils.GameHelper;
 //import com.google.example.games.basegameutils.GameHelper;
 
 import ru.asupd.poop_ballon.MyGdxGame;
@@ -24,6 +26,14 @@ import ru.asupd.poop_ballon.Workers.ActionResolver;
 import ru.asupd.poop_ballon.Workers.AdsController;
 import ru.asupd.poop_ballon.Workers.GameHelperListener;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.games.Games;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 public class AndroidLauncher extends AndroidApplication implements AdsController,GameHelperListener, ActionResolver {
 	public static final String TAG="AndroidLauncher";
@@ -31,7 +41,11 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	protected AdView adView;
 	protected AdView adView_full_ads;
 	private InterstitialAd mInterstitialAd;
-	GameHelper gameHelper;
+	//GameHelper gameHelper;
+	GoogleSignInClient mGoogleSignInClient;
+
+	private static final int RC_LEADERBOARD_UI = 9004;
+	private static final int RC_SIGN_IN = 9001;
 
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
@@ -53,7 +67,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		//** Лучше вообще не использовать
 
 		// Create the libgdx View
-		View gameView = initializeForView(new MyGdxGame(this), config);
+		View gameView = initializeForView(new MyGdxGame(this,this), config);
 		//gameView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 		layout.addView(gameView);
 
@@ -87,8 +101,14 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		mInterstitialAd.setAdUnitId("ca-app-pub-1769194239356799/4759804724");
 		mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
+		startSignInIntent();
 		setContentView(layout);
 	}
+	private void signIn() {
+		Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+		startActivityForResult(signInIntent, 9001);
+	}
+
 	public void setupAds() {
 		adView = new AdView(this);
 		adView.setVisibility(View.INVISIBLE);
@@ -178,6 +198,25 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	@Override
 	public void submitScoreGPGS(int score) {
 
+		signInSilently();
+		//Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)).submitScore("CgkIibnQwPAeEAIQAQ",score);
+		//Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)).submitScore("CgkIibnQwPAeEAIQAQ",score);
+	}
+	private void signInSilently() {
+		GoogleSignInClient signInClient = GoogleSignIn.getClient(this,
+				GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
+		signInClient.silentSignIn().addOnCompleteListener(this,
+				new OnCompleteListener<GoogleSignInAccount>() {
+					@Override
+					public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
+						if (task.isSuccessful()) {
+							// The signed in account is stored in the task's result.
+							GoogleSignInAccount signedInAccount = task.getResult();
+						} else {
+							// Player will need to sign-in explicitly using via UI
+						}
+					}
+				});
 	}
 
 	@Override
@@ -187,8 +226,16 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 	@Override
 	public void getLeaderboardGPGS() {
-
+			Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this))
+					.getLeaderboardIntent("CgkIibnQwPAeEAIQAQ")
+					.addOnSuccessListener(new OnSuccessListener<Intent>() {
+						@Override
+						public void onSuccess(Intent intent) {
+							startActivityForResult(intent, RC_LEADERBOARD_UI);
+						}
+					});
 	}
+
 
 	@Override
 	public void getAchievementsGPGS() {
@@ -203,5 +250,11 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	@Override
 	public void onSignInSucceeded() {
 
+	}
+	private void startSignInIntent() {
+		GoogleSignInClient signInClient = GoogleSignIn.getClient(this,
+				GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
+		Intent intent = signInClient.getSignInIntent();
+		startActivityForResult(intent, RC_SIGN_IN);
 	}
 }

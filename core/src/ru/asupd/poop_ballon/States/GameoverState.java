@@ -19,6 +19,7 @@ import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Score;
 
 
+import static ru.asupd.poop_ballon.MyGdxGame.actionresolver_my;
 import static ru.asupd.poop_ballon.MyGdxGame.adsController_my;
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
@@ -165,7 +166,12 @@ public class GameoverState extends State {
         if (currentdt>=waiting) {
             handleInput();
             if (ads){
+                if (actionresolver_my!=null)
+                {
+                    actionresolver_my.submitScoreGPGS(score_b.getScore());
+                }
                 if (showed_ads){
+
                     ads=false;
                     //оказать рекламу
                     System.out.println("adsController show");

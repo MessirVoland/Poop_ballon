@@ -47,7 +47,7 @@ public class AndroidLauncher_full extends AndroidApplication implements AdsContr
         //** Лучше вообще не использовать
 
         // Create the libgdx View
-        View gameView = initializeForView(new MyGdxGame(this), config);
+        View gameView = initializeForView(new MyGdxGame(this,null), config);
         gameView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         layout.addView(gameView);
 

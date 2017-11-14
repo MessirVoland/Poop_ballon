@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import ru.asupd.poop_ballon.States.MenuState;
 import ru.asupd.poop_ballon.States.PlayState;
+import ru.asupd.poop_ballon.Workers.ActionResolver;
 import ru.asupd.poop_ballon.Workers.AdsController;
 import ru.asupd.poop_ballon.Workers.Assets;
 
@@ -21,17 +22,19 @@ public class MyGdxGame implements ApplicationListener {
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800; // 800
 	public static AdsController adsController_my;
+	public static ActionResolver actionresolver_my;
     public static boolean showed_ads=false;
 	public static void show_banner(){
 		adsController_my.showBannerAd();
 	}
 
-	public MyGdxGame(AdsController adsController) {
+	public MyGdxGame(AdsController adsController,ActionResolver actionresolver) {
 		if (adsController != null) {
 			adsController_my = adsController;
 		} else {
 			adsController_my = new DummyAdsController();
 		}
+		actionresolver_my=actionresolver;
 	}
 
 	@Override
