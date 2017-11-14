@@ -20,17 +20,17 @@ public class MyGdxGame implements ApplicationListener {
 
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800; // 800
-	public static AdsController adsController;
+	public static AdsController adsController_my;
     public static boolean showed_ads=false;
 	public static void show_banner(){
-		adsController.showBannerAd();
+		adsController_my.showBannerAd();
 	}
 
 	public MyGdxGame(AdsController adsController) {
 		if (adsController != null) {
-			this.adsController = adsController;
+			adsController_my = adsController;
 		} else {
-			this.adsController = new DummyAdsController();
+			adsController_my = new DummyAdsController();
 		}
 	}
 
@@ -44,8 +44,8 @@ public class MyGdxGame implements ApplicationListener {
 		new Gdx().app.postRunnable(new Runnable() {
 			@Override
 			public void run() {
-                if(adsController.isOnline())
-				{adsController.showBannerAd();
+                if(adsController_my.isOnline())
+				{adsController_my.showBannerAd();
 				showed_ads=true;}
 			}
 		});

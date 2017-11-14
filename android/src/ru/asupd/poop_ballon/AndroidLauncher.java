@@ -78,6 +78,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		adParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 
 		layout.addView(adView,adParams);
+		layout.addView(adView_full_ads,adParams);
 		//adView.loadAd(builder.build());
 
 		setContentView(layout);
@@ -93,9 +94,9 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 		adView_full_ads=new AdView(this);
 		adView_full_ads.setVisibility(View.INVISIBLE);
-		adView.setBackgroundColor(0xff000000); // black
-		adView.setAdUnitId("ca-app-pub-1769194239356799/4759804724");
-		adView.setAdSize(AdSize.FULL_BANNER);
+		//adView.setBackgroundColor(0xff000000); // black
+		adView_full_ads.setAdUnitId("ca-app-pub-1769194239356799/4759804724");
+		adView_full_ads.setAdSize(AdSize.FULL_BANNER);
 
 	}
 
