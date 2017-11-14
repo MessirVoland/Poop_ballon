@@ -178,8 +178,8 @@ text
 - Delay -
 active: false
 - Duration - 
-lowMin: 3000.0
-lowMax: 3000.0
+lowMin: 1500.0
+lowMax: 1500.0
 - Count - 
 min: 1
 max: 1

@@ -84,8 +84,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 100.0
-highMax: 100.0
+highMin: 200.0
+highMax: 200.0
 relative: false
 scalingCount: 5
 scaling0: 0.0
@@ -172,8 +172,8 @@ text
 - Delay -
 active: false
 - Duration - 
-lowMin: 3000.0
-lowMax: 3000.0
+lowMin: 1500.0
+lowMax: 1500.0
 - Count - 
 min: 1
 max: 1
@@ -228,8 +228,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 100.0
-highMax: 100.0
+highMin: 200.0
+highMax: 200.0
 relative: false
 scalingCount: 7
 scaling0: 0.0
@@ -336,8 +336,8 @@ timeline4: 0.70547944
 active: false
 - X Offset - 
 active: true
-lowMin: -40.0
-lowMax: 40.0
+lowMin: -80.0
+lowMax: 80.0
 highMin: 0.0
 highMax: 0.0
 relative: false
@@ -347,8 +347,8 @@ timelineCount: 1
 timeline0: 0.0
 - Y Offset - 
 active: true
-lowMin: -20.0
-lowMax: 20.0
+lowMin: -40.0
+lowMax: 40.0
 highMin: 0.0
 highMax: 0.0
 relative: false
@@ -381,8 +381,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 32.0
-highMax: 50.0
+highMin: 62.0
+highMax: 100.0
 relative: false
 scalingCount: 9
 scaling0: 0.0
