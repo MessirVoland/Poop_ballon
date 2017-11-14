@@ -20,7 +20,7 @@ public class MyGdxGame implements ApplicationListener {
 
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800; // 800
-	private static AdsController adsController;
+	public static AdsController adsController;
     public static boolean showed_ads=false;
 	public static void show_banner(){
 		adsController.showBannerAd();
@@ -112,6 +112,11 @@ public class MyGdxGame implements ApplicationListener {
 	private class DummyAdsController implements AdsController {
 		@Override
 		public void showBannerAd() {
+
+		}
+
+		@Override
+		public void showBannerAd_full() {
 
 		}
 

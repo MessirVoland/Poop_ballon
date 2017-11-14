@@ -28,6 +28,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	public static final String TAG="AndroidLauncher";
 
 	protected AdView adView;
+	protected AdView adView_full_ads;
 	GameHelper gameHelper;
 
 	@Override
@@ -89,6 +90,13 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		//adView.setAdUnitId("ca-app-pub-1769194239356799/9412540227");//samsung
 		adView.setAdUnitId("ca-app-pub-1769194239356799/5197963043"); // test ads
 		adView.setAdSize(AdSize.SMART_BANNER);
+
+		adView_full_ads=new AdView(this);
+		adView_full_ads.setVisibility(View.INVISIBLE);
+		adView.setBackgroundColor(0xff000000); // black
+		adView.setAdUnitId("ca-app-pub-1769194239356799/4759804724");
+		adView.setAdSize(AdSize.FULL_BANNER);
+
 	}
 
 	@Override
@@ -100,6 +108,19 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 				AdRequest.Builder builder = new AdRequest.Builder();
 				AdRequest ad = builder.build();
 				adView.loadAd(ad);
+			}
+		});
+	}
+
+	@Override
+	public void showBannerAd_full() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				adView_full_ads.setVisibility(View.VISIBLE);
+				AdRequest.Builder builder = new AdRequest.Builder();
+				AdRequest ad = builder.build();
+				adView_full_ads.loadAd(ad);
 			}
 		});
 	}
