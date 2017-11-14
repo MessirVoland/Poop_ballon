@@ -38,7 +38,7 @@ public class GameoverState extends State {
 
     Texture numbers;
     //что за счет
-    Score score= new Score();
+    Score score= new Score(1.0f);
     //и это
     Score score_b= new Score();
 
@@ -117,7 +117,6 @@ public class GameoverState extends State {
         last_score = prefs.getInteger("last_match_score");
         local_score = last_score;
         for (int k=0;k<=4;k++) {
-
             score_last[k] = local_score % 10;
             local_score = local_score / 10;
         }
@@ -129,14 +128,15 @@ public class GameoverState extends State {
         settings.hi_score_refresh();
         achievement.start_anim();
         score.addScore(last_score);
+        score.update_render_time();
         score_b.setScore(load_hiscore);
     }
 
     @Override
     protected void handleInput() {
         if(Gdx.input.justTouched()){
-            System.out.println("score.getScore(true)"+score.getScore(true));
-            System.out.println("score.getScore()"+score.getScore());
+            //System.out.println("score.getScore(true)"+score.getScore(true));
+            //System.out.println("score.getScore()"+score.getScore());
             if (score.getScore(true)<score.getScore()){
                 score.end_count();
                 System.out.println("S4et");

@@ -9,6 +9,7 @@ import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.COMBO_TIME;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ONE_FRAME_COUNT;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.TIME_COUNT_LAST_GAME_SCORE;
 
 /**
  * ускорение счета
@@ -29,10 +30,13 @@ public class Score {
     private boolean wooden;
     private int current_wooden;
     private int combo_num=0;
+    private boolean own_time;
+    float ONE_FRAME_COUNT_local;
 
 
 
     public Score() {
+        own_time=false;
         numbers = new Texture("numbers.png");
         numbers.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         plus =new Sprite(new Texture("plus.png"));
@@ -41,7 +45,20 @@ public class Score {
             frames_numbers.add(new Sprite(numbers,j*25,0,25,31));
         }
 		buffer=0;
-
+    }
+    public Score(float own_time_count){
+        own_time=true;
+        numbers = new Texture("numbers.png");
+        numbers.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        plus =new Sprite(new Texture("plus.png"));
+        frames_numbers = new Array<Sprite>();
+        for (int j=0;j<=9;j++){
+            frames_numbers.add(new Sprite(numbers,j*25,0,25,31));
+        }
+        buffer=0;
+    }
+    public void update_render_time(){
+        ONE_FRAME_COUNT_local=TIME_COUNT_LAST_GAME_SCORE/(local_score+buffer);
     }
     public void setCombo(int combo_in,boolean wood,int current_wood){
         //if (!combo) {
@@ -64,11 +81,20 @@ public class Score {
     public void update(float dt){
         if (buffer>0){
             current_dt+=dt;
-            if (current_dt>=ONE_FRAME_COUNT){
-                current_dt=0;
-                buffer--;
-                local_score++;
-                setScore(local_score);
+            if (own_time){
+                if (current_dt >= ONE_FRAME_COUNT_local) {
+                    current_dt = 0;
+                    buffer--;
+                    local_score++;
+                    setScore(local_score);
+                }
+            }else {
+                if (current_dt >= ONE_FRAME_COUNT) {
+                    current_dt = 0;
+                    buffer--;
+                    local_score++;
+                    setScore(local_score);
+                }
             }
         }
         if (combo){
