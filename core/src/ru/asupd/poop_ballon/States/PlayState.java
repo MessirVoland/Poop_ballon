@@ -453,7 +453,7 @@ public class PlayState extends State {
             }
 
             if (started) {
-                if (score_num.getScore() / 50 > effect_500) {
+                if (score_num.getScore() / 100 > effect_500) {
                     effect_500++;
 
 
@@ -461,19 +461,19 @@ public class PlayState extends State {
                         case 0:
                             System.out.println("Effect start cool");
                             combo_effects.add(new ParticleEffect(Assets.score_500_effect_cool));
-                            combo_effects.get(combo_effects.size - 1).setPosition(240, 400);
+                            combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
                             combo_effects.get(combo_effects.size - 1).start();
                             break;
                         case 1:
                             System.out.println("Effect start wow");
                             combo_effects.add(new ParticleEffect(Assets.score_500_effect_wow));
-                            combo_effects.get(combo_effects.size - 1).setPosition(240, 400);
+                            combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
                             combo_effects.get(combo_effects.size - 1).start();
                             break;
                         case 2:
                             System.out.println("Effect start amazing");
                             combo_effects.add(new ParticleEffect(Assets.score_500_effect_amazing));
-                            combo_effects.get(combo_effects.size - 1).setPosition(240, 400);
+                            combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
                             combo_effects.get(combo_effects.size - 1).start();
                             break;
                         default:
