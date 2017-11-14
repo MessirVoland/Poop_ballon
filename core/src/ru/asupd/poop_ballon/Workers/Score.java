@@ -86,6 +86,10 @@ public class Score {
     public int getScore(boolean with_out_buffer){
         return local_score;
     }
+    public void end_count(){
+        setScore(local_score+=buffer);
+        buffer=0;
+    }
 
     public void addScore(int added_score){
         buffer+=added_score;

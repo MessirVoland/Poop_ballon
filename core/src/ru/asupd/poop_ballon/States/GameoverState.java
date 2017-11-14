@@ -37,7 +37,9 @@ public class GameoverState extends State {
     private float current_tap_to_restart;
 
     Texture numbers;
+    //что за счет
     Score score= new Score();
+    //и это
     Score score_b= new Score();
 
     Array<TextureRegion> frames_numbers;
@@ -133,7 +135,14 @@ public class GameoverState extends State {
     @Override
     protected void handleInput() {
         if(Gdx.input.justTouched()){
-           gsm.set(new PlayState(gsm));
+            System.out.println("score.getScore(true)"+score.getScore(true));
+            System.out.println("score.getScore()"+score.getScore());
+            if (score.getScore(true)<score.getScore()){
+                score.end_count();
+                System.out.println("S4et");
+            }else {
+                gsm.set(new PlayState(gsm));
+            }
             //score_b.addScore(score.getScore()-score_b.getScore());
           //  prefs.putInteger("highscore", score.getScore());
          //   prefs.flush();
