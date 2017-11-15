@@ -455,7 +455,7 @@ public class PlayState extends State {
             }
 
             if (started) {
-                if (score_num.getScore() / 100 > effect_500) {
+                if (score_num.getScore() / 500 > effect_500) {
                     effect_500++;
 
 
