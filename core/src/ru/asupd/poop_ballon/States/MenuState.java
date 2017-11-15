@@ -16,6 +16,7 @@ import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Network_time;
 
 import static com.badlogic.gdx.math.MathUtils.random;
+import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
 
 /**
@@ -99,6 +100,7 @@ public class MenuState extends State {
 
             }
         });
+        playServices_my.signIn();
     }
     @Override
     public void handleInput() {

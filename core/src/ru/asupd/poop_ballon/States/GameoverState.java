@@ -21,6 +21,7 @@ import ru.asupd.poop_ballon.Workers.Score;
 
 import static ru.asupd.poop_ballon.MyGdxGame.actionresolver_my;
 import static ru.asupd.poop_ballon.MyGdxGame.adsController_my;
+import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME_TAP_TO_PLAY;
@@ -168,7 +169,8 @@ public class GameoverState extends State {
             if (ads){
                 if (actionresolver_my!=null)
                 {
-                    actionresolver_my.submitScoreGPGS(score_b.getScore());
+                    playServices_my.submitScore(score_b.getScore());
+                    //actionresolver_my.submitScoreGPGS(score_b.getScore());
                 }
                 if (showed_ads){
 

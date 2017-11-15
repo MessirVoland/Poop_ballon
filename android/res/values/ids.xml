@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Google Play game services IDs.
+Save this file as res/values/games-ids.xml in your project.
+-->
+<resources>
+    <!-- app_id -->
+    <string name="app_id" translatable="false">1060992457865</string>
+    <!-- leaderboard World high score -->
+    <string name="leaderboard_world_high_score" translatable="false">CgkIibnQwPAeEAIQAQ</string>
+</resources>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.google.android.gms.ads.AdListener;
@@ -25,24 +27,28 @@ import ru.asupd.poop_ballon.MyGdxGame;
 import ru.asupd.poop_ballon.Workers.ActionResolver;
 import ru.asupd.poop_ballon.Workers.AdsController;
 import ru.asupd.poop_ballon.Workers.GameHelperListener;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.games.Games;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import ru.asupd.poop_ballon.Workers.PlayServices;
 
-public class AndroidLauncher extends AndroidApplication implements AdsController,GameHelperListener, ActionResolver {
+import com.google.android.gms.ads.InterstitialAd;
+//import com.google.android.gms.auth.api.signin.GoogleSignIn;
+//import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+//import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+//import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.games.Games;
+import com.google.example.games.basegameutils.GameHelper;
+//import com.google.android.gms.tasks.OnCompleteListener;
+//import com.google.android.gms.tasks.OnSuccessListener;
+//import com.google.android.gms.tasks.Task;
+
+public class AndroidLauncher extends AndroidApplication implements AdsController,GameHelperListener, ActionResolver,PlayServices {
 	public static final String TAG="AndroidLauncher";
 
 	protected AdView adView;
 	protected AdView adView_full_ads;
 	private InterstitialAd mInterstitialAd;
-	//GameHelper gameHelper;
-	GoogleSignInClient mGoogleSignInClient;
+	GameHelper gameHelper;
+	private final static int requestCode = 1;
+	//GoogleSignInClient mGoogleSignInClient;
 
 	private static final int RC_LEADERBOARD_UI = 9004;
 	private static final int RC_SIGN_IN = 9001;
@@ -67,7 +73,20 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		//** Лучше вообще не использовать
 
 		// Create the libgdx View
-		View gameView = initializeForView(new MyGdxGame(this,this), config);
+		gameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
+		gameHelper.enableDebugLog(false);
+
+		GameHelper.GameHelperListener gameHelperListener = new GameHelper.GameHelperListener()
+		{
+			@Override
+			public void onSignInFailed(){ }
+
+			@Override
+			public void onSignInSucceeded(){ }
+		};
+
+		gameHelper.setup(gameHelperListener);
+		View gameView = initializeForView(new MyGdxGame(this,this,this), config);
 		//gameView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 		layout.addView(gameView);
 
@@ -105,9 +124,96 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		setContentView(layout);
 		startSignInIntent();
 	}
-	private void signIn() {
-		Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-		startActivityForResult(signInIntent, 9001);
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		gameHelper.onStart(this);
+	}
+	@Override
+	protected void onStop() {
+		super.onStop();
+		gameHelper.onStop();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		gameHelper.onActivityResult(requestCode, resultCode, data);
+	}
+
+
+	@Override
+	public void signIn() {
+		try
+		{
+			runOnUiThread(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					gameHelper.beginUserInitiatedSignIn();
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			Gdx.app.log("MainActivity", "Log in failed: " + e.getMessage() + ".");
+		}
+	}
+
+	@Override
+	public void signOut() {
+		try
+		{
+			runOnUiThread(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					gameHelper.signOut();
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			Gdx.app.log("MainActivity", "Log out failed: " + e.getMessage() + ".");
+		}
+	}
+
+	@Override
+	public void rateGame() {
+		String str = "Your PlayStore Link";
+		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(str)));
+	}
+
+	@Override
+	public void unlockAchievement() {
+
+	}
+
+	@Override
+	public void submitScore(int highScore) {
+		if (isSignedIn() == true)
+		{
+			Games.Leaderboards.submitScore(gameHelper.getApiClient(),
+					"CgkIibnQwPAeEAIQAQ", highScore);
+		}
+	}
+
+	@Override
+	public void showAchievement() {
+
+	}
+
+	@Override
+	public void showScore() {
+
+	}
+
+	@Override
+	public boolean isSignedIn() {
+		return gameHelper.isSignedIn();
 	}
 
 	public void setupAds() {
@@ -204,20 +310,20 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		//Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)).submitScore("CgkIibnQwPAeEAIQAQ",score);
 	}
 	private void signInSilently() {
-		GoogleSignInClient signInClient = GoogleSignIn.getClient(this,
-				GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
-		signInClient.silentSignIn().addOnCompleteListener(this,
-				new OnCompleteListener<GoogleSignInAccount>() {
-					@Override
-					public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
-						if (task.isSuccessful()) {
-							// The signed in account is stored in the task's result.
-							GoogleSignInAccount signedInAccount = task.getResult();
-						} else {
+		//GoogleSignInClient signInClient = GoogleSignIn.getClient(this,
+		//		GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
+		//signInClient.silentSignIn().addOnCompleteListener(this,
+		//		new OnCompleteListener<GoogleSignInAccount>() {
+		//			@Override
+		//			public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
+		//				if (task.isSuccessful()) {
+		//					// The signed in account is stored in the task's result.
+		////					GoogleSignInAccount signedInAccount = task.getResult();
+		//				} else {
 							// Player will need to sign-in explicitly using via UI
-						}
-					}
-				});
+		//				}
+		//			}
+		//		});
 	}
 
 	@Override
@@ -227,14 +333,14 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 	@Override
 	public void getLeaderboardGPGS() {
-			Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this))
-					.getLeaderboardIntent("CgkIibnQwPAeEAIQAQ")
-					.addOnSuccessListener(new OnSuccessListener<Intent>() {
-						@Override
-						public void onSuccess(Intent intent) {
-							startActivityForResult(intent, RC_LEADERBOARD_UI);
-						}
-					});
+			//Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this))
+			//		.getLeaderboardIntent("CgkIibnQwPAeEAIQAQ")
+			//		.addOnSuccessListener(new OnSuccessListener<Intent>() {
+				//		@Override
+				//		public void onSuccess(Intent intent) {
+				//			startActivityForResult(intent, RC_LEADERBOARD_UI);
+				//		}
+				//	});
 	}
 
 
@@ -253,9 +359,9 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 	}
 	private void startSignInIntent() {
-		GoogleSignInClient signInClient = GoogleSignIn.getClient(this,
-				GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
-		Intent intent = signInClient.getSignInIntent();
-		startActivityForResult(intent, RC_SIGN_IN);
+	//	GoogleSignInClient signInClient = GoogleSignIn.getClient(this,
+	//			GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
+	//	Intent intent = signInClient.getSignInIntent();
+	//	startActivityForResult(intent, RC_SIGN_IN);
 	}
 }

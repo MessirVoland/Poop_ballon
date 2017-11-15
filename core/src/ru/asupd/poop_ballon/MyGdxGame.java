@@ -11,6 +11,7 @@ import ru.asupd.poop_ballon.States.PlayState;
 import ru.asupd.poop_ballon.Workers.ActionResolver;
 import ru.asupd.poop_ballon.Workers.AdsController;
 import ru.asupd.poop_ballon.Workers.Assets;
+import ru.asupd.poop_ballon.Workers.PlayServices;
 
 import static ru.asupd.poop_ballon.States.PlayState.perfomancecounter;
 
@@ -23,17 +24,19 @@ public class MyGdxGame implements ApplicationListener {
 	public static final int HEIGHT = 800; // 800
 	public static AdsController adsController_my;
 	public static ActionResolver actionresolver_my;
+	public static PlayServices playServices_my;
     public static boolean showed_ads=false;
 	public static void show_banner(){
 		adsController_my.showBannerAd();
 	}
 
-	public MyGdxGame(AdsController adsController,ActionResolver actionresolver) {
+	public MyGdxGame(AdsController adsController,ActionResolver actionresolver,PlayServices playServices) {
 		if (adsController != null) {
 			adsController_my = adsController;
 		} else {
 			adsController_my = new DummyAdsController();
 		}
+		playServices_my=playServices;
 		actionresolver_my=actionresolver;
 	}
 
@@ -53,6 +56,7 @@ public class MyGdxGame implements ApplicationListener {
 			}
 		});
 		gsm.push(new MenuState(gsm));
+
 	}
 
     @Override
