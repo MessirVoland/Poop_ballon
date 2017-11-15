@@ -5,7 +5,7 @@ Save this file as res/values/games-ids.xml in your project.
 -->
 <resources>
     <!-- app_id -->
-    <string name="app_id" translatable="false">1060992457865</string>
-    <!-- leaderboard World high score -->
-    <string name="leaderboard_world_high_score" translatable="false">CgkIibnQwPAeEAIQAQ</string>
+    <string name="app_id" translatable="false">798641657136</string>
+    <!-- leaderboard Hi Score -->
+    <string name="leaderboard_hi_score" translatable="false">CgkIsKqClp8XEAIQAA</string>
 </resources>

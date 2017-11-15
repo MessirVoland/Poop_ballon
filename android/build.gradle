@@ -40,8 +40,8 @@ android {
     }
     productFlavors {
         free {
-            applicationId "ru.asupd.poop_ballon.free"
-            versionName '0.9.8'
+            applicationId "ru.detone_studio.pop_balloon.free"
+            versionName '0.9.8.2'
             minSdkVersion 16
             targetSdkVersion 16
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
