@@ -4,8 +4,10 @@ import com.badlogic.gdx.math.Vector3;
 
 import ru.asupd.poop_ballon.States.PlayState;
 
+import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.States.PlayState.ads_clicker;
 import static ru.asupd.poop_ballon.States.PlayState.faq;
+import static ru.asupd.poop_ballon.States.PlayState.leaderboard;
 import static ru.asupd.poop_ballon.States.PlayState.pause;
 import static ru.asupd.poop_ballon.States.PlayState.perfomancecounter;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
@@ -56,9 +58,16 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
 
                 }else {
                     if (!faq.isShow()&!ads_clicker.click(screenX,screenY)) {
-                        started = true;
-                        score_num.setScore(0);
-                        settings.hi_score_refresh();
+                        if (!leaderboard.getBoundingRectangle().contains(screenX,screenY)) {
+                            started = true;
+                            score_num.setScore(0);
+                            settings.hi_score_refresh();
+                        }
+                        else
+                        {
+                            System.out.println("Show hi score");
+                            playServices_my.showScore();
+                        }
                     }
                 }
             }

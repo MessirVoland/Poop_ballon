@@ -169,6 +169,7 @@ public class GameoverState extends State {
             if (ads){
                 if (actionresolver_my!=null)
                 {
+                    System.out.println("Submit score"+score_b.getScore());
                     playServices_my.submitScore(score_b.getScore());
                     //actionresolver_my.submitScoreGPGS(score_b.getScore());
                 }

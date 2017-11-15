@@ -1,17 +1,12 @@
 android {
     signingConfigs {
-        //   Full_key {
-        //        keyAlias 'Pop balloons'
-        //       keyPassword '4815162342zZ'
-        //       storeFile file('C:/Users/Asup.D/Desktop/key/key_pop_balloon.jks')
-        //       storePassword '4815162342zZ'
-        //  }
-        //key {
-        //    keyAlias 'Detone Games'
-        //    keyPassword 'bzomort39'
-        //    storeFile file('C:/Users/mortv/Desktop/Detone_games.jks')
-        //    storePassword 'zorrffff57'
-        //}
+        Config_key {
+            keyAlias 'pop balloon'
+            keyPassword 'zorrffff57'
+
+            storeFile file('C:/Users/Voland/Desktop/keys/Detone_games.jks')
+            storePassword 'bzoqmort39'
+        }
     }
     buildToolsVersion "26.0.1"
     compileSdkVersion 25
@@ -25,14 +20,13 @@ android {
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
         }
-
         instrumentTest.setRoot('tests')
     }
     packagingOptions {
         exclude 'META-INF/robovm/ios/robovm.xml'
     }
     defaultConfig {
-        applicationId "ru.asupd.poop_ballon"
+        applicationId "ru.detone_studio.pop_balloon"
         minSdkVersion 9
         targetSdkVersion 25
         versionCode 1
@@ -48,11 +42,12 @@ android {
             versionCode 1
             multiDexEnabled true
             manifestPlaceholders = [
-                    appIcon: "@drawable/ic_launcher_free",
+                    appIcon        : "@drawable/ic_launcher_free",
                     applicationId_n: "ru.asupd.poop_ballon.AndroidLauncher"
             ]
-
             //resValue "string", "app_name", "Pop Balloon Free"
+            proguardFile 'C:/Users/Voland/Desktop/Poop ballon/android/proguard-rules.pro'
+            signingConfig signingConfigs.Config_key
         }
         full {
             applicationId "ru.asupd.poop_ballon.full"
@@ -62,10 +57,9 @@ android {
             versionCode 1
             multiDexEnabled true
             manifestPlaceholders = [
-                    appIcon: "@drawable/ic_launcher_full",
+                    appIcon        : "@drawable/ic_launcher_full",
                     applicationId_n: "ru.asupd.poop_ballon.AndroidLauncher_full"
             ]
-
             //resValue "string", "app_name", "Pop Balloon"
         }
     }
@@ -73,6 +67,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.Config_key
         }
     }
 }

@@ -195,20 +195,29 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	@Override
 	public void submitScore(int highScore) {
 		if (isSignedIn() == true)
-		{
+		{System.out.println("Signet");
 			Games.Leaderboards.submitScore(gameHelper.getApiClient(),
-					"CgkIibnQwPAeEAIQAQ", highScore);
+					"CgkIsKqClp8XEAIQAA", highScore);
 		}
 	}
 
 	@Override
 	public void showAchievement() {
-
+		//Games.Achievements.unlock(gameHelper.getApiClient(),
+		//		getString(R.string.achievement_dum_dum));
 	}
 
 	@Override
 	public void showScore() {
-
+		if (isSignedIn() == true)
+		{
+			startActivityForResult(Games.Leaderboards.getLeaderboardIntent(gameHelper.getApiClient(),
+					getString(R.string.leaderboard_hi_score)), requestCode);
+		}
+		else
+		{
+			signIn();
+		}
 	}
 
 	@Override

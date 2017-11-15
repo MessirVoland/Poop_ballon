@@ -176,11 +176,13 @@ public class PlayState extends State {
     private Sprite button_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
     private Sprite button_fb=new Sprite(Assets.instance.manager.get(Assets.button_fb));
     //private Sprite buuton_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
+    public static Sprite leaderboard=new Sprite(new Texture(Gdx.files.internal("high_ico.png")));
 
     private int effect_500=0;
 
     PlayState(GameStateManager gsm) {
         super(gsm);
+        leaderboard.setPosition(10,350);
 
 
 
