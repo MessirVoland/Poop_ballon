@@ -4,7 +4,7 @@ android {
             keyAlias 'pop balloon'
             keyPassword 'zorrffff57'
 
-            storeFile file('C:/Users/Voland/Desktop/keys/Detone_games.jks')
+            storeFile file('C:/Detone_games.jks')
             storePassword 'bzoqmort39'
         }
     }
