@@ -80,7 +80,6 @@ public class Balloons_manager {
                     PlayState.bomb_balloon.try_to_fly();
                 }
                 switch (current_combo){
-                    
                     case 3:
                         PlayState.combo_effects.add(new ParticleEffect(Assets.c_3x));
                         PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
