@@ -2,6 +2,7 @@ package ru.asupd.poop_ballon.Workers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
@@ -77,6 +78,23 @@ public class Balloons_manager {
                 }
                 if (PlayState.current_combo>=SIZE_OF_COMBO_FOR_BOMB_SPAWN){
                     PlayState.bomb_balloon.try_to_fly();
+                }
+                switch (current_combo){
+                    case 4:
+                        PlayState.combo_effects.add(new ParticleEffect(Assets.c_4x));
+                        PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
+                        PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(240, 500);
+                        break;
+                    case 5:
+                        PlayState.combo_effects.add(new ParticleEffect(Assets.c_5x));
+                        PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
+                        PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(240, 500);
+                        break;
+                    case 6:
+                        PlayState.combo_effects.add(new ParticleEffect(Assets.c_6x));
+                        PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
+                        PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(240, 500);
+                        break;
                 }
                 achievement.clicked(wooden,current_combo,current_step_wooden);
 

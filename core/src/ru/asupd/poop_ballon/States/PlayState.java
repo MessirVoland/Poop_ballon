@@ -59,21 +59,15 @@ public class PlayState extends State {
     private Array<Star> stars;//звезды
 
     private Texture pause_bgnd;//задник
-    private TextureRegion back_ground_atlas;
-    private Array<TextureRegion> background_frames;
-    //private boolean change_background;//хз
-    private float currnent_dt_background;
-    public static float current_alpha_background=1.0f;
+
+    //public static float current_alpha_background=1.0f;
 
     public static BitmapFont FontRed1;//для фпс
-
-    private Texture vibrated,unvibrated;//иконка звука
 
     private float current_immotal;
     private Texture texture_poop_balloon;//Название игры
 
     private Resizer resizer_poop_balloon;
-    int get_avr_speed=0;
 
     private Texture your_high_score,score;//наибольший счет, таб ту плей, напись счет
     private Sprite tap_to_play;
@@ -84,23 +78,15 @@ public class PlayState extends State {
 
     public static Score score_num;
 
-    //private Texture poof_balloon_atlas;//загрузчик атласов взрывов
-
     public static int cautch_ball = 0;//поймано шаров
     public static int miss_ball = 0;//пропущено шаров
 
-    //private static Sound poop_Sound;//звук лопания
-    public static final float minX = 0.75f;//Диапазон изменения хлопка
-    public static final float maxX = 1.7f;
     public static int balloons_count=0;
     public static int balloons_number=0;
-
-    //private int max_combo=0;
 
     private static Music background_Music,boss_Music;//музыка
 
     public final static float ANIMATION_TIME=0.266f;//время анимации
-    //public final static float ANIMATION_TIME=3.0f;
     private Preferences prefs;//для храниния данных
     private int load_hiscore;//макс счет
 
@@ -177,7 +163,6 @@ public class PlayState extends State {
     private Sprite button_fb=new Sprite(Assets.instance.manager.get(Assets.button_fb));
     //private Sprite buuton_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
     public static Sprite leaderboard=new Sprite(new Texture(Gdx.files.internal("high_ico.png")));
-
     private int effect_500=0;
 
     PlayState(GameStateManager gsm) {
@@ -317,9 +302,6 @@ public class PlayState extends State {
         resizer_poop_balloon.start();
         nice_played_resizer=new Resizer(384,88);
         well_played_resizer=new Resizer(323,164);
-
-
-        currnent_dt_background = 0;
 
         one_cast_music=true;
         current_dt_one_cast=0.0f;
@@ -504,7 +486,7 @@ public class PlayState extends State {
             //Активные действия и проверки босса
             if ((boss_balloon.isMissed()) & (boss_balloon.isStarted())) {
                 miss_ball++;
-                current_alpha_background=0.0f;
+                //current_alpha_background=0.0f;
                 boss_balloon.setMissed(false);
                 //change_background = true;
                 if (settings.isVibro()) {
@@ -566,7 +548,7 @@ public class PlayState extends State {
                                 if (current_immotal>=IMMORTAL_TIME) {
                                     miss_ball++;
                                     System.out.println("Missed ball");
-                                    current_alpha_background = 0.0f;
+                                    //current_alpha_background = 0.0f;
                                     current_immotal = 0;
                                     //change_background = true;
                                     if (settings.isVibro()) {
@@ -747,6 +729,7 @@ public class PlayState extends State {
             button_ads_free.draw(sb);
             button_fb.draw(sb);
             button_vk.draw(sb);
+            leaderboard.draw(sb);
 
             if (!faq.isShow()) {
                 if (showed_ads) {

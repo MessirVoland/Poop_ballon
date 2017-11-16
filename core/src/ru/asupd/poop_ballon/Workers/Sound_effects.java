@@ -13,6 +13,10 @@ import ru.asupd.poop_ballon.States.PlayState;
  */
 
 public final class Sound_effects {
+
+    public static final float minX = 0.75f;//Диапазон изменения хлопка
+    public static final float maxX = 1.7f;
+
     private Sound poop_Sound;//звук лопания
     public Sound_effects() {
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("sounds/poop.mp3"));
@@ -24,7 +28,7 @@ public final class Sound_effects {
         if (!PlayState.settings.isMute()) {
             long id = poop_Sound.play(PlayState.volume);
             Random rand = new Random();
-            float finalX = rand.nextFloat() * (PlayState.maxX - PlayState.minX) + PlayState.minX;
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
             poop_Sound.setPitch(id, finalX);
             poop_Sound.setVolume(id, PlayState.volume);
         }

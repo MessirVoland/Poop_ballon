@@ -65,8 +65,11 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                         }
                         else
                         {
+
                             System.out.println("Show hi score");
-                            playServices_my.showScore();
+                            if (playServices_my!=null) {
+                                playServices_my.showScore();
+                            }
                         }
                     }
                 }
@@ -91,7 +94,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
 
                             PlayState.shaker.shake(0.40f);
                             if (PlayState.hearth_balloon.getClicks() == 2) {
-                                PlayState.current_alpha_background = 2.0f;
+                                //PlayState.current_alpha_background = 2.0f;
                                 PlayState.miss_ball--;
                                 PlayState.hearth_balloon.setFly(false);
                                 PlayState.hearth_balloon.setPooped();

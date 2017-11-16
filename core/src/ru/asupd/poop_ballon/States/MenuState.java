@@ -100,7 +100,9 @@ public class MenuState extends State {
 
             }
         });
-        playServices_my.signIn();
+        if (playServices_my!=null) {
+            playServices_my.signIn();
+        }
     }
     @Override
     public void handleInput() {
