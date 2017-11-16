@@ -123,6 +123,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect combo_5x = new ParticleEffect();
     public static ParticleEffect combo_6x = new ParticleEffect();
 
+    public static ParticleEffect c_3x=new ParticleEffect();
     public static ParticleEffect c_4x=new ParticleEffect();
     public static ParticleEffect c_5x=new ParticleEffect();
     public static ParticleEffect c_6x=new ParticleEffect();
@@ -271,6 +272,7 @@ public class Assets implements Disposable, AssetErrorListener {
         combo_6x.loadEmitterImages(Gdx.files.internal("particles"));
         //combo_7x.loadEmitterImages(Gdx.files.internal("particles/pop_green"));
 
+        c_3x.load(Gdx.files.internal("particles/3x_c.p"),Gdx.files.internal("particles"));
         c_4x.load(Gdx.files.internal("particles/4x_c.p"),Gdx.files.internal("particles"));
         c_5x.load(Gdx.files.internal("particles/5x_c.p"),Gdx.files.internal("particles"));
         c_6x.load(Gdx.files.internal("particles/6x_c.p"),Gdx.files.internal("particles"));

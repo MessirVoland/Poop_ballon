@@ -80,6 +80,11 @@ public class Balloons_manager {
                     PlayState.bomb_balloon.try_to_fly();
                 }
                 switch (current_combo){
+                    case 3:
+                        PlayState.combo_effects.add(new ParticleEffect(Assets.c_3x));
+                        PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
+                        PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(240, 500);
+                        break;
                     case 4:
                         PlayState.combo_effects.add(new ParticleEffect(Assets.c_4x));
                         PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
@@ -96,6 +101,7 @@ public class Balloons_manager {
                         PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(240, 500);
                         break;
                 }
+
                 achievement.clicked(wooden,current_combo,current_step_wooden);
 
                 if (!g_clicked) {
