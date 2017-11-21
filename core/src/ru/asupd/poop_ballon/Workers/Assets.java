@@ -153,6 +153,10 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect score_500_effect_cool= new ParticleEffect();
     public static ParticleEffect score_500_effect_amazing= new ParticleEffect();
 
+    public static ParticleEffect beat_high_score= new ParticleEffect();
+    public static ParticleEffect well_play_particle= new ParticleEffect();
+    public static ParticleEffect nice_try_particle= new ParticleEffect();
+
 
     //private AssetManager assetManager;
 
@@ -304,7 +308,11 @@ public class Assets implements Disposable, AssetErrorListener {
         score_500_effect_cool.load(Gdx.files.internal("particles/cool.p"),Gdx.files.internal("particles"));
         score_500_effect_amazing.load(Gdx.files.internal("particles/amazing.p"),Gdx.files.internal("particles"));
 
-        score_500_effect_amazing.load(Gdx.files.internal("particles/miss_ball.p"),Gdx.files.internal("particles"));
+        miss_ball.load(Gdx.files.internal("particles/miss_ball.p"),Gdx.files.internal("particles"));
+        beat_high_score.load(Gdx.files.internal("particles/high_score.p"),Gdx.files.internal("particles"));
+
+        well_play_particle.load(Gdx.files.internal("particles/well_played.p"),Gdx.files.internal("particles"));
+        nice_try_particle.load(Gdx.files.internal("particles/nice_try.p"),Gdx.files.internal("particles"));
 
 
 

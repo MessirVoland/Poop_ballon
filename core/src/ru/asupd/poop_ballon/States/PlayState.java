@@ -164,6 +164,7 @@ public class PlayState extends State {
     //private Sprite buuton_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
     public static Sprite leaderboard=new Sprite(new Texture(Gdx.files.internal("high_ico.png")));
     private int effect_500=0;
+    private boolean beat_highscore;
 
     PlayState(GameStateManager gsm) {
         super(gsm);
@@ -310,6 +311,7 @@ public class PlayState extends State {
         button_ads_free.setPosition(35,680);
         button_ads_free.scale(-0.5f);
 
+        beat_highscore=true;
 
     }
 // Input
@@ -409,6 +411,16 @@ public class PlayState extends State {
                 }
 
                 if (!game_over_well_play){
+                    if (score_num.getScore()>load_hiscore){
+                        combo_effects.add(new ParticleEffect(Assets.well_play_particle));
+                        combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
+                        combo_effects.get(combo_effects.size - 1).start();
+                    }else
+                    {
+                        combo_effects.add(new ParticleEffect(Assets.nice_try_particle));
+                        combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
+                        combo_effects.get(combo_effects.size - 1).start();
+                    }
                     game_over_well_play=true;
                     well_played_resizer.setPosition(0);
                     nice_played_resizer.setPosition(0);
@@ -437,6 +449,13 @@ public class PlayState extends State {
             }
 
             if (started) {
+                if (beat_highscore){
+                    if (score_num.getScore()>load_hiscore){
+                        combo_effects.add(new ParticleEffect(Assets.beat_high_score));
+                        combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
+                        combo_effects.get(combo_effects.size - 1).start();
+                    }
+                }
                 if (score_num.getScore() / 500 > effect_500) {
                     effect_500++;
 
@@ -547,7 +566,7 @@ public class PlayState extends State {
                                 balloon.setVelosity(get_speed_for_balloon());
                                 if (current_immotal>=IMMORTAL_TIME) {
                                     miss_ball++;
-                                    combo_effects.add(new ParticleEffect(Assets.bomb_blow));
+                                    combo_effects.add(new ParticleEffect(Assets.miss_ball));
                                     combo_effects.get(combo_effects.size - 1).setPosition(240, 800);
                                     combo_effects.get(combo_effects.size - 1).start();
                                     System.out.println("Missed ball");
@@ -764,12 +783,12 @@ public class PlayState extends State {
             sb.draw(boss_balloon.getTexture_boss(),boss_balloon.getPosition().x,boss_balloon.getPosition().y,95,190);
         }
         if (game_over_well_play){
-            if (load_hiscore>cautch_ball){
+          /*  if (load_hiscore>cautch_ball){
                 sb.draw(nice_played,48+(384/2)-(nice_played_resizer.getSize_x()/2),300+(88/2)-(nice_played_resizer.getSize_y()/2),nice_played_resizer.getSize_x(),nice_played_resizer.getSize_y());
             }else
             {
                 sb.draw(well_played,78+(323/2)-(well_played_resizer.getSize_x()/2),300+(164/2)-(well_played_resizer.getSize_y()/2),well_played_resizer.getSize_x(),well_played_resizer.getSize_y());
-            }
+            }*/
             for (Star star : stars ){
                 sb.draw(star.getTexture(),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
                // sb.draw(Assets.instance.manager.get(Assets.star1),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());

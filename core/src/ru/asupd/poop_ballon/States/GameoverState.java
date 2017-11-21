@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -61,6 +62,7 @@ public class GameoverState extends State {
     Texture big_balloon;
     private boolean add_hicsore=true;
     public static final Achievement achievement= new Achievement();
+    public static Array<ParticleEffect> special_effects = new Array<ParticleEffect>();
 
     Sprite progress_bar_bgnd= new Sprite(new Texture(Gdx.files.internal("bar.png")));
 
@@ -224,6 +226,16 @@ public class GameoverState extends State {
         }
 
         tap_to_restart.draw(sb);
+
+        if (special_effects.size>=1) {
+            for (int j = 0; j <= special_effects.size - 1; j++) {
+                if (!special_effects.get(j).isComplete()) {
+                    special_effects.get(j).draw(sb);
+                } else {
+                    special_effects.removeIndex(j);
+                }
+            }
+        }
 
         progress_bar_bgnd.draw(sb);
         if (score_b.getScore()<1500) {
