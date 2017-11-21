@@ -547,6 +547,9 @@ public class PlayState extends State {
                                 balloon.setVelosity(get_speed_for_balloon());
                                 if (current_immotal>=IMMORTAL_TIME) {
                                     miss_ball++;
+                                    combo_effects.add(new ParticleEffect(Assets.bomb_blow));
+                                    combo_effects.get(combo_effects.size - 1).setPosition(240, 800);
+                                    combo_effects.get(combo_effects.size - 1).start();
                                     System.out.println("Missed ball");
                                     //current_alpha_background = 0.0f;
                                     current_immotal = 0;

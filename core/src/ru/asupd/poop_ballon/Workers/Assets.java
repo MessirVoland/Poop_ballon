@@ -72,6 +72,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect fire_bomb1= new ParticleEffect();
     public static ParticleEffect fire_bomb2= new ParticleEffect();
     public static ParticleEffect bomb_blow= new ParticleEffect();
+    public static ParticleEffect miss_ball= new ParticleEffect();
 
     //медали
     public static final AssetDescriptor<Texture> medal_ice = new AssetDescriptor<Texture>("medal_x2.png",Texture.class);
@@ -284,15 +285,16 @@ public class Assets implements Disposable, AssetErrorListener {
         hearth_ballon_part_heart.load(Gdx.files.internal("particles/heart.p"),Gdx.files.internal("particles"));
         hearth_ballon_part_basket.load(Gdx.files.internal("particles/basket.p"),Gdx.files.internal("particles"));
 
-        ballon_n_st_ice.load(Gdx.files.internal("particles/pop_ice.p"),Gdx.files.internal("particles"));
-        ballon_n_st_wood.load(Gdx.files.internal("particles/pop_wood.p"),Gdx.files.internal("particles"));
-        ballon_n_st_stone.load(Gdx.files.internal("particles/pop_stone.p"),Gdx.files.internal("particles"));
-        ballon_n_st_kript.load(Gdx.files.internal("particles/pop_kriptr.p"),Gdx.files.internal("particles"));
-        ballon_n_st_initblue.load(Gdx.files.internal("particles/pop_blueinit.p"),Gdx.files.internal("particles"));
-        ballon_n_st_pheon.load(Gdx.files.internal("particles/pop_pheonit.p"),Gdx.files.internal("particles"));
-        ballon_n_st_bronze.load(Gdx.files.internal("particles/pop_bronze.p"),Gdx.files.internal("particles"));
-        ballon_n_st_silver.load(Gdx.files.internal("particles/pop_silver.p"),Gdx.files.internal("particles"));
-        ballon_n_st_gold.load(Gdx.files.internal("particles/pop_gold.p"),Gdx.files.internal("particles"));
+        ballon_n_st_ice.load(Gdx.files.internal("particles/pop_wood.p"),Gdx.files.internal("particles"));
+        ballon_n_st_wood.load(Gdx.files.internal("particles/pop_stone.p"),Gdx.files.internal("particles"));
+        ballon_n_st_stone.load(Gdx.files.internal("particles/pop_iron.p"),Gdx.files.internal("particles"));
+        ballon_n_st_kript.load(Gdx.files.internal("particles/pop_bronze.p"),Gdx.files.internal("particles"));
+        ballon_n_st_initblue.load(Gdx.files.internal("particles/pop_silver.p"),Gdx.files.internal("particles"));
+        ballon_n_st_pheon.load(Gdx.files.internal("particles/pop_gold.p"),Gdx.files.internal("particles"));
+        ballon_n_st_bronze.load(Gdx.files.internal("particles/pop_ruby.p"),Gdx.files.internal("particles"));
+        ballon_n_st_silver.load(Gdx.files.internal("particles/pop_emerald.p"),Gdx.files.internal("particles"));
+        ballon_n_st_gold.load(Gdx.files.internal("particles/pop_diamond.p"),Gdx.files.internal("particles"));
+
         gold_stars.load(Gdx.files.internal("particles/star_metal.p"),Gdx.files.internal("particles"));
         gem_stars.load(Gdx.files.internal("particles/star_gem.p"),Gdx.files.internal("particles"));
         fire_bomb1.load(Gdx.files.internal("particles/fire_bomb1.p"),Gdx.files.internal("particles"));
@@ -301,6 +303,8 @@ public class Assets implements Disposable, AssetErrorListener {
         score_500_effect_wow.load(Gdx.files.internal("particles/wow.p"),Gdx.files.internal("particles"));
         score_500_effect_cool.load(Gdx.files.internal("particles/cool.p"),Gdx.files.internal("particles"));
         score_500_effect_amazing.load(Gdx.files.internal("particles/amazing.p"),Gdx.files.internal("particles"));
+
+        score_500_effect_amazing.load(Gdx.files.internal("particles/miss_ball.p"),Gdx.files.internal("particles"));
 
 
 
