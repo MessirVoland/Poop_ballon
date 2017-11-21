@@ -289,15 +289,15 @@ public class Assets implements Disposable, AssetErrorListener {
         hearth_ballon_part_heart.load(Gdx.files.internal("particles/heart.p"),Gdx.files.internal("particles"));
         hearth_ballon_part_basket.load(Gdx.files.internal("particles/basket.p"),Gdx.files.internal("particles"));
 
-        ballon_n_st_ice.load(Gdx.files.internal("particles/pop_wood.p"),Gdx.files.internal("particles"));
-        ballon_n_st_wood.load(Gdx.files.internal("particles/pop_stone.p"),Gdx.files.internal("particles"));
-        ballon_n_st_stone.load(Gdx.files.internal("particles/pop_iron.p"),Gdx.files.internal("particles"));
-        ballon_n_st_kript.load(Gdx.files.internal("particles/pop_bronze.p"),Gdx.files.internal("particles"));
-        ballon_n_st_initblue.load(Gdx.files.internal("particles/pop_silver.p"),Gdx.files.internal("particles"));
-        ballon_n_st_pheon.load(Gdx.files.internal("particles/pop_gold.p"),Gdx.files.internal("particles"));
-        ballon_n_st_bronze.load(Gdx.files.internal("particles/pop_ruby.p"),Gdx.files.internal("particles"));
-        ballon_n_st_silver.load(Gdx.files.internal("particles/pop_emerald.p"),Gdx.files.internal("particles"));
-        ballon_n_st_gold.load(Gdx.files.internal("particles/pop_diamond.p"),Gdx.files.internal("particles"));
+        ballon_n_st_ice.load(Gdx.files.internal("particles/pop_x2.p"),Gdx.files.internal("particles"));
+        ballon_n_st_wood.load(Gdx.files.internal("particles/pop_x3.p"),Gdx.files.internal("particles"));
+        ballon_n_st_stone.load(Gdx.files.internal("particles/pop_x4.p"),Gdx.files.internal("particles"));
+        ballon_n_st_kript.load(Gdx.files.internal("particles/pop_x5.p"),Gdx.files.internal("particles"));
+        ballon_n_st_initblue.load(Gdx.files.internal("particles/pop_x6.p"),Gdx.files.internal("particles"));
+        ballon_n_st_pheon.load(Gdx.files.internal("particles/pop_x7.p"),Gdx.files.internal("particles"));
+        ballon_n_st_bronze.load(Gdx.files.internal("particles/pop_x8.p"),Gdx.files.internal("particles"));
+        ballon_n_st_silver.load(Gdx.files.internal("particles/pop_x9.p"),Gdx.files.internal("particles"));
+        ballon_n_st_gold.load(Gdx.files.internal("particles/pop_x10.p"),Gdx.files.internal("particles"));
 
         gold_stars.load(Gdx.files.internal("particles/star_metal.p"),Gdx.files.internal("particles"));
         gem_stars.load(Gdx.files.internal("particles/star_gem.p"),Gdx.files.internal("particles"));
