@@ -144,7 +144,7 @@ public class GameoverState extends State {
         }
         else
         {
-            prefs.putInteger("medal_score",0);
+            prefs.putInteger("medal_score",last_score);
             score_medal_load=0;
             prefs.flush();
         }
@@ -285,7 +285,7 @@ public class GameoverState extends State {
         progress_bar_bgnd.draw(sb);
 
 
-        draw_progress_bar(sb,(score_medal.getScore(true)*100)/score_need.getScore());
+        draw_progress_bar(sb,(score_medal.getScore(true)*10000)/score_need.getScore());
 
 
         dark_medal.draw(sb);
@@ -330,9 +330,9 @@ public class GameoverState extends State {
 
     }
 
-    private void draw_progress_bar(SpriteBatch sb,int range) {
+    private void draw_progress_bar(SpriteBatch sb,float range) {
 
-        patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10,((range*405)/100)+20 , 50);
+        patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10,((range*405)/10000)+20 , 50);
     }
 
     @Override
