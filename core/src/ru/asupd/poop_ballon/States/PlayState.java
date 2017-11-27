@@ -557,6 +557,8 @@ public class PlayState extends State {
                     if (current_immotal<=IMMORTAL_TIME) {
                         current_immotal += dt;
                     }
+                    int ballons_disposed = 0;
+                    boolean missed=false;
                         for (Balloon balloon : balloons) {
                             balloon.update(dt, shaker);
 
@@ -566,6 +568,7 @@ public class PlayState extends State {
                                 balloon.setVelosity(get_speed_for_balloon());
                                 if (current_immotal>=IMMORTAL_TIME) {
                                     miss_ball++;
+                                    missed=true;
                                     combo_effects.add(new ParticleEffect(Assets.miss_ball));
                                     combo_effects.get(combo_effects.size - 1).setPosition(240, 800);
                                     combo_effects.get(combo_effects.size - 1).start();
@@ -579,6 +582,19 @@ public class PlayState extends State {
                                 }
                             }
                         }
+                        if (missed){
+                            for (Balloon balloon : balloons) {
+                                if (!balloon.isPooped()) {
+                                    ballons_disposed++;
+                                }
+                                balloon.setPooped();
+                                make_poop_Sound();
+                            }
+                            for (int i=0;i<ballons_disposed;i++){
+                                balloons.add(new Balloon(random(4) * 96, -260 - random(80), PlayState.get_speed_for_balloon(), !PlayState.boss_balloon.isStarted()));
+                            }
+                        }
+
                     }
                 {
                         index=0;

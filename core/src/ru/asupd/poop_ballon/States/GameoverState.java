@@ -79,7 +79,11 @@ public class GameoverState extends State {
         camera.setToOrtho(false, 480 , 800 );
         this.final_stars=stars;
         current_tap_to_restart=0;
-        progress_bar_bgnd.setPosition(15,15);
+        if (showed_ads){
+            progress_bar_bgnd.setPosition(15,85);
+        }else {
+            progress_bar_bgnd.setPosition(15, 15);
+        }
 
 
 
