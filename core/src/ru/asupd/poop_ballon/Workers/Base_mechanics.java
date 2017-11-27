@@ -36,7 +36,7 @@ public class Base_mechanics {
     public static final float IMMORTAL_TIME=0.5f;
 
     public static final int[] NEEDED_SCORE={
-            5000,//1 Дерево
+            10000,//1 Дерево
             20000,//2 Камень
             40000,//3 Железо
             80000,//4 Бронза
