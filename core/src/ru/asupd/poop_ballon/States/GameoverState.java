@@ -46,6 +46,11 @@ public class GameoverState extends State {
     //и это
     Score score_b= new Score();
 
+    Score score_medal=new Score();
+    int score_medal_load;
+
+    Score score_need=new Score();
+
     Array<TextureRegion> frames_numbers;
 
     float  currentdt, waiting;
@@ -57,6 +62,7 @@ public class GameoverState extends State {
     Array<Star> final_stars;
     Sprite dark_medal;
     boolean ads=true;
+    boolean start_count_trigger=true;
 
     Vector3 velosity,position;
     Texture big_balloon;
@@ -131,6 +137,23 @@ public class GameoverState extends State {
             local_score = local_score / 10;
         }
 
+        if (prefs.contains("medal_score")) {
+            score_medal_load = prefs.getInteger("medal_score");
+            prefs.putInteger("medal_score",last_score+score_medal_load);
+            prefs.flush();
+        }
+        else
+        {
+            prefs.putInteger("medal_score",0);
+            score_medal_load=0;
+            prefs.flush();
+        }
+        score_medal.setScore(score_medal_load);
+        score_medal.update_render_time();
+
+        score_need.setScore(10000);
+
+
         FontRed1 = new BitmapFont();
         FontRed1.setColor(Color.RED); //Красный
         currentdt=0;
@@ -140,6 +163,7 @@ public class GameoverState extends State {
         score.addScore(last_score);
         score.update_render_time();
         score_b.setScore(load_hiscore);
+
         ads=true;
 
 
@@ -150,10 +174,17 @@ public class GameoverState extends State {
         if(Gdx.input.justTouched()){
             //System.out.println("score.getScore(true)"+score.getScore(true));
             //System.out.println("score.getScore()"+score.getScore());
-            if (score.getScore(true)<score.getScore()){
+            if (score.getScore(true)<score.getScore())
+            {
                 score.end_count();
                 System.out.println("S4et");
-            }else {
+            }
+            else if (score_medal.getScore(true)<score_medal.getScore())
+            {
+                score_medal.end_count();
+            }
+            else
+            {
                 gsm.set(new PlayState(gsm));
             }
             //score_b.addScore(score.getScore()-score_b.getScore());
@@ -170,6 +201,16 @@ public class GameoverState extends State {
         score.update(dt);
         score_b.update(dt);
         achievement.update(dt);
+        if (start_count_trigger){
+            if (score.getScore(true)>=score.getScore()){
+                start_count_trigger=false;
+                score_medal.addScore(score.getScore());
+            }
+        }else
+        {
+            score_medal.update(dt);
+        }
+
         if (currentdt>=waiting) {
             handleInput();
             if (ads){
@@ -242,27 +283,17 @@ public class GameoverState extends State {
         }
 
         progress_bar_bgnd.draw(sb);
-        if (score_b.getScore()<1500) {
-            patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10, (score_b.getScore(true)*404)/1500+20, 50);
-        }
-        else if (score_b.getScore()>=5500)
-        {
-            patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10, 424, 50);
 
-        }
-        else
-        {
-            int round_max_score_500 = score_b.getScore();
-            round_max_score_500 = round_max_score_500 / 500;
-            //round_max_score_500++;
-            round_max_score_500 = round_max_score_500 * 500;
-            //System.out.println(round_max_score_500);
-            patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10, ((score_b.getScore(true) - round_max_score_500) * 404) / round_max_score_500 + 20, 50);
-        }
+
+        draw_progress_bar(sb,(score_medal.getScore(true)*100)/score_need.getScore());
+
 
         dark_medal.draw(sb);
+        score_medal.draw_center(sb,(int) progress_bar_bgnd.getX() + 100,(int) progress_bar_bgnd.getY() + 20);
+        score_need.draw_center(sb,(int) progress_bar_bgnd.getX() + 240,(int) progress_bar_bgnd.getY() + 20);
 
-       // if(
+
+        // if(
         achievement.draw_current_medal(sb);
         //{
           //  if (!add_hicsore) {
@@ -281,11 +312,11 @@ public class GameoverState extends State {
 
 
         if (showed_ads){
-            sb.draw(your_best_score, 125, 170, 210, 75);
-            score_b.draw_center(sb,185,130);
+            sb.draw(your_best_score, 125, 190, 210, 75);
+            score_b.draw_center(sb,185,160);
         }else {
-            sb.draw(your_best_score, 125, 170, 210, 75);
-            score_b.draw_center(sb,185,120);
+            sb.draw(your_best_score, 125, 190, 210, 75);
+            score_b.draw_center(sb,185,160);
 
         }
         if (position.x>=-865){
@@ -297,6 +328,11 @@ public class GameoverState extends State {
        // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 250);
         sb.end();
 
+    }
+
+    private void draw_progress_bar(SpriteBatch sb,int range) {
+
+        patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10,((range*405)/100)+20 , 50);
     }
 
     @Override
