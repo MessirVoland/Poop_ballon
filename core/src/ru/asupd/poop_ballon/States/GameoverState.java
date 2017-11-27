@@ -24,10 +24,14 @@ import static ru.asupd.poop_ballon.MyGdxGame.actionresolver_my;
 import static ru.asupd.poop_ballon.MyGdxGame.adsController_my;
 import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
+import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
+import static ru.asupd.poop_ballon.States.PlayState.upCurrent_difficult_up;
+import static ru.asupd.poop_ballon.States.PlayState.zeroCurrent_difficult_up;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME_TAP_TO_PLAY;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATIO_TIME_TO_PLAY_SIZE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
+import static ru.asupd.poop_ballon.Workers.Base_mechanics.NEEDED_SCORE;
 
 /**
  * Created by Voland on 22.08.2017.
@@ -55,7 +59,7 @@ public class GameoverState extends State {
 
     float  currentdt, waiting;
     final BitmapFont FontRed1;
-    final Preferences prefs;
+    static final Preferences prefs = Gdx.app.getPreferences(APP_STORE_NAME);;
     int load_hiscore,last_score;
     int[] score_best =new int[5];
     int[] score_last =new int[5];
@@ -63,6 +67,7 @@ public class GameoverState extends State {
     Sprite dark_medal;
     boolean ads=true;
     boolean start_count_trigger=true;
+    boolean start_gain_medal_trigger=true;
 
     Vector3 velosity,position;
     Texture big_balloon;
@@ -117,7 +122,7 @@ public class GameoverState extends State {
         }
 
 
-        prefs = Gdx.app.getPreferences(APP_STORE_NAME);
+
 
         load_hiscore = prefs.getInteger("highscore");
         //load_hiscore = 0;
@@ -136,6 +141,12 @@ public class GameoverState extends State {
             score_last[k] = local_score % 10;
             local_score = local_score / 10;
         }
+        //Занулятор
+        //zeroCurrent_difficult_up();
+        //prefs.putInteger("medal_score",4200);
+        //score_medal_load=0;
+        //prefs.flush();
+
 
         if (prefs.contains("medal_score")) {
             score_medal_load = prefs.getInteger("medal_score");
@@ -151,7 +162,7 @@ public class GameoverState extends State {
         score_medal.setScore(score_medal_load);
         score_medal.update_render_time();
 
-        score_need.setScore(10000);
+        score_need.setScore(NEEDED_SCORE[getCurrent_difficult_up()]);
 
 
         FontRed1 = new BitmapFont();
@@ -185,7 +196,9 @@ public class GameoverState extends State {
             }
             else
             {
-                gsm.set(new PlayState(gsm));
+                if (special_effects.size<=0) {
+                    gsm.set(new PlayState(gsm));
+                }
             }
             //score_b.addScore(score.getScore()-score_b.getScore());
           //  prefs.putInteger("highscore", score.getScore());
@@ -209,6 +222,32 @@ public class GameoverState extends State {
         }else
         {
             score_medal.update(dt);
+        }
+        if (start_gain_medal_trigger){
+            if (score_medal.getScore()>=score_need.getScore()){
+                upCurrent_difficult_up();
+                score_need.setScore(NEEDED_SCORE[getCurrent_difficult_up()]);
+
+                special_effects.add(new ParticleEffect(Assets.beam));
+                special_effects.get(special_effects.size-1).setPosition(240, 400);
+                special_effects.get(special_effects.size-1).start();
+
+                switch (getCurrent_difficult_up()){
+                    case 1:
+                        special_effects.add(new ParticleEffect(Assets.medal_x2));
+                        special_effects.get(special_effects.size - 1).setPosition(240, 400);
+                        special_effects.get(special_effects.size - 1).start();
+                        break;
+                    case 2:
+                        special_effects.add(new ParticleEffect(Assets.medal_x3));
+                        special_effects.get(special_effects.size - 1).setPosition(240, 400);
+                        special_effects.get(special_effects.size - 1).start();
+                        break;
+                }
+            }
+            for(ParticleEffect special_effect :special_effects){
+                special_effect.update(dt);
+            }
         }
 
         if (currentdt>=waiting) {
@@ -272,15 +311,7 @@ public class GameoverState extends State {
 
         tap_to_restart.draw(sb);
 
-        if (special_effects.size>=1) {
-            for (int j = 0; j <= special_effects.size - 1; j++) {
-                if (!special_effects.get(j).isComplete()) {
-                    special_effects.get(j).draw(sb);
-                } else {
-                    special_effects.removeIndex(j);
-                }
-            }
-        }
+
 
         progress_bar_bgnd.draw(sb);
 
@@ -326,6 +357,15 @@ public class GameoverState extends State {
         //achievement.draw_current_medal(sb,270,200);
 
        // FontRed1.draw(sb, " Hi Score: "+  load_hiscore, 10, 250);
+        if (special_effects.size>=1) {
+            for (int j = 0; j <= special_effects.size - 1; j++) {
+                if (!special_effects.get(j).isComplete()) {
+                    special_effects.get(j).draw(sb);
+                } else {
+                    special_effects.removeIndex(j);
+                }
+            }
+        }
         sb.end();
 
     }

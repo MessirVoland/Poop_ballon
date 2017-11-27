@@ -157,6 +157,10 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect well_play_particle= new ParticleEffect();
     public static ParticleEffect nice_try_particle= new ParticleEffect();
 
+    public static ParticleEffect beam= new ParticleEffect();
+    public static ParticleEffect medal_x2= new ParticleEffect();
+    public static ParticleEffect medal_x3= new ParticleEffect();
+
 
     //private AssetManager assetManager;
 
@@ -313,6 +317,10 @@ public class Assets implements Disposable, AssetErrorListener {
 
         well_play_particle.load(Gdx.files.internal("particles/well_played.p"),Gdx.files.internal("particles"));
         nice_try_particle.load(Gdx.files.internal("particles/nice_try.p"),Gdx.files.internal("particles"));
+
+        beam.load(Gdx.files.internal("particles/beams.p"),Gdx.files.internal("particles"));
+        medal_x2.load(Gdx.files.internal("particles/medal_x2.p"),Gdx.files.internal("particles"));
+        medal_x3.load(Gdx.files.internal("particles/medal_x3.p"),Gdx.files.internal("particles"));
 
 
 

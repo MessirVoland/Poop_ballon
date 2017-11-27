@@ -254,7 +254,7 @@ public class Balloons_manager {
                         }
                         sb.setColor(1, 1, 1, 1);
                         balloon.getSprite().draw(sb);
-                        balloon.setNumber_of_n_st((settings.hi_score()-MEDAL_START)/MEDAL_SCORE);
+                        balloon.setNumber_of_n_st(getCurrent_difficult_up());
                         if (balloon.effect_gold!=null)
                             balloon.effect_gold.draw(sb);
 

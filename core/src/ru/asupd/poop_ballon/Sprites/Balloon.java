@@ -60,7 +60,7 @@ public class Balloon {
         velosity = new Vector3(random(100) - 50, grav, 0);
 
         //Генерация нестандартного шара
-        if ((PlayState.settings.hi_score()-MEDAL_START)>=MEDAL_SCORE) {
+        if (getCurrent_difficult_up()>0) {
             if (rand.nextInt(99) < CHANSE_OF_WOODEN_BALLOON-getCurrent_difficult_up()+1) {
                 N_ST_color = true;
             }
@@ -107,7 +107,7 @@ public class Balloon {
         else
         {
             color_of_balloon = 12;
-            switch ((PlayState.settings.hi_score()-MEDAL_START)/MEDAL_SCORE) {
+            switch (getCurrent_difficult_up()) {
                 case 0:
                     break;
                 case 1:
@@ -213,7 +213,7 @@ public class Balloon {
             if (!N_ST_color) {
                 effect = new ParticleEffect(Assets.effect_orange);
             }else
-                switch ((PlayState.settings.hi_score()-MEDAL_START)/MEDAL_SCORE) {
+                switch (getCurrent_difficult_up()) {
                     case 0:
                         break;
                     case 1:
@@ -385,35 +385,35 @@ public class Balloon {
                     if (!N_ST_color) {
                         color_of_balloon = 12;
                         switch (getCurrent_difficult_up()) {
-                            case 2:
+                            case 1:
                                 sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ns_x2));
                                 sprite.setPosition(position.x, position.y);
                                 break;
-                            case 3:
+                            case 2:
                                 sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ice));
                                 sprite.setPosition(position.x, position.y);
                                 break;
-                            case 4:
+                            case 3:
                                 sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_stone));
                                 sprite.setPosition(position.x, position.y);
                                 break;
-                            case 5:
+                            case 4:
                                 sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_kript));
                                 sprite.setPosition(position.x, position.y);
                                 break;
-                            case 6:
+                            case 5:
                                 sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_blueinit));
                                 sprite.setPosition(position.x, position.y);
                                 break;
-                            case 7:
+                            case 6:
                                 sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_pheon));
                                 sprite.setPosition(position.x, position.y);
                                 break;
-                            case 8:
+                            case 7:
                                 sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_bronze));
                                 sprite.setPosition(position.x, position.y);
                                 break;
-                            case 9:
+                            case 8:
                                 sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_silver));
                                 sprite.setPosition(position.x, position.y);
                                 break;

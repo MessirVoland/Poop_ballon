@@ -1000,14 +1000,38 @@ public class PlayState extends State {
     }
 
     public static int getCurrent_difficult_up() {
-        int current_difficult=((settings.hi_score()-MEDAL_START)/MEDAL_SCORE+1);
-        if (current_difficult>=10){
-            current_difficult=10;//ограничение для золота
+
+        if (GameoverState.prefs.contains("difficult_up"))
+        {
+            return GameoverState.prefs.getInteger("difficult_up");
         }
-        if (current_difficult<1){
-            current_difficult=1;
+        else
+        {
+            GameoverState.prefs.putInteger("difficult_up",0);
+            GameoverState.prefs.flush();
+            return 0;
         }
-        return current_difficult;
+        //int current_difficult=((settings.hi_score()-MEDAL_START)/MEDAL_SCORE+1);
+        //if (current_difficult>=10){
+        //    current_difficult=10;//ограничение для золота
+        //}
+        //if (current_difficult<1){
+        //    current_difficult=1;
+        //}
+    }
+    public static void upCurrent_difficult_up() {
+        int local_difficult=GameoverState.prefs.getInteger("difficult_up");
+        local_difficult++;
+        if (local_difficult>=10)
+        {
+            local_difficult=10;
+        }
+        GameoverState.prefs.putInteger("difficult_up",local_difficult);
+        GameoverState.prefs.flush();
+    }
+    public static void zeroCurrent_difficult_up() {
+        GameoverState.prefs.putInteger("difficult_up",0);
+        GameoverState.prefs.flush();
     }
 
 }

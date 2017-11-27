@@ -35,6 +35,19 @@ public class Base_mechanics {
     public static final int SIZE_OF_COMBO_FOR_BOMB_SPAWN=3;//х3 Размер комбо для проверки спавна бомбы
     public static final float IMMORTAL_TIME=0.5f;
 
+    public static final int[] NEEDED_SCORE={
+            5000,//1 Дерево
+            20000,//2 Камень
+            40000,//3 Железо
+            80000,//4 Бронза
+           160000,//5 Серебро
+           320000,//6 Золото
+           640000,//7 Рубин
+          1280000,//8 Изумруд
+          2560000 //9 Алмаз
+    };
+
+
     //-------------------------------------------------------------------------/
 
     private static final Base_mechanics ourInstance = new Base_mechanics();
