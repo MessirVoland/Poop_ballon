@@ -451,6 +451,7 @@ public class PlayState extends State {
             if (started) {
                 if (beat_highscore){
                     if (score_num.getScore()>load_hiscore){
+                        beat_highscore=false;
                         combo_effects.add(new ParticleEffect(Assets.beat_high_score));
                         combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
                         combo_effects.get(combo_effects.size - 1).start();
