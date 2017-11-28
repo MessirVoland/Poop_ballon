@@ -80,11 +80,11 @@ public class Balloons_manager {
                     PlayState.bomb_balloon.try_to_fly();
                 }
                 switch (current_combo){
-                    case 3:
-                        PlayState.combo_effects.add(new ParticleEffect(Assets.c_3x));
-                        PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
-                        PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(240, 500);
-                        break;
+                    //case 3:
+                    //    PlayState.combo_effects.add(new ParticleEffect(Assets.c_3x));
+                    //    PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
+                    //    PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(240, 500);
+                    //    break;
                     case 4:
                         PlayState.combo_effects.add(new ParticleEffect(Assets.c_4x));
                         PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
@@ -125,7 +125,7 @@ public class Balloons_manager {
                                     PlayState.cautch_ball++;
 
 
-                                    if (PlayState.counter_of_h_ballons <= PlayState.score_num.getScore() /SEQUENCE_OF_HEARTH_BALLOON * getCurrent_difficult_up()) {
+                                    if (PlayState.counter_of_h_ballons <= PlayState.score_num.getScore() /SEQUENCE_OF_HEARTH_BALLOON * (getCurrent_difficult_up()+2)) {
                                         if (PlayState.miss_ball >= 1) {
                                             //System.out.println("Spawned");
                                             PlayState.hearth_balloon.setCan_fly(true);
@@ -146,7 +146,7 @@ public class Balloons_manager {
                                             balloon.setWooden_color(true);
                                         }
                                         if (wooden) {
-                                            PlayState.score_num.addScore((int) (PlayState.current_combo * (getCurrent_difficult_up()*current_step_wooden)));
+                                            PlayState.score_num.addScore((int) (PlayState.current_combo * ((getCurrent_difficult_up()+1)*current_step_wooden)));
                                             //System.out.println("Added W "+ (PlayState.current_combo * (getCurrent_difficult_up()*current_step_wooden)));
                                             //System.out.println("cur combo "+ PlayState.current_combo +"diff " +getCurrent_difficult_up()+"Curr wood "+current_step_wooden);
                                         } else {
@@ -160,7 +160,7 @@ public class Balloons_manager {
                                     } else {
                                         PlayState.make_poop_Sound();
                                         if (wooden) {
-                                            PlayState.score_num.addScore(getCurrent_difficult_up());
+                                            PlayState.score_num.addScore(getCurrent_difficult_up()+1);
                                            // System.out.println("Added 2 W score");
                                         } else {
                                             PlayState.score_num.addScore(1);
