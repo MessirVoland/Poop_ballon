@@ -243,6 +243,36 @@ public class GameoverState extends State {
                         special_effects.get(special_effects.size - 1).setPosition(240, 400);
                         special_effects.get(special_effects.size - 1).start();
                         break;
+                    case 3:
+                        special_effects.add(new ParticleEffect(Assets.medal_x4));
+                        special_effects.get(special_effects.size - 1).setPosition(240, 400);
+                        special_effects.get(special_effects.size - 1).start();
+                        break;
+                    case 4:
+                        special_effects.add(new ParticleEffect(Assets.medal_x5));
+                        special_effects.get(special_effects.size - 1).setPosition(240, 400);
+                        special_effects.get(special_effects.size - 1).start();
+                        break;
+                    case 5:
+                        special_effects.add(new ParticleEffect(Assets.medal_x6));
+                        special_effects.get(special_effects.size - 1).setPosition(240, 400);
+                        special_effects.get(special_effects.size - 1).start();
+                        break;
+                    case 6:
+                        special_effects.add(new ParticleEffect(Assets.medal_x7));
+                        special_effects.get(special_effects.size - 1).setPosition(240, 400);
+                        special_effects.get(special_effects.size - 1).start();
+                        break;
+                    case 7:
+                        special_effects.add(new ParticleEffect(Assets.medal_x8));
+                        special_effects.get(special_effects.size - 1).setPosition(240, 400);
+                        special_effects.get(special_effects.size - 1).start();
+                        break;
+                    case 8:
+                        special_effects.add(new ParticleEffect(Assets.medal_x9));
+                        special_effects.get(special_effects.size - 1).setPosition(240, 400);
+                        special_effects.get(special_effects.size - 1).start();
+                        break;
                 }
             }
             for(ParticleEffect special_effect :special_effects){

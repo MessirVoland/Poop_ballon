@@ -160,6 +160,13 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect beam= new ParticleEffect();
     public static ParticleEffect medal_x2= new ParticleEffect();
     public static ParticleEffect medal_x3= new ParticleEffect();
+    public static ParticleEffect medal_x4= new ParticleEffect();
+    public static ParticleEffect medal_x5= new ParticleEffect();
+    public static ParticleEffect medal_x6= new ParticleEffect();
+    public static ParticleEffect medal_x7= new ParticleEffect();
+    public static ParticleEffect medal_x8= new ParticleEffect();
+    public static ParticleEffect medal_x9= new ParticleEffect();
+
 
 
     //private AssetManager assetManager;
@@ -321,6 +328,12 @@ public class Assets implements Disposable, AssetErrorListener {
         beam.load(Gdx.files.internal("particles/beams.p"),Gdx.files.internal("particles"));
         medal_x2.load(Gdx.files.internal("particles/medal_x2.p"),Gdx.files.internal("particles"));
         medal_x3.load(Gdx.files.internal("particles/medal_x3.p"),Gdx.files.internal("particles"));
+        medal_x4.load(Gdx.files.internal("particles/medal_x4.p"),Gdx.files.internal("particles"));
+        medal_x5.load(Gdx.files.internal("particles/medal_x5.p"),Gdx.files.internal("particles"));
+        medal_x6.load(Gdx.files.internal("particles/medal_x6.p"),Gdx.files.internal("particles"));
+        medal_x7.load(Gdx.files.internal("particles/medal_x7.p"),Gdx.files.internal("particles"));
+        medal_x8.load(Gdx.files.internal("particles/medal_x8.p"),Gdx.files.internal("particles"));
+        medal_x9.load(Gdx.files.internal("particles/medal_x9.p"),Gdx.files.internal("particles"));
 
 
 
