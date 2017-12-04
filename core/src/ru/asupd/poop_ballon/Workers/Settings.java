@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
 import ru.asupd.poop_ballon.States.PlayState;
 
@@ -24,10 +25,21 @@ public class Settings {
     private Vector3 pos_vibro;
     private static final float POS_X_RESTART=-75,POS_Y_RESTART=-278;
 
+    public ShaderProgram shader;
+    boolean one_time=false;
+
     private boolean one_click=false;
 
     public Settings(Preferences prefs) {
         pref=prefs;
+        ShaderProgram.pedantic = false;
+        shader = new ShaderProgram(Gdx.files.internal("shaders/default.vert"),
+                (Gdx.files.internal("shaders/invertColors.frag")));
+        if (!shader.isCompiled()) {
+            System.err.println(shader.getLog());
+            System.exit(0);
+        }
+
         //Первый запуск
         if (pref.getBoolean("first_start")){
             pref.putBoolean("first_start",false);
@@ -59,6 +71,10 @@ public class Settings {
 
     }
     public void draw(SpriteBatch sb,Shaker shaker){
+        if (!one_time){
+            one_time=true;
+            sb.setShader(shader);
+        }
         if (mute){
             sb.draw(mute_tex,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78);
         }else{

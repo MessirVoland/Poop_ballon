@@ -256,6 +256,7 @@ public class PlayState extends State {
 
         prefs = Gdx.app.getPreferences(APP_STORE_NAME);
         settings= new Settings(prefs);
+
         settings.hi_score_refresh();
         load_hiscore = prefs.getInteger("highscore");
 

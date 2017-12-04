@@ -1,11 +1,11 @@
 android {
     signingConfigs {
         Config_key {
-            keyAlias 'pop balloon'
-            keyPassword 'zorrffff57'
+           // keyAlias 'pop balloon'
+            //keyPassword 'zorrffff57'
            // storeFile file('/home/asupd/Desktop/key/Detone_games.jks')
-            storeFile file('C:/Detone_games.jks')
-            storePassword 'bzoqmort39'
+           // storeFile file('C:/Detone_games.jks')
+           // storePassword 'bzoqmort39'
         }
     }
     buildToolsVersion "26.0.1"
