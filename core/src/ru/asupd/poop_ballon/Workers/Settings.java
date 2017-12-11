@@ -22,7 +22,7 @@ import static ru.asupd.poop_ballon.States.PlayState.set_mute;
 public class Settings {
     private Preferences pref;//для храниния данных
     private static int hi_score;
-    private boolean mute,vibro;//звук вибро
+    private boolean mute,vibro,music_b;//звук вибро
 
     //private Texture restart;
     //private Texture mute_tex,unmute_tex;
@@ -42,6 +42,7 @@ public class Settings {
     Sprite sprt_unvibro=new Sprite(new Texture("vibro_off.png"));
 
     Sprite sprt_music=new Sprite(new Texture(Gdx.files.internal("music_on.png")));
+    Sprite sprt_unmusic=new Sprite(new Texture(Gdx.files.internal("music_off.png")));
 
     Sprite sprt_achiv=new Sprite(new Texture("achives_ico.png"));
     Sprite leaderboard=new Sprite(new Texture("high_ico.png"));
@@ -88,6 +89,7 @@ public class Settings {
             pref.putBoolean("first_start",false);
             mute=false;
             vibro=true;
+            music_b=true;
             pref.putBoolean("mute",mute);
             pref.putBoolean("vibro",vibro);
             pref.flush();
@@ -95,6 +97,7 @@ public class Settings {
         }
         else {
             mute=pref.getBoolean("mute");
+            music_b=true;
             vibro=pref.getBoolean("vibro");
         }
 
@@ -115,6 +118,7 @@ public class Settings {
         sprt_unmute.setPosition(170,395);
 
         sprt_music.setPosition(280,395);
+        sprt_unmusic.setPosition(280,395);
 
 
         //pos_mute = new Vector3(270,400-78,0);
@@ -150,6 +154,14 @@ public class Settings {
 
 
         leaderboard.draw(sb);
+
+        if (music_b){
+            sprt_music.draw(sb);
+        }
+        else
+        {
+            sprt_unmusic.draw(sb);
+        }
 
         if (mute){
             sprt_mute.draw(sb);
@@ -242,8 +254,10 @@ public class Settings {
             }
 
         }
-        else if (sprt_music.getBoundingRectangle().contains(ScreenX,ScreenY)){
-            score_num.addScore(1500);
+        else if (sprt_music.getBoundingRectangle().contains(ScreenX,ScreenY)|
+                sprt_unmusic.getBoundingRectangle().contains(ScreenX,ScreenY)){
+            music_b=!music_b;
+            //score_num.addScore(1500);
         }
         else
         //вывод из паузы
