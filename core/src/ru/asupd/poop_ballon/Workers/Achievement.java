@@ -64,8 +64,8 @@ public class Achievement {
     }
     public boolean draw_current_medal(SpriteBatch sb){
         int diff= getCurrent_difficult_up();
-        font.draw(sb," x1 :"+st_x1+" x2 :"+st_x2+" x3 :"+st_x3+" x4 :"+st_x4+" x5 :"+st_x5,10,780);
-        font.draw(sb," n1 :"+nst_x1+" n2 :"+nst_x2+" n3 :"+nst_x3+" n4 :"+nst_x4+" n5 :"+nst_x5,10,760);
+        //font.draw(sb," x1 :"+st_x1+" x2 :"+st_x2+" x3 :"+st_x3+" x4 :"+st_x4+" x5 :"+st_x5,10,780);
+        //font.draw(sb," n1 :"+nst_x1+" n2 :"+nst_x2+" n3 :"+nst_x3+" n4 :"+nst_x4+" n5 :"+nst_x5,10,760);
         if (diff>=1){
                 sb.draw(medals.get(diff - 1), local_x , local_y , 60,80);
         return true;

@@ -69,19 +69,7 @@ public class Settings {
       //      System.exit(0);
        // }
 
-        //Перепроверка ачивок
-        if (!pref.contains("achive_0"))
-        {
-            if (playServices_my!=null) {
-               // playServices_my.unlockAchievement(0);
-                pref.putBoolean("achive_0", true);
 
-            }else
-            {
-                pref.putBoolean("achive_0", false);
-            }
-        }
-        pref.flush();
         //Первый запуск
 
         if (!pref.contains("first_start")){
@@ -257,7 +245,7 @@ public class Settings {
         else if (sprt_music.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_unmusic.getBoundingRectangle().contains(ScreenX,ScreenY)){
             music_b=!music_b;
-            playServices_my.unlockAchievement(0);
+
             //score_num.addScore(1500);
         }
         else

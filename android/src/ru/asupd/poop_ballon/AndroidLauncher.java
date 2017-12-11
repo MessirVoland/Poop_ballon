@@ -188,17 +188,14 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	}
 
 	@Override
-	public void unlockAchievement(int count) {
-		if (isSignedIn()==true){
-			switch (count) {
-				case 0://achievement_alphapeople
-					Games.Achievements.unlock(gameHelper.getApiClient(), "CgkIvYetxegNEAIQAw");
-					break;
-			}
+	public void unlockAchievement(String id_achiv) {
+		if (isSignedIn()==true) {
+			Games.Achievements.unlock(gameHelper.getApiClient(), id_achiv);
 		}
-		else {
-			//Toast.makeText(this, "Need to SignIn to Get Achivement", Toast.LENGTH_SHORT).show();
+		else{
+			signIn();
 		}
+
 	}
 
 	@Override
@@ -206,7 +203,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		if (isSignedIn() == true)
 		{System.out.println("Signet");
 			Games.Leaderboards.submitScore(gameHelper.getApiClient(),
-					getString(R.string.leaderboard_hi_score), highScore);
+					getString(R.string.leaderboard_world_high_score), highScore);
 		}
 		else
 		{
@@ -232,7 +229,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		if (isSignedIn() == true)
 		{
 			startActivityForResult(Games.Leaderboards.getLeaderboardIntent(gameHelper.getApiClient(),
-					getString(R.string.leaderboard_hi_score)), requestCode);
+					getString(R.string.leaderboard_world_high_score)), requestCode);
 		}
 		else
 		{
