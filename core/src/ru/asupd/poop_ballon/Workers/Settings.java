@@ -103,10 +103,10 @@ public class Settings {
 
         restart.setPosition(60,270);
 
-        leaderboard.scale(0.8f);
+        //leaderboard.scale(0.8f);
         leaderboard.setPosition(210,310);
 
-        sprt_achiv.scale(0.4f);
+        //sprt_achiv.scale(0.4f);
         sprt_achiv.setPosition(320,310);
 
 
