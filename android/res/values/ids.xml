@@ -8,6 +8,8 @@ Save this file as res/values/games-ids.xml in your project.
     <string name="app_id" translatable="false">474739327933</string>
     <!-- package_name -->
     <string name="package_name" translatable="false">ru.detone_studio.pop_balloon.free</string>
-    <!-- leaderboard Hi Score -->
-    <string name="leaderboard_hi_score" translatable="false">CgkIvYetxegNEAIQAQ</string>
+    <!-- achievement Alpha-people -->
+    <string name="achievement_alphapeople" translatable="false">CgkIvYetxegNEAIQAw</string>
+    <!-- leaderboard World High Score -->
+    <string name="leaderboard_world_high_score" translatable="false">CgkIvYetxegNEAIQAQ</string>
 </resources>

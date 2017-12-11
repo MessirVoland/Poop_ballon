@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector3;
 import ru.asupd.poop_ballon.States.PlayState;
 
 import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
+import static ru.asupd.poop_ballon.States.PlayState.achivements_gps;
 import static ru.asupd.poop_ballon.States.PlayState.ads_clicker;
 import static ru.asupd.poop_ballon.States.PlayState.faq;
 import static ru.asupd.poop_ballon.States.PlayState.pause;
@@ -91,6 +92,8 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                             PlayState.make_poop_Sound();
                             //System.out.println("Hearthballon_clicked, clickes: " + PlayState.hearth_balloon.getClicks());
 
+
+
                             PlayState.shaker.shake(0.40f);
                             if (PlayState.hearth_balloon.getClicks() == 2) {
                                 //PlayState.current_alpha_background = 2.0f;
@@ -110,6 +113,12 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
             //Обработка обычных шаров
             //max_combo=0;
             PlayState.current_combo = 0;
+
+            //System.out.println("Act + "+achivements_gps.trigger_Alpha_People());
+            if (!achivements_gps.trigger_Alpha_People()){
+                achivements_gps.unlock_Alpha_People();
+               // System.out.println("Trigger Achivment");
+            }
 
             //Клик по шарам для проверки комбо, да долго проверять клик по шарам дважды но ничего лучше не придумал
             final int finalScreenX = screenX;

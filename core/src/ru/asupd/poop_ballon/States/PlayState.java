@@ -27,6 +27,7 @@ import ru.asupd.poop_ballon.Sprites.Boss_balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
 import ru.asupd.poop_ballon.Sprites.Hearth_balloon;
 import ru.asupd.poop_ballon.Sprites.Star;
+import ru.asupd.poop_ballon.Workers.Achivements_GPS;
 import ru.asupd.poop_ballon.Workers.Ads_Clicker;
 import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Balloons_manager;
@@ -87,7 +88,7 @@ public class PlayState extends State {
     private static Music background_Music,boss_Music;//музыка
 
     public final static float ANIMATION_TIME=0.266f;//время анимации
-    private Preferences prefs;//для храниния данных
+    public static Preferences prefs;//для храниния данных
     private int load_hiscore;//макс счет
 
     public static float volume;//звук хлопков)
@@ -166,20 +167,16 @@ public class PlayState extends State {
     private int effect_500=0;
     private boolean beat_highscore;
 
+    public static Achivements_GPS achivements_gps=new Achivements_GPS();
+
     PlayState(GameStateManager gsm) {
         super(gsm);
-
-
-
 
         button_fb.setPosition(-42,680);
         button_fb.scale(-0.5f);
 
         button_vk.setPosition(30,680);
         button_vk.scale(-0.5f);
-
-
-
 
         perfomancecounter = new PerformanceCounter("Counter");
         camera.setToOrtho(false, 480 , 800 );
