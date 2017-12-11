@@ -5,9 +5,9 @@ Save this file as res/values/games-ids.xml in your project.
 -->
 <resources>
     <!-- app_id -->
-    <string name="app_id" translatable="false">798641657136</string>
+    <string name="app_id" translatable="false">474739327933</string>
     <!-- package_name -->
     <string name="package_name" translatable="false">ru.detone_studio.pop_balloon.free</string>
     <!-- leaderboard Hi Score -->
-    <string name="leaderboard_hi_score" translatable="false">CgkIsKqClp8XEAIQAA</string>
+    <string name="leaderboard_hi_score" translatable="false">CgkIvYetxegNEAIQAQ</string>
 </resources>

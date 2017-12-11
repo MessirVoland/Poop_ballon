@@ -198,7 +198,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 			}
 		}
 		else {
-			Toast.makeText(this, "Need to SignIn to Get Achivement", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "Need to SignIn to Get Achivement", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -207,7 +207,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		if (isSignedIn() == true)
 		{System.out.println("Signet");
 			Games.Leaderboards.submitScore(gameHelper.getApiClient(),
-					"CgkIsKqClp8XEAIQAA", highScore);
+					getString(R.string.leaderboard_hi_score), highScore);
 		}
 		else
 		{

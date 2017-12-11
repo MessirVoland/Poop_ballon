@@ -1,11 +1,11 @@
 android {
     signingConfigs {
         Config_key {
-           // keyAlias 'pop balloon'
-            //keyPassword 'zorrffff57'
+            keyAlias 'Pop_balloon'
+            keyPassword 'xsw2ZAQ!'
            // storeFile file('/home/asupd/Desktop/key/Detone_games.jks')
-           // storeFile file('C:/Detone_games.jks')
-           // storePassword 'bzoqmort39'
+            storeFile file('C:/Detone_games.jks')
+            storePassword 'bzoqmort39'
         }
     }
     buildToolsVersion "26.0.1"
@@ -35,11 +35,11 @@ android {
     productFlavors {
         free {
             applicationId "ru.detone_studio.pop_balloon.free"
-            versionName '0.9.8.3'
+            versionName '0.9.8.4'
             minSdkVersion 16
             targetSdkVersion 16
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            versionCode 1
+            versionCode 2
             multiDexEnabled true
             manifestPlaceholders = [
                     appIcon        : "@drawable/ic_launcher_free",
@@ -47,7 +47,7 @@ android {
             ]
             //resValue "string", "app_name", "Pop Balloon Free"
             //proguardFile 'C:/Users/Voland/Desktop/Poop ballon/android/proguard-rules.pro'
-            //signingConfig signingConfigs.Config_key
+            signingConfig signingConfigs.Config_key
         }
         full {
             applicationId "ru.asupd.poop_ballon.full"
