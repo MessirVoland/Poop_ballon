@@ -215,18 +215,17 @@ public class GameoverState extends State {
 
     @Override
     public void update(float dt) {
-        score.update(dt);
-        score_b.update(dt);
-        achievement.update(dt);
-        if (start_count_trigger){
-            if (score.getScore(true)>=score.getScore()){
-                start_count_trigger=false;
-                score_medal.addScore(score.getScore());
+            score.update(dt);
+            score_b.update(dt);
+            achievement.update(dt);
+            if (start_count_trigger) {
+                if (score.getScore(true) >= score.getScore()) {
+                    start_count_trigger = false;
+                    score_medal.addScore(score.getScore());
+                }
+            } else {
+                score_medal.update(dt);
             }
-        }else
-        {
-            score_medal.update(dt);
-        }
         if (start_gain_medal_trigger){
             if (score_medal.getScore()>=score_need.getScore()){
                 upCurrent_difficult_up();

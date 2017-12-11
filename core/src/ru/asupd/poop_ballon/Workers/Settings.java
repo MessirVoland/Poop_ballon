@@ -3,6 +3,7 @@ package ru.asupd.poop_ballon.Workers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -46,6 +47,8 @@ public class Settings {
     Sprite leaderboard=new Sprite(new Texture("high_ico.png"));
 
     Sprite plah_bgnd=new Sprite(Assets.instance.manager.get(Assets.plah));
+    NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("bck.9.png")),10,10,10,10);
+
 
     //private static final float POS_X_RESTART=-75,POS_Y_RESTART=-278;
 
@@ -134,6 +137,7 @@ public class Settings {
        //     one_time=true;
        //     sb.setShader(shader);
        // }
+        patch.draw(sb,10,10,460,780);
         plah_bgnd.draw(sb);
         sprt_music.draw(sb);
 
