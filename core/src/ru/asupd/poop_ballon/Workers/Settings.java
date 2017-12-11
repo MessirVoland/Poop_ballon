@@ -47,6 +47,7 @@ public class Settings {
     Sprite leaderboard=new Sprite(new Texture("high_ico.png"));
 
     Sprite plah_bgnd=new Sprite(Assets.instance.manager.get(Assets.plah));
+    Sprite bgnd_white= new Sprite(new Texture("white_bck.png"));
     NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("bck.9.png")),10,10,10,10);
 
 
@@ -128,7 +129,9 @@ public class Settings {
         //pos_vibro = new Vector3(70,480,0);
         hi_score_refresh();
 
-        plah_bgnd.setPosition(70,265);
+        bgnd_white.setPosition(0,0);
+
+        //plah_bgnd.setPosition(70,265);
 
 
     }
@@ -137,8 +140,10 @@ public class Settings {
        //     one_time=true;
        //     sb.setShader(shader);
        // }
-        patch.draw(sb,10,10,460,780);
-        plah_bgnd.draw(sb);
+
+        bgnd_white.draw(sb);
+        patch.draw(sb,70,265,340,270);
+        //plah_bgnd.draw(sb);
         sprt_music.draw(sb);
 
         sprt_achiv.draw(sb);
