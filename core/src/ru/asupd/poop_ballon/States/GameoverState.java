@@ -227,7 +227,7 @@ public class GameoverState extends State {
                 score_medal.update(dt);
             }
         if (start_gain_medal_trigger){
-            if (score_medal.getScore()>=score_need.getScore()){
+            if (score_medal.getScore(true)>=score_need.getScore()){
                 upCurrent_difficult_up();
                 score_need.setScore(NEEDED_SCORE[getCurrent_difficult_up()]);
 
