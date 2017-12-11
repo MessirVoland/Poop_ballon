@@ -31,7 +31,8 @@ public class Score {
     private int current_wooden;
     private int combo_num=0;
     private boolean own_time;
-    float ONE_FRAME_COUNT_local;
+    private float ONE_FRAME_COUNT_local;
+    private int faster;
 
 
 
@@ -58,7 +59,10 @@ public class Score {
         buffer=0;
     }
     public void update_render_time(){
-        ONE_FRAME_COUNT_local=TIME_COUNT_LAST_GAME_SCORE/(local_score+buffer);
+        System.out.println("Frame_time old "+ONE_FRAME_COUNT_local);
+        ONE_FRAME_COUNT_local=TIME_COUNT_LAST_GAME_SCORE/(buffer);
+        System.out.println("Frame_time new "+ONE_FRAME_COUNT_local);
+        faster=0;
     }
     public void setCombo(int combo_in,boolean wood,int current_wood){
         //if (!combo) {
@@ -78,14 +82,27 @@ public class Score {
             any_score = any_score / 10;
         }
     }
+
     public void update(float dt){
         if (buffer>0){
             current_dt+=dt;
             if (own_time){
+
                 if (current_dt >= ONE_FRAME_COUNT_local) {
+
+                    faster = (int) (current_dt/ONE_FRAME_COUNT_local);
                     current_dt = 0;
-                    buffer--;
-                    local_score++;
+
+                    if (buffer>=faster) {
+                        buffer -= faster;
+                        local_score+=faster;
+                    }else
+                    {
+                        faster=buffer;
+                        buffer=0;
+                        local_score+=faster;
+                        faster=0;
+                    }
                     setScore(local_score);
                 }
             }else {
@@ -123,6 +140,7 @@ public class Score {
 
 
     public void draw_center(SpriteBatch sb,int x,int y){
+
         int sm_pxl=String.valueOf(local_score).length();
         int sm_local=0;
         int peren;

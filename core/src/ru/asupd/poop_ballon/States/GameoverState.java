@@ -48,9 +48,9 @@ public class GameoverState extends State {
     //что за счет
     Score score= new Score(1.0f);
     //и это
-    Score score_b= new Score();
+    Score score_b= new Score(1.0f);
 
-    Score score_medal=new Score();
+    Score score_medal=new Score(1.0f);
     int score_medal_load;
 
     Score score_need=new Score();
@@ -164,7 +164,7 @@ public class GameoverState extends State {
             prefs.flush();
         }
         score_medal.setScore(score_medal_load);
-        score_medal.update_render_time();
+        //score_medal.update_render_time();
 
         score_need.setScore(NEEDED_SCORE[getCurrent_difficult_up()]);
 
@@ -175,11 +175,14 @@ public class GameoverState extends State {
         waiting=1.5f;
         settings.hi_score_refresh();
         achievement.start_anim();
+
         score.addScore(last_score);
         score.update_render_time();
+
         score_b.setScore(load_hiscore);
 
         ads=true;
+
 
 
     }
@@ -222,6 +225,7 @@ public class GameoverState extends State {
                 if (score.getScore(true) >= score.getScore()) {
                     start_count_trigger = false;
                     score_medal.addScore(score.getScore());
+                    score_medal.update_render_time();
                 }
             } else {
                 score_medal.update(dt);
