@@ -73,7 +73,7 @@ public class Settings {
         if (!pref.contains("achive_0"))
         {
             if (playServices_my!=null) {
-                playServices_my.unlockAchievement(0);
+               // playServices_my.unlockAchievement(0);
                 pref.putBoolean("achive_0", true);
 
             }else
@@ -257,6 +257,7 @@ public class Settings {
         else if (sprt_music.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_unmusic.getBoundingRectangle().contains(ScreenX,ScreenY)){
             music_b=!music_b;
+            playServices_my.unlockAchievement(0);
             //score_num.addScore(1500);
         }
         else

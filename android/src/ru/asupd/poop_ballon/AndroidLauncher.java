@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -220,7 +219,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		//Games.Achievements.unlock(gameHelper.getApiClient(),
 		//		getString(R.string.achievement_dum_dum));
 		if (isSignedIn()==true){
-			Games.Achievements.getAchievementsIntent(gameHelper.getApiClient());
+			startActivityForResult(Games.Achievements.getAchievementsIntent(gameHelper.getApiClient()), requestCode);
 		}
 		else
 		{
