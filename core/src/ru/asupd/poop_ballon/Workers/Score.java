@@ -59,9 +59,9 @@ public class Score {
         buffer=0;
     }
     public void update_render_time(){
-        System.out.println("Frame_time old "+ONE_FRAME_COUNT_local);
+        //System.out.println("Frame_time old "+ONE_FRAME_COUNT_local);
         ONE_FRAME_COUNT_local=TIME_COUNT_LAST_GAME_SCORE/(buffer);
-        System.out.println("Frame_time new "+ONE_FRAME_COUNT_local);
+        //System.out.println("Frame_time new "+ONE_FRAME_COUNT_local);
         faster=0;
     }
     public void setCombo(int combo_in,boolean wood,int current_wood){

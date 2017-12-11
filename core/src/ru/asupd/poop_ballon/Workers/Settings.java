@@ -93,7 +93,7 @@ public class Settings {
             pref.putBoolean("mute",mute);
             pref.putBoolean("vibro",vibro);
             pref.flush();
-            System.out.println("First start of game. vibro: "+vibro+" ,mute: "+mute);
+            //System.out.println("First start of game. vibro: "+vibro+" ,mute: "+mute);
         }
         else {
             mute=pref.getBoolean("mute");
