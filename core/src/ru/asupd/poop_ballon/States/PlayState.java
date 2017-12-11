@@ -162,13 +162,13 @@ public class PlayState extends State {
     private Sprite button_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
     private Sprite button_fb=new Sprite(Assets.instance.manager.get(Assets.button_fb));
     //private Sprite buuton_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
-    public static Sprite leaderboard=new Sprite(new Texture(Gdx.files.internal("high_ico.png")));
+
     private int effect_500=0;
     private boolean beat_highscore;
 
     PlayState(GameStateManager gsm) {
         super(gsm);
-        leaderboard.setPosition(10,350);
+
 
 
 
@@ -769,7 +769,8 @@ public class PlayState extends State {
             button_ads_free.draw(sb);
             button_fb.draw(sb);
             button_vk.draw(sb);
-            leaderboard.draw(sb);
+            //leaderboard.setPosition(10,350);
+            //leaderboard.draw(sb);
 
             if (!faq.isShow()) {
                 if (showed_ads) {
@@ -938,7 +939,7 @@ public class PlayState extends State {
         }
 
         if (pause){
-            sb.draw(pause_bgnd,((int) shaker.getCamera_sh().position.x)-240,((int) shaker.getCamera_sh().position.y)-400,480,800);
+            //sb.draw(pause_bgnd,((int) shaker.getCamera_sh().position.x)-240,((int) shaker.getCamera_sh().position.y)-400,480,800);
             settings.draw(sb,shaker);
         }
         if (game_over_ball_fly) {

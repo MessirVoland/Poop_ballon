@@ -167,6 +167,13 @@ public class Assets implements Disposable, AssetErrorListener {
     public static ParticleEffect medal_x8= new ParticleEffect();
     public static ParticleEffect medal_x9= new ParticleEffect();
 
+    //Опции
+    public static final AssetDescriptor<Texture> plah= new AssetDescriptor<Texture>("plah.png",Texture.class);
+    public static final AssetDescriptor<Texture> ico_mute= new AssetDescriptor<Texture>("sound_off.png",Texture.class);
+    public static final AssetDescriptor<Texture> ico_unmute= new AssetDescriptor<Texture>("sound_on.png",Texture.class);
+
+
+
 
 
     //private AssetManager assetManager;
@@ -334,6 +341,10 @@ public class Assets implements Disposable, AssetErrorListener {
         medal_x7.load(Gdx.files.internal("particles/medal_x7.p"),Gdx.files.internal("particles"));
         medal_x8.load(Gdx.files.internal("particles/medal_x8.p"),Gdx.files.internal("particles"));
         medal_x9.load(Gdx.files.internal("particles/medal_x9.p"),Gdx.files.internal("particles"));
+
+        manager.load(plah);
+        manager.load(ico_mute);
+        manager.load(ico_unmute);
 
 
 

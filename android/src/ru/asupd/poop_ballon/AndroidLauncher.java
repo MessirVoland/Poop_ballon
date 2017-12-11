@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -188,8 +189,17 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	}
 
 	@Override
-	public void unlockAchievement() {
-
+	public void unlockAchievement(int count) {
+		if (isSignedIn()==true){
+			switch (count) {
+				case 0://achievement_alphapeople
+					Games.Achievements.unlock(gameHelper.getApiClient(), "CgkIvYetxegNEAIQAw");
+					break;
+			}
+		}
+		else {
+			Toast.makeText(this, "Need to SignIn to Get Achivement", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override
@@ -199,12 +209,23 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 			Games.Leaderboards.submitScore(gameHelper.getApiClient(),
 					"CgkIsKqClp8XEAIQAA", highScore);
 		}
+		else
+		{
+			signIn();
+		}
 	}
 
 	@Override
 	public void showAchievement() {
 		//Games.Achievements.unlock(gameHelper.getApiClient(),
 		//		getString(R.string.achievement_dum_dum));
+		if (isSignedIn()==true){
+			Games.Achievements.getAchievementsIntent(gameHelper.getApiClient());
+		}
+		else
+		{
+			signIn();
+		}
 	}
 
 	@Override

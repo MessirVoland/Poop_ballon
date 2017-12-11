@@ -21,7 +21,7 @@ public class Score {
     private Sprite plus;//плюсик
 
     private Array<Sprite> frames_numbers;//числа'
-    private int[] megred_high_score = new int[7];//для отображения счета
+    private int[] megred_high_score = new int[15];//для отображения счета
     private int buffer=0;
     private float current_dt=0.0f;
     private float current_dt_combo=0.0f;
@@ -73,7 +73,7 @@ public class Score {
     }
     public void setScore(int any_score){
         local_score=any_score;
-        for (int k=0;k<=4;k++) {
+        for (int k=0;k<=6;k++) {
             megred_high_score[k] = any_score % 10;
             any_score = any_score / 10;
         }
@@ -131,6 +131,11 @@ public class Score {
         x+=40;
         peren= 10+sm_pxl*10;
         switch (sm_pxl){
+            default:
+                sb.draw(frames_numbers.get(megred_high_score[sm_pxl]), x -peren, y);
+                peren-=20;
+                sm_local++;
+                break;
             case 5:
                 sb.draw(frames_numbers.get(megred_high_score[5]), x -peren, y);
                 peren-=20;
@@ -162,6 +167,10 @@ public class Score {
         int sm_local=0;
         sm_pxl--;
         switch (sm_pxl){
+            default:
+                sb.draw(frames_numbers.get(megred_high_score[sm_pxl]), x + sm_local*20, y);
+                sm_local++;
+                break;
             case 5:
                 sb.draw(frames_numbers.get(megred_high_score[5]), x + sm_local*20, y);
                 sm_local++;

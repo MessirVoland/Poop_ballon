@@ -61,8 +61,9 @@ public class GameoverState extends State {
     final BitmapFont FontRed1;
     static final Preferences prefs = Gdx.app.getPreferences(APP_STORE_NAME);;
     int load_hiscore,last_score;
-    int[] score_best =new int[5];
-    int[] score_last =new int[5];
+    int size_of_score=6;
+    int[] score_best =new int[size_of_score];
+    int[] score_last =new int[size_of_score];
     Array<Star> final_stars;
     Sprite dark_medal;
     boolean ads=true;
@@ -76,6 +77,7 @@ public class GameoverState extends State {
     public static Array<ParticleEffect> special_effects = new Array<ParticleEffect>();
 
     Sprite progress_bar_bgnd= new Sprite(new Texture(Gdx.files.internal("bar.png")));
+    Sprite stick=new Sprite(new Texture("palka.png"));
 
     NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("progress.9.png")),10,10,10,10);
 
@@ -95,6 +97,7 @@ public class GameoverState extends State {
         }else {
             progress_bar_bgnd.setPosition(15, 15);
         }
+        stick.setPosition(210,progress_bar_bgnd.getY()+18);
 
 
 
@@ -113,6 +116,7 @@ public class GameoverState extends State {
 
         numbers = new Texture("numbers.png");
         big_balloon= new Texture("big_balloon.png");
+
         position = new Vector3(redball_x,0,0);
         velosity=new Vector3(-1200,0,0);
         frames_numbers = new Array<TextureRegion>();
@@ -129,7 +133,7 @@ public class GameoverState extends State {
         int local_score;
 
         local_score = load_hiscore;
-        for (int k=0;k<=4;k++) {
+        for (int k=0;k<size_of_score;k++) {
 
             score_best[k] = local_score % 10;
             local_score = local_score / 10;
@@ -137,7 +141,7 @@ public class GameoverState extends State {
 
         last_score = prefs.getInteger("last_match_score");
         local_score = last_score;
-        for (int k=0;k<=4;k++) {
+        for (int k=0;k<size_of_score;k++) {
             score_last[k] = local_score % 10;
             local_score = local_score / 10;
         }
@@ -350,8 +354,9 @@ public class GameoverState extends State {
 
 
         dark_medal.draw(sb);
-        score_medal.draw_center(sb,(int) progress_bar_bgnd.getX() + 100,(int) progress_bar_bgnd.getY() + 20);
-        score_need.draw_center(sb,(int) progress_bar_bgnd.getX() + 240,(int) progress_bar_bgnd.getY() + 20);
+        score_medal.draw_center(sb,(int) progress_bar_bgnd.getX() + 80,(int) progress_bar_bgnd.getY() + 20);
+        stick.draw(sb);
+        score_need.draw_center(sb,(int) progress_bar_bgnd.getX() + 260,(int) progress_bar_bgnd.getY() + 20);
 
 
         // if(
