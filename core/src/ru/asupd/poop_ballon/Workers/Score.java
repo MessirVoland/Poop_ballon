@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
-import static ru.asupd.poop_ballon.States.PlayState.balloons_manager;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.COMBO_TIME;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ONE_FRAME_COUNT;
@@ -21,18 +20,18 @@ public class Score {
     private Sprite plus;//плюсик
 
     private Array<Sprite> frames_numbers;//числа'
-    private int[] megred_high_score = new int[15];//для отображения счета
-    private int buffer=0;
+    private long[] megred_high_score = new long[15];//для отображения счета
+    private long buffer=0;
     private float current_dt=0.0f;
     private float current_dt_combo=0.0f;
-    private int local_score=0;
+    private long local_score=0;
     private boolean combo=false;
     private boolean wooden;
     private int current_wooden;
     private int combo_num=0;
     private boolean own_time;
     private float ONE_FRAME_COUNT_local;
-    private int faster;
+    private long faster;
 
 
 
@@ -75,7 +74,7 @@ public class Score {
             current_dt_combo=0;
       //  }
     }
-    public void setScore(int any_score){
+    public void setScore(long any_score){
         local_score=any_score;
         for (int k=0;k<=6;k++) {
             megred_high_score[k] = any_score % 10;
@@ -123,10 +122,10 @@ public class Score {
         }
 
     }
-    public int getScore(){
+    public long getScore(){
         return local_score+buffer;
     }
-    public int getScore(boolean with_out_buffer){
+    public long getScore(boolean with_out_buffer){
         return local_score;
     }
     public void end_count(){
@@ -134,7 +133,7 @@ public class Score {
         buffer=0;
     }
 
-    public void addScore(int added_score){
+    public void addScore(long added_score){
         buffer+=added_score;
     }
 
@@ -142,6 +141,7 @@ public class Score {
     public void draw_center(SpriteBatch sb,int x,int y){
 
         int sm_pxl=String.valueOf(local_score).length();
+        //System.out.println("asd: "+sm_pxl);
         int sm_local=0;
         int peren;
 
@@ -149,33 +149,44 @@ public class Score {
         x+=40;
         peren= 10+sm_pxl*10;
         switch (sm_pxl){
-            default:
-                sb.draw(frames_numbers.get(megred_high_score[sm_pxl]), x -peren, y);
+            case 9:
+                sb.draw(frames_numbers.get((int) megred_high_score[9]), x -peren, y);
                 peren-=20;
                 sm_local++;
-                break;
+            case 8:
+                sb.draw(frames_numbers.get((int) megred_high_score[8]), x -peren, y);
+                peren-=20;
+                sm_local++;
+            case 7:
+                sb.draw(frames_numbers.get((int) megred_high_score[7]), x -peren, y);
+                peren-=20;
+                sm_local++;
+            case 6:
+                sb.draw(frames_numbers.get((int) megred_high_score[6]), x -peren, y);
+                peren-=20;
+                sm_local++;
             case 5:
-                sb.draw(frames_numbers.get(megred_high_score[5]), x -peren, y);
+                sb.draw(frames_numbers.get((int) megred_high_score[5]), x -peren, y);
                 peren-=20;
                 sm_local++;
             case 4:
-                sb.draw(frames_numbers.get(megred_high_score[4]), x -peren, y);
+                sb.draw(frames_numbers.get((int) megred_high_score[4]), x -peren, y);
                 sm_local++;
                 peren-=20;
             case 3:
-                sb.draw(frames_numbers.get(megred_high_score[3]), x -peren, y);
+                sb.draw(frames_numbers.get((int) megred_high_score[3]), x -peren, y);
                 sm_local++;
                 peren-=20;
             case 2:
-                sb.draw(frames_numbers.get(megred_high_score[2]), x -peren, y);
+                sb.draw(frames_numbers.get((int) megred_high_score[2]), x -peren, y);
                 sm_local++;
                 peren-=20;
             case 1:
-                sb.draw(frames_numbers.get(megred_high_score[1]), x -peren, y);
+                sb.draw(frames_numbers.get((int)megred_high_score[1]), x -peren, y);
                 sm_local++;
                 peren-=20;
             case 0:
-                sb.draw(frames_numbers.get(megred_high_score[0]), x -peren, y);
+                sb.draw(frames_numbers.get((int) megred_high_score[0]), x -peren, y);
                 break;
         }
     }
@@ -186,26 +197,26 @@ public class Score {
         sm_pxl--;
         switch (sm_pxl){
             default:
-                sb.draw(frames_numbers.get(megred_high_score[sm_pxl]), x + sm_local*20, y);
+                sb.draw(frames_numbers.get((int)megred_high_score[sm_pxl]), x + sm_local*20, y);
                 sm_local++;
                 break;
             case 5:
-                sb.draw(frames_numbers.get(megred_high_score[5]), x + sm_local*20, y);
+                sb.draw(frames_numbers.get((int)megred_high_score[5]), x + sm_local*20, y);
                 sm_local++;
             case 4:
-                sb.draw(frames_numbers.get(megred_high_score[4]), x + sm_local*20, y);
+                sb.draw(frames_numbers.get((int)megred_high_score[4]), x + sm_local*20, y);
                 sm_local++;
             case 3:
-                sb.draw(frames_numbers.get(megred_high_score[3]), x + sm_local*20, y);
+                sb.draw(frames_numbers.get((int)megred_high_score[3]), x + sm_local*20, y);
                 sm_local++;
             case 2:
-                sb.draw(frames_numbers.get(megred_high_score[2]), x + sm_local*20, y);
+                sb.draw(frames_numbers.get((int)megred_high_score[2]), x + sm_local*20, y);
                 sm_local++;
             case 1:
-                sb.draw(frames_numbers.get(megred_high_score[1]), x + sm_local*20, y);
+                sb.draw(frames_numbers.get((int)megred_high_score[1]), x + sm_local*20, y);
                 sm_local++;
             case 0:
-                sb.draw(frames_numbers.get(megred_high_score[0]), x + sm_local*20, y);
+                sb.draw(frames_numbers.get((int)megred_high_score[0]), x + sm_local*20, y);
                 break;
         }
 
@@ -278,7 +289,7 @@ public class Score {
 
 
     }
-    public int getBuffer() {
+    public long getBuffer() {
         return buffer;
     }
     public void dispose(){

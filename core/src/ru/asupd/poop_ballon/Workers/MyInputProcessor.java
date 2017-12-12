@@ -146,6 +146,16 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        touchPos.set(screenX, screenY, 0);
+        PlayState.camera.unproject(touchPos);
+        screenX= (int) touchPos.x;
+        screenY= (int) touchPos.y;
+        //если пауза
+        if (PlayState.isPause()){
+            settings.clicked_up(screenX,screenY);
+            return true;
+
+        }
         return true;
     }
 

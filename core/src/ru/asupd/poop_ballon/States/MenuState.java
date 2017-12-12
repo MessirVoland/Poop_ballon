@@ -108,9 +108,10 @@ public class MenuState extends State {
     public void handleInput() {
         if(Gdx.input.justTouched()){
             if (current_dt>=0.25f){
-                current_dt=4.5f;
+                //current_dt=4.5f;
+                gsm.set(new PlayState(gsm));
             }
-            gsm.set(new PlayState(gsm));
+
         }
 
 
@@ -122,11 +123,11 @@ public class MenuState extends State {
         handleInput();
         current_dt+=dt;
 
-        if (current_dt>=4.0f){
+        if (current_dt>=3.0f){
             //Assets.make_linear();
             Assets.make_resized_balloons_linear();
             Assets.make_ads_linear();
-           // gsm.set(new PlayState(gsm));
+            gsm.set(new PlayState(gsm));
         }
     }
 

@@ -27,7 +27,6 @@ import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.PlayState.settings;
 import static ru.asupd.poop_ballon.States.PlayState.upCurrent_difficult_up;
-import static ru.asupd.poop_ballon.States.PlayState.zeroCurrent_difficult_up;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME_TAP_TO_PLAY;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATIO_TIME_TO_PLAY_SIZE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
@@ -166,7 +165,9 @@ public class GameoverState extends State {
         score_medal.setScore(score_medal_load);
         //score_medal.update_render_time();
 
-        score_need.setScore(NEEDED_SCORE[getCurrent_difficult_up()]);
+        if (getCurrent_difficult_up()<=8) {
+            score_need.setScore(NEEDED_SCORE[getCurrent_difficult_up()]);
+        }
 
 
         FontRed1 = new BitmapFont();
@@ -218,28 +219,37 @@ public class GameoverState extends State {
 
     @Override
     public void update(float dt) {
+        if (PlayState.isPause())
+        {
+            PlayState.setUNPAUSE();
+        }
             score.update(dt);
             score_b.update(dt);
             achievement.update(dt);
+
+
             if (start_count_trigger) {
-                if (score.getScore(true) >= score.getScore()) {
-                    start_count_trigger = false;
-                    score_medal.addScore(score.getScore());
-                    score_medal.update_render_time();
+                    if (score.getScore(true) >= score.getScore()) {
+                        start_count_trigger = false;
+                        score_medal.addScore(score.getScore());
+                        score_medal.update_render_time();
                 }
             } else {
                 score_medal.update(dt);
             }
-        if (start_gain_medal_trigger){
-            if (score_medal.getScore(true)>=score_need.getScore()){
+        if (getCurrent_difficult_up()<=8) {
+        if (start_gain_medal_trigger) {
+            if (score_medal.getScore(true) >= score_need.getScore()) {
                 upCurrent_difficult_up();
-                score_need.setScore(NEEDED_SCORE[getCurrent_difficult_up()]);
+                if (getCurrent_difficult_up() <= 8) {
+                    score_need.setScore(NEEDED_SCORE[getCurrent_difficult_up()]);
+                }
 
                 special_effects.add(new ParticleEffect(Assets.beam));
-                special_effects.get(special_effects.size-1).setPosition(240, 400);
-                special_effects.get(special_effects.size-1).start();
+                special_effects.get(special_effects.size - 1).setPosition(240, 400);
+                special_effects.get(special_effects.size - 1).start();
 
-                switch (getCurrent_difficult_up()){
+                switch (getCurrent_difficult_up()) {
                     case 1:
                         special_effects.add(new ParticleEffect(Assets.medal_x2));
                         special_effects.get(special_effects.size - 1).setPosition(240, 400);
@@ -282,6 +292,7 @@ public class GameoverState extends State {
                         break;
                 }
             }
+        }
             for(ParticleEffect special_effect :special_effects){
                 special_effect.update(dt);
             }
@@ -325,7 +336,7 @@ public class GameoverState extends State {
             if (score.getScore(true)>score_b.getScore()){
                 add_hicsore=false;
                 score_b.addScore(score.getScore()-score_b.getScore());
-                prefs.putInteger("highscore", score.getScore());
+                prefs.putInteger("highscore", (int) score.getScore());
                 prefs.flush();
             }
         }
@@ -353,17 +364,32 @@ public class GameoverState extends State {
         progress_bar_bgnd.draw(sb);
 
 
-        draw_progress_bar(sb,(score_medal.getScore(true)*10000)/score_need.getScore());
+        long stam_p=score_need.getScore();
+        long stap_2=score_medal.getScore(true);
+        stap_2*=10000;
+        //System.out.println(stam_p+" "+stap_2);
 
 
-        dark_medal.draw(sb);
-        score_medal.draw_center(sb,(int) progress_bar_bgnd.getX() + 80,(int) progress_bar_bgnd.getY() + 20);
-        stick.draw(sb);
-        score_need.draw_center(sb,(int) progress_bar_bgnd.getX() + 260,(int) progress_bar_bgnd.getY() + 20);
+
+
+        if (getCurrent_difficult_up()<=8) {
+            draw_progress_bar(sb,stap_2/stam_p);
+            dark_medal.draw(sb);
+            score_medal.draw_center(sb, (int) progress_bar_bgnd.getX() + 80, (int) progress_bar_bgnd.getY() + 20);
+            stick.draw(sb);
+            score_need.draw_center(sb, (int) progress_bar_bgnd.getX() + 260, (int) progress_bar_bgnd.getY() + 20);
+        }else
+        {
+            draw_progress_bar(sb,10000);
+            score_medal.draw_center(sb, (int) progress_bar_bgnd.getX() + 170, (int) progress_bar_bgnd.getY() + 20);
+        }
+        //System.out.println("asd: "+score_need.getScore());
 
 
         // if(
-        achievement.draw_current_medal(sb);
+        if (getCurrent_difficult_up()<=8) {
+            achievement.draw_current_medal(sb);
+        }
         //{
           //  if (!add_hicsore) {
         //        sb.draw(awesome, 95, 530, 290, 55);

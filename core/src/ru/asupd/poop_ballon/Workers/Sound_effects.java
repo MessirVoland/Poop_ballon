@@ -18,8 +18,10 @@ public final class Sound_effects {
     public static final float maxX = 1.7f;
 
     private Sound poop_Sound;//звук лопания
+    private Sound click_Sound;//звук нажатия нопки
     public Sound_effects() {
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("sounds/poop.mp3"));
+        click_Sound = Gdx.audio.newSound(Gdx.files.internal("sounds/button.wav"));
     }
     static {
 
@@ -31,6 +33,15 @@ public final class Sound_effects {
             float finalX = rand.nextFloat() * (maxX - minX) + minX;
             poop_Sound.setPitch(id, finalX);
             poop_Sound.setVolume(id, PlayState.volume);
+        }
+    }
+    public void click_sound(){
+        if (!PlayState.settings.isMute()) {
+            long id = click_Sound.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            click_Sound.setPitch(id, finalX);
+            click_Sound.setVolume(id, PlayState.volume);
         }
     }
 }

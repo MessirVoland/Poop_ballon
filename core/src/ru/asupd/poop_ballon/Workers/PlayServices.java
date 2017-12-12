@@ -10,7 +10,7 @@ public interface PlayServices
     public void signOut();
     public void rateGame();
     public void unlockAchievement(String id_achive);
-    public void submitScore(int highScore);
+    public void submitScore(long highScore);
     public void showAchievement();
     public void showScore();
     public boolean isSignedIn();

@@ -1,7 +1,5 @@
 package ru.asupd.poop_ballon.Workers;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
@@ -17,7 +15,6 @@ import static ru.asupd.poop_ballon.States.PlayState.settings;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_SPEED_RESIZE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_SCORE;
-import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_START;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.SEQUENCE_OF_HEARTH_BALLOON;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.SIZE_OF_COMBO_FOR_BOMB_SPAWN;
 

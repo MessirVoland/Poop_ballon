@@ -6,13 +6,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.math.Vector3;
+
 import ru.asupd.poop_ballon.States.PlayState;
 
 import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
-import static ru.asupd.poop_ballon.States.PlayState.set_mute;
+import static ru.asupd.poop_ballon.States.PlayState.sound_effects;
 
 /**
  * Класс для храния и обработки настроек
@@ -174,7 +173,10 @@ public class Settings {
         //        ((ScreenX>pos_restart.x)&(ScreenX<pos_restart.x+restart.getWidth()))){
         if (restart.getBoundingRectangle().contains(ScreenX,ScreenY)){
             //gsm.set(new PlayState(gsm));
-            PlayState.RESTART_STAGE();
+            restart.scale(0.2f);
+            sound_effects.click_sound();
+
+
         }
         else
         //звук
@@ -183,6 +185,8 @@ public class Settings {
         if (sprt_unmute.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_mute.getBoundingRectangle().contains(ScreenX,ScreenY))
         {
+            sprt_mute.scale(0.2f);
+            sprt_unmute.scale(0.2f);
             if (mute) {
                 mute=false;
                 System.out.println("unmute");
@@ -194,6 +198,7 @@ public class Settings {
                 System.out.println("mute");
                 PlayState.set_mute();
             }
+            sound_effects.click_sound();
             pref.putBoolean("mute", mute);
             pref.flush();
         }
@@ -204,7 +209,9 @@ public class Settings {
         if (sprt_vibro.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_unvibro.getBoundingRectangle().contains(ScreenX,ScreenY))
             {
-                    {
+                sprt_unvibro.scale(0.2f);
+                sprt_vibro.scale(0.2f);
+                sound_effects.click_sound();
                         if (vibro){
                             vibro=false;
                             pref.putBoolean("vibro",vibro);
@@ -217,7 +224,7 @@ public class Settings {
                             pref.putBoolean("vibro",vibro);
                             pref.flush();
                         }
-                    }
+
             }
         /*else
 
@@ -231,20 +238,29 @@ public class Settings {
         }*/
         //leaderboard
         else if (leaderboard.getBoundingRectangle().contains(ScreenX,ScreenY)){
+            sound_effects.click_sound();
+            leaderboard.scale(0.2f);
             if (playServices_my!=null) {
                 playServices_my.submitScore(pref.getInteger("highscore"));
                 playServices_my.showScore();
             }
         }
         else if (sprt_achiv.getBoundingRectangle().contains(ScreenX,ScreenY)){
+            sprt_achiv.scale(0.2f);
+            sound_effects.click_sound();
             if (playServices_my!=null){
                 playServices_my.showAchievement();
+
             }
 
         }
         else if (sprt_music.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_unmusic.getBoundingRectangle().contains(ScreenX,ScreenY)){
             music_b=!music_b;
+            sprt_music.scale(0.2f);
+            sprt_unmusic.scale(0.2f);
+
+            sound_effects.click_sound();
 
             //score_num.addScore(1500);
         }
@@ -264,6 +280,40 @@ public class Settings {
         }
 
     }
+    public void clicked_up(int ScreenX, int ScreenY) {
+        if (restart.getBoundingRectangle().contains(ScreenX,ScreenY)) {
+            restart.scale(-0.2f);
+            PlayState.RESTART_STAGE();
+        }
+
+        else if (sprt_music.getBoundingRectangle().contains(ScreenX,ScreenY)|
+                sprt_unmusic.getBoundingRectangle().contains(ScreenX,ScreenY)){
+            sprt_music.scale(-0.2f);
+            sprt_unmusic.scale(-0.2f);
+
+            //score_num.addScore(1500);
+        }else if (sprt_unmute.getBoundingRectangle().contains(ScreenX,ScreenY)|
+                sprt_mute.getBoundingRectangle().contains(ScreenX,ScreenY))
+        {
+            sprt_mute.scale(-0.2f);
+            sprt_unmute.scale(-0.2f);
+        }
+        else if (sprt_vibro.getBoundingRectangle().contains(ScreenX,ScreenY)|
+                sprt_unvibro.getBoundingRectangle().contains(ScreenX,ScreenY)) {
+            sprt_unvibro.scale(-0.2f);
+            sprt_vibro.scale(-0.2f);
+        }
+        else if (leaderboard.getBoundingRectangle().contains(ScreenX,ScreenY)){
+            leaderboard.scale(-0.2f);
+        }
+        else if (sprt_achiv.getBoundingRectangle().contains(ScreenX,ScreenY)){
+            sprt_achiv.scale(-0.2f);
+        }
+        else
+        {
+
+        }
+    }
 
     public boolean isMute() {
         return mute;
@@ -279,4 +329,6 @@ public class Settings {
     public int hi_score(){
         return hi_score;
     }
+
+
 }

@@ -128,31 +128,37 @@ public class Balloon {
                     break;
                 case 4:
                     sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_kript));
+                    sprite.setPosition(position.x,position.y);
                     effect = new ParticleEffect(Assets.ballon_n_st_kript);
                     effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 case 5:
                     sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_blueinit));
+                    sprite.setPosition(position.x,position.y);
                     effect = new ParticleEffect(Assets.ballon_n_st_initblue);
                     effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 case 6:
                     sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_pheon));
+                    sprite.setPosition(position.x,position.y);
                     effect = new ParticleEffect(Assets.ballon_n_st_pheon);
                     effect_gold = new ParticleEffect(Assets.gold_stars);
                     break;
                 case 7:
                     sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_bronze));
+                    sprite.setPosition(position.x,position.y);
                     effect = new ParticleEffect(Assets.ballon_n_st_bronze);
                     effect_gold = new ParticleEffect(Assets.gem_stars);
                     break;
                 case 8:
                     sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_silver));
+                    sprite.setPosition(position.x,position.y);
                     effect = new ParticleEffect(Assets.ballon_n_st_silver);
                     effect_gold = new ParticleEffect(Assets.gem_stars);
                     break;
                 default:
                     sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ns_x10));
+                    sprite.setPosition(position.x,position.y);
                     effect = new ParticleEffect(Assets.ballon_n_st_gold);
                     effect_gold = new ParticleEffect(Assets.gem_stars);
                     break;

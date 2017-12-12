@@ -1,23 +1,17 @@
 package ru.asupd.poop_ballon.States;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.PerformanceCounter;
-
-import java.util.Random;
 
 import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Sprites.BackGround;
@@ -27,6 +21,7 @@ import ru.asupd.poop_ballon.Sprites.Boss_balloon;
 import ru.asupd.poop_ballon.Sprites.Cloud;
 import ru.asupd.poop_ballon.Sprites.Hearth_balloon;
 import ru.asupd.poop_ballon.Sprites.Star;
+import ru.asupd.poop_ballon.Workers.Achievement;
 import ru.asupd.poop_ballon.Workers.Achivements_GPS;
 import ru.asupd.poop_ballon.Workers.Ads_Clicker;
 import ru.asupd.poop_ballon.Workers.Assets;
@@ -45,8 +40,6 @@ import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME_TAP_TO_
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATIO_TIME_TO_PLAY_SIZE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.IMMORTAL_TIME;
-import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_SCORE;
-import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_START;
 
 /**Игровой модуль
  * Created by Voland on 04.08.2017.
@@ -79,7 +72,7 @@ public class PlayState extends State {
 
     public static Score score_num;
 
-    public static int cautch_ball = 0;//поймано шаров
+    public static long cautch_ball = 0;//поймано шаров
     public static int miss_ball = 0;//пропущено шаров
 
     public static int balloons_count=0;
@@ -166,6 +159,8 @@ public class PlayState extends State {
 
     private int effect_500=0;
     private boolean beat_highscore;
+
+    private Achievement medals=new Achievement();
 
     public static Achivements_GPS achivements_gps=new Achivements_GPS();
 
@@ -756,10 +751,12 @@ public class PlayState extends State {
             tap_to_play.draw(sb);
 
             if (showed_ads) {
+                medals.draw_current_medal(sb,140,20,180,240);
                 sb.draw(your_high_score,130,170,211,74);
                 score_num.draw_center(sb,190,120);
             }else
             {
+                medals.draw_current_medal(sb,170,50,80,120);
                 sb.draw(your_high_score,130,100,211,74);
                 score_num.draw_center(sb,190,50);
             }
@@ -775,6 +772,8 @@ public class PlayState extends State {
                 }else
                     sb.draw(Assets.instance.manager.get(Assets.faq), 380, 0);
             }
+
+
         }
         if (hearth_balloon.isFly()|hearth_balloon.isPooped()) {
             sb.draw(hearth_balloon.getTexture(), hearth_balloon.getPosition().x, hearth_balloon.getPosition().y, 95, 169);
@@ -910,7 +909,7 @@ public class PlayState extends State {
 
                 for (int i = 0; i <= score_num.getScore() / 100; i++) {
                     //int local_speed = get_speed_for_balloon();
-                    stars.add(new Star(random(400) + 40, random(720) + 40));
+                    stars.add(new Star(random(440) , random(780) ));
                     //balloons.get(i).setAnimation_idle(poof_balloon_g);
                 }
                 for (Star star : stars) {
@@ -921,7 +920,7 @@ public class PlayState extends State {
                 //  balloons.add(new Balloon(random(4) * 96, -195 - random(50), get_speed_for_balloon(), !boss_balloon.isStarted()));
                 load_hiscore = prefs.getInteger("highscore");
                 cautch_ball = score_num.getScore();
-                prefs.putInteger("last_match_score", cautch_ball);
+                prefs.putInteger("last_match_score", (int) cautch_ball);
 
                 prefs.flush();
                 //if (load_hiscore < cautch_ball) {

@@ -6,8 +6,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,14 +14,12 @@ import android.widget.RelativeLayout;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 //import com.google.example.games.basegameutils.GameHelper;
 //import com.google.example.games.basegameutils.GameHelper;
 
-import ru.asupd.poop_ballon.MyGdxGame;
 import ru.asupd.poop_ballon.Workers.ActionResolver;
 import ru.asupd.poop_ballon.Workers.AdsController;
 import ru.asupd.poop_ballon.Workers.GameHelperListener;
@@ -199,7 +195,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	}
 
 	@Override
-	public void submitScore(int highScore) {
+	public void submitScore(long highScore) {
 		if (isSignedIn() == true)
 		{System.out.println("Signet");
 			Games.Leaderboards.submitScore(gameHelper.getApiClient(),
