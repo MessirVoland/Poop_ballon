@@ -6,6 +6,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import ru.asupd.poop_ballon.States.LoadingState;
 import ru.asupd.poop_ballon.States.MenuState;
 import ru.asupd.poop_ballon.States.PlayState;
 import ru.asupd.poop_ballon.Workers.ActionResolver;
@@ -55,7 +57,7 @@ public class MyGdxGame implements ApplicationListener {
 				showed_ads=true;}
 			}
 		});
-		gsm.push(new MenuState(gsm));
+		gsm.push(new LoadingState(gsm));
 
 	}
 

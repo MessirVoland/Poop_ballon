@@ -71,13 +71,7 @@ public class MenuState extends State {
    //     generator.dispose();
         //FontRed1.setColor(Color.RED);
 
-        Gdx.app.postRunnable(new Runnable() {
-            @Override
-            public void run() {
-                Assets.instance.load(new AssetManager());
 
-            }
-        });
         if (playServices_my!=null) {
             playServices_my.signIn();
         }
@@ -119,9 +113,9 @@ public class MenuState extends State {
                 //
         //Assets.loadParticleEffects();
         //FontRed1.draw(sb, " Время до старта 4.0f : "+ current_dt, 15, 790);
-        while (!Assets.instance.manager.update()) {
-            FontRed1.draw(sb, " Loanding >>> " + +Assets.instance.manager.getProgress() * 100 + "%", 15, 730);
-        }
+        //while (!Assets.instance.manager.update()) {
+        //    FontRed1.draw(sb, " Loanding >>> " + +Assets.instance.manager.getProgress() * 100 + "%", 15, 730);
+       // }
 
 
         /*
