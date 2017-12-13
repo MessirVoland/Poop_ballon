@@ -25,6 +25,8 @@ public class LoadingState extends State {
     private BitmapFont Font1=new BitmapFont();;
     Sprite progress_bar_bgnd= new Sprite(new Texture(Gdx.files.internal("bar.png")));
     NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("loading.9.png")),10,10,10,10);
+    Texture proc_t=new Texture("proc.png");
+    Sprite proc ;
     Score loading_score=new Score();
     float wait_100;
     //Thread loader;
@@ -34,12 +36,17 @@ public class LoadingState extends State {
         super(gsm);
         loadind_img.setPosition(0,0);
         wait_100=0;
+        proc_t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        proc=new Sprite(proc_t);
         one=true;
         if (showed_ads){
+            proc.setPosition(260,105);
             progress_bar_bgnd.setPosition(15,85);
         }else {
+            proc.setPosition(260,35);
             progress_bar_bgnd.setPosition(15, 15);
         }
+        proc.scale(0.2f);
 
         /*loader=new Thread(new Runnable() {
             @Override
@@ -101,6 +108,7 @@ public class LoadingState extends State {
             }
         }
         loading_score.draw_center(sb, (int) progress_bar_bgnd.getX() + 170, (int) progress_bar_bgnd.getY() + 20);
+        proc.draw(sb);
 
         sb.end();
     }
