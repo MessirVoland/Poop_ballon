@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.Locale;
 
 import ru.asupd.poop_ballon.GameStateManager;
+import ru.asupd.poop_ballon.Sprites.Cloud;
 import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Network_time;
 
@@ -28,6 +30,7 @@ public class MenuState extends State {
 
     private Texture background;
     private Texture balloon;
+    public static Array<Cloud> clouds;//массив шаров
     private float current_dt=0;
     private BitmapFont FontRed1;
     //private Network_time network_time;
@@ -75,6 +78,12 @@ public class MenuState extends State {
         if (playServices_my!=null) {
             playServices_my.signIn();
         }
+        //инициализация массива облаков
+        clouds = new Array<Cloud>();
+        for (int i = 0; i <= 4; i++){
+            //clouds.add(new Cloud(random(1000)-400,125*i+100+10,-random(25)-25));
+            clouds.add(new Cloud(random(680)-222,125*i+100+10,-random(25)-25));
+        }
     }
     @Override
     public void handleInput() {
@@ -95,6 +104,14 @@ public class MenuState extends State {
         handleInput();
         current_dt+=dt;
 
+        for (Cloud cloud : clouds) {
+            cloud.update(dt);
+            if (cloud.getPosition().x < -222) {
+                cloud.setPosition(+480 + 222 + random(0), cloud.getPosition().y);
+                cloud.change_texture();
+            }
+        }
+
         if (current_dt>=3.0f){
             //Assets.make_linear();
             Assets.make_resized_balloons_linear();
@@ -108,6 +125,13 @@ public class MenuState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0,480,800);
+
+        for (Cloud cloud : clouds) {
+            sb.setColor(1,1,1,0.9f);
+            sb.draw(cloud.getTexture(),cloud.getPosition().x,cloud.getPosition().y);
+            sb.setColor(1,1,1,1);
+        }
+
         sb.draw(balloon,22,320,436,370);
 
                 //

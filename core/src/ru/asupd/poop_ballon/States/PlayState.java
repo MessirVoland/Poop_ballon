@@ -273,10 +273,14 @@ public class PlayState extends State {
 
 
         //инициализация массива облаков
-        clouds = new Array<Cloud>();
-        for (int i = 0; i <= 4; i++){
-            //clouds.add(new Cloud(random(1000)-400,125*i+100+10,-random(25)-25));
-            clouds.add(new Cloud(random(680)-222,125*i+100+10,-random(25)-25));
+        if (MenuState.clouds.size>=1){
+            clouds=MenuState.clouds;
+        }else {
+            clouds = new Array<Cloud>();
+            for (int i = 0; i <= 4; i++) {
+                //clouds.add(new Cloud(random(1000)-400,125*i+100+10,-random(25)-25));
+                clouds.add(new Cloud(random(680) - 222, 125 * i + 100 + 10, -random(25) - 25));
+            }
         }
         //инициализация босса
         boss_balloon = new Boss_balloon(random(4)*96,-195-random(50),80);
@@ -746,12 +750,12 @@ public class PlayState extends State {
             if (showed_ads) {
                 medals.draw_current_medal(sb,175,35,120,160);
                 sb.draw(your_high_score,130,170,211,74);
-                score_num.draw_center(sb,190,120);
+                score_num.draw_center(sb,190,120,32,40);
             }else
             {
                 medals.draw_current_medal(sb,175,0,120,160);
                 sb.draw(your_high_score,130,100,211,74);
-                score_num.draw_center(sb,190,50);
+                score_num.draw_center(sb,190,50,32,40);
             }
             //button_ads_free.draw(sb);
 

@@ -185,7 +185,7 @@ public class Settings {
         //        ((ScreenX>pos_restart.x)&(ScreenX<pos_restart.x+restart.getWidth()))){
         if (restart.getBoundingRectangle().contains(ScreenX,ScreenY)){
             //gsm.set(new PlayState(gsm));
-            restart.scale(0.2f);
+            restart.scale(-0.2f);
             sound_effects.click_sound();
 
 
@@ -197,8 +197,8 @@ public class Settings {
         if (sprt_unmute.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_mute.getBoundingRectangle().contains(ScreenX,ScreenY))
         {
-            sprt_mute.scale(0.2f);
-            sprt_unmute.scale(0.2f);
+            sprt_mute.scale(-0.2f);
+            sprt_unmute.scale(-0.2f);
             if (mute) {
                 mute=false;
                 System.out.println("unmute");
@@ -221,8 +221,8 @@ public class Settings {
         if (sprt_vibro.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_unvibro.getBoundingRectangle().contains(ScreenX,ScreenY))
             {
-                sprt_unvibro.scale(0.2f);
-                sprt_vibro.scale(0.2f);
+                sprt_unvibro.scale(-0.2f);
+                sprt_vibro.scale(-0.2f);
                 sound_effects.click_sound();
                         if (vibro){
                             vibro=false;
@@ -251,7 +251,7 @@ public class Settings {
         //leaderboard
         else if (leaderboard.getBoundingRectangle().contains(ScreenX,ScreenY)){
             sound_effects.click_sound();
-            leaderboard.scale(0.2f);
+            leaderboard.scale(-0.2f);
             if (playServices_my!=null) {
                 playServices_my.submitScore(pref.getInteger("highscore"));
                 playServices_my.showScore();
@@ -260,18 +260,18 @@ public class Settings {
 
         else if (button_fb.getBoundingRectangle().contains(ScreenX,ScreenY)){
             sound_effects.click_sound();
-            button_fb.scale(0.2f);
+            button_fb.scale(-0.2f);
 
         }
 
         else if (button_vk.getBoundingRectangle().contains(ScreenX,ScreenY)){
             sound_effects.click_sound();
-            button_vk.scale(0.2f);
+            button_vk.scale(-0.2f);
 
         }
 
         else if (sprt_achiv.getBoundingRectangle().contains(ScreenX,ScreenY)){
-            sprt_achiv.scale(0.2f);
+            sprt_achiv.scale(-0.2f);
             sound_effects.click_sound();
             if (playServices_my!=null){
                 playServices_my.showAchievement();
@@ -282,8 +282,8 @@ public class Settings {
         else if (sprt_music.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_unmusic.getBoundingRectangle().contains(ScreenX,ScreenY)){
             music_b=!music_b;
-            sprt_music.scale(0.2f);
-            sprt_unmusic.scale(0.2f);
+            sprt_music.scale(-0.2f);
+            sprt_unmusic.scale(-0.2f);
 
             sound_effects.click_sound();
 
@@ -307,43 +307,43 @@ public class Settings {
     }
     public void clicked_up(int ScreenX, int ScreenY) {
         if (restart.getBoundingRectangle().contains(ScreenX,ScreenY)) {
-            restart.scale(-0.2f);
+            restart.scale(0.2f);
             PlayState.RESTART_STAGE();
         }
 
         else if (sprt_music.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_unmusic.getBoundingRectangle().contains(ScreenX,ScreenY)){
-            sprt_music.scale(-0.2f);
-            sprt_unmusic.scale(-0.2f);
+            sprt_music.scale(0.2f);
+            sprt_unmusic.scale(0.2f);
 
             //score_num.addScore(1500);
         }else if (sprt_unmute.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_mute.getBoundingRectangle().contains(ScreenX,ScreenY))
         {
-            sprt_mute.scale(-0.2f);
-            sprt_unmute.scale(-0.2f);
+            sprt_mute.scale(0.2f);
+            sprt_unmute.scale(0.2f);
         }
         else if (button_fb.getBoundingRectangle().contains(ScreenX,ScreenY)){
             sound_effects.click_sound();
-            button_fb.scale(-0.2f);
+            button_fb.scale(0.2f);
             Gdx.net.openURI("https://www.facebook.com/groups/detone.games/");
         }
 
         else if (button_vk.getBoundingRectangle().contains(ScreenX,ScreenY)){
             sound_effects.click_sound();
-            button_vk.scale(-0.2f);
+            button_vk.scale(0.2f);
             Gdx.net.openURI("https://vk.com/detone_games");
         }
         else if (sprt_vibro.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_unvibro.getBoundingRectangle().contains(ScreenX,ScreenY)) {
-            sprt_unvibro.scale(-0.2f);
-            sprt_vibro.scale(-0.2f);
+            sprt_unvibro.scale(0.2f);
+            sprt_vibro.scale(0.2f);
         }
         else if (leaderboard.getBoundingRectangle().contains(ScreenX,ScreenY)){
-            leaderboard.scale(-0.2f);
+            leaderboard.scale(0.2f);
         }
         else if (sprt_achiv.getBoundingRectangle().contains(ScreenX,ScreenY)){
-            sprt_achiv.scale(-0.2f);
+            sprt_achiv.scale(0.2f);
         }
         else
         {

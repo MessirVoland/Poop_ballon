@@ -53,10 +53,12 @@ public class Score {
         plus =new Sprite(new Texture("plus.png"));
         frames_numbers = new Array<Sprite>();
         for (int j=0;j<=9;j++){
+
             frames_numbers.add(new Sprite(numbers,j*25,0,25,31));
         }
         buffer=0;
     }
+
     public void update_render_time(){
         //System.out.println("Frame_time old "+ONE_FRAME_COUNT_local);
         ONE_FRAME_COUNT_local=TIME_COUNT_LAST_GAME_SCORE/(buffer);
@@ -187,6 +189,59 @@ public class Score {
                 peren-=20;
             case 0:
                 sb.draw(frames_numbers.get((int) megred_high_score[0]), x -peren, y);
+                break;
+        }
+    }
+
+    public void draw_center(SpriteBatch sb,int x,int y,int width,int height){
+
+        int sm_pxl=String.valueOf(local_score).length();
+        //System.out.println("asd: "+sm_pxl);
+        int sm_local=0;
+        int peren;
+
+        sm_pxl--;
+        x+=40;
+        peren= 10+sm_pxl*10;
+        switch (sm_pxl){
+            case 9:
+                sb.draw(frames_numbers.get((int) megred_high_score[9]), x -peren, y,width,height);
+                peren-=20;
+                sm_local++;
+            case 8:
+                sb.draw(frames_numbers.get((int) megred_high_score[8]), x -peren, y,width,height);
+                peren-=20;
+                sm_local++;
+            case 7:
+                sb.draw(frames_numbers.get((int) megred_high_score[7]), x -peren, y,width,height);
+                peren-=20;
+                sm_local++;
+            case 6:
+                sb.draw(frames_numbers.get((int) megred_high_score[6]), x -peren, y,width,height);
+                peren-=20;
+                sm_local++;
+            case 5:
+                sb.draw(frames_numbers.get((int) megred_high_score[5]), x -peren, y,width,height);
+                peren-=20;
+                sm_local++;
+            case 4:
+                sb.draw(frames_numbers.get((int) megred_high_score[4]), x -peren, y,width,height);
+                sm_local++;
+                peren-=20;
+            case 3:
+                sb.draw(frames_numbers.get((int) megred_high_score[3]), x -peren, y,width,height);
+                sm_local++;
+                peren-=20;
+            case 2:
+                sb.draw(frames_numbers.get((int) megred_high_score[2]), x -peren, y,width,height);
+                sm_local++;
+                peren-=20;
+            case 1:
+                sb.draw(frames_numbers.get((int)megred_high_score[1]), x -peren, y,width,height);
+                sm_local++;
+                peren-=20;
+            case 0:
+                sb.draw(frames_numbers.get((int) megred_high_score[0]), x -peren, y,width,height);
                 break;
         }
     }

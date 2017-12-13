@@ -60,6 +60,7 @@ public class Cloud extends Creature {
         }
     }
 
+
     @Override
     public void update(float dt) {
         velosity.scl(dt);
