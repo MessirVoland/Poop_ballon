@@ -85,6 +85,16 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> medal_silver = new AssetDescriptor<Texture>("medal_x9.png",Texture.class);
     public static final AssetDescriptor<Texture> medal_gold = new AssetDescriptor<Texture>("medal_x10.png",Texture.class);
 
+    public static final AssetDescriptor<Texture> medal_w_ice =    new AssetDescriptor<Texture>("medal_emty_x2.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_w_wooden = new AssetDescriptor<Texture>("medal_emty_x3.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_w_stone =  new AssetDescriptor<Texture>("medal_emty_x4.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_w_kript =  new AssetDescriptor<Texture>("medal_emty_x5.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_w_blueinit=new AssetDescriptor<Texture>("medal_emty_x6.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_w_pheon =  new AssetDescriptor<Texture>("medal_emty_x7.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_w_bronze = new AssetDescriptor<Texture>("medal_emty_x8.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_w_silver = new AssetDescriptor<Texture>("medal_emty_x9.png",Texture.class);
+    public static final AssetDescriptor<Texture> medal_w_gold =   new AssetDescriptor<Texture>("medal_emty_x10.png",Texture.class);
+
     public static final AssetDescriptor<Texture> back_ground_atlas = new AssetDescriptor<Texture>("bacgound_atlas.png",Texture.class);
 
     //Меню
@@ -243,6 +253,16 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(medal_bronze);
         manager.load(medal_silver);
         manager.load(medal_gold);
+
+        manager.load(medal_w_ice);
+        manager.load(medal_w_wooden);
+        manager.load(medal_w_stone);
+        manager.load(medal_w_kript);
+        manager.load(medal_w_blueinit);
+        manager.load(medal_w_pheon);
+        manager.load(medal_w_bronze);
+        manager.load(medal_w_silver);
+        manager.load(medal_w_gold);
 
         manager.load(back_ground_atlas);
 
@@ -403,6 +423,10 @@ public class Assets implements Disposable, AssetErrorListener {
     public static void make_medals_linear(){
         Assets.instance.manager.get(Assets.medal_ice).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     }
+    public static void make_medals_w_linear(){
+
+    }
+
     public static void make_ads_linear(){
         Assets.instance.manager.get(Assets.button_ads_free).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Assets.instance.manager.get(Assets.button_vk).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

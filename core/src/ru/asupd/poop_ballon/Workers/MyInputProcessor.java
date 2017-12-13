@@ -129,7 +129,6 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
             PlayState.bomb_balloon.clicked(finalScreenX,finalScreenY);
 
 
-
             if (PlayState.miss_ball>=1){
                 PlayState.hearth_balloon.setCan_fly(true);
             }

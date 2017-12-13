@@ -195,12 +195,12 @@ public class GameoverState extends State {
             //System.out.println("score.getScore()"+score.getScore());
             if (score.getScore(true)<score.getScore())
             {
-                score.end_count();
-                System.out.println("S4et");
+                //score.end_count();
+                //System.out.println("S4et");
             }
             else if (score_medal.getScore(true)<score_medal.getScore())
             {
-                score_medal.end_count();
+               // score_medal.end_count();
             }
             else
             {

@@ -46,6 +46,9 @@ public class Settings {
     Sprite sprt_achiv=new Sprite(new Texture("achives_ico.png"));
     Sprite leaderboard=new Sprite(new Texture("high_ico.png"));
 
+    private Sprite button_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
+    private Sprite button_fb=new Sprite(Assets.instance.manager.get(Assets.button_fb));
+
     Sprite plah_bgnd=new Sprite(Assets.instance.manager.get(Assets.plah));
     Sprite bgnd_white= new Sprite(new Texture("white_bck.png"));
     NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("bck.9.png")),10,10,10,10);
@@ -114,6 +117,11 @@ public class Settings {
         sprt_unvibro.setPosition(60,395);
 
 
+        button_fb.setPosition(165,165);
+        button_fb.scale(-0.4f);
+
+        button_vk.setPosition(55,165);
+        button_vk.scale(-0.4f);
 
         //vibro_tex = new Texture("vibro_on.png");
         //unvibro_tex = new Texture("vibro_off.png");
@@ -133,11 +141,15 @@ public class Settings {
        // }
 
         bgnd_white.draw(sb);
-        patch.draw(sb,70,265,340,270);
+        patch.draw(sb,70,185,340,360);
         //plah_bgnd.draw(sb);
         sprt_music.draw(sb);
 
         sprt_achiv.draw(sb);
+
+        button_fb.draw(sb);
+
+        button_vk.draw(sb);
 
 
         leaderboard.draw(sb);
@@ -245,6 +257,19 @@ public class Settings {
                 playServices_my.showScore();
             }
         }
+
+        else if (button_fb.getBoundingRectangle().contains(ScreenX,ScreenY)){
+            sound_effects.click_sound();
+            button_fb.scale(0.2f);
+
+        }
+
+        else if (button_vk.getBoundingRectangle().contains(ScreenX,ScreenY)){
+            sound_effects.click_sound();
+            button_vk.scale(0.2f);
+
+        }
+
         else if (sprt_achiv.getBoundingRectangle().contains(ScreenX,ScreenY)){
             sprt_achiv.scale(0.2f);
             sound_effects.click_sound();
@@ -297,6 +322,17 @@ public class Settings {
         {
             sprt_mute.scale(-0.2f);
             sprt_unmute.scale(-0.2f);
+        }
+        else if (button_fb.getBoundingRectangle().contains(ScreenX,ScreenY)){
+            sound_effects.click_sound();
+            button_fb.scale(-0.2f);
+            Gdx.net.openURI("https://www.facebook.com/groups/detone.games/");
+        }
+
+        else if (button_vk.getBoundingRectangle().contains(ScreenX,ScreenY)){
+            sound_effects.click_sound();
+            button_vk.scale(-0.2f);
+            Gdx.net.openURI("https://vk.com/detone_games");
         }
         else if (sprt_vibro.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_unvibro.getBoundingRectangle().contains(ScreenX,ScreenY)) {

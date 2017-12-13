@@ -152,26 +152,21 @@ public class PlayState extends State {
     public static Faq faq;
     public static Ads_Clicker ads_clicker;
 
-    public static Sprite button_ads_free;
-    private Sprite button_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
-    private Sprite button_fb=new Sprite(Assets.instance.manager.get(Assets.button_fb));
+    //public static Sprite button_ads_free;
+
     //private Sprite buuton_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
 
     private int effect_500=0;
     private boolean beat_highscore;
 
-    private Achievement medals=new Achievement();
+    private Achievement medals=new Achievement(true);
 
     public static Achivements_GPS achivements_gps=new Achivements_GPS();
 
     PlayState(GameStateManager gsm) {
         super(gsm);
 
-        button_fb.setPosition(-42,680);
-        button_fb.scale(-0.5f);
 
-        button_vk.setPosition(30,680);
-        button_vk.scale(-0.5f);
 
         perfomancecounter = new PerformanceCounter("Counter");
         camera.setToOrtho(false, 480 , 800 );
@@ -286,8 +281,6 @@ public class PlayState extends State {
         //инициализация босса
         boss_balloon = new Boss_balloon(random(4)*96,-195-random(50),80);
 
-
-
         if (random(100)>= CHANSE_OF_BOSS){
             boss_balloon.setLive(false);
         }
@@ -300,9 +293,9 @@ public class PlayState extends State {
         one_cast_music=true;
         current_dt_one_cast=0.0f;
         bomb_balloon = new Bomb_balloon();
-        button_ads_free=new Sprite(Assets.instance.manager.get(Assets.button_ads_free));
-        button_ads_free.setPosition(35,680);
-        button_ads_free.scale(-0.5f);
+        //button_ads_free=new Sprite(Assets.instance.manager.get(Assets.button_ads_free));
+        //button_ads_free.setPosition(35,680);
+        //button_ads_free.scale(-0.5f);
 
         beat_highscore=true;
 
@@ -751,18 +744,17 @@ public class PlayState extends State {
             tap_to_play.draw(sb);
 
             if (showed_ads) {
-                medals.draw_current_medal(sb,140,20,180,240);
+                medals.draw_current_medal(sb,175,35,120,160);
                 sb.draw(your_high_score,130,170,211,74);
                 score_num.draw_center(sb,190,120);
             }else
             {
-                medals.draw_current_medal(sb,170,50,80,120);
+                medals.draw_current_medal(sb,175,0,120,160);
                 sb.draw(your_high_score,130,100,211,74);
                 score_num.draw_center(sb,190,50);
             }
-            button_ads_free.draw(sb);
-            button_fb.draw(sb);
-            button_vk.draw(sb);
+            //button_ads_free.draw(sb);
+
             //leaderboard.setPosition(10,350);
             //leaderboard.draw(sb);
 

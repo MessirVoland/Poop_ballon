@@ -43,7 +43,22 @@ public class Achievement {
         medals.add(Assets.instance.manager.get(Assets.medal_gold));    //9
         resizer_medal = new Resizer(225,290);
         Assets.make_medals_linear();
+    }
 
+    public Achievement(boolean use_medal_without_x2){
+        medals=new Array<Texture>();
+        medals.add(Assets.instance.manager.get(Assets.medal_w_ice));
+        medals.add(Assets.instance.manager.get(Assets.medal_w_wooden));   //1
+        medals.add(Assets.instance.manager.get(Assets.medal_w_stone));    //2
+        //3
+        medals.add(Assets.instance.manager.get(Assets.medal_w_kript));    //4
+        medals.add(Assets.instance.manager.get(Assets.medal_w_blueinit));    //5
+        medals.add(Assets.instance.manager.get(Assets.medal_w_pheon));    //6//7
+        medals.add(Assets.instance.manager.get(Assets.medal_w_bronze));    //7
+        medals.add(Assets.instance.manager.get(Assets.medal_w_silver));    //8
+        medals.add(Assets.instance.manager.get(Assets.medal_w_gold));    //9
+        resizer_medal = new Resizer(225,290);
+        Assets.make_medals_w_linear();
     }
     public void draw_current_medal(SpriteBatch sb,int x,int y){
         int diff= getCurrent_difficult_up();
