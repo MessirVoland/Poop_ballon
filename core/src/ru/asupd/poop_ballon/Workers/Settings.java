@@ -32,6 +32,9 @@ public class Settings {
     //private Vector3 pos_mute;
     //private Vector3 pos_vibro;
 
+    int change_size=0;
+    Sprite game_name=new Sprite(new Texture("poop_balloon.png"));
+
     Sprite restart= new Sprite(Assets.instance.manager.get(Assets.restart_ico));
 
     Sprite sprt_mute=new Sprite(Assets.instance.manager.get(Assets.ico_mute));
@@ -79,17 +82,21 @@ public class Settings {
             pref.putBoolean("first_start",false);
             mute=false;
             vibro=true;
+            //music=true;
             music_b=true;
             pref.putBoolean("mute",mute);
             pref.putBoolean("vibro",vibro);
+            pref.putBoolean("music",music_b);
             pref.flush();
             //System.out.println("First start of game. vibro: "+vibro+" ,mute: "+mute);
         }
         else {
             mute=pref.getBoolean("mute");
-            music_b=true;
+            music_b=pref.getBoolean("music");
             vibro=pref.getBoolean("vibro");
         }
+
+        game_name.setPosition(10,500);
 
         restart.setPosition(60,270);
 
@@ -142,6 +149,7 @@ public class Settings {
 
         bgnd_white.draw(sb);
         patch.draw(sb,70,185,340,360);
+        game_name.draw(sb);
         //plah_bgnd.draw(sb);
         sprt_music.draw(sb);
 
@@ -181,11 +189,13 @@ public class Settings {
     }
 
     void clicked(int ScreenX, int ScreenY) {
+        change_size=0;
         //if (((ScreenY>pos_restart.y)&(ScreenY<pos_restart.y+restart.getHeight()))&
         //        ((ScreenX>pos_restart.x)&(ScreenX<pos_restart.x+restart.getWidth()))){
         if (restart.getBoundingRectangle().contains(ScreenX,ScreenY)){
             //gsm.set(new PlayState(gsm));
             restart.scale(-0.2f);
+            change_size=1;
             sound_effects.click_sound();
 
 
@@ -199,6 +209,7 @@ public class Settings {
         {
             sprt_mute.scale(-0.2f);
             sprt_unmute.scale(-0.2f);
+            change_size=2;
             if (mute) {
                 mute=false;
                 System.out.println("unmute");
@@ -223,6 +234,7 @@ public class Settings {
             {
                 sprt_unvibro.scale(-0.2f);
                 sprt_vibro.scale(-0.2f);
+                change_size=3;
                 sound_effects.click_sound();
                         if (vibro){
                             vibro=false;
@@ -252,6 +264,7 @@ public class Settings {
         else if (leaderboard.getBoundingRectangle().contains(ScreenX,ScreenY)){
             sound_effects.click_sound();
             leaderboard.scale(-0.2f);
+            change_size=4;
             if (playServices_my!=null) {
                 playServices_my.submitScore(pref.getInteger("highscore"));
                 playServices_my.showScore();
@@ -261,17 +274,20 @@ public class Settings {
         else if (button_fb.getBoundingRectangle().contains(ScreenX,ScreenY)){
             sound_effects.click_sound();
             button_fb.scale(-0.2f);
+            change_size=5;
 
         }
 
         else if (button_vk.getBoundingRectangle().contains(ScreenX,ScreenY)){
             sound_effects.click_sound();
             button_vk.scale(-0.2f);
+            change_size=6;
 
         }
 
         else if (sprt_achiv.getBoundingRectangle().contains(ScreenX,ScreenY)){
             sprt_achiv.scale(-0.2f);
+            change_size=7;
             sound_effects.click_sound();
             if (playServices_my!=null){
                 playServices_my.showAchievement();
@@ -282,7 +298,21 @@ public class Settings {
         else if (sprt_music.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_unmusic.getBoundingRectangle().contains(ScreenX,ScreenY)){
             music_b=!music_b;
+            if (music_b) {
+                //mute=false;
+                //System.out.println("unmute");
+                PlayState.set_unmus();
+            }
+            else
+            {
+                //mute=true;
+                //System.out.println("mute");
+                PlayState.set_mus();
+            }
+            pref.putBoolean("music", music_b);
+            pref.flush();
             sprt_music.scale(-0.2f);
+            change_size=8;
             sprt_unmusic.scale(-0.2f);
 
             sound_effects.click_sound();
@@ -306,44 +336,75 @@ public class Settings {
 
     }
     public void clicked_up(int ScreenX, int ScreenY) {
+        switch (change_size){
+            case 1:
+                restart.scale(0.2f);
+                break;
+            case 2:
+                sprt_mute.scale(0.2f);
+                sprt_unmute.scale(0.2f);
+                break;
+            case 3:
+                sprt_unvibro.scale(0.2f);
+                sprt_vibro.scale(0.2f);
+                break;
+            case 4:
+                leaderboard.scale(0.2f);
+                break;
+            case 5:
+                button_fb.scale(0.2f);
+                break;
+            case 6:
+                button_vk.scale(0.2f);
+                break;
+            case 7:
+                sprt_achiv.scale(0.2f);
+                break;
+            case 8:
+                sprt_music.scale(0.2f);
+                sprt_unmusic.scale(0.2f);
+                break;
+        }
         if (restart.getBoundingRectangle().contains(ScreenX,ScreenY)) {
-            restart.scale(0.2f);
-            PlayState.RESTART_STAGE();
+            //restart.scale(0.2f);
+            if (change_size==1) {
+                PlayState.RESTART_STAGE();
+            }
         }
 
         else if (sprt_music.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_unmusic.getBoundingRectangle().contains(ScreenX,ScreenY)){
-            sprt_music.scale(0.2f);
-            sprt_unmusic.scale(0.2f);
+            //sprt_music.scale(0.2f);
+            //sprt_unmusic.scale(0.2f);
 
             //score_num.addScore(1500);
         }else if (sprt_unmute.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_mute.getBoundingRectangle().contains(ScreenX,ScreenY))
         {
-            sprt_mute.scale(0.2f);
-            sprt_unmute.scale(0.2f);
+            //sprt_mute.scale(0.2f);
+            //sprt_unmute.scale(0.2f);
         }
         else if (button_fb.getBoundingRectangle().contains(ScreenX,ScreenY)){
             sound_effects.click_sound();
-            button_fb.scale(0.2f);
+            //button_fb.scale(0.2f);
             Gdx.net.openURI("https://www.facebook.com/groups/detone.games/");
         }
 
         else if (button_vk.getBoundingRectangle().contains(ScreenX,ScreenY)){
             sound_effects.click_sound();
-            button_vk.scale(0.2f);
+            //button_vk.scale(0.2f);
             Gdx.net.openURI("https://vk.com/detone_games");
         }
         else if (sprt_vibro.getBoundingRectangle().contains(ScreenX,ScreenY)|
                 sprt_unvibro.getBoundingRectangle().contains(ScreenX,ScreenY)) {
-            sprt_unvibro.scale(0.2f);
-            sprt_vibro.scale(0.2f);
+            //sprt_unvibro.scale(0.2f);
+            //sprt_vibro.scale(0.2f);
         }
         else if (leaderboard.getBoundingRectangle().contains(ScreenX,ScreenY)){
-            leaderboard.scale(0.2f);
+            //leaderboard.scale(0.2f);
         }
         else if (sprt_achiv.getBoundingRectangle().contains(ScreenX,ScreenY)){
-            sprt_achiv.scale(0.2f);
+            //sprt_achiv.scale(0.2f);
         }
         else
         {

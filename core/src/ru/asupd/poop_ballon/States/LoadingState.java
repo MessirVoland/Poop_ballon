@@ -40,11 +40,11 @@ public class LoadingState extends State {
         proc=new Sprite(proc_t);
         one=true;
         if (showed_ads){
-            proc.setPosition(260,105);
-            progress_bar_bgnd.setPosition(15,85);
+            proc.setPosition(260,310);
+            progress_bar_bgnd.setPosition(15,290);
         }else {
-            proc.setPosition(260,35);
-            progress_bar_bgnd.setPosition(15, 15);
+            proc.setPosition(260,310);
+            progress_bar_bgnd.setPosition(15, 290);
         }
         proc.scale(0.2f);
 

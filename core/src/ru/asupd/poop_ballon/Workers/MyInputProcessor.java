@@ -8,6 +8,7 @@ import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.States.PlayState.achivements_gps;
 import static ru.asupd.poop_ballon.States.PlayState.ads_clicker;
 import static ru.asupd.poop_ballon.States.PlayState.faq;
+import static ru.asupd.poop_ballon.States.PlayState.options;
 import static ru.asupd.poop_ballon.States.PlayState.pause;
 import static ru.asupd.poop_ballon.States.PlayState.perfomancecounter;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
@@ -54,12 +55,17 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
         //cтарт игры
         if ((!started)&(!pause)) {
             if (!PlayState.boss_balloon.isStarted()) {
-                if (faq.click(screenX,screenY)) {
+                //if (faq.click(screenX,screenY)) {
 
-                }else {
+                //}
+                if (options.getBoundingRectangle().contains(screenX,screenY)){
+
+                }
+                else {
                     if (!faq.isShow()&!ads_clicker.click(screenX,screenY)) {
                         //if (!leaderboard.getBoundingRectangle().contains(screenX,screenY)) {
                             started = true;
+                        System.out.println("Started game");
                             score_num.setScore(0);
                             settings.hi_score_refresh();
                        // }

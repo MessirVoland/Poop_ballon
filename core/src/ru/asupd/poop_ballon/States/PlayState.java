@@ -68,7 +68,7 @@ public class PlayState extends State {
     private float current_tap_to_play;
 
 
-	private Sprite options;//кнопка опции
+	public static Sprite options;//кнопка опции
 
     public static Score score_num;
 
@@ -393,10 +393,13 @@ public class PlayState extends State {
             if (game_over_dt>=1.2f){
 
                 if ((!game_over_ball_fly)&(game_over_well_play)){
-                    if (score_num.getBuffer()>=0) {
-                        game_over_ball_fly = true;
-                        game_over_dt = 0;
-                        System.out.println("cautch_ball : "+cautch_ball);
+
+                    if (combo_effects.size==0) {
+                        if (score_num.getBuffer() >= 0) {
+                            game_over_ball_fly = true;
+                            game_over_dt = 0;
+                            System.out.println("cautch_ball : " + cautch_ball);
+                        }
                     }
                 }
 
@@ -453,19 +456,19 @@ public class PlayState extends State {
 
                     switch (random(2)) {
                         case 0:
-                            System.out.println("Effect start cool");
+                            //System.out.println("Effect start cool");
                             combo_effects.add(new ParticleEffect(Assets.score_500_effect_cool));
                             combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
                             combo_effects.get(combo_effects.size - 1).start();
                             break;
                         case 1:
-                            System.out.println("Effect start wow");
+                            //System.out.println("Effect start wow");
                             combo_effects.add(new ParticleEffect(Assets.score_500_effect_wow));
                             combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
                             combo_effects.get(combo_effects.size - 1).start();
                             break;
                         case 2:
-                            System.out.println("Effect start amazing");
+                            //System.out.println("Effect start amazing");
                             combo_effects.add(new ParticleEffect(Assets.score_500_effect_amazing));
                             combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
                             combo_effects.get(combo_effects.size - 1).start();
@@ -762,12 +765,13 @@ public class PlayState extends State {
             //leaderboard.setPosition(10,350);
             //leaderboard.draw(sb);
 
-            if (!faq.isShow()) {
+            //Подсказка
+            /*if (!faq.isShow()) {
                 if (showed_ads) {
                     sb.draw(Assets.instance.manager.get(Assets.faq), 380, 70);
                 }else
                     sb.draw(Assets.instance.manager.get(Assets.faq), 380, 0);
-            }
+            }*/
 
 
         }
@@ -943,20 +947,24 @@ public class PlayState extends State {
 
 
     public static void set_mute(){
+        volume=0.0f;
+    }
+    public static void set_mus(){
         if (boss_balloon.isStarted()){
             boss_Music.pause();
         }else {
             background_Music.pause();
         }
-        volume=0.0f;
     }
-
-    public static void set_unmute(){
+    public static void set_unmus(){
         if (boss_balloon.isStarted()){
             boss_Music.play();
         }else {
             background_Music.play();
         }
+    }
+
+    public static void set_unmute(){
         volume=0.1f;
     }
     public static void make_poop_Sound(){
