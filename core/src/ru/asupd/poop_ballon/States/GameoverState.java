@@ -20,6 +20,7 @@ import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Score;
 
 
+import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.MyGdxGame.actionresolver_my;
 import static ru.asupd.poop_ballon.MyGdxGame.adsController_my;
 import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
@@ -65,7 +66,7 @@ public class GameoverState extends State {
     int[] score_last =new int[size_of_score];
     Array<Star> final_stars;
     Sprite dark_medal;
-    boolean ads=true;
+    private boolean ads=true;
     boolean start_count_trigger=true;
     boolean start_gain_medal_trigger=true;
 
@@ -307,15 +308,20 @@ public class GameoverState extends State {
                 playServices_my.submitScore(score_medal.getScore());
                 //actionresolver_my.submitScoreGPGS(score_b.getScore());
             }
-            if (ads){
 
+            int chance=random(10);
+
+            if (ads&chance<3){
+                System.out.println("started adsController: "+chance);
                 if (showed_ads){
 
                     ads=false;
                     //оказать рекламу
-                    System.out.println("adsController show");
                     adsController_my.showBannerAd_full();
                 }
+            }else if (ads){
+                System.out.println("started adsController: "+chance);
+                ads=false;
             }
         }
         currentdt+=dt;
