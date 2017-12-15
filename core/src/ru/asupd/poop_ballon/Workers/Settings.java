@@ -98,7 +98,7 @@ public class Settings {
 
         game_name.setPosition(10,500);
 
-        restart.setPosition(60,270);
+        restart.setPosition(60,200);
 
         //leaderboard.scale(0.8f);
         leaderboard.setPosition(210,310);
@@ -124,11 +124,11 @@ public class Settings {
         sprt_unvibro.setPosition(60,395);
 
 
-        button_fb.setPosition(165,165);
-        button_fb.scale(-0.4f);
+        button_fb.setPosition(260,165);
+        //button_fb.scale(-0.4f);
 
-        button_vk.setPosition(55,165);
-        button_vk.scale(-0.4f);
+        button_vk.setPosition(340,165);
+        //button_vk.scale(-0.4f);
 
         //vibro_tex = new Texture("vibro_on.png");
         //unvibro_tex = new Texture("vibro_off.png");
@@ -148,7 +148,7 @@ public class Settings {
        // }
 
         bgnd_white.draw(sb);
-        patch.draw(sb,70,185,340,360);
+        patch.draw(sb,45,180,390,420);   // patch.draw(sb,70,185,340,360);
         game_name.draw(sb);
         //plah_bgnd.draw(sb);
         sprt_music.draw(sb);
