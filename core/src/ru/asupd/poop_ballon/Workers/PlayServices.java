@@ -11,6 +11,7 @@ public interface PlayServices
     public void rateGame();
     public void unlockAchievement(String id_achive);
     public void submitScore(long highScore);
+    public void submitScore_ALLScore(long highScore);
     public void showAchievement();
     public void showScore();
     public boolean isSignedIn();

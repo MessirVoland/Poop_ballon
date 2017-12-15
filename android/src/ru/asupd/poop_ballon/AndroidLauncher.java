@@ -208,6 +208,19 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	}
 
 	@Override
+	public void submitScore_ALLScore(long highScore) {
+		if (isSignedIn() == true)
+		{System.out.println("Signet");
+			//Games.Leaderboards.submitScore(gameHelper.getApiClient(),
+			//		getString(R.string.leaderboard_world_high_score), highScore);
+		}
+		else
+		{
+			signIn();
+		}
+	}
+
+	@Override
 	public void showAchievement() {
 		//Games.Achievements.unlock(gameHelper.getApiClient(),
 		//		getString(R.string.achievement_dum_dum));
