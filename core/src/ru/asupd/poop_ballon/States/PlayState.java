@@ -909,7 +909,7 @@ public class PlayState extends State {
 
                 for (int i = 0; i <= score_num.getScore() / 100; i++) {
                     //int local_speed = get_speed_for_balloon();
-                    stars.add(new Star(random(440) , random(780) ));
+                    //stars.add(new Star(random(440) , random(780) ));
                     //balloons.get(i).setAnimation_idle(poof_balloon_g);
                 }
                 for (Star star : stars) {

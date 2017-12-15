@@ -34,6 +34,7 @@ public class LoadingState extends State {
 
     public LoadingState(GameStateManager gsm) {
         super(gsm);
+        camera.setToOrtho(false,480,800 );
         loadind_img.setPosition(0,0);
         wait_100=0;
         proc_t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -86,6 +87,7 @@ public class LoadingState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
+        sb.setProjectionMatrix(camera.combined);
         sb.begin();
         loadind_img.draw(sb);
         progress_bar_bgnd.draw(sb);

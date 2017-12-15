@@ -38,7 +38,8 @@ import static ru.asupd.poop_ballon.Workers.Base_mechanics.NEEDED_SCORE;
  */
 
 public class GameoverState extends State {
-    TextureRegion background;
+    //TextureRegion background;
+    Texture background;
     Texture your_score,your_best_score,awesome;
 
     Sprite tap_to_restart;
@@ -101,9 +102,9 @@ public class GameoverState extends State {
 
 
 
-        //background = new Texture("background_night.png");
-        background = new TextureRegion((Texture)(Assets.instance.manager.get(Assets.back_ground_atlas)));
-        background = new TextureRegion(background,4*background.getRegionWidth()/4,0,background.getRegionWidth()/4,background.getRegionHeight());
+        background = new Texture("background_gameover.png");
+        //background = new TextureRegion((Texture)(Assets.instance.manager.get(Assets.back_ground_atlas)));
+        //background = new TextureRegion(background,4*background.getRegionWidth()/4,0,background.getRegionWidth()/4,background.getRegionHeight());
 
         Texture texture_t=new Texture("restart.png");
         texture_t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
