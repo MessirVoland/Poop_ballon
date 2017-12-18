@@ -364,6 +364,7 @@ public class PlayState extends State {
 
     @Override
     public void update(final float dt) {
+        settings.update(dt);
 
         handleInput();
         //супер костыль)
@@ -1037,6 +1038,7 @@ public class PlayState extends State {
         PlayState.pause = pause;
     }
     public static void RESTART_STAGE() {
+        //game_over_ball_fly = true;
         gsm.set(new PlayState(gsm));
         PlayState.setUNPAUSE();
     }

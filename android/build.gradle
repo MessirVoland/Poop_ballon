@@ -35,11 +35,11 @@ android {
     productFlavors {
         free {
             applicationId "ru.detone_studio.pop_balloon.free"
-            versionName '0.9.8.4'
+            versionName '0.9.8.5'
             minSdkVersion 16
             targetSdkVersion 16
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            versionCode 2
+            versionCode 3
             multiDexEnabled true
             manifestPlaceholders = [
                     appIcon        : "@drawable/ic_launcher_free",

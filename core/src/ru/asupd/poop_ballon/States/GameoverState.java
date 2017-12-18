@@ -212,8 +212,13 @@ public class GameoverState extends State {
                     if (!next_game) {
                         next_game=true;
                         position.x=480;
-                        playState=new PlayState(gsm);
-                        PlayState.set_mus();
+                        Gdx.app.postRunnable(new Runnable() {
+                            @Override
+                            public void run() {
+                                playState=new PlayState(gsm);
+                                PlayState.set_mus();
+                            }
+                        });
                     }
                 }
             }

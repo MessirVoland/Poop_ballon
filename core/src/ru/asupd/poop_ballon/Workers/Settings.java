@@ -33,6 +33,8 @@ public class Settings {
     //private Vector3 pos_vibro;
 
     int change_size=0;
+    boolean any_button=false;
+    float current_dt=0.0f;
     Sprite game_name=new Sprite(new Texture("poop_balloon.png"));
 
     Sprite restart= new Sprite(Assets.instance.manager.get(Assets.restart_ico));
@@ -158,48 +160,48 @@ public class Settings {
         sb.draw(game_name,game_name.getX()+x,game_name.getY()+y);
         //plah_bgnd.draw(sb);
         //sprt_music.draw(sb);
-        //sprt_achiv.draw(sb);
-        sb.draw(sprt_achiv,sprt_achiv.getX(),sprt_achiv.getY());
-        //button_fb.draw(sb);
-        sb.draw(button_fb,button_fb.getX()+x,button_fb.getY()+y);
-        //button_vk.draw(sb);
-        sb.draw(button_vk,button_vk.getX()+x,button_vk.getY()+y);
-        //leaderboard.draw(sb);
-        sb.draw(leaderboard,leaderboard.getX()+x,leaderboard.getY()+y);
+        sprt_achiv.draw(sb);
+        //sb.draw(sprt_achiv,sprt_achiv.getX(),sprt_achiv.getY());
+        button_fb.draw(sb);
+        //sb.draw(button_fb,button_fb.getX()+x,button_fb.getY()+y);
+        button_vk.draw(sb);
+        //sb.draw(button_vk,button_vk.getX()+x,button_vk.getY()+y);
+        leaderboard.draw(sb);
+        //sb.draw(leaderboard,leaderboard.getX()+x,leaderboard.getY()+y);
 
 
         if (music_b){
-            //sprt_music.draw(sb);
-            sb.draw(sprt_music,sprt_music.getX()+x,sprt_music.getY()+y);
+            sprt_music.draw(sb);
+            //sb.draw(sprt_music,sprt_music.getX()+x,sprt_music.getY()+y);
         }
         else
         {
-            //sprt_unmusic.draw(sb);
-            sb.draw(sprt_unmusic,sprt_unmusic.getX()+x,sprt_unmusic.getY()+y);
+            sprt_unmusic.draw(sb);
+            //sb.draw(sprt_unmusic,sprt_unmusic.getX()+x,sprt_unmusic.getY()+y);
         }
 
         if (mute){
-            //sprt_mute.draw(sb);
-            sb.draw(sprt_mute,sprt_mute.getX()+x,sprt_mute.getY()+y);
+            sprt_mute.draw(sb);
+            //sb.draw(sprt_mute,sprt_mute.getX()+x,sprt_mute.getY()+y);
             //sb.draw(mute_tex,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78);
         }else{
-            //sprt_unmute.draw(sb);
-            sb.draw(sprt_unmute,sprt_unmute.getX()+x,sprt_unmute.getY()+y);
+            sprt_unmute.draw(sb);
+            //sb.draw(sprt_unmute,sprt_unmute.getX()+x,sprt_unmute.getY()+y);
             //sb.draw(unmute_tex,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78);
         }
 
         if (vibro){
-            //sprt_vibro.draw(sb);
-            sb.draw(sprt_vibro,sprt_vibro.getX()+x,sprt_vibro.getY()+y);
+            sprt_vibro.draw(sb);
+            //sb.draw(sprt_vibro,sprt_vibro.getX()+x,sprt_vibro.getY()+y);
             //sb.draw(vibro_tex,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78);
         }else{
-            //sprt_unvibro.draw(sb);
-            sb.draw(sprt_unvibro,sprt_unvibro.getX()+x,sprt_unvibro.getY()+y);
+            sprt_unvibro.draw(sb);
+            //sb.draw(sprt_unvibro,sprt_unvibro.getX()+x,sprt_unvibro.getY()+y);
             //sb.draw(unvibro_tex,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78);
         }
 
-        //restart.draw(sb);
-        sb.draw(restart,restart.getX()+x,restart.getY()+y);
+        restart.draw(sb);
+        //sb.draw(restart,restart.getX()+x,restart.getY()+y);
         //sb.draw(restart,((int) shaker.getCamera_sh().position.x)+POS_X_RESTART,((int) shaker.getCamera_sh().position.y)+POS_Y_RESTART);
     }
 
@@ -351,35 +353,9 @@ public class Settings {
 
     }
     public void clicked_up(int ScreenX, int ScreenY) {
-        switch (change_size){
-            case 1:
-                restart.scale(0.2f);
-                break;
-            case 2:
-                sprt_mute.scale(0.2f);
-                sprt_unmute.scale(0.2f);
-                break;
-            case 3:
-                sprt_unvibro.scale(0.2f);
-                sprt_vibro.scale(0.2f);
-                break;
-            case 4:
-                leaderboard.scale(0.2f);
-                break;
-            case 5:
-                button_fb.scale(0.2f);
-                break;
-            case 6:
-                button_vk.scale(0.2f);
-                break;
-            case 7:
-                sprt_achiv.scale(0.2f);
-                break;
-            case 8:
-                sprt_music.scale(0.2f);
-                sprt_unmusic.scale(0.2f);
-                break;
-        }
+        any_button=true;
+        current_dt=0.0f;
+
         if (restart.getBoundingRectangle().contains(ScreenX,ScreenY)) {
             //restart.scale(0.2f);
             if (change_size==1) {
@@ -429,6 +405,45 @@ public class Settings {
 
     public boolean isMute() {
         return mute;
+    }
+
+    public void update(float dt){
+        if (any_button){
+            current_dt+=dt;
+            if (current_dt>=0.25f){
+                current_dt=0.0f;
+                any_button=false;
+                switch (change_size){
+                    case 1:
+                        restart.scale(0.2f);
+                        break;
+                    case 2:
+                        sprt_mute.scale(0.2f);
+                        sprt_unmute.scale(0.2f);
+                        break;
+                    case 3:
+                        sprt_unvibro.scale(0.2f);
+                        sprt_vibro.scale(0.2f);
+                        break;
+                    case 4:
+                        leaderboard.scale(0.2f);
+                        break;
+                    case 5:
+                        button_fb.scale(0.2f);
+                        break;
+                    case 6:
+                        button_vk.scale(0.2f);
+                        break;
+                    case 7:
+                        sprt_achiv.scale(0.2f);
+                        break;
+                    case 8:
+                        sprt_music.scale(0.2f);
+                        sprt_unmusic.scale(0.2f);
+                        break;
+                }
+            }
+        }
     }
 
     public boolean isMus() {

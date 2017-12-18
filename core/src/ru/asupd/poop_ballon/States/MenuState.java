@@ -124,8 +124,14 @@ public class MenuState extends State {
         {
             if (one_time_play_state_load){
                 one_time_play_state_load=false;
-                playState=new PlayState(gsm);
-                PlayState.set_mus();
+                Gdx.app.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+                        playState=new PlayState(gsm);
+                        PlayState.set_mus();
+                    }
+                });
+
             }
             apear=false;
         }
