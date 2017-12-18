@@ -12,4 +12,6 @@ Save this file as res/values/games-ids.xml in your project.
     <string name="achievement_alphapeople" translatable="false">CgkIvYetxegNEAIQAw</string>
     <!-- leaderboard World High Score -->
     <string name="leaderboard_world_high_score" translatable="false">CgkIvYetxegNEAIQAQ</string>
+    <!-- leaderboard World Maximum Score -->
+    <string name="leaderboard_world_maximum_score" translatable="false">CgkIvYetxegNEAIQBA</string>
 </resources>

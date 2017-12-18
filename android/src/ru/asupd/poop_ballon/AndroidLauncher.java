@@ -211,8 +211,8 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	public void submitScore_ALLScore(long highScore) {
 		if (isSignedIn() == true)
 		{System.out.println("Signet_All_Score");
-			//Games.Leaderboards.submitScore(gameHelper.getApiClient(),
-			//		getString(R.string.leaderboard_world_high_score), highScore);
+			Games.Leaderboards.submitScore(gameHelper.getApiClient(),
+					getString(R.string.leaderboard_world_maximum_score), highScore);
 		}
 		else
 		{
