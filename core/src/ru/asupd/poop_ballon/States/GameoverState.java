@@ -73,8 +73,10 @@ public class GameoverState extends State {
 
     Vector3 velosity,position;
     Texture big_balloon;
+    boolean next_game=false;
     private boolean add_hicsore=true;
     public static final Achievement achievement= new Achievement();
+    PlayState playState;
     public static Array<ParticleEffect> special_effects = new Array<ParticleEffect>();
 
     Sprite progress_bar_bgnd= new Sprite(new Texture(Gdx.files.internal("bar.png")));
@@ -207,7 +209,12 @@ public class GameoverState extends State {
             else
             {
                 if (special_effects.size<=0) {
-                    gsm.set(new PlayState(gsm));
+                    if (!next_game) {
+                        next_game=true;
+                        position.x=480;
+                        playState=new PlayState(gsm);
+                        PlayState.set_mus();
+                    }
                 }
             }
             //score_b.addScore(score.getScore()-score_b.getScore());
@@ -221,6 +228,20 @@ public class GameoverState extends State {
 
     @Override
     public void update(float dt) {
+        if (next_game){
+            if (position.x>=-190) {
+                velosity.scl(dt);
+                position.add(velosity.x, 0, 0);
+                velosity.scl(1 / dt);
+            }else{
+                next_game=false;
+                playState.setPosition_red(position);
+                if (PlayState.settings.isMus()){
+                    PlayState.set_unmus();
+                }
+                gsm.set(playState);
+            }
+        }
         if (PlayState.isPause())
         {
             PlayState.setUNPAUSE();
@@ -326,10 +347,12 @@ public class GameoverState extends State {
             }
         }
         currentdt+=dt;
-        if (position.x>=-865) {
-            velosity.scl(dt);
-            position.add(velosity.x, 0, 0);
-            velosity.scl(1 / dt);
+        if (!next_game) {
+            if (position.x >= -865) {
+                velosity.scl(dt);
+                position.add(velosity.x, 0, 0);
+                velosity.scl(1 / dt);
+            }
         }
         current_tap_to_restart+=dt;
         if (current_tap_to_restart<=ANIMATION_TIME_TAP_TO_PLAY){
@@ -423,9 +446,7 @@ public class GameoverState extends State {
             score_b.draw_center(sb,185,160);
 
         }
-        if (position.x>=-865){
-            sb.draw(big_balloon, position.x, position.y, 860, 800);
-        }
+
 
         //achievement.draw_current_medal(sb,270,200);
 
@@ -438,6 +459,9 @@ public class GameoverState extends State {
                     special_effects.removeIndex(j);
                 }
             }
+        }
+        if (position.x>=-800){
+            sb.draw(big_balloon, position.x, position.y, 860, 800);
         }
         sb.end();
 

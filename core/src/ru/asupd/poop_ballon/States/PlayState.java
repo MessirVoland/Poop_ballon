@@ -90,6 +90,16 @@ public class PlayState extends State {
     private boolean game_over_start=false;//перероход в гейм овер
     private boolean game_over_well_play=false;
     private boolean game_over_ball_fly=false;
+
+    private boolean red_balloon_start=true;
+
+    public void setPosition_red(Vector3 position_red) {
+        this.position_red = position_red;
+    }
+
+    private Vector3 position_red;//Координаты красного шара
+    private Vector3 velosity_red=new Vector3(-1200,0,0);//вектор движения красного шара
+
     private float game_over_dt=0;
     private final static float GAME_OVER_ANIM=0.266f;
     private Texture well_played;
@@ -216,6 +226,8 @@ public class PlayState extends State {
         background_Music.setVolume(0.3f);
         background_Music.setLooping(true);
 
+
+
         boss_Music.setVolume(0.3f);
         boss_Music.setLooping(true);
 
@@ -303,6 +315,13 @@ public class PlayState extends State {
 
         beat_highscore=true;
 
+        if (settings.isMus()){
+            background_Music.play();
+        }else
+        {
+            background_Music.stop();
+        }
+
     }
 // Input
 
@@ -348,6 +367,19 @@ public class PlayState extends State {
 
         handleInput();
         //супер костыль)
+        if (red_balloon_start){
+            if (position_red==null){
+                position_red= new Vector3(480,0,0);
+            }
+            if (position_red.x>=-865) {
+                velosity_red.scl(dt);
+                position_red.add(velosity_red.x, 0, 0);
+                velosity_red.scl(1 / dt);
+            }else
+            {
+                red_balloon_start=false;
+            }
+        }
 
 
         if (one_cast_music){
@@ -436,6 +468,7 @@ public class PlayState extends State {
 
 
         if (!pause) {
+
 
             if (boss_balloon.isStarted()) {
                 boss_balloon.update(dt);
@@ -942,6 +975,12 @@ public class PlayState extends State {
             sb.draw(big_balloon, position.x, position.y,860, 800);
         }
 
+        if (position_red!=null) {
+            if (position_red.x >= -865) {
+                sb.draw(big_balloon, position_red.x, position_red.y, 860, 800);
+            }
+        }
+
         sb.end();
     }
 
@@ -949,6 +988,7 @@ public class PlayState extends State {
     public static void set_mute(){
         volume=0.0f;
     }
+
     public static void set_mus(){
         if (boss_balloon.isStarted()){
             boss_Music.pause();

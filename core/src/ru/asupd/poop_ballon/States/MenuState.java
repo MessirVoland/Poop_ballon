@@ -7,7 +7,9 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Locale;
@@ -30,10 +32,17 @@ public class MenuState extends State {
 
     private Texture background;
     private Texture balloon;
+    private Sprite logo;
+    Texture big_balloon;
+    Vector3 velosity,position;
+    boolean red_balloon_trigger=false;
     public static Array<Cloud> clouds;//массив шаров
     private float current_dt=0;
     private BitmapFont FontRed1;
+    private boolean apear=true,disapear=false;
     //private Network_time network_time;
+    boolean one_time_play_state_load=true;
+    PlayState playState;
     int var;
     final String FONT_CHARS = "本土化ローカリゼーションабвгдежзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyzАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|\\/?-+=()*&.;:,{}\"´`'<>";
 
@@ -61,6 +70,8 @@ public class MenuState extends State {
         background = new Texture("background_start.png");
         balloon  = new Texture("c_logo.png");
         balloon.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        logo = new Sprite(balloon);
+        logo.setPosition(22,320);
         //balloon.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         FontRed1 = new BitmapFont();
         final String FONT_PATH = "coquettec.ttf";
@@ -84,13 +95,16 @@ public class MenuState extends State {
             //clouds.add(new Cloud(random(1000)-400,125*i+100+10,-random(25)-25));
             clouds.add(new Cloud(random(680)-222,125*i+100+10,-random(25)-25));
         }
+        big_balloon= new Texture("big_balloon.png");
+        position = new Vector3(480,0,0);
+        velosity=new Vector3(-1200,0,0);
     }
     @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
             if (current_dt>=0.25f){
                 //current_dt=4.5f;
-                gsm.set(new PlayState(gsm));
+              //  gsm.set(new PlayState(gsm));
             }
 
         }
@@ -101,8 +115,52 @@ public class MenuState extends State {
 
     @Override
     public void update(float dt) {
+
         handleInput();
         current_dt+=dt;
+        if (current_dt<=1.0f){
+            apear=true;
+        }else
+        {
+            apear=false;
+        }
+
+        if (current_dt>=2.0f){
+            disapear=true;
+            if (one_time_play_state_load){
+                one_time_play_state_load=false;
+                playState=new PlayState(gsm);
+                PlayState.set_mus();
+            }
+        }else{
+            disapear=false;
+        }
+
+        if (current_dt>=3.0f){
+            //Assets.make_linear();
+            Assets.make_resized_balloons_linear();
+            Assets.make_ads_linear();
+            red_balloon_trigger=true;
+
+        }
+
+        if (red_balloon_trigger){
+            if (position.x>=-190) {
+                velosity.scl(dt);
+                position.add(velosity.x, 0, 0);
+                velosity.scl(1 / dt);
+            }else
+            {
+                red_balloon_trigger=false;
+                playState.setPosition_red(position);
+                if (PlayState.settings.isMus()){
+                    PlayState.set_unmus();
+                }
+
+                gsm.set(playState);
+            }
+        }
+
 
         for (Cloud cloud : clouds) {
             cloud.update(dt);
@@ -112,12 +170,7 @@ public class MenuState extends State {
             }
         }
 
-        if (current_dt>=3.0f){
-            //Assets.make_linear();
-            Assets.make_resized_balloons_linear();
-            Assets.make_ads_linear();
-            gsm.set(new PlayState(gsm));
-        }
+
     }
 
     @Override
@@ -132,7 +185,16 @@ public class MenuState extends State {
             sb.setColor(1,1,1,1);
         }
 
-        sb.draw(balloon,22,320,436,370);
+        //sb.draw(balloon,22,320,436,370);
+        if (!red_balloon_trigger) {
+            if (apear) {
+                logo.draw(sb, current_dt);
+            } else if (disapear) {
+                logo.draw(sb, 3.0f - current_dt);
+            } else {
+                logo.draw(sb);
+            }
+        }
 
                 //
         //Assets.loadParticleEffects();
@@ -185,7 +247,9 @@ public class MenuState extends State {
         //FontRed1.draw(sb," Локализация :"+ Locale.getDefault().getCountry(), 15, 40);
         //FontRed1.draw(sb," Локализация :"+ Locale.getDefault().getCountry(), 15, 40);
         //FontRed1.draw(sb," Локализация :"+ Locale.getDefault().getCountry(), 15, 40);
-
+        if (position.x>=-865){
+            sb.draw(big_balloon, position.x, position.y, 860, 800);
+        }
         sb.end();
 
     }

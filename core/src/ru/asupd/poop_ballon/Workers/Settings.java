@@ -416,6 +416,10 @@ public class Settings {
         return mute;
     }
 
+    public boolean isMus() {
+        return music_b;
+    }
+
     public boolean isVibro() {
         return vibro;
     }
