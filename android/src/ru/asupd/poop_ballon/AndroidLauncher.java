@@ -237,8 +237,9 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	public void showScore() {
 		if (isSignedIn() == true)
 		{
-			startActivityForResult(Games.Leaderboards.getLeaderboardIntent(gameHelper.getApiClient(),
-					getString(R.string.leaderboard_world_high_score)), requestCode);
+			startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(gameHelper.getApiClient()),requestCode);
+			//startActivityForResult(Games.Leaderboards.getLeaderboardIntent(gameHelper.getApiClient(),
+				//	getString(R.string.leaderboard_world_high_score)), requestCode);
 		}
 		else
 		{
