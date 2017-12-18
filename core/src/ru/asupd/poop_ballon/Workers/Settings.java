@@ -146,45 +146,60 @@ public class Settings {
        //     one_time=true;
        //     sb.setShader(shader);
        // }
+        float x=shaker.getCamera_sh().position.x;
+        float y=shaker.getCamera_sh().position.y;
+        x-=240;
+        y-=400;
 
-        bgnd_white.draw(sb);
-        patch.draw(sb,45,180,390,420);   // patch.draw(sb,70,185,340,360);
-        game_name.draw(sb);
+        //bgnd_white.draw(sb);
+        sb.draw(bgnd_white,bgnd_white.getX()+x,bgnd_white.getY()+y);
+        patch.draw(sb,45+x,180+y,390,420);   // patch.draw(sb,70,185,340,360);
+        //game_name.draw(sb);
+        sb.draw(game_name,game_name.getX()+x,game_name.getY()+y);
         //plah_bgnd.draw(sb);
-        sprt_music.draw(sb);
+        //sprt_music.draw(sb);
+        //sprt_achiv.draw(sb);
+        sb.draw(sprt_achiv,sprt_achiv.getX(),sprt_achiv.getY());
+        //button_fb.draw(sb);
+        sb.draw(button_fb,button_fb.getX()+x,button_fb.getY()+y);
+        //button_vk.draw(sb);
+        sb.draw(button_vk,button_vk.getX()+x,button_vk.getY()+y);
+        //leaderboard.draw(sb);
+        sb.draw(leaderboard,leaderboard.getX()+x,leaderboard.getY()+y);
 
-        sprt_achiv.draw(sb);
-
-        button_fb.draw(sb);
-
-        button_vk.draw(sb);
-
-
-        leaderboard.draw(sb);
 
         if (music_b){
-            sprt_music.draw(sb);
+            //sprt_music.draw(sb);
+            sb.draw(sprt_music,sprt_music.getX()+x,sprt_music.getY()+y);
         }
         else
         {
-            sprt_unmusic.draw(sb);
+            //sprt_unmusic.draw(sb);
+            sb.draw(sprt_unmusic,sprt_unmusic.getX()+x,sprt_unmusic.getY()+y);
         }
 
         if (mute){
-            sprt_mute.draw(sb);
+            //sprt_mute.draw(sb);
+            sb.draw(sprt_mute,sprt_mute.getX()+x,sprt_mute.getY()+y);
             //sb.draw(mute_tex,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78);
         }else{
-            sprt_unmute.draw(sb);
+            //sprt_unmute.draw(sb);
+            sb.draw(sprt_unmute,sprt_unmute.getX()+x,sprt_unmute.getY()+y);
             //sb.draw(unmute_tex,((int) shaker.getCamera_sh().position.x)+30,((int) shaker.getCamera_sh().position.y)-78);
         }
+
         if (vibro){
-            sprt_vibro.draw(sb);
+            //sprt_vibro.draw(sb);
+            sb.draw(sprt_vibro,sprt_vibro.getX()+x,sprt_vibro.getY()+y);
             //sb.draw(vibro_tex,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78);
         }else{
-            sprt_unvibro.draw(sb);
+            //sprt_unvibro.draw(sb);
+            sb.draw(sprt_unvibro,sprt_unvibro.getX()+x,sprt_unvibro.getY()+y);
             //sb.draw(unvibro_tex,((int) shaker.getCamera_sh().position.x)-180,((int) shaker.getCamera_sh().position.y)-78);
         }
-        restart.draw(sb);
+
+        //restart.draw(sb);
+        sb.draw(restart,restart.getX()+x,restart.getY()+y);
         //sb.draw(restart,((int) shaker.getCamera_sh().position.x)+POS_X_RESTART,((int) shaker.getCamera_sh().position.y)+POS_Y_RESTART);
     }
 

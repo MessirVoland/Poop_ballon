@@ -122,16 +122,17 @@ public class MenuState extends State {
             apear=true;
         }else
         {
-            apear=false;
-        }
-
-        if (current_dt>=2.0f){
-            disapear=true;
             if (one_time_play_state_load){
                 one_time_play_state_load=false;
                 playState=new PlayState(gsm);
                 PlayState.set_mus();
             }
+            apear=false;
+        }
+
+        if (current_dt>=2.0f){
+            disapear=true;
+
         }else{
             disapear=false;
         }
