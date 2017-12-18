@@ -306,7 +306,7 @@ public class GameoverState extends State {
             {
                 System.out.println("Submit score"+score_b.getScore());
                 playServices_my.submitScore(score_b.getScore());
-                playServices_my.submitScore(score_medal.getScore());
+                playServices_my.submitScore_ALLScore(score_medal.getScore());
                 //actionresolver_my.submitScoreGPGS(score_b.getScore());
             }
 
