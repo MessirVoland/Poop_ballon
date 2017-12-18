@@ -206,6 +206,9 @@ public class Settings {
     }
 
     void clicked(int ScreenX, int ScreenY) {
+        if (any_button){
+            button_press();
+        }
         change_size=0;
         //if (((ScreenY>pos_restart.y)&(ScreenY<pos_restart.y+restart.getHeight()))&
         //        ((ScreenX>pos_restart.x)&(ScreenX<pos_restart.x+restart.getWidth()))){
@@ -406,42 +409,45 @@ public class Settings {
     public boolean isMute() {
         return mute;
     }
+    public void button_press(){
+        current_dt=0.0f;
+        any_button=false;
+        switch (change_size){
+            case 1:
+                restart.scale(0.2f);
+                break;
+            case 2:
+                sprt_mute.scale(0.2f);
+                sprt_unmute.scale(0.2f);
+                break;
+            case 3:
+                sprt_unvibro.scale(0.2f);
+                sprt_vibro.scale(0.2f);
+                break;
+            case 4:
+                leaderboard.scale(0.2f);
+                break;
+            case 5:
+                button_fb.scale(0.2f);
+                break;
+            case 6:
+                button_vk.scale(0.2f);
+                break;
+            case 7:
+                sprt_achiv.scale(0.2f);
+                break;
+            case 8:
+                sprt_music.scale(0.2f);
+                sprt_unmusic.scale(0.2f);
+                break;
+        }
+    }
 
     public void update(float dt){
         if (any_button){
             current_dt+=dt;
             if (current_dt>=0.25f){
-                current_dt=0.0f;
-                any_button=false;
-                switch (change_size){
-                    case 1:
-                        restart.scale(0.2f);
-                        break;
-                    case 2:
-                        sprt_mute.scale(0.2f);
-                        sprt_unmute.scale(0.2f);
-                        break;
-                    case 3:
-                        sprt_unvibro.scale(0.2f);
-                        sprt_vibro.scale(0.2f);
-                        break;
-                    case 4:
-                        leaderboard.scale(0.2f);
-                        break;
-                    case 5:
-                        button_fb.scale(0.2f);
-                        break;
-                    case 6:
-                        button_vk.scale(0.2f);
-                        break;
-                    case 7:
-                        sprt_achiv.scale(0.2f);
-                        break;
-                    case 8:
-                        sprt_music.scale(0.2f);
-                        sprt_unmusic.scale(0.2f);
-                        break;
-                }
+                button_press();
             }
         }
     }
