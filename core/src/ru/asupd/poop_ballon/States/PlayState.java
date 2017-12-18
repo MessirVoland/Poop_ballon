@@ -884,8 +884,8 @@ public class PlayState extends State {
 
 
         if (current_immotal<=IMMORTAL_TIME) {
-            FontRed1.setColor(1, 0, 0, 1);
-            FontRed1.draw(sb, "IMMORTAL", 10, 770);
+            //FontRed1.setColor(1, 0, 0, 1);
+            //FontRed1.draw(sb, "IMMORTAL", 10, 770);
         }
 
         //Справочная информация
