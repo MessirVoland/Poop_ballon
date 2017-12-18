@@ -12,6 +12,7 @@ buildscript {
     dependencies {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
         classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.google.gms:google-services:3.1.1' // google-services plugin
         
 
     }
@@ -95,12 +96,15 @@ project(":android") {
 
         //compile "com.google.android.gms:play-services-games:11.0.4"
         //compile "com.google.android.gms:play-services-plus:8.4.0"
+
+       // compile 'com.google.firebase:firebase-core:11.6.2'
         compile 'com.google.android.gms:play-services-games:8.4.0'
         // 8.4 is the latest as of now, keep it updated
         compile project(':BaseGameUtils')
         
     }
 }
+
 
 project(":core") {
     apply plugin: "java"
@@ -141,3 +145,4 @@ project(":html") {
 tasks.eclipse.doLast {
     delete ".project"
 }
+//apply plugin: 'com.google.gms.google-services'

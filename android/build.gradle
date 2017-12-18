@@ -35,11 +35,11 @@ android {
     productFlavors {
         free {
             applicationId "ru.detone_studio.pop_balloon.free"
-            versionName '0.9.8.5'
+            versionName '0.9.8.6'
             minSdkVersion 16
             targetSdkVersion 16
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            versionCode 3
+            versionCode 4
             multiDexEnabled true
             manifestPlaceholders = [
                     appIcon        : "@drawable/ic_launcher_free",
@@ -172,4 +172,6 @@ idea {
 }
 dependencies {
     compile 'com.android.support:multidex:1.0.1'
+    //compile 'com.google.firebase:firebase-core:8.4.0'
 }
+//apply plugin: 'com.google.gms.google-services'
