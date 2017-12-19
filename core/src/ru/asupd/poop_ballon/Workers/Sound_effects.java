@@ -48,8 +48,8 @@ public final class Sound_effects {
         snd_heart= Gdx.audio.newSound(Gdx.files.internal("sounds/snd_heart.wav"));
         snd_bsg =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_bsg.wav"));
 
-        //snd_pop =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_pop.wav"));//не забыть
-        snd_pop  =  Gdx.audio.newSound(Gdx.files.internal("sounds/poop.mp3"));//не забыть
+        snd_pop =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_pop.wav"));//не забыть
+        //snd_pop  =  Gdx.audio.newSound(Gdx.files.internal("sounds/poop.mp3"));//не забыть
 
         snd_red =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_red.wav"));
         snd_steel =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_steel.wav"));
