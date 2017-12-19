@@ -87,6 +87,7 @@ public class GameoverState extends State {
 
 
 
+
     public GameoverState(GameStateManager gsm, float redball_x, Array<Star> stars) {
         super(gsm);
         dark_medal = new Sprite(new Texture(Gdx.files.internal("pse-medal.png")));
@@ -190,7 +191,7 @@ public class GameoverState extends State {
         ads=true;
 
 
-
+        sound_effects.snd_scores();
 
 
     }
@@ -207,12 +208,14 @@ public class GameoverState extends State {
             }
             else if (score_medal.getScore(true)<score_medal.getScore())
             {
+
                // score_medal.end_count();
             }
             else
             {
                 if (special_effects.size<=0) {
                     if (!next_game) {
+
                         sound_effects.snd_big_baloon();
                         next_game=true;
                         position.x=480;
@@ -238,6 +241,7 @@ public class GameoverState extends State {
 
     @Override
     public void update(float dt) {
+
         if (next_game){
             if (position.x>=-190) {
                 velosity.scl(dt);
@@ -270,6 +274,9 @@ public class GameoverState extends State {
                 }
             } else {
                 score_medal.update(dt);
+                if (score_medal.getBuffer()<=3){
+                    sound_effects.snd_scores_stop();
+                }
             }
         if (getCurrent_difficult_up()<=8) {
         if (start_gain_medal_trigger) {

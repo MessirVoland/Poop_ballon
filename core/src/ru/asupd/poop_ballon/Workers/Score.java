@@ -91,7 +91,7 @@ public class Score {
             if (own_time){
 
                 if (current_dt >= ONE_FRAME_COUNT_local) {
-                    sound_effects.snd_scores();
+
 
                     faster = (int) (current_dt/ONE_FRAME_COUNT_local);
                     current_dt = 0;

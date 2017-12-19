@@ -102,10 +102,10 @@ public final class Sound_effects {
     public void snd_pop(){
         if (!settings.isMute()) {
             long id =  snd_pop.play(PlayState.volume);
-            //Random rand = new Random();
-            //float finalX = rand.nextFloat() * (maxX - minX) + minX;
-            //snd_pop.setPitch(id, finalX);
-            //snd_pop.setVolume(id, PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_pop.setPitch(id, finalX);
+            snd_pop.setVolume(id, PlayState.volume);
         }
     }
     public void snd_bsg(){
@@ -169,7 +169,7 @@ public final class Sound_effects {
     }
     public void snd_life(){
         if (!settings.isMute()) {
-            System.out.println("sound_life");
+            //System.out.println("sound_life");
             long id = snd_life.play(PlayState.volume);
             Random rand = new Random();
             float finalX = rand.nextFloat() * (maxX - minX) + minX;
@@ -182,7 +182,7 @@ public final class Sound_effects {
 
     public void snd_titles(){
         if (!settings.isMute()) {
-            System.out.println("sound_life");
+            //System.out.println("sound_life");
             long id = snd_titles.play(PlayState.volume);
             Random rand = new Random();
             float finalX = rand.nextFloat() * (maxX - minX) + minX;
@@ -199,12 +199,16 @@ public final class Sound_effects {
             float finalX = rand.nextFloat() * (maxX - minX) + minX;
             snd_scores.setPitch(id, finalX);
             snd_scores.setVolume(id, PlayState.volume);
+            snd_scores.loop();
             //System.out.println("volume: "+PlayState.volume);
         }
     }
+    public void snd_scores_stop(){
+        snd_scores.stop();
+    }
     public void snd_progressl(){
         if (!settings.isMute()) {
-            System.out.println("sound_life");
+            //System.out.println("sound_life");
             long id = snd_progressl.play(PlayState.volume);
             Random rand = new Random();
             float finalX = rand.nextFloat() * (maxX - minX) + minX;
@@ -215,7 +219,7 @@ public final class Sound_effects {
     }
     public void snd_take_medal(){
         if (!settings.isMute()) {
-            System.out.println("sound_life");
+            //System.out.println("sound_life");
             long id = snd_take_medal.play(PlayState.volume);
             Random rand = new Random();
             float finalX = rand.nextFloat() * (maxX - minX) + minX;
