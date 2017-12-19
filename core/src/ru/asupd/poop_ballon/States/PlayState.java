@@ -498,18 +498,21 @@ public class PlayState extends State {
 
                     switch (random(2)) {
                         case 0:
+                            sound_effects.snd_titles();
                             //System.out.println("Effect start cool");
                             combo_effects.add(new ParticleEffect(Assets.score_500_effect_cool));
                             combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
                             combo_effects.get(combo_effects.size - 1).start();
                             break;
                         case 1:
+                            sound_effects.snd_titles();
                             //System.out.println("Effect start wow");
                             combo_effects.add(new ParticleEffect(Assets.score_500_effect_wow));
                             combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
                             combo_effects.get(combo_effects.size - 1).start();
                             break;
                         case 2:
+                            sound_effects.snd_titles();
                             //System.out.println("Effect start amazing");
                             combo_effects.add(new ParticleEffect(Assets.score_500_effect_amazing));
                             combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
