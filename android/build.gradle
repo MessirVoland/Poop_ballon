@@ -172,6 +172,6 @@ idea {
 }
 dependencies {
     compile 'com.android.support:multidex:1.0.1'
-    //compile 'com.google.firebase:firebase-core:8.4.0'
+    compile 'com.google.firebase:firebase-core:11.6.0'
 }
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'

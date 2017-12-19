@@ -11,7 +11,7 @@ import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.GameoverState.achievement;
 import static ru.asupd.poop_ballon.States.PlayState.current_combo;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
-import static ru.asupd.poop_ballon.States.PlayState.settings;
+import static ru.asupd.poop_ballon.States.MenuState.settings;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_SPEED_RESIZE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_SCORE;

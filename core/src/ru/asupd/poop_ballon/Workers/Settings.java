@@ -11,7 +11,7 @@ import ru.asupd.poop_ballon.States.PlayState;
 
 import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
-import static ru.asupd.poop_ballon.States.PlayState.sound_effects;
+import static ru.asupd.poop_ballon.States.MenuState.sound_effects;
 
 /**
  * Класс для храния и обработки настроек
@@ -362,6 +362,7 @@ public class Settings {
         if (restart.getBoundingRectangle().contains(ScreenX,ScreenY)) {
             //restart.scale(0.2f);
             if (change_size==1) {
+
                 PlayState.RESTART_STAGE();
             }
         }

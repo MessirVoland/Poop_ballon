@@ -30,7 +30,7 @@ allprojects {
         box2DLightsVersion = '1.4'
         ashleyVersion = '1.7.0'
         aiVersion = '1.8.0'
-        admobVersion ='8.4.0'
+        admobVersion ='11.6.0'
     }
 
     repositories {
@@ -88,7 +88,7 @@ project(":android") {
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-android:$gdxVersion"
         compile "com.google.android.gms:play-services-ads:$admobVersion"
-        //compile "com.google.android.gms:play-services-auth:11.6.0"
+        //
         //compile "com.google.android.gms:play-services-games:11.6.0"
         //compile 'com.google.android.gms:play-services-base:11.4.2'
         //compile "com.google.android.gms:play-services-games:$admobVersion"
@@ -98,9 +98,10 @@ project(":android") {
         //compile "com.google.android.gms:play-services-plus:8.4.0"
 
        // compile 'com.google.firebase:firebase-core:11.6.2'
-        compile 'com.google.android.gms:play-services-games:8.4.0'
+        compile "com.google.android.gms:play-services-auth:$admobVersion"
+        compile "com.google.android.gms:play-services-games:$admobVersion"
         // 8.4 is the latest as of now, keep it updated
-        compile project(':BaseGameUtils')
+        //compile project(':BaseGameUtils')
         
     }
 }
@@ -145,4 +146,5 @@ project(":html") {
 tasks.eclipse.doLast {
     delete ".project"
 }
+
 //apply plugin: 'com.google.gms.google-services'

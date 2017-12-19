@@ -35,7 +35,10 @@ import ru.asupd.poop_ballon.Workers.Shaker;
 import ru.asupd.poop_ballon.Workers.Sound_effects;
 
 import static com.badlogic.gdx.math.MathUtils.random;
+import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
+import static ru.asupd.poop_ballon.States.MenuState.settings;
+import static ru.asupd.poop_ballon.States.MenuState.sound_effects;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME_TAP_TO_PLAY;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATIO_TIME_TO_PLAY_SIZE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
@@ -78,13 +81,14 @@ public class PlayState extends State {
     public static int balloons_count=0;
     public static int balloons_number=0;
 
-    private static Music background_Music,boss_Music;//музыка
+    private static Music background_Music;
+    private Music boss_Music;//музыка
 
     public final static float ANIMATION_TIME=0.266f;//время анимации
-    public static Preferences prefs;//для храниния данных
+    public static Preferences prefs=Gdx.app.getPreferences(APP_STORE_NAME);//для храниния данных
     private int load_hiscore;//макс счет
 
-    public static float volume;//звук хлопков)
+    public static float volume=1.0f;//звук хлопков)
 
     //гейм овер
     private boolean game_over_start=false;//перероход в гейм овер
@@ -148,14 +152,14 @@ public class PlayState extends State {
 
     private boolean one_cast_music;
     private float current_dt_one_cast;
-    public static Settings settings;
+
 
     private MyInputProcessor inputProcessor;//обработчик событий
     //private MyInputProcessor inputProcessor2;
     //InputMultiplexer inputMultiplexer = new InputMultiplexer();
     public static PerformanceCounter perfomancecounter;
 
-    public static Sound_effects sound_effects=new Sound_effects();
+
 
     public static Bomb_balloon bomb_balloon;
     BackGround background;
@@ -223,7 +227,7 @@ public class PlayState extends State {
         boss_Music = Gdx.audio.newMusic(Gdx.files.internal("Sound_19272 [Wav_Library_Net].mp3"));
 
         background_Music = Assets.instance.manager.get(Assets.background_Music);
-        background_Music.setVolume(0.3f);
+        background_Music.setVolume(1.0f);
         background_Music.setLooping(true);
 
 
@@ -253,8 +257,6 @@ public class PlayState extends State {
 		options.setPosition((shaker.getCamera_sh().position.x + 171),(shaker.getCamera_sh().position.y + 331));
 		//options.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        prefs = Gdx.app.getPreferences(APP_STORE_NAME);
-        settings= new Settings(prefs);
 
         settings.hi_score_refresh();
         load_hiscore = prefs.getInteger("highscore");
@@ -320,6 +322,11 @@ public class PlayState extends State {
         }else
         {
             background_Music.stop();
+        }
+        if (playServices_my!=null) {
+            if (!playServices_my.isSignedIn()) {
+                playServices_my.signIn();
+            }
         }
 
     }
@@ -388,7 +395,7 @@ public class PlayState extends State {
             if(current_dt_one_cast>=0.25f){
                 if (!settings.isMute())
                 {
-                    volume=0.1f;
+                    volume=1.0f;
                     //System.out.println("Воспроизвести звук");
                     //set_mute();
                     set_unmute();
@@ -430,6 +437,7 @@ public class PlayState extends State {
                     if (combo_effects.size==0) {
                         if (score_num.getBuffer() >= 0) {
                             game_over_ball_fly = true;
+                            sound_effects.snd_big_baloon();
                             game_over_dt = 0;
                             System.out.println("cautch_ball : " + cautch_ball);
                         }
@@ -601,6 +609,7 @@ public class PlayState extends State {
                                     combo_effects.get(combo_effects.size - 1).setPosition(240, 800);
                                     combo_effects.get(combo_effects.size - 1).start();
                                     System.out.println("Missed ball");
+                                    sound_effects.snd_life();
                                     //current_alpha_background = 0.0f;
                                     current_immotal = 0;
                                     //change_background = true;
@@ -992,21 +1001,21 @@ public class PlayState extends State {
 
     public static void set_mus(){
         if (boss_balloon.isStarted()){
-            boss_Music.pause();
+           // boss_Music.pause();
         }else {
             background_Music.pause();
         }
     }
     public static void set_unmus(){
         if (boss_balloon.isStarted()){
-            boss_Music.play();
+            //boss_Music.play();
         }else {
             background_Music.play();
         }
     }
 
     public static void set_unmute(){
-        volume=0.1f;
+        volume=1.0f;
     }
     public static void make_poop_Sound(){
         sound_effects.poop_sound();
@@ -1038,9 +1047,17 @@ public class PlayState extends State {
         PlayState.pause = pause;
     }
     public static void RESTART_STAGE() {
+
+
         //game_over_ball_fly = true;
         gsm.set(new PlayState(gsm));
         PlayState.setUNPAUSE();
+        if (settings.isMus()){
+            set_unmus();
+        }
+        System.out.println("Playsnd");
+
+        sound_effects.snd_big_baloon();
     }
 
     public static int getCurrent_difficult_up() {

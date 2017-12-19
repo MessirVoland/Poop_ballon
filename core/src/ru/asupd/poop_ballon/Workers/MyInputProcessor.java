@@ -12,7 +12,7 @@ import static ru.asupd.poop_ballon.States.PlayState.options;
 import static ru.asupd.poop_ballon.States.PlayState.pause;
 import static ru.asupd.poop_ballon.States.PlayState.perfomancecounter;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
-import static ru.asupd.poop_ballon.States.PlayState.settings;
+import static ru.asupd.poop_ballon.States.MenuState.settings;
 import static ru.asupd.poop_ballon.States.PlayState.started;
 
 /**

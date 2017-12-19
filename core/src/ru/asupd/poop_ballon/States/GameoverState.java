@@ -25,8 +25,9 @@ import static ru.asupd.poop_ballon.MyGdxGame.actionresolver_my;
 import static ru.asupd.poop_ballon.MyGdxGame.adsController_my;
 import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
+import static ru.asupd.poop_ballon.States.MenuState.sound_effects;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
-import static ru.asupd.poop_ballon.States.PlayState.settings;
+import static ru.asupd.poop_ballon.States.MenuState.settings;
 import static ru.asupd.poop_ballon.States.PlayState.upCurrent_difficult_up;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME_TAP_TO_PLAY;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATIO_TIME_TO_PLAY_SIZE;
@@ -210,11 +211,13 @@ public class GameoverState extends State {
             {
                 if (special_effects.size<=0) {
                     if (!next_game) {
+                        sound_effects.snd_big_baloon();
                         next_game=true;
                         position.x=480;
                         Gdx.app.postRunnable(new Runnable() {
                             @Override
                             public void run() {
+                                PlayState.set_mus();
                                 playState=new PlayState(gsm);
                                 PlayState.set_mus();
                             }
@@ -241,7 +244,7 @@ public class GameoverState extends State {
             }else{
                 next_game=false;
                 playState.setPosition_red(position);
-                if (PlayState.settings.isMus()){
+                if (settings.isMus()){
                     PlayState.set_unmus();
                 }
                 gsm.set(playState);

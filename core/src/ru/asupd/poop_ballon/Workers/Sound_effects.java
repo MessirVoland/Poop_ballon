@@ -7,6 +7,9 @@ import java.util.Random;
 
 import ru.asupd.poop_ballon.States.PlayState;
 
+import static ru.asupd.poop_ballon.States.MenuState.settings;
+import static ru.asupd.poop_ballon.States.PlayState.prefs;
+
 /**
  * Класс для звуков;
  * Created by Asup.D on 11.10.2017.
@@ -19,15 +22,22 @@ public final class Sound_effects {
 
     private Sound poop_Sound;//звук лопания
     private Sound click_Sound;//звук нажатия нопки
+    private Sound snd_big_baloon;//Пролет красного шара
+    private Sound snd_life;
     public Sound_effects() {
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("sounds/poop.mp3"));
         click_Sound = Gdx.audio.newSound(Gdx.files.internal("sounds/button.wav"));
+        snd_big_baloon = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_big_baloon.wav"));
+        snd_life = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_life.wav"));
+        settings= new Settings(prefs);
+        settings.hi_score_refresh();
     }
     static {
 
+
     }
     public void poop_sound(){
-        if (!PlayState.settings.isMute()) {
+        if (!settings.isMute()) {
             long id = poop_Sound.play(PlayState.volume);
             Random rand = new Random();
             float finalX = rand.nextFloat() * (maxX - minX) + minX;
@@ -36,12 +46,47 @@ public final class Sound_effects {
         }
     }
     public void click_sound(){
-        if (!PlayState.settings.isMute()) {
+        if (!settings.isMute()) {
             long id = click_Sound.play(PlayState.volume);
             Random rand = new Random();
             float finalX = rand.nextFloat() * (maxX - minX) + minX;
             click_Sound.setPitch(id, finalX);
             click_Sound.setVolume(id, PlayState.volume);
         }
+    }
+    public void snd_big_baloon(){
+        if (!settings.isMute()) {
+            long id = snd_big_baloon.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_big_baloon.setPitch(id, finalX);
+            snd_big_baloon.setVolume(id, PlayState.volume);
+        }
+        else {
+            //System.out.println("mute");
+        }
+
+    }
+    public void snd_bomb(){
+        if (!settings.isMute()) {
+            long id = poop_Sound.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            poop_Sound.setPitch(id, finalX);
+            poop_Sound.setVolume(id, PlayState.volume);
+        }
+
+    }
+    public void snd_life(){
+        if (!settings.isMute()) {
+            System.out.println("sound_life");
+            long id = snd_life.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_life.setPitch(id, finalX);
+            snd_life.setVolume(id, PlayState.volume);
+            System.out.println("volume: "+PlayState.volume);
+        }
+
     }
 }

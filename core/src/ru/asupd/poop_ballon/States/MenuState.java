@@ -18,6 +18,8 @@ import ru.asupd.poop_ballon.GameStateManager;
 import ru.asupd.poop_ballon.Sprites.Cloud;
 import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Network_time;
+import ru.asupd.poop_ballon.Workers.Settings;
+import ru.asupd.poop_ballon.Workers.Sound_effects;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
@@ -41,8 +43,11 @@ public class MenuState extends State {
     private BitmapFont FontRed1;
     private boolean apear=true,disapear=false;
     //private Network_time network_time;
-    boolean one_time_play_state_load=true;
+    private boolean one_time_play_state_load=true;
+    private boolean one_time_play_snd=true;
     PlayState playState;
+    public static Sound_effects sound_effects=new Sound_effects();
+    public static Settings settings;
     int var;
     final String FONT_CHARS = "本土化ローカリゼーションабвгдежзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyzАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|\\/?-+=()*&.;:,{}\"´`'<>";
 
@@ -87,7 +92,7 @@ public class MenuState extends State {
 
 
         if (playServices_my!=null) {
-            playServices_my.signIn();
+            //playServices_my.signIn();
         }
         //инициализация массива облаков
         clouds = new Array<Cloud>();
@@ -124,13 +129,16 @@ public class MenuState extends State {
         {
             if (one_time_play_state_load){
                 one_time_play_state_load=false;
+
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
+
                         playState=new PlayState(gsm);
                         PlayState.set_mus();
                     }
                 });
+
 
             }
             apear=false;
@@ -145,9 +153,13 @@ public class MenuState extends State {
 
         if (current_dt>=3.0f){
             //Assets.make_linear();
-            Assets.make_resized_balloons_linear();
-            Assets.make_ads_linear();
-            red_balloon_trigger=true;
+            if (one_time_play_snd) {
+                one_time_play_snd=false;
+                sound_effects.snd_big_baloon();
+                Assets.make_resized_balloons_linear();
+                Assets.make_ads_linear();
+                red_balloon_trigger = true;
+            }
 
         }
 
@@ -160,7 +172,7 @@ public class MenuState extends State {
             {
                 red_balloon_trigger=false;
                 playState.setPosition_red(position);
-                if (PlayState.settings.isMus()){
+                if (settings.isMus()){
                     PlayState.set_unmus();
                 }
 

@@ -16,7 +16,7 @@ import static ru.asupd.poop_ballon.States.PlayState.combo_effects;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.PlayState.make_poop_Sound;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
-import static ru.asupd.poop_ballon.States.PlayState.settings;
+import static ru.asupd.poop_ballon.States.MenuState.settings;
 import static ru.asupd.poop_ballon.States.PlayState.shaker;
 import static ru.asupd.poop_ballon.States.PlayState.special_effects;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.CHANSE_OF_SPAWN_BOMB;
