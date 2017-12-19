@@ -9,6 +9,7 @@ import ru.asupd.poop_ballon.States.PlayState;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.GameoverState.achievement;
+import static ru.asupd.poop_ballon.States.MenuState.sound_effects;
 import static ru.asupd.poop_ballon.States.PlayState.current_combo;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.MenuState.settings;
@@ -155,11 +156,19 @@ public class Balloons_manager {
                                         balloon.setMax_combo(PlayState.current_combo);
 
                                     } else {
-                                        PlayState.make_poop_Sound();
+                                        //PlayState.make_poop_Sound();
+
+
                                         if (wooden) {
+                                            switch (getCurrent_difficult_up()){
+                                                case 1:
+                                                    sound_effects.snd_wood();
+                                                    break;
+                                            }
                                             PlayState.score_num.addScore(getCurrent_difficult_up()+1);
                                            // System.out.println("Added 2 W score");
                                         } else {
+                                            sound_effects.snd_pop();
                                             PlayState.score_num.addScore(1);
                                           //  System.out.println("Added 1 nW score");
                                         }

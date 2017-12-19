@@ -46,6 +46,15 @@ public final class Sound_effects {
         snd_take_medal = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_take_medal.wav"));
         snd_bomb= Gdx.audio.newSound(Gdx.files.internal("sounds/snd_bomb.wav"));
         snd_heart= Gdx.audio.newSound(Gdx.files.internal("sounds/snd_heart.wav"));
+        snd_bsg =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_bsg.wav"));
+
+        //snd_pop =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_pop.wav"));//не забыть
+        snd_pop  =  Gdx.audio.newSound(Gdx.files.internal("sounds/poop.mp3"));//не забыть
+
+        snd_red =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_red.wav"));
+        snd_steel =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_steel.wav"));
+        snd_stone =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_stone.wav"));
+        snd_wood =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_wood.wav"));
         settings= new Settings(prefs);
         settings.hi_score_refresh();
     }
@@ -53,7 +62,61 @@ public final class Sound_effects {
 
 
     }
+    public void snd_wood(){
+        if (!settings.isMute()) {
+            long id =  snd_wood.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_wood.setPitch(id, finalX);
+            snd_wood .setVolume(id, PlayState.volume);
+        }
+    }
+    public void snd_stone(){
+        if (!settings.isMute()) {
+            long id =  snd_stone.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_stone.setPitch(id, finalX);
+            snd_stone.setVolume(id, PlayState.volume);
+        }
+    }
+    public void snd_steel(){
+        if (!settings.isMute()) {
+            long id =  snd_steel.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_steel.setPitch(id, finalX);
+            snd_steel.setVolume(id, PlayState.volume);
+        }
+    }
 
+    public void snd_red(){
+        if (!settings.isMute()) {
+            long id =  snd_red.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_red.setPitch(id, finalX);
+            snd_red.setVolume(id, PlayState.volume);
+        }
+    }
+    public void snd_pop(){
+        if (!settings.isMute()) {
+            long id =  snd_pop.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_pop.setPitch(id, finalX);
+            snd_pop.setVolume(id, PlayState.volume);
+        }
+    }
+    public void snd_bsg(){
+        if (!settings.isMute()) {
+            long id =  snd_bsg.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_bsg.setPitch(id, finalX);
+            snd_bsg.setVolume(id, PlayState.volume);
+        }
+    }
     public void snd_heart(){
         if (!settings.isMute()) {
             long id = snd_heart.play(PlayState.volume);

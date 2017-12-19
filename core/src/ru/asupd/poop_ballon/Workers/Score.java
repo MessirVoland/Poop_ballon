@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
+import static ru.asupd.poop_ballon.States.MenuState.sound_effects;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.COMBO_TIME;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ONE_FRAME_COUNT;
@@ -90,6 +91,7 @@ public class Score {
             if (own_time){
 
                 if (current_dt >= ONE_FRAME_COUNT_local) {
+                    sound_effects.snd_scores();
 
                     faster = (int) (current_dt/ONE_FRAME_COUNT_local);
                     current_dt = 0;

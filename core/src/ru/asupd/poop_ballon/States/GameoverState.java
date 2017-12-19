@@ -189,7 +189,7 @@ public class GameoverState extends State {
 
         ads=true;
 
-        sound_effects.snd_scores();
+
 
 
 
