@@ -628,7 +628,7 @@ public class PlayState extends State {
                                     ballons_disposed++;
                                 }
                                 balloon.setPooped();
-                                make_poop_Sound();
+                                //make_poop_Sound();
                             }
                             for (int i=0;i<ballons_disposed;i++){
                                 balloons.add(new Balloon(random(4) * 96, -260 - random(80), PlayState.get_speed_for_balloon(), !PlayState.boss_balloon.isStarted()));
@@ -940,7 +940,7 @@ public class PlayState extends State {
             if (!game_over_start) {
                 for (Balloon balloon : balloons) {
                     balloon.setPooped();
-                    make_poop_Sound();
+                    //make_poop_Sound();
                     balloon.stop_spawn();
                 }
                 //убрать шар здоровья

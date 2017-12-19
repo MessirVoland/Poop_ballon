@@ -162,7 +162,7 @@ public class Balloons_manager {
                                         if (wooden) {
                                             switch (getCurrent_difficult_up()){
                                                 case 1:
-                                                    sound_effects.snd_wood();
+                                                    //sound_effects.snd_wood();
                                                     break;
                                             }
                                             PlayState.score_num.addScore(getCurrent_difficult_up()+1);

@@ -218,44 +218,53 @@ public class Balloon {
            // System.out.println("Current_time: "+currentTime);
             make_orange=true;
             if (!N_ST_color) {
+                sound_effects.snd_pop();
                 effect = new ParticleEffect(Assets.effect_orange);
             }else
                 switch (getCurrent_difficult_up()) {
                     case 0:
                         break;
                     case 1:
-                       // sprite = new Sprite(Assets.instance.manager.get(Assets.balloon_ice));
-                       // sprite.setPosition(position.x,position.y);
+                        sound_effects.snd_wood();
                         effect = new ParticleEffect(Assets.ballon_n_st_ice);
                         break;
                     case 2:
+                        sound_effects.snd_stone();
                         effect = new ParticleEffect(Assets.ballon_n_st_wood);
                         break;
                     case 3:
+                        sound_effects.snd_steel();
                         effect = new ParticleEffect(Assets.ballon_n_st_stone);
                         break;
                     case 4:
+                        sound_effects.snd_bsg();
                         effect = new ParticleEffect(Assets.ballon_n_st_kript);
                         break;
                     case 5:
+                        sound_effects.snd_bsg();
                         effect = new ParticleEffect(Assets.ballon_n_st_initblue);
                         break;
                     case 6:
+                        sound_effects.snd_bsg();
                         effect = new ParticleEffect(Assets.ballon_n_st_pheon);
                         break;
                     case 7:
+                        sound_effects.snd_red();
                         effect = new ParticleEffect(Assets.ballon_n_st_bronze);
                         break;
                     case 8:
+                        sound_effects.snd_red();
                         effect = new ParticleEffect(Assets.ballon_n_st_silver);
                         break;
                     default:
+                        sound_effects.snd_red();
                         effect = new ParticleEffect(Assets.ballon_n_st_gold);
                         break;
                 }
 
         }
         else{
+            sound_effects.snd_pop();
             if (N_ST_color){
                 color_of_balloon++;
             }else {
@@ -395,7 +404,7 @@ public class Balloon {
                 //if (currentTime_or>=1.0f){
                 make_orange = false;
                 //PlayState.make_poop_Sound();
-                sound_effects.snd_pop();
+                //sound_effects.snd_pop();
 
 
                 shaker.inc();
