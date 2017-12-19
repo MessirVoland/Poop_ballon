@@ -44,12 +44,24 @@ public final class Sound_effects {
         snd_scores = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_scores.wav"));
         snd_progressl = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_progressl.wav"));
         snd_take_medal = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_take_medal.wav"));
+        snd_bomb= Gdx.audio.newSound(Gdx.files.internal("sounds/snd_bomb.wav"));
+        snd_heart= Gdx.audio.newSound(Gdx.files.internal("sounds/snd_heart.wav"));
         settings= new Settings(prefs);
         settings.hi_score_refresh();
     }
     static {
 
 
+    }
+
+    public void snd_heart(){
+        if (!settings.isMute()) {
+            long id = snd_heart.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_heart.setPitch(id, finalX);
+            snd_heart.setVolume(id, PlayState.volume);
+        }
     }
     public void poop_sound(){
         if (!settings.isMute()) {
@@ -84,11 +96,11 @@ public final class Sound_effects {
     }
     public void snd_bomb(){
         if (!settings.isMute()) {
-            long id = poop_Sound.play(PlayState.volume);
+            long id = snd_bomb.play(PlayState.volume);
             Random rand = new Random();
             float finalX = rand.nextFloat() * (maxX - minX) + minX;
-            poop_Sound.setPitch(id, finalX);
-            poop_Sound.setVolume(id, PlayState.volume);
+            snd_bomb.setPitch(id, finalX);
+            snd_bomb.setVolume(id, PlayState.volume);
         }
 
     }
