@@ -102,10 +102,10 @@ public final class Sound_effects {
     public void snd_pop(){
         if (!settings.isMute()) {
             long id =  snd_pop.play(PlayState.volume);
-            Random rand = new Random();
-            float finalX = rand.nextFloat() * (maxX - minX) + minX;
-            snd_pop.setPitch(id, finalX);
-            snd_pop.setVolume(id, PlayState.volume);
+            //Random rand = new Random();
+            //float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            //snd_pop.setPitch(id, finalX);
+            //snd_pop.setVolume(id, PlayState.volume);
         }
     }
     public void snd_bsg(){

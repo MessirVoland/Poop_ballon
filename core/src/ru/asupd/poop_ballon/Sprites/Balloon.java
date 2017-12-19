@@ -10,6 +10,7 @@ import ru.asupd.poop_ballon.States.PlayState;
 import ru.asupd.poop_ballon.Workers.Assets;
 import ru.asupd.poop_ballon.Workers.Shaker;
 import static com.badlogic.gdx.math.MathUtils.random;
+import static ru.asupd.poop_ballon.States.MenuState.sound_effects;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.CHANSE_OF_WOODEN_BALLOON;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_SCORE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_START;
@@ -318,30 +319,39 @@ public class Balloon {
                 case 0:
                     break;
                 case 1:
+                    sound_effects.snd_wood();
                     effect = new ParticleEffect(Assets.ballon_n_st_ice);
                     break;
                 case 2:
+                    sound_effects.snd_stone();
                     effect = new ParticleEffect(Assets.ballon_n_st_wood);
                     break;
                 case 3:
+                    sound_effects.snd_steel();
                     effect = new ParticleEffect(Assets.ballon_n_st_stone);
                     break;
                 case 4:
+                    sound_effects.snd_bsg();
                     effect = new ParticleEffect(Assets.ballon_n_st_kript);
                     break;
                 case 5:
+                    sound_effects.snd_bsg();
                     effect = new ParticleEffect(Assets.ballon_n_st_initblue);
                     break;
                 case 6:
+                    sound_effects.snd_bsg();
                     effect = new ParticleEffect(Assets.ballon_n_st_pheon);
                     break;
                 case 7:
+                    sound_effects.snd_red();
                     effect = new ParticleEffect(Assets.ballon_n_st_bronze);
                     break;
                 case 8:
+                    sound_effects.snd_red();
                     effect = new ParticleEffect(Assets.ballon_n_st_silver);
                     break;
                 default:
+                    sound_effects.snd_red();
                     effect = new ParticleEffect(Assets.ballon_n_st_gold);
                     break;
             }
@@ -384,7 +394,10 @@ public class Balloon {
                 //System.out.println("Combo_number: "+combo_number);
                 //if (currentTime_or>=1.0f){
                 make_orange = false;
-                PlayState.make_poop_Sound();
+                //PlayState.make_poop_Sound();
+                sound_effects.snd_pop();
+
+
                 shaker.inc();
 
                 if (wooden_color) {
