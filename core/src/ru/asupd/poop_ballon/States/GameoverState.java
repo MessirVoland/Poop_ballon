@@ -189,6 +189,8 @@ public class GameoverState extends State {
 
         ads=true;
 
+        sound_effects.snd_scores();
+
 
 
     }
@@ -262,6 +264,7 @@ public class GameoverState extends State {
             if (start_count_trigger) {
                     if (score.getScore(true) >= score.getScore()) {
                         start_count_trigger = false;
+                        sound_effects.snd_scores();
                         score_medal.addScore(score.getScore());
                         score_medal.update_render_time();
                 }
@@ -271,6 +274,7 @@ public class GameoverState extends State {
         if (getCurrent_difficult_up()<=8) {
         if (start_gain_medal_trigger) {
             if (score_medal.getScore(true) >= score_need.getScore()) {
+                sound_effects.snd_progressl();
                 upCurrent_difficult_up();
                 if (getCurrent_difficult_up() <= 8) {
                     score_need.setScore(NEEDED_SCORE[getCurrent_difficult_up()]);
@@ -281,6 +285,8 @@ public class GameoverState extends State {
                 special_effects.get(special_effects.size - 1).start();
 
                 switch (getCurrent_difficult_up()) {
+                    default:
+                        sound_effects.snd_take_medal();
                     case 1:
                         special_effects.add(new ParticleEffect(Assets.medal_x2));
                         special_effects.get(special_effects.size - 1).setPosition(240, 400);

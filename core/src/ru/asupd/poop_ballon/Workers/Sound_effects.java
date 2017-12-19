@@ -41,6 +41,9 @@ public final class Sound_effects {
         snd_big_baloon = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_big_baloon.wav"));
         snd_life = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_life.wav"));
         snd_titles = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_titles.wav"));
+        snd_scores = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_scores.wav"));
+        snd_progressl = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_progressl.wav"));
+        snd_take_medal = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_take_medal.wav"));
         settings= new Settings(prefs);
         settings.hi_score_refresh();
     }
@@ -101,6 +104,7 @@ public final class Sound_effects {
         }
 
     }
+
     public void snd_titles(){
         if (!settings.isMute()) {
             System.out.println("sound_life");
@@ -112,4 +116,38 @@ public final class Sound_effects {
             //System.out.println("volume: "+PlayState.volume);
         }
     }
+    public void snd_scores(){
+        if (!settings.isMute()) {
+            System.out.println("sound_life");
+            long id = snd_scores.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_scores.setPitch(id, finalX);
+            snd_scores.setVolume(id, PlayState.volume);
+            //System.out.println("volume: "+PlayState.volume);
+        }
+    }
+    public void snd_progressl(){
+        if (!settings.isMute()) {
+            System.out.println("sound_life");
+            long id = snd_progressl.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_progressl.setPitch(id, finalX);
+            snd_progressl.setVolume(id, PlayState.volume);
+            //System.out.println("volume: "+PlayState.volume);
+        }
+    }
+    public void snd_take_medal(){
+        if (!settings.isMute()) {
+            System.out.println("sound_life");
+            long id = snd_take_medal.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            snd_take_medal.setPitch(id, finalX);
+            snd_take_medal.setVolume(id, PlayState.volume);
+            //System.out.println("volume: "+PlayState.volume);
+        }
+    }
+
 }
