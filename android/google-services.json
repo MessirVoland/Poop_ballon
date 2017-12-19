@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "474739327933",
+    "firebase_url": "https://pop-balloon-v0983-27175851.firebaseio.com",
+    "project_id": "pop-balloon-v0983-27175851",
+    "storage_bucket": "pop-balloon-v0983-27175851.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474739327933:android:89d940edebf55749",
+        "android_client_info": {
+          "package_name": "ru.detone_studio.pop_balloon.free"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474739327933-l8mnleaduq53p1f5el5b2qv06uuo2ij1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.detone_studio.pop_balloon.free",
+            "certificate_hash": "b8074206c2b79e13563d4c4df060e87c0297deb0"
+          }
+        },
+        {
+          "client_id": "474739327933-n51uo6niic39bghv07pscu3s9s63oiqh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.detone_studio.pop_balloon.free",
+            "certificate_hash": "5b2f94659756057f9a11c8902c4502ae741e8623"
+          }
+        },
+        {
+          "client_id": "474739327933-d3ef6o7gudc7st17pg7bmhqs38i32p60.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzUarXG95yGGZ_hCMJrrhN3p1AC39g3cM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474739327933-d3ef6o7gudc7st17pg7bmhqs38i32p60.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
