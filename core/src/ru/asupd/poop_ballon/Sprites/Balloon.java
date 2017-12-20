@@ -268,6 +268,7 @@ public class Balloon {
             if (N_ST_color){
                 color_of_balloon++;
             }else {
+                //sound_effects.snd_pop2();
                 color_of_balloon += 5;
             }
             this.pooped = true;
@@ -326,6 +327,7 @@ public class Balloon {
            // effect.start();
             switch (number_of_n_st) {
                 case 0:
+                    sound_effects.snd_pop2();
                     break;
                 case 1:
                     sound_effects.snd_wood();

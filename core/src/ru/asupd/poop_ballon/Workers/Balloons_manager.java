@@ -168,7 +168,7 @@ public class Balloons_manager {
                                             PlayState.score_num.addScore(getCurrent_difficult_up()+1);
                                            // System.out.println("Added 2 W score");
                                         } else {
-                                            sound_effects.snd_pop();
+                                            //sound_effects.snd_pop();
                                             PlayState.score_num.addScore(1);
                                           //  System.out.println("Added 1 nW score");
                                         }

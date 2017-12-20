@@ -33,7 +33,8 @@ public final class Sound_effects {
     snd_scores, //- звук при подсчете очков
     snd_steel,snd_stone,snd_wood ,//- стальной,каменный и деревянные шары
     snd_take_medal, //- появление медали
-    snd_titles; //- звук появления надписей wow, mega combo и всё вот это вот.)
+    snd_titles, //- звук появления надписей wow, mega combo и всё вот это вот.)
+    pop2;
     public Sound_effects() {
 
         poop_Sound = Gdx.audio.newSound(Gdx.files.internal("sounds/poop.mp3"));
@@ -55,12 +56,23 @@ public final class Sound_effects {
         snd_steel =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_steel.wav"));
         snd_stone =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_stone.wav"));
         snd_wood =  Gdx.audio.newSound(Gdx.files.internal("sounds/snd_wood.wav"));
+        pop2 = Gdx.audio.newSound(Gdx.files.internal("sounds/snd_pop2.wav"));
         settings= new Settings(prefs);
         settings.hi_score_refresh();
     }
     static {
 
 
+    }
+    public void snd_pop2(){
+        if (!settings.isMute()) {
+            //System.out.println("snd_pop2 : PLAY");
+            long id =  pop2.play(PlayState.volume);
+            Random rand = new Random();
+            float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            pop2.setPitch(id, finalX);
+            pop2 .setVolume(id, PlayState.volume);
+        }
     }
     public void snd_wood(){
         if (!settings.isMute()) {
@@ -101,6 +113,7 @@ public final class Sound_effects {
     }
     public void snd_pop(){
         if (!settings.isMute()) {
+            //System.out.println("snd_pop : PLAY");
             long id =  snd_pop.play(PlayState.volume);
             Random rand = new Random();
             float finalX = rand.nextFloat() * (maxX - minX) + minX;

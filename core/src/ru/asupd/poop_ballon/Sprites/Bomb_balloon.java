@@ -194,7 +194,7 @@ public class Bomb_balloon extends Creature{
                 ballons_disposed++;
             }
             balloon.setPooped();
-            make_poop_Sound();
+            //make_poop_Sound();
             // balloons.add(new Balloon(random(4) * 96, -195 - random(50), PlayState.get_speed_for_balloon(), !PlayState.boss_balloon.isStarted()));
         }
         for (int i=0;i<ballons_disposed;i++){
