@@ -39,6 +39,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.games.Games;
+import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -56,10 +57,12 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	//GameHelper gameHelper;
 	View gameView;
 
-	GoogleSignInClient signInClient;
-	GoogleSignInAccount signedInAccount;
-	Intent intent;
-	GoogleSignInResult result;
+	private GoogleSignInClient signInClient;
+	private GoogleSignInAccount signedInAccount;
+    //private GoogleSignInAccount account;
+    private GamesClient gamesClient;
+	private Intent intent;
+	private GoogleSignInResult result;
 
 	private final static int requestCode = 1;
 	//GoogleSignInClient mGoogleSignInClient;
@@ -138,6 +141,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 		setContentView(layout);
 		//startSignInIntent();
+       // gamesClient.setViewForPopups(new View(this));
 
 	}
 
@@ -150,12 +154,14 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	protected void onStop() {
 		super.onStop();
 		//gameHelper.onStop();
+        //signInClient.revokeAccess();
+
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		signInSilently();
+		//signInSilently();
 	}
 
 	@Override
@@ -172,11 +178,13 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 			if (result.isSuccess()) {
 				// The signed in account is stored in the result.
 				 signedInAccount = result.getSignInAccount();
-				new AlertDialog.Builder(this).setMessage("All ok").setNeutralButton(android.R.string.ok, null).show();
+                //gamesClient.getCurrentAccountName();
+
+                new AlertDialog.Builder(this).setMessage("Signed in. All ok. =)").setNeutralButton(android.R.string.ok, null).show();
 			} else {
 				String message = result.getStatus().getStatusMessage();
 				if (message == null || message.isEmpty()) {
-					message = "Eroor smth went wrong 132";
+					message = "Error smth went wrong: 132";
 				}
 				//new AlertDialog.Builder(this).setMessage(message).setNeutralButton(android.R.string.ok, null).show();
 			}
@@ -192,13 +200,11 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 	@Override
 	public void signIn() {
-		if (isOnline()) {
-			if (!isSignedIn()) {
-				signInClient = GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
+				signInClient = GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN);
+
 				intent = signInClient.getSignInIntent();
 				startActivityForResult(intent, RC_SIGN_IN);
-			}
-		}
+
 
 		/*
 		try
@@ -221,23 +227,17 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 
 	@Override
-	public void signOut() {
-		try
-		{
-			runOnUiThread(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					//gameHelper.signOut();
-				}
-			});
-		}
-		catch (Exception e)
-		{
-			Gdx.app.log("MainActivity", "Log out failed: " + e.getMessage() + ".");
-		}
-	}
+    public void signOut() {
+        GoogleSignInClient signInClient = GoogleSignIn.getClient(this,
+                GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
+        signInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // at this point, the user is signed out.
+                    }
+                });
+    }
 
 	@Override
 	public void rateGame() {
@@ -249,7 +249,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	public void unlockAchievement(String id_achiv) {
 		if (isSignedIn()==true) {
 			//Games.Achievements.unlock(gameHelper.getApiClient(), id_achiv);
-			Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)).unlock(id_achiv);
+			Games.getAchievementsClient(this, signedInAccount).unlock(id_achiv);
 		}
 		else{
 			signIn();
@@ -263,7 +263,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		{System.out.println("Signet");
 			//
 			// Games.Leaderboards.submitScore(gameHelper.getApiClient(),getString(R.string.leaderboard_world_high_score), highScore);
-			Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)).submitScore(getString(R.string.leaderboard_world_high_score), highScore);
+			Games.getLeaderboardsClient(this, signedInAccount).submitScore(getString(R.string.leaderboard_world_high_score), highScore);
 		}
 		else
 		{
@@ -275,7 +275,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	public void submitScore_ALLScore(long highScore) {
 		if (isSignedIn() == true)
 		{System.out.println("Signet_All_Score");
-			Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)).submitScore(getString(R.string.leaderboard_world_maximum_score), highScore);
+			Games.getLeaderboardsClient(this, signedInAccount).submitScore(getString(R.string.leaderboard_world_maximum_score), highScore);
 			//Games.Leaderboards.submitScore(gameHelper.getApiClient(),
 			//		getString(R.string.leaderboard_world_maximum_score), highScore);
 		}
@@ -291,7 +291,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 		//		getString(R.string.achievement_dum_dum));
 		if (isSignedIn()==true){
 			//startActivityForResult(Games.Achievements.getAchievementsIntent(gameHelper.getApiClient()), requestCode);
-			Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)).getAchievementsIntent().addOnSuccessListener(new OnSuccessListener<Intent>() {
+			Games.getAchievementsClient(this, signedInAccount).getAchievementsIntent().addOnSuccessListener(new OnSuccessListener<Intent>() {
 				@Override
 				public void onSuccess(Intent intent) {
 					startActivityForResult(intent,RC_ACHIEVEMENT_UI);
@@ -313,7 +313,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 			//startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(gameHelper.getApiClient()),requestCode);
 			//startActivityForResult(Games.Leaderboards.getLeaderboardIntent(gameHelper.getApiClient(),
 				//	getString(R.string.leaderboard_world_high_score)), requestCode);
-			Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this)).getAllLeaderboardsIntent().addOnSuccessListener(new OnSuccessListener<Intent>() {
+			Games.getLeaderboardsClient(this,signedInAccount).getAllLeaderboardsIntent().addOnSuccessListener(new OnSuccessListener<Intent>() {
 						@Override
 						public void onSuccess(Intent intent) {
 							startActivityForResult(intent, RC_LEADERBOARD_UI);
@@ -328,7 +328,14 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 	@Override
 	public boolean isSignedIn() {
-		return GoogleSignIn.getLastSignedInAccount(this) != null;
+        //account = GoogleSignIn.getLastSignedInAccount(this);
+        if (signedInAccount!=null){
+            return true;
+        }else
+        {
+            return false;
+        }
+		//return account != null;
 	}
 
 	public void setupAds() {

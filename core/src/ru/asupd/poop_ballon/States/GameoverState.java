@@ -74,6 +74,7 @@ public class GameoverState extends State {
 
     Vector3 velosity,position;
     Texture big_balloon;
+    private boolean submit=true;
     boolean next_game=false;
     private boolean add_hicsore=true;
     public static final Achievement achievement= new Achievement();
@@ -192,6 +193,7 @@ public class GameoverState extends State {
 
 
         sound_effects.snd_scores();
+        submit=true;
 
 
     }
@@ -346,9 +348,12 @@ public class GameoverState extends State {
             handleInput();
             if (actionresolver_my!=null)
             {
-                System.out.println("Submit score"+score_b.getScore());
-                playServices_my.submitScore(score_b.getScore());
-                playServices_my.submitScore_ALLScore(score_medal.getScore());
+                if (submit) {
+                    submit=false;
+                    System.out.println("Submit score" + score_b.getScore());
+                    playServices_my.submitScore(score_b.getScore());
+                    playServices_my.submitScore_ALLScore(score_medal.getScore());
+                }
                 //actionresolver_my.submitScoreGPGS(score_b.getScore());
             }
 
