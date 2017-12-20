@@ -76,6 +76,7 @@ public class GameoverState extends State {
     Texture big_balloon;
     private boolean submit=true;
     boolean next_game=false;
+    boolean start=true;
     private boolean add_hicsore=true;
     public static final Achievement achievement= new Achievement();
     PlayState playState;
@@ -192,7 +193,7 @@ public class GameoverState extends State {
         ads=true;
 
 
-        sound_effects.snd_scores();
+
         submit=true;
 
 
@@ -244,6 +245,11 @@ public class GameoverState extends State {
     @Override
     public void update(float dt) {
 
+        if (start){
+            sound_effects.snd_scores();
+            start=false;
+        }
+
         if (next_game){
             if (position.x>=-190) {
                 velosity.scl(dt);
@@ -270,7 +276,7 @@ public class GameoverState extends State {
             if (start_count_trigger) {
                     if (score.getScore(true) >= score.getScore()) {
                         start_count_trigger = false;
-                        sound_effects.snd_scores();
+
                         score_medal.addScore(score.getScore());
                         score_medal.update_render_time();
                 }
