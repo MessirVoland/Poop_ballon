@@ -248,10 +248,10 @@ public class GameoverState extends State {
         if (start&currentdt>=0.25f){
             //
 
-            if (score.getScore()>score.getScore(true)) {
+            //if (score.getScore()>score.getScore(true)) {
                 start = false;
                 sound_effects.snd_scores(score.getScore());
-            }
+            //}
         }
 
         if (next_game){
@@ -280,6 +280,11 @@ public class GameoverState extends State {
             if (start_count_trigger) {
                     if (score.getScore(true) >= score.getScore()) {
                         start_count_trigger = false;
+
+                        sound_effects.snd_scores_stop();
+                        start=true;
+                        currentdt=0.0f;
+                        //sound_effects.snd_scores(score.getScore());
 
                         score_medal.addScore(score.getScore());
                         score_medal.update_render_time();
