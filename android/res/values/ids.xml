@@ -10,6 +10,8 @@ Save this file as res/values/games-ids.xml in your project.
     <string name="package_name" translatable="false">ru.detone_studio.pop_balloon.free</string>
     <!-- achievement Alpha-people -->
     <string name="achievement_alphapeople" translatable="false">CgkIvYetxegNEAIQAw</string>
+    <!-- achievement Yellow King -->
+    <string name="achievement_yellow_king" translatable="false">CgkIvYetxegNEAIQCQ</string>
     <!-- leaderboard World High Score -->
     <string name="leaderboard_world_high_score" translatable="false">CgkIvYetxegNEAIQBQ</string>
     <!-- leaderboard World Maximum Score -->

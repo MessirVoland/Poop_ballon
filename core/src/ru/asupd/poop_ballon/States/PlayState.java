@@ -37,7 +37,6 @@ import ru.asupd.poop_ballon.Workers.Sound_effects;
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
-import static ru.asupd.poop_ballon.States.MenuState.settings;
 import static ru.asupd.poop_ballon.States.MenuState.sound_effects;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME_TAP_TO_PLAY;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATIO_TIME_TO_PLAY_SIZE;
@@ -166,6 +165,7 @@ public class PlayState extends State {
     public static Faq faq;
     public static Ads_Clicker ads_clicker;
 
+    public static Settings settings;
     //public static Sprite button_ads_free;
 
     //private Sprite buuton_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
@@ -175,12 +175,14 @@ public class PlayState extends State {
 
     private Achievement medals=new Achievement(true);
 
+
     public static Achivements_GPS achivements_gps=new Achivements_GPS();
 
     PlayState(GameStateManager gsm) {
         super(gsm);
 
 
+        settings=MenuState.settings;
 
         perfomancecounter = new PerformanceCounter("Counter");
         camera.setToOrtho(false, 480 , 800 );
@@ -221,6 +223,7 @@ public class PlayState extends State {
         balloons_number=0;
         counter_of_h_ballons=0;
         current_immotal=1.0f;
+        settings = settings;
 
         //инициализация музыки
         //poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));

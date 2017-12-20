@@ -28,20 +28,28 @@ public class Achivements_GPS {
     }
     public boolean unlock_Alpha_People(){
         //Перепроверка ачивок
-        if (pref_s.contains("achive_0"))
-        {
-            if (playServices_my!=null) {
+        //if (pref_s.contains("achive_0"))
+        //{
+          //  if (playServices_my!=null) {
                 // playServices_my.unlockAchievement(0);
-                pref_s.putBoolean("achive_0", true);
+           //     pref_s.putBoolean("achive_0", true);
                 //System.out.println("Unlock Achivment");
-                playServices_my.unlockAchievement("CgkIvYetxegNEAIQAw");
-            }else
-            {
-                pref_s.putBoolean("achive_0", false);
-            }
-            pref_s.flush();
-            return true;
+        if (playServices_my!=null) {
+            playServices_my.unlockAchievement("CgkIvYetxegNEAIQAw");
         }
+           // }else
+          //  {
+          //      pref_s.putBoolean("achive_0", false);
+           // }
+          //  pref_s.flush();
+          //  return true;
+       // }
         return false;
     }
+    public void unlock_yellow_king(){
+        if (playServices_my!=null) {
+            playServices_my.unlockAchievement("CgkIvYetxegNEAIQCQ");
+        }
+    }
+
 }

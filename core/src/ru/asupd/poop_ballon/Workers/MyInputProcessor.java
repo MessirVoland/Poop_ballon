@@ -66,6 +66,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                     if (!faq.isShow()&!ads_clicker.click(screenX,screenY)) {
                         //if (!leaderboard.getBoundingRectangle().contains(screenX,screenY)) {
                             started = true;
+                        achivements_gps.unlock_Alpha_People();
                         System.out.println("Started game");
                             score_num.setScore(0);
                             settings.hi_score_refresh();
@@ -124,10 +125,10 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
             PlayState.current_combo = 0;
 
             //System.out.println("Act + "+achivements_gps.trigger_Alpha_People());
-            if (!achivements_gps.trigger_Alpha_People()){
-                achivements_gps.unlock_Alpha_People();
+            //if (!achivements_gps.trigger_Alpha_People()){
+            //    achivements_gps.unlock_Alpha_People();
                // System.out.println("Trigger Achivment");
-            }
+            //}
 
             //Клик по шарам для проверки комбо, да долго проверять клик по шарам дважды но ничего лучше не придумал
             final int finalScreenX = screenX;

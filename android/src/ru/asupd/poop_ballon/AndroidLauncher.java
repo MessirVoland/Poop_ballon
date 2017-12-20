@@ -251,6 +251,9 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	@Override
 	public void unlockAchievement(String id_achiv) {
 		if (isSignedIn()==true) {
+			if (id_achiv=="CgkIvYetxegNEAIQCQ"){
+				Games.getAchievementsClient(this, GoogleSignIn.getLastSignedInAccount(this)).increment(id_achiv, 1);
+			}else
 			//Games.Achievements.unlock(gameHelper.getApiClient(), id_achiv);
 			Games.getAchievementsClient(this, signedInAccount).unlock(id_achiv);
 		}

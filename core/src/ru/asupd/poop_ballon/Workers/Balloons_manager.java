@@ -10,6 +10,7 @@ import ru.asupd.poop_ballon.States.PlayState;
 import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.States.GameoverState.achievement;
 import static ru.asupd.poop_ballon.States.MenuState.sound_effects;
+import static ru.asupd.poop_ballon.States.PlayState.achivements_gps;
 import static ru.asupd.poop_ballon.States.PlayState.current_combo;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.MenuState.settings;
@@ -65,6 +66,9 @@ public class Balloons_manager {
                                 if (!wooden) {
                                     wooden = balloon.isN_ST_color();
                                 }
+                                if (balloon.getColor_of_balloon()==1){
+                                    achivements_gps.unlock_yellow_king();
+                                };
 
 
                                 g_clicked = true;
