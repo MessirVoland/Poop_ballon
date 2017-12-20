@@ -446,11 +446,13 @@ public class PlayState extends State {
 
                 if (!game_over_well_play){
                     if (score_num.getScore()>load_hiscore){
+                        sound_effects.snd_titles();
                         combo_effects.add(new ParticleEffect(Assets.well_play_particle));
                         combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
                         combo_effects.get(combo_effects.size - 1).start();
                     }else
                     {
+                        sound_effects.snd_titles();
                         combo_effects.add(new ParticleEffect(Assets.nice_try_particle));
                         combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
                         combo_effects.get(combo_effects.size - 1).start();
@@ -487,6 +489,7 @@ public class PlayState extends State {
                 if (beat_highscore){
                     if (score_num.getScore()>load_hiscore){
                         beat_highscore=false;
+                        sound_effects.snd_titles();
                         combo_effects.add(new ParticleEffect(Assets.beat_high_score));
                         combo_effects.get(combo_effects.size - 1).setPosition(240, 500);
                         combo_effects.get(combo_effects.size - 1).start();

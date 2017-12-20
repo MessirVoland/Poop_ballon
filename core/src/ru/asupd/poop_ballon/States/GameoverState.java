@@ -245,9 +245,13 @@ public class GameoverState extends State {
     @Override
     public void update(float dt) {
 
-        if (start){
-            sound_effects.snd_scores();
-            start=false;
+        if (start&currentdt>=0.25f){
+            //
+
+            if (score.getScore()>score.getScore(true)) {
+                start = false;
+                sound_effects.snd_scores(score.getScore());
+            }
         }
 
         if (next_game){

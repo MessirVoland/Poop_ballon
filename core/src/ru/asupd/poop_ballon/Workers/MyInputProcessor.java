@@ -96,7 +96,8 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
                 if ((PlayState.hearth_balloon.getPosition().x-help<screenX)&(PlayState.hearth_balloon.getPosition().x+95+help>screenX)){
                     if ((PlayState.hearth_balloon.getPosition().y-help<screenY)&(PlayState.hearth_balloon.getPosition().y+95+help>screenY)) {
                         if (!PlayState.hearth_balloon.isPooped()) {
-                            PlayState.make_poop_Sound();
+                            //PlayState.make_poop_Sound();
+                            sound_effects.snd_pop();
                             //System.out.println("Hearthballon_clicked, clickes: " + PlayState.hearth_balloon.getClicks());
 
 

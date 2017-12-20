@@ -84,16 +84,19 @@ public class Balloons_manager {
                     //    PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(240, 500);
                     //    break;
                     case 4:
+                        sound_effects.snd_titles();
                         PlayState.combo_effects.add(new ParticleEffect(Assets.c_4x));
                         PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
                         PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(240, 500);
                         break;
                     case 5:
+                        sound_effects.snd_titles();
                         PlayState.combo_effects.add(new ParticleEffect(Assets.c_5x));
                         PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
                         PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(240, 500);
                         break;
                     case 6:
+                        sound_effects.snd_titles();
                         PlayState.combo_effects.add(new ParticleEffect(Assets.c_6x));
                         PlayState.combo_effects.get(PlayState.combo_effects.size - 1).start();
                         PlayState.combo_effects.get(PlayState.combo_effects.size - 1).setPosition(240, 500);
