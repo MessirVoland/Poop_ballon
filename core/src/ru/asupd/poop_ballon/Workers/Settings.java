@@ -286,7 +286,7 @@ public class Settings {
             leaderboard.scale(-0.2f);
             change_size=4;
             if (playServices_my!=null) {
-                playServices_my.submitScore(pref.getInteger("highscore"));
+                //playServices_my.submitScore(pref.getInteger("highscore"));
                 playServices_my.showScore();
             }
         }
