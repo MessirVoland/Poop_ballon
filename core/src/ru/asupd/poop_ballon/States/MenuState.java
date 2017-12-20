@@ -92,7 +92,7 @@ public class MenuState extends State {
 
 
         if (playServices_my!=null) {
-            //playServices_my.signIn();
+            playServices_my.signIn();
         }
         //инициализация массива облаков
         clouds = new Array<Cloud>();

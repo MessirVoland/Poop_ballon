@@ -216,8 +216,8 @@ public final class Sound_effects {
         if (!settings.isMute()) {
             System.out.println("snd_scores()");
             //snd_scores.loop();
-            long id = snd_scores.play(PlayState.volume);
-            snd_scores.setLooping(id,true);
+            long id = snd_scores.loop(PlayState.volume);
+            //snd_scores.setLooping(id,true);
             Random rand = new Random();
             //float finalX = rand.nextFloat() * (maxX - minX) + minX;
             float finalX = score /1000;
