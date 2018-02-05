@@ -35,27 +35,27 @@ public class Settings {
     int change_size=0;
     boolean any_button=false;
     float current_dt=0.0f;
-    Sprite game_name=new Sprite(new Texture("poop_balloon.png"));
+    Sprite game_name=new Sprite(Assets.instance.manager.get(Assets.game_name));
 
     Sprite restart= new Sprite(Assets.instance.manager.get(Assets.restart_ico));
 
     Sprite sprt_mute=new Sprite(Assets.instance.manager.get(Assets.ico_mute));
     Sprite sprt_unmute=new Sprite(Assets.instance.manager.get(Assets.ico_unmute));
 
-    Sprite sprt_vibro=new Sprite(new Texture("vibro_on.png"));
-    Sprite sprt_unvibro=new Sprite(new Texture("vibro_off.png"));
+    Sprite sprt_vibro=new Sprite(Assets.instance.manager.get(Assets.sprt_vibro));
+    Sprite sprt_unvibro=new Sprite(Assets.instance.manager.get(Assets.sprt_unvibro));
 
-    Sprite sprt_music=new Sprite(new Texture(Gdx.files.internal("music_on.png")));
-    Sprite sprt_unmusic=new Sprite(new Texture(Gdx.files.internal("music_off.png")));
+    Sprite sprt_music=new Sprite(Assets.instance.manager.get(Assets.sprt_music));
+    Sprite sprt_unmusic=new Sprite(Assets.instance.manager.get(Assets.sprt_unmusic));
 
-    Sprite sprt_achiv=new Sprite(new Texture("achives_ico.png"));
-    Sprite leaderboard=new Sprite(new Texture("high_ico.png"));
+    Sprite sprt_achiv=new Sprite(Assets.instance.manager.get(Assets.sprt_achiv));
+    Sprite leaderboard=new Sprite(Assets.instance.manager.get(Assets.leaderboard));
 
     private Sprite button_vk=new Sprite(Assets.instance.manager.get(Assets.button_vk));
     private Sprite button_fb=new Sprite(Assets.instance.manager.get(Assets.button_fb));
 
     Sprite plah_bgnd=new Sprite(Assets.instance.manager.get(Assets.plah));
-    Sprite bgnd_white= new Sprite(new Texture("white_bck.png"));
+    Sprite bgnd_white= new Sprite(Assets.instance.manager.get(Assets.bgnd_white));
     NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("bck.9.png")),10,10,10,10);
 
 

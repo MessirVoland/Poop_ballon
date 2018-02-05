@@ -85,6 +85,8 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> medal_silver = new AssetDescriptor<Texture>("medal_x9.png",Texture.class);
     public static final AssetDescriptor<Texture> medal_gold = new AssetDescriptor<Texture>("medal_x10.png",Texture.class);
 
+
+
     public static final AssetDescriptor<Texture> medal_w_ice =    new AssetDescriptor<Texture>("medal_emty_x2.png",Texture.class);
     public static final AssetDescriptor<Texture> medal_w_wooden = new AssetDescriptor<Texture>("medal_emty_x3.png",Texture.class);
     public static final AssetDescriptor<Texture> medal_w_stone =  new AssetDescriptor<Texture>("medal_emty_x4.png",Texture.class);
@@ -116,6 +118,8 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> button_vk= new AssetDescriptor<Texture>("button_vk.png",Texture.class);
     public static final AssetDescriptor<Texture> button_fb= new AssetDescriptor<Texture>("button_facebook.png",Texture.class);
     public static final AssetDescriptor<Texture> button_tw= new AssetDescriptor<Texture>("button_twitter.png",Texture.class);
+
+
 
 
     //Частицы
@@ -181,6 +185,19 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> plah= new AssetDescriptor<Texture>("plah.png",Texture.class);
     public static final AssetDescriptor<Texture> ico_mute= new AssetDescriptor<Texture>("sound_off.png",Texture.class);
     public static final AssetDescriptor<Texture> ico_unmute= new AssetDescriptor<Texture>("sound_on.png",Texture.class);
+
+    public static final AssetDescriptor<Texture> sprt_vibro= new AssetDescriptor<Texture>("vibro_on.png",Texture.class);
+    public static final AssetDescriptor<Texture> sprt_unvibro= new AssetDescriptor<Texture>("vibro_off.png",Texture.class);
+
+    public static final AssetDescriptor<Texture> sprt_music= new AssetDescriptor<Texture>("music_on.png",Texture.class);
+    public static final AssetDescriptor<Texture> sprt_unmusic= new AssetDescriptor<Texture>("music_off.png",Texture.class);
+
+    public static final AssetDescriptor<Texture> sprt_achiv= new AssetDescriptor<Texture>("achives_ico.png",Texture.class);
+    public static final AssetDescriptor<Texture> leaderboard= new AssetDescriptor<Texture>("high_ico.png",Texture.class);
+
+    public static final AssetDescriptor<Texture> bgnd_white= new AssetDescriptor<Texture>("white_bck.png",Texture.class);
+
+    public static final AssetDescriptor<Texture> game_name = new AssetDescriptor<Texture>("poop_balloon.png",Texture.class);
 
 
 
@@ -365,6 +382,19 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(plah);
         manager.load(ico_mute);
         manager.load(ico_unmute);
+
+        manager.load(sprt_vibro);
+        manager.load(sprt_unvibro);
+
+        manager.load(sprt_music);
+        manager.load(sprt_unmusic);
+
+        manager.load(leaderboard);
+        manager.load(sprt_achiv);
+
+        manager.load(bgnd_white);
+
+        manager.load(game_name);
 
 
 
