@@ -55,6 +55,10 @@ public class Settings {
     private Sprite button_fb=new Sprite(Assets.instance.manager.get(Assets.button_fb));
 
     Sprite plah_bgnd=new Sprite(Assets.instance.manager.get(Assets.plah));
+
+    private boolean start_restart=false;
+    private float delay_restart=0.0f;
+
     Sprite bgnd_white= new Sprite(Assets.instance.manager.get(Assets.bgnd_white));
     NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("bck.9.png")),10,10,10,10);
 
@@ -362,8 +366,8 @@ public class Settings {
         if (restart.getBoundingRectangle().contains(ScreenX,ScreenY)) {
             //restart.scale(0.2f);
             if (change_size==1) {
-
-                PlayState.RESTART_STAGE();
+                start_restart=true;
+                //PlayState.RESTART_STAGE();
             }
         }
 
@@ -416,6 +420,7 @@ public class Settings {
         switch (change_size){
             case 1:
                 restart.scale(0.2f);
+                change_size=0;
                 break;
             case 2:
                 sprt_mute.scale(0.2f);
@@ -445,6 +450,15 @@ public class Settings {
     }
 
     public void update(float dt){
+        if (start_restart)
+        {
+            delay_restart+=dt;
+            if (delay_restart>=0.35f){
+                start_restart=false;
+                delay_restart=0;
+                PlayState.RESTART_STAGE();
+            }
+        }
         if (any_button){
             current_dt+=dt;
             if (current_dt>=0.25f){
