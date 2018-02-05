@@ -87,9 +87,6 @@ public class GameoverState extends State {
 
     NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("progress.9.png")),10,10,10,10);
 
-
-
-
     public GameoverState(GameStateManager gsm, float redball_x, Array<Star> stars) {
         super(gsm);
         dark_medal = new Sprite(new Texture(Gdx.files.internal("pse-medal.png")));
@@ -105,8 +102,6 @@ public class GameoverState extends State {
             progress_bar_bgnd.setPosition(15, 15);
         }
         stick.setPosition(210,progress_bar_bgnd.getY()+18);
-
-
 
         background = new Texture("background_gameover.png");
         //background = new TextureRegion((Texture)(Assets.instance.manager.get(Assets.back_ground_atlas)));
@@ -131,9 +126,6 @@ public class GameoverState extends State {
         for (int j=0;j<=9;j++){
             frames_numbers.add(new TextureRegion(numbers,j*25,0,25,31));
         }
-
-
-
 
         load_hiscore = prefs.getInteger("highscore");
         //load_hiscore = 0;
@@ -367,7 +359,7 @@ public class GameoverState extends State {
                     submit=false;
                     System.out.println("Submit score" + score_b.getScore());
                     playServices_my.submitScore(score_b.getScore());
-                    playServices_my.submitScore_ALLScore(score_medal.getScore());
+                    playServices_my.submitScore_ALLScore(score_medal.getScore()+last_score);
                 }
                 //actionresolver_my.submitScoreGPGS(score_b.getScore());
             }
