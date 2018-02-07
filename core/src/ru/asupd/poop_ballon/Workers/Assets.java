@@ -33,6 +33,14 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final String balloon_purple ="Balloon_purple.png";
     public static final String balloon_orange ="round_b_o.png";
 
+    //Запчасти экарана Play State
+    public static final AssetDescriptor<Texture> pause_bgnd = new AssetDescriptor<Texture>("pause.png",Texture.class);
+    public static final AssetDescriptor<Texture> your_high_score = new AssetDescriptor<Texture>("best_score_g.png",Texture.class);
+    public static final AssetDescriptor<Texture> texture_poop_balloon = new AssetDescriptor<Texture>("poop_balloon.png",Texture.class);
+    public static final AssetDescriptor<Texture> tap_to_play = new AssetDescriptor<Texture>("tap_to_play.png",Texture.class);
+    public static final AssetDescriptor<Texture> big_balloon = new AssetDescriptor<Texture>("big_balloon.png",Texture.class);
+    public static final AssetDescriptor<Texture> score = new AssetDescriptor<Texture>("score.png",Texture.class);
+
     //облачка
     public static final AssetDescriptor<Texture> cloud1 = new AssetDescriptor<Texture>("cloud1.png",Texture.class);
     public static final AssetDescriptor<Texture> cloud2 = new AssetDescriptor<Texture>("cloud2.png",Texture.class);
@@ -231,6 +239,13 @@ public class Assets implements Disposable, AssetErrorListener {
         manager.load(balloon_purple,Texture.class);
         manager.load(balloon_orange,Texture.class);
 
+        manager.load(pause_bgnd);
+        manager.load(tap_to_play);
+        manager.load(your_high_score);
+        manager.load(texture_poop_balloon);
+        manager.load(big_balloon);
+        manager.load(score);
+
         manager.load(cloud1);
         manager.load(cloud2);
         manager.load(cloud3);
@@ -410,6 +425,11 @@ public class Assets implements Disposable, AssetErrorListener {
         //} catch (Throwable t){
         //    System.out.println("Smm: "+t );
        // }
+    }
+    public static void make_PlayState_linear(){
+        Assets.instance.manager.get(Assets.texture_poop_balloon).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.tap_to_play).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        Assets.instance.manager.get(Assets.score).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     }
     public static void make_linear(){
        // Assets.instance.manager.get(Assets.poof_balloon_atlas_idle_o,Texture.class).setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

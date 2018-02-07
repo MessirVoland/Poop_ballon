@@ -38,6 +38,7 @@ import static com.badlogic.gdx.math.MathUtils.random;
 import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
 import static ru.asupd.poop_ballon.States.MenuState.sound_effects;
+import static ru.asupd.poop_ballon.Workers.Assets.make_PlayState_linear;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME_TAP_TO_PLAY;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATIO_TIME_TO_PLAY_SIZE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
@@ -81,7 +82,7 @@ public class PlayState extends State {
     public static int balloons_number=0;
 
     private static Music background_Music;
-    private Music boss_Music;//музыка
+    //private Music boss_Music;//музыка
 
     public final static float ANIMATION_TIME=0.266f;//время анимации
     public static Preferences prefs=Gdx.app.getPreferences(APP_STORE_NAME);//для храниния данных
@@ -105,8 +106,8 @@ public class PlayState extends State {
 
     private float game_over_dt=0;
     private final static float GAME_OVER_ANIM=0.266f;
-    private Texture well_played;
-    private Texture nice_played;
+    //private Texture well_played;
+    //private Texture nice_played;
     private Texture big_balloon;
 
     private float x_game_over=-480,y_game_over=0;
@@ -181,6 +182,7 @@ public class PlayState extends State {
     PlayState(GameStateManager gsm) {
         super(gsm);
 
+        make_PlayState_linear();
 
         settings=MenuState.settings;
 
@@ -203,7 +205,8 @@ public class PlayState extends State {
       //      background_frames.add(new TextureRegion(back_ground_atlas,i*frameWidth,0,frameWidth,back_ground_atlas.getRegionHeight()));
       //  }
 
-        pause_bgnd = new Texture("pause.png");
+        pause_bgnd = Assets.instance.manager.get(Assets.pause_bgnd);
+
         STEP_for_balloon=50;
         faq = new Faq();
         ads_clicker = new Ads_Clicker();
@@ -227,7 +230,7 @@ public class PlayState extends State {
 
         //инициализация музыки
         //poop_Sound = Gdx.audio.newSound(Gdx.files.internal("poop.mp3"));
-        boss_Music = Gdx.audio.newMusic(Gdx.files.internal("Sound_19272 [Wav_Library_Net].mp3"));
+        //boss_Music = Gdx.audio.newMusic(Gdx.files.internal("Sound_19272 [Wav_Library_Net].mp3"));
 
         background_Music = Assets.instance.manager.get(Assets.background_Music);
         background_Music.setVolume(1.0f);
@@ -235,24 +238,24 @@ public class PlayState extends State {
 
 
 
-        boss_Music.setVolume(0.3f);
-        boss_Music.setLooping(true);
+        //boss_Music.setVolume(0.3f);
+        //boss_Music.setLooping(true);
 
-        your_high_score = new Texture("best_score_g.png");
-        texture_poop_balloon = new Texture("poop_balloon.png");
+        your_high_score = Assets.instance.manager.get(Assets.your_high_score);
+        texture_poop_balloon = Assets.instance.manager.get(Assets.texture_poop_balloon);
         resizer_poop_balloon = new Resizer(texture_poop_balloon.getWidth(),texture_poop_balloon.getHeight());
 
-        Texture text = new Texture("tap_to_play.png");
-        text.setFilter(Texture.TextureFilter.Linear,Texture.TextureFilter.Linear);
-        tap_to_play = new Sprite(text);
+        //Texture text = new Texture("tap_to_play.png");
+        //text.setFilter(Texture.TextureFilter.Linear,Texture.TextureFilter.Linear);
+        tap_to_play = new Sprite(Assets.instance.manager.get(Assets.tap_to_play));
         tap_to_play.setPosition(80,360);
         current_tap_to_play=0;
 
-        score =  new Texture("score.png");
+        score =  Assets.instance.manager.get(Assets.score);
 
-        well_played = new Texture("wp.png");
-        nice_played = new Texture("nice_try.png");
-        big_balloon= new Texture("big_balloon.png");
+        //well_played = new Texture("wp.png");
+        //nice_played = new Texture("nice_try.png");
+        big_balloon= Assets.instance.manager.get(Assets.big_balloon);
 
         score_num = new Score();
 
@@ -539,7 +542,7 @@ public class PlayState extends State {
                     //started = false;
                     if (!settings.isMute()) {
                         background_Music.stop();
-                        boss_Music.play();
+                        //boss_Music.play();
                     }
                     for (Balloon balloon : balloons) {
                         balloon.stop_spawn();
@@ -587,6 +590,7 @@ public class PlayState extends State {
                 position.add(velosity.x, 0, 0);
                 velosity.scl(1 / dt);
             }
+            /*
             if (!boss_balloon.isLive()) {
                 if (boss_Music.isPlaying()) {
                     if (!settings.isMute()) {
@@ -594,7 +598,7 @@ public class PlayState extends State {
                         background_Music.play();
                     }
                 }
-            }
+            }*/
 
 
             if (started) {
@@ -1032,7 +1036,7 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
-        boss_Music.dispose();
+        //boss_Music.dispose();
         //background_frames.clear();
         background_Music.stop();
         background_Music.setPosition(0.0f);
