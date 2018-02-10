@@ -66,7 +66,7 @@ public final class Sound_effects {
     }
     public void snd_pop2(){
         if (!settings.isMute()) {
-            //System.out.println("snd_pop2 : PLAY");
+            System.out.println("snd_pop2 : PLAY");
             long id =  pop2.play(PlayState.volume);
             Random rand = new Random();
             float finalX = rand.nextFloat() * (maxX - minX) + minX;
@@ -114,11 +114,11 @@ public final class Sound_effects {
     public void snd_pop(){
         if (!settings.isMute()) {
             //System.out.println("snd_pop : PLAY");
-            long id =  snd_pop.play(PlayState.volume);
-            Random rand = new Random();
-            float finalX = rand.nextFloat() * (maxX - minX) + minX;
-            snd_pop.setPitch(id, finalX);
-            snd_pop.setVolume(id, PlayState.volume);
+            //long id2 =  snd_pop.play(PlayState.volume);
+            //Random rand = new Random();
+            //float finalX = rand.nextFloat() * (maxX - minX) + minX;
+            //snd_pop.setPitch(id2, finalX);
+            //snd_pop.setVolume(id2, PlayState.volume);
         }
     }
     public void snd_bsg(){
