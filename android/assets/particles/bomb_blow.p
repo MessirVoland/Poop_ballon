@@ -176,11 +176,11 @@ timeline3: 1.0
 attached: false
 continuous: false
 aligned: false
-additive: false
+additive: true
 behind: false
 premultipliedAlpha: false
 - Image Path -
-wood_par.png
+ice_par.png
 
 
 blow
@@ -763,8 +763,8 @@ timeline4: 1.0
 attached: false
 continuous: false
 aligned: false
-additive: false
+additive: true
 behind: false
 premultipliedAlpha: false
 - Image Path -
-wood_par.png
+diamond_part2.png

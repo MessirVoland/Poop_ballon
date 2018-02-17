@@ -69,8 +69,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 600.0
-highMax: 900.0
+highMin: 1600.0
+highMax: 1900.0
 relative: false
 scalingCount: 7
 scaling0: 0.0
@@ -218,8 +218,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 600.0
-highMax: 900.0
+highMin: 1600.0
+highMax: 1900.0
 relative: false
 scalingCount: 6
 scaling0: 0.0
@@ -300,8 +300,8 @@ parts
 - Delay -
 active: false
 - Duration - 
-lowMin: 6000.0
-lowMax: 6000.0
+lowMin: 5500.0
+lowMax: 5500.0
 - Count - 
 min: 0
 max: 600
@@ -456,8 +456,8 @@ or
 - Delay -
 active: false
 - Duration - 
-lowMin: 6000.0
-lowMax: 6000.0
+lowMin: 3000.0
+lowMax: 3000.0
 - Count - 
 min: 1
 max: 1
@@ -523,8 +523,8 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 170.0
-highMax: 170.0
+highMin: 270.0
+highMax: 270.0
 relative: false
 scalingCount: 6
 scaling0: 0.0

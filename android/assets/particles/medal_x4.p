@@ -2,8 +2,8 @@ medal
 - Delay -
 active: false
 - Duration - 
-lowMin: 6000.0
-lowMax: 6000.0
+lowMin: 3000.0
+lowMax: 3000.0
 - Count - 
 min: 1
 max: 1
@@ -60,27 +60,23 @@ timeline0: 0.0
 - Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 100.0
-highMax: 100.0
+highMin: 200.0
+highMax: 200.0
 relative: false
-scalingCount: 8
+scalingCount: 6
 scaling0: 0.0
-scaling1: 0.9101124
-scaling2: 1.0
-scaling3: 0.8988764
+scaling1: 0.1741573
+scaling2: 0.994382
+scaling3: 0.8651685
 scaling4: 1.0
-scaling5: 0.9494382
-scaling6: 1.0
-scaling7: 1.0
-timelineCount: 8
+scaling5: 0.9325843
+timelineCount: 6
 timeline0: 0.0
-timeline1: 0.071428575
-timeline2: 0.10017422
-timeline3: 0.19860627
-timeline4: 0.29616725
-timeline5: 0.40069687
-timeline6: 0.5017422
-timeline7: 1.0
+timeline1: 0.011722272
+timeline2: 0.03606853
+timeline3: 0.045987375
+timeline4: 0.07303877
+timeline5: 1.0
 - Velocity - 
 active: true
 lowMin: 0.0
