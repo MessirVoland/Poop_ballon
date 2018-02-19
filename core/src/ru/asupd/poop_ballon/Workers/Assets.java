@@ -111,7 +111,7 @@ public class Assets implements Disposable, AssetErrorListener {
     public static final AssetDescriptor<Texture> restart_ico = new AssetDescriptor<Texture>("restart_ico.png",Texture.class);
     public static final AssetDescriptor<Texture> pause_button = new AssetDescriptor<Texture>("pause_but.png",Texture.class);
 
-
+    public static final AssetDescriptor<Texture> sprt_exit = new AssetDescriptor<Texture>("arrow_bck.png",Texture.class);
     public static final AssetDescriptor<Music> background_Music = new AssetDescriptor<Music>("sound.mp3",Music.class);
     public static final AssetDescriptor<Texture> faq = new AssetDescriptor<Texture>("faq.png",Texture.class);
     public static final AssetDescriptor<Texture> instr_pause_screen = new AssetDescriptor<Texture>("instr_pause_screen.png",Texture.class);
@@ -303,7 +303,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
 
         manager.load(background_Music);
-
+        manager.load(sprt_exit);
         manager.load(faq);
         manager.load(instr_pause_screen);
         manager.load(plate);

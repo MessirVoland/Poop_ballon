@@ -60,7 +60,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
 
                 //}
                 if (options.getBoundingRectangle().contains(screenX,screenY)){
-
+                    //sound_effects.click_sound();
                 }
                 else {
                     if (!faq.isShow()&!ads_clicker.click(screenX,screenY)) {
@@ -86,6 +86,7 @@ public class MyInputProcessor implements com.badlogic.gdx.InputProcessor {
         //если пауза
         if (PlayState.isPause()){
             settings.clicked(screenX,screenY);
+
 
             return true;
 

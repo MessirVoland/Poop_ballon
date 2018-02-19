@@ -90,14 +90,14 @@ public class GameoverState extends State {
     public GameoverState(GameStateManager gsm, float redball_x, Array<Star> stars) {
         super(gsm);
         dark_medal = new Sprite(new Texture(Gdx.files.internal("pse-medal.png")));
-        dark_medal.setPosition(420,40);
+        dark_medal.setPosition(420,70);
         //redball_x=-190;
         //System.out.println("redball_x: "+redball_x);
         camera.setToOrtho(false, 480 , 800 );
         this.final_stars=stars;
         current_tap_to_restart=0;
         if (showed_ads){
-            progress_bar_bgnd.setPosition(15,85);
+            progress_bar_bgnd.setPosition(15,115);
         }else {
             progress_bar_bgnd.setPosition(15, 15);
         }
@@ -424,8 +424,6 @@ public class GameoverState extends State {
 
         tap_to_restart.draw(sb);
 
-
-
         progress_bar_bgnd.draw(sb);
 
 
@@ -472,8 +470,8 @@ public class GameoverState extends State {
 
 
         if (showed_ads){
-            sb.draw(your_best_score, 125, 190, 210, 75);
-            score_b.draw_center(sb,185,160);
+            sb.draw(your_best_score, 125, 220, 210, 75);
+            score_b.draw_center(sb,185,190);
         }else {
             sb.draw(your_best_score, 125, 190, 210, 75);
             score_b.draw_center(sb,185,160);

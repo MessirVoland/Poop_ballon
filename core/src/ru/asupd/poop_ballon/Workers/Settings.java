@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import ru.asupd.poop_ballon.States.PlayState;
 
 import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
+import static ru.asupd.poop_ballon.States.PlayState.cautch_ball;
 import static ru.asupd.poop_ballon.States.PlayState.score_num;
 import static ru.asupd.poop_ballon.States.MenuState.sound_effects;
 
@@ -36,6 +37,7 @@ public class Settings {
     boolean any_button=false;
     float current_dt=0.0f;
     Sprite game_name=new Sprite(Assets.instance.manager.get(Assets.game_name));
+    Sprite exit=new Sprite (Assets.instance.manager.get(Assets.sprt_exit));
 
     Sprite restart= new Sprite(Assets.instance.manager.get(Assets.restart_ico));
 
@@ -57,7 +59,9 @@ public class Settings {
     Sprite plah_bgnd=new Sprite(Assets.instance.manager.get(Assets.plah));
 
     private boolean start_restart=false;
+    private boolean start_exit=false;
     private float delay_restart=0.0f;
+    private float delay_exit=0.0f;
 
     Sprite bgnd_white= new Sprite(Assets.instance.manager.get(Assets.bgnd_white));
     NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("bck.9.png")),10,10,10,10);
@@ -104,24 +108,25 @@ public class Settings {
 
         game_name.setPosition(10,500);
 
-        restart.setPosition(60,200);
+        restart.setPosition(80,150);
 
         //leaderboard.scale(0.8f);
-        leaderboard.setPosition(210,310);
+        leaderboard.setPosition(220,280);
 
         //sprt_achiv.scale(0.4f);
-        sprt_achiv.setPosition(320,310);
+        sprt_achiv.setPosition(110,280);
 
 
         //pos_restart = new Vector3(240+POS_X_RESTART,400+POS_Y_RESTART,0);
 
         //mute_tex= new Texture("sound_off.png");
         //unmute_tex = new Texture("sound_on.png");
-        sprt_mute.setPosition(170,395);
-        sprt_unmute.setPosition(170,395);
+        exit.setPosition(480-64-5,800-64-5);
+        sprt_mute.setPosition(280,395);
+        sprt_unmute.setPosition(280,395);
 
-        sprt_music.setPosition(280,395);
-        sprt_unmusic.setPosition(280,395);
+        sprt_music.setPosition(170,395);
+        sprt_unmusic.setPosition(170,395);
 
 
         //pos_mute = new Vector3(270,400-78,0);
@@ -130,10 +135,10 @@ public class Settings {
         sprt_unvibro.setPosition(60,395);
 
 
-        button_fb.setPosition(260,165);
+        button_fb.setPosition(215,195);
         //button_fb.scale(-0.4f);
 
-        button_vk.setPosition(340,165);
+        button_vk.setPosition(300,195);
         //button_vk.scale(-0.4f);
 
         //vibro_tex = new Texture("vibro_on.png");
@@ -159,9 +164,9 @@ public class Settings {
 
         //bgnd_white.draw(sb);
         sb.draw(bgnd_white,bgnd_white.getX()+x,bgnd_white.getY()+y);
-        patch.draw(sb,45+x,180+y,390,420);   // patch.draw(sb,70,185,340,360);
+        //patch.draw(sb,45+x,180+y,390,420);   // patch.draw(sb,70,185,340,360);
         //game_name.draw(sb);
-        sb.draw(game_name,game_name.getX()+x,game_name.getY()+y);
+        //sb.draw(game_name,game_name.getX()+x,game_name.getY()+y);
         //plah_bgnd.draw(sb);
         //sprt_music.draw(sb);
         sprt_achiv.draw(sb);
@@ -171,6 +176,8 @@ public class Settings {
         button_vk.draw(sb);
         //sb.draw(button_vk,button_vk.getX()+x,button_vk.getY()+y);
         leaderboard.draw(sb);
+
+        exit.draw(sb);
         //sb.draw(leaderboard,leaderboard.getX()+x,leaderboard.getY()+y);
 
 
@@ -347,8 +354,13 @@ public class Settings {
         //вывод из паузы
         {
            // if (one_click) {
-            if (ScreenY<780) {
-                PlayState.setUNPAUSE();
+            if (exit.getBoundingRectangle().contains(ScreenX,ScreenY)) {
+                //if (ScreenY < 780) {
+                sound_effects.click_sound();
+                change_size=9;
+                exit.scale(-0.2f);
+                    //PlayState.setUNPAUSE();
+                //}
             }
            //     System.out.println("Unpause()");
             //    one_click=false;
@@ -405,6 +417,11 @@ public class Settings {
         else if (sprt_achiv.getBoundingRectangle().contains(ScreenX,ScreenY)){
             //sprt_achiv.scale(0.2f);
         }
+        else if(exit.getBoundingRectangle().contains(ScreenX,ScreenY)){
+            if (change_size==9) {
+                start_exit = true;
+            }
+        }
         else
         {
 
@@ -446,6 +463,10 @@ public class Settings {
                 sprt_music.scale(0.2f);
                 sprt_unmusic.scale(0.2f);
                 break;
+            case 9:
+                exit.scale(0.2f);
+                change_size=0;
+                break;
         }
     }
 
@@ -459,9 +480,20 @@ public class Settings {
                 PlayState.RESTART_STAGE();
             }
         }
+        if(start_exit)
+        {
+            delay_exit+=dt;
+            if (delay_exit>=0.40f){
+                start_exit=false;
+                delay_exit=0;
+                //PlayState.RESTART_STAGE();
+                PlayState.setUNPAUSE();
+                change_size=0;
+            }
+        }
         if (any_button){
             current_dt+=dt;
-            if (current_dt>=0.25f){
+            if (current_dt>=0.08f){
                 button_press();
             }
         }

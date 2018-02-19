@@ -14,6 +14,7 @@ import static ru.asupd.poop_ballon.States.PlayState.achivements_gps;
 import static ru.asupd.poop_ballon.States.PlayState.current_combo;
 import static ru.asupd.poop_ballon.States.PlayState.getCurrent_difficult_up;
 import static ru.asupd.poop_ballon.States.MenuState.settings;
+import static ru.asupd.poop_ballon.States.PlayState.options;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_SPEED_RESIZE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.MEDAL_SCORE;
@@ -29,6 +30,9 @@ public class Balloons_manager {
     private static boolean get_clicked;
     int current_step_wooden;
     public boolean wooden;
+    public static boolean pause_clicked=false;
+    public static float pause_time_passed=0.0f;
+    public static boolean rescale=false;
     private static Array<Balloon> balloons;//массив шаров
 
     public Balloons_manager(Array<Balloon> balloons_input) {
@@ -113,7 +117,14 @@ public class Balloons_manager {
                     if (((480 - 69 < finalScreenX) & (480 - 69 + 64 > finalScreenX)) &
                          ((720 < finalScreenY) & (720 + 64 > finalScreenY))) {
                             if (!PlayState.isPause()) {
-                                PlayState.setPAUSE(true);
+                                //options.scale(-0.2f);
+                                pause_time_passed=0.0f;
+                                pause_clicked=true;
+                                sound_effects.click_sound();
+                                options.scale(-0.2f);
+                                rescale=true;
+                                System.out.println("pause :Scale");
+                                //PlayState.setPAUSE(true);
                             }
                         }
 

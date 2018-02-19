@@ -39,6 +39,9 @@ import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
 import static ru.asupd.poop_ballon.States.MenuState.sound_effects;
 import static ru.asupd.poop_ballon.Workers.Assets.make_PlayState_linear;
+import static ru.asupd.poop_ballon.Workers.Balloons_manager.pause_clicked;
+import static ru.asupd.poop_ballon.Workers.Balloons_manager.pause_time_passed;
+import static ru.asupd.poop_ballon.Workers.Balloons_manager.rescale;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATION_TIME_TAP_TO_PLAY;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.ANIMATIO_TIME_TO_PLAY_SIZE;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
@@ -380,6 +383,21 @@ public class PlayState extends State {
         settings.update(dt);
 
         handleInput();
+        if (pause_clicked)
+        {
+            pause_time_passed+=dt;
+            if (pause_time_passed>=0.2f){
+                if(rescale){
+                    options.scale(0.2f);
+                    rescale=false;
+                    pause_time_passed=0.0f;
+                }else
+                {
+                    PlayState.setPAUSE(true);
+                    pause_clicked=false;
+                }
+            }
+        }
         //супер костыль)
         if (red_balloon_start){
             if (position_red==null){
@@ -807,9 +825,9 @@ public class PlayState extends State {
             tap_to_play.draw(sb);
 
             if (showed_ads) {
-                medals.draw_current_medal(sb,175,35,120,160);
-                sb.draw(your_high_score,130,170,211,74);
-                score_num.draw_center(sb,190,120,32,40);
+                medals.draw_current_medal(sb,170,70,130,160);
+                sb.draw(your_high_score,130,200,211,74);
+                score_num.draw_center(sb,190,150,32,40);
             }else
             {
                 medals.draw_current_medal(sb,175,0,120,160);
