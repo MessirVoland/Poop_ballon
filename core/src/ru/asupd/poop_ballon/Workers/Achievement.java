@@ -27,7 +27,7 @@ public class Achievement {
     int st_x4=0,nst_x4=0;
     int st_x5=0,nst_x5=0;
 
-    private int local_x=5,local_y=70;
+    private int local_x=5,local_y=95;
     public Achievement() {
         font.setColor(Color.RED);
         medals=new Array<Texture>();

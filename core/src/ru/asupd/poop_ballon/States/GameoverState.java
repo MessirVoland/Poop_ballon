@@ -90,7 +90,7 @@ public class GameoverState extends State {
     public GameoverState(GameStateManager gsm, float redball_x, Array<Star> stars) {
         super(gsm);
         dark_medal = new Sprite(new Texture(Gdx.files.internal("pse-medal.png")));
-        dark_medal.setPosition(420,70);
+        dark_medal.setPosition(420,95);
         //redball_x=-190;
         //System.out.println("redball_x: "+redball_x);
         camera.setToOrtho(false, 480 , 800 );
