@@ -78,6 +78,7 @@ public class LoadingState extends State {
             if (wait_100>=0.5f){
                 wait_100=0;
                 gsm.set(new MenuState(gsm));
+                //gsm.set(new GameoverState(gsm,-190,null));
             }
         }
         if (Gdx.input.isTouched()){

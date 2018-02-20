@@ -82,10 +82,10 @@ public class GameoverState extends State {
     PlayState playState;
     public static Array<ParticleEffect> special_effects = new Array<ParticleEffect>();
 
-    Sprite progress_bar_bgnd= new Sprite(new Texture(Gdx.files.internal("bar.png")));
+    Sprite progress_bar_bgnd= new Sprite(new Texture(Gdx.files.internal("progr_bar.png")));
     Sprite stick=new Sprite(new Texture("palka.png"));
 
-    NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("progress.9.png")),10,10,10,10);
+    NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("scores.9.png")),15,14,14,15);
 
     public GameoverState(GameStateManager gsm, float redball_x, Array<Star> stars) {
         super(gsm);
@@ -94,14 +94,14 @@ public class GameoverState extends State {
         //redball_x=-190;
         //System.out.println("redball_x: "+redball_x);
         camera.setToOrtho(false, 480 , 800 );
-        this.final_stars=stars;
+        //this.final_stars=stars;
         current_tap_to_restart=0;
         if (showed_ads){
-            progress_bar_bgnd.setPosition(15,115);
+            progress_bar_bgnd.setPosition(5,80);
         }else {
-            progress_bar_bgnd.setPosition(15, 15);
+            progress_bar_bgnd.setPosition(5, 10);
         }
-        stick.setPosition(210,progress_bar_bgnd.getY()+18);
+        stick.setPosition(210,progress_bar_bgnd.getY()+43);
 
         background = new Texture("background_gameover.png");
         //background = new TextureRegion((Texture)(Assets.instance.manager.get(Assets.back_ground_atlas)));
@@ -417,10 +417,10 @@ public class GameoverState extends State {
         sb.draw(background, 0, 0,480,800);
 
         //звезды
-        for (Star star : final_stars ){
-            sb.draw(star.getTexture(),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
+        //for (Star star : final_stars ){
+        //    sb.draw(star.getTexture(),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
             // sb.draw(Assets.instance.manager.get(Assets.star1),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
-        }
+        //}
 
         tap_to_restart.draw(sb);
 
@@ -438,13 +438,13 @@ public class GameoverState extends State {
         if (getCurrent_difficult_up()<=8) {
             draw_progress_bar(sb,stap_2/stam_p);
             dark_medal.draw(sb);
-            score_medal.draw_center(sb, (int) progress_bar_bgnd.getX() + 80, (int) progress_bar_bgnd.getY() + 20);
+            score_medal.draw_center(sb, (int) progress_bar_bgnd.getX() + 80, (int) progress_bar_bgnd.getY() + 45);
             stick.draw(sb);
-            score_need.draw_center(sb, (int) progress_bar_bgnd.getX() + 260, (int) progress_bar_bgnd.getY() + 20);
+            score_need.draw_center(sb, (int) progress_bar_bgnd.getX() + 260, (int) progress_bar_bgnd.getY() + 45);
         }else
         {
             draw_progress_bar(sb,10000);
-            score_medal.draw_center(sb, (int) progress_bar_bgnd.getX() + 170, (int) progress_bar_bgnd.getY() + 20);
+            score_medal.draw_center(sb, (int) progress_bar_bgnd.getX() + 170, (int) progress_bar_bgnd.getY() + 45);
         }
         //System.out.println("asd: "+score_need.getScore());
 
@@ -500,7 +500,8 @@ public class GameoverState extends State {
 
     private void draw_progress_bar(SpriteBatch sb,float range) {
 
-        patch.draw(sb, progress_bar_bgnd.getX() + 13, progress_bar_bgnd.getY() + 10,((range*405)/10000)+20 , 50);
+        //range=10000;
+        patch.draw(sb, progress_bar_bgnd.getX() + 23, progress_bar_bgnd.getY() + 46,((range*405)/10000)+20 , 30);
     }
 
     @Override
