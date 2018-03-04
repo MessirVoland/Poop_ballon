@@ -83,6 +83,7 @@ public class GameoverState extends State {
     public static Array<ParticleEffect> special_effects = new Array<ParticleEffect>();
 
     Sprite progress_bar_bgnd= new Sprite(new Texture(Gdx.files.internal("progr_bar.png")));
+    Sprite progress_bar_bgnd_one= new Sprite(new Texture(Gdx.files.internal("progr_bar_part.png")));
     Sprite stick=new Sprite(new Texture("palka.png"));
 
     NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("scores.9.png")),15,14,14,15);
@@ -98,7 +99,9 @@ public class GameoverState extends State {
         current_tap_to_restart=0;
         if (showed_ads){
             progress_bar_bgnd.setPosition(5,80);
+            progress_bar_bgnd_one.setPosition(5,80);
         }else {
+            progress_bar_bgnd_one.setPosition(5,10);
             progress_bar_bgnd.setPosition(5, 10);
         }
         stick.setPosition(210,progress_bar_bgnd.getY()+43);
@@ -424,7 +427,7 @@ public class GameoverState extends State {
 
         tap_to_restart.draw(sb);
 
-        progress_bar_bgnd.draw(sb);
+        //
 
 
         long stam_p=score_need.getScore();
@@ -433,16 +436,25 @@ public class GameoverState extends State {
         //System.out.println(stam_p+" "+stap_2);
 
 
+        if (getCurrent_difficult_up()==0){
+            progress_bar_bgnd_one.draw(sb);
+
+        }else
+        {
+            progress_bar_bgnd.draw(sb);
+        }
 
 
         if (getCurrent_difficult_up()<=8) {
+
             draw_progress_bar(sb,stap_2/stam_p);
-            dark_medal.draw(sb);
+            //dark_medal.draw(sb);
             score_medal.draw_center(sb, (int) progress_bar_bgnd.getX() + 80, (int) progress_bar_bgnd.getY() + 45);
             stick.draw(sb);
             score_need.draw_center(sb, (int) progress_bar_bgnd.getX() + 260, (int) progress_bar_bgnd.getY() + 45);
         }else
         {
+
             draw_progress_bar(sb,10000);
             score_medal.draw_center(sb, (int) progress_bar_bgnd.getX() + 170, (int) progress_bar_bgnd.getY() + 45);
         }
@@ -501,7 +513,7 @@ public class GameoverState extends State {
     private void draw_progress_bar(SpriteBatch sb,float range) {
 
         //range=10000;
-        patch.draw(sb, progress_bar_bgnd.getX() + 43, progress_bar_bgnd.getY() + 46,((range*405)/10000)+30 , 30);
+        patch.draw(sb, progress_bar_bgnd.getX() + 43, progress_bar_bgnd.getY() + 46,((range*360)/10000)+30 , 30);
     }
 
     @Override
