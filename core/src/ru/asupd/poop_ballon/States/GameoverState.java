@@ -74,6 +74,7 @@ public class GameoverState extends State {
 
     Vector3 velosity,position;
     Texture big_balloon;
+    private boolean can_restart;
     private boolean submit=true;
     boolean next_game=false;
     boolean start=true;
@@ -90,6 +91,7 @@ public class GameoverState extends State {
 
     public GameoverState(GameStateManager gsm, float redball_x, Array<Star> stars) {
         super(gsm);
+        can_restart=false;
         dark_medal = new Sprite(new Texture(Gdx.files.internal("pse-medal.png")));
         dark_medal.setPosition(420,95);
         //redball_x=-190;
@@ -239,6 +241,20 @@ public class GameoverState extends State {
 
     @Override
     public void update(float dt) {
+        if(!can_restart){
+            if (score.getScore(true)<score.getScore())
+            {
+
+            }
+            else if (score_medal.getScore(true)<score_medal.getScore())
+            {
+
+            }
+            else
+            {
+                can_restart=true;
+            }
+        }
 
         if (start&currentdt>=0.25f){
             //
@@ -348,6 +364,7 @@ public class GameoverState extends State {
                         break;
                 }
             }
+
         }
             for(ParticleEffect special_effect :special_effects){
                 special_effect.update(dt);
@@ -425,7 +442,9 @@ public class GameoverState extends State {
             // sb.draw(Assets.instance.manager.get(Assets.star1),star.getPosition().x+(40/2)-(star.resizer.getSize_x()/2),star.getPosition().y+(40/2)-(star.resizer.getSize_y()/2),star.resizer.getSize_x(),star.resizer.getSize_y());
         //}
 
-        tap_to_restart.draw(sb);
+        if(can_restart) {
+            tap_to_restart.draw(sb);
+        }
 
         //
 
