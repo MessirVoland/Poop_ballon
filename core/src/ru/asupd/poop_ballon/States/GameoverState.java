@@ -501,7 +501,7 @@ public class GameoverState extends State {
     private void draw_progress_bar(SpriteBatch sb,float range) {
 
         //range=10000;
-        patch.draw(sb, progress_bar_bgnd.getX() + 23, progress_bar_bgnd.getY() + 46,((range*405)/10000)+20 , 30);
+        patch.draw(sb, progress_bar_bgnd.getX() + 43, progress_bar_bgnd.getY() + 46,((range*405)/10000)+30 , 30);
     }
 
     @Override
