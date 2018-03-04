@@ -523,6 +523,8 @@ public class PlayState extends State {
                     effect_500++;
 
 
+                    // Эффект каждые 500 очков
+                    /*
                     switch (random(2)) {
                         case 0:
                             sound_effects.snd_titles();
@@ -550,6 +552,7 @@ public class PlayState extends State {
                             break;
 
                     }
+                    */
                 }
             }
 
