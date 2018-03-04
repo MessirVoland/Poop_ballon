@@ -203,7 +203,9 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 	@Override
 	public void signIn() {
-        signInSilently();
+		if (isOnline()) {
+			signInSilently();
+		}
         //if (!isSignedIn()|signedInAccount==null) {
 
         //}
