@@ -108,6 +108,7 @@ public class GameoverState extends State {
         }
         stick.setPosition(210,progress_bar_bgnd.getY()+43);
 
+
         background = new Texture("background_gameover.png");
         //background = new TextureRegion((Texture)(Assets.instance.manager.get(Assets.back_ground_atlas)));
         //background = new TextureRegion(background,4*background.getRegionWidth()/4,0,background.getRegionWidth()/4,background.getRegionHeight());
@@ -478,8 +479,6 @@ public class GameoverState extends State {
             score_medal.draw_center(sb, (int) progress_bar_bgnd.getX() + 170, (int) progress_bar_bgnd.getY() + 45);
         }
         //System.out.println("asd: "+score_need.getScore());
-
-
         // if(
         if (getCurrent_difficult_up()<=8) {
             achievement.draw_current_medal(sb);
