@@ -113,45 +113,43 @@ public class MenuState extends State {
             }
 
         }
-
-
-
     }
 
     @Override
     public void update(float dt) {
-
+//пробую раскинуть комкенты
         handleInput();
         current_dt+=dt;
         if (current_dt<=1.0f){
-            apear=true;
+            //сука
+            //apear=true;
+            //появление
+            //не работает корректно
         }else
+         //ьтпл гачало времени
         {
+            //если ты это читаешь то знай что я умер тут нахуй
             if (one_time_play_state_load){
                 one_time_play_state_load=false;
-
                 Gdx.app.postRunnable(new Runnable() {
                     @Override
                     public void run() {
-
                         playState=new PlayState(gsm);
                         PlayState.set_mus();
                     }
                 });
-
-
             }
             apear=false;
         }
 
-        if (current_dt>=2.0f){
+        if (current_dt>=5.0f){
             disapear=true;
 
         }else{
             disapear=false;
         }
 
-        if (current_dt>=3.0f){
+        if (current_dt>=5.0f){
             //Assets.make_linear();
             if (one_time_play_snd) {
                 one_time_play_snd=false;

@@ -19,7 +19,7 @@ import static ru.asupd.poop_ballon.MyGdxGame.showed_ads;
  * Created by Asup.D on 13.12.2017.
  */
 
-public class LoadingState extends State {
+public class  LoadingState extends State {
     Sprite loadind_img=new Sprite(new Texture("loading_screen.png"));
     boolean one=true;
     private BitmapFont Font1=new BitmapFont();;
