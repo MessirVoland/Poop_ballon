@@ -183,6 +183,9 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	public void signIn() {
 		if (isOnline()) {
 			signInSilently();
+		}else
+		{
+			System.out.println("NOT ON LINE");
 		}
 	}
 
@@ -366,6 +369,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 	//Функция проверки ОНЛАЙНА
 	public boolean isOnline() {
+		System.out.println("Check isOnline from mob");
 		ConnectivityManager cm =
 				(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();

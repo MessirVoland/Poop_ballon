@@ -121,26 +121,28 @@ public class MyGdxGame implements ApplicationListener {
 	private class DummyAdsController implements AdsController {
 		@Override
 		public void showBannerAd() {
-
+			System.out.println("TRY to showBannerAD");
 		}
 
 		@Override
 		public void showBannerAd_full() {
-
+			System.out.println("TRY to showBannerAD_full");
 		}
 
 		@Override
 		public void hideBannerAd() {
-
+			System.out.println("Hide banner");
 		}
 
         @Override
         public boolean isWifiConnected() {
-            return true;
+			System.out.println("WIFI");
+			return true;
         }
 
 		@Override
 		public boolean isOnline() {
+			System.out.println("iS online");
 			return true;
 		}
 	}

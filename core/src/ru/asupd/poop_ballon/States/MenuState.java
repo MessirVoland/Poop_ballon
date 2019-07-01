@@ -22,6 +22,7 @@ import ru.asupd.poop_ballon.Workers.Settings;
 import ru.asupd.poop_ballon.Workers.Sound_effects;
 
 import static com.badlogic.gdx.math.MathUtils.random;
+import static ru.asupd.poop_ballon.MyGdxGame.adsController_my;
 import static ru.asupd.poop_ballon.MyGdxGame.playServices_my;
 import static ru.asupd.poop_ballon.Workers.Base_mechanics.APP_STORE_NAME;
 
@@ -80,19 +81,13 @@ public class MenuState extends State {
         //balloon.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         FontRed1 = new BitmapFont();
         final String FONT_PATH = "coquettec.ttf";
-   //     //final String FONT_PATH = "Arialuni.ttf";
-//        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(FONT_PATH));
- //       FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-  //      parameter.characters = FONT_CHARS;
-   //     parameter.size = 25;
-  //      parameter.color = Color.BLACK;
-   //     FontRed1 = generator.generateFont(parameter);
-   //     generator.dispose();
-        //FontRed1.setColor(Color.RED);
 
-
+        //Попытка запустить ГУГЛ плей сервисы атоматически
+        //Кстати костыль, пробовать это делать только когда реклама смогла получить доступ в интеренет.
         if (playServices_my!=null) {
-            playServices_my.signIn();
+            if (adsController_my.isOnline()) {
+                 playServices_my.signIn();
+            }
         }
         //инициализация массива облаков
         clouds = new Array<Cloud>();
