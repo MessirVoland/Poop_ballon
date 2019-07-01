@@ -14,5 +14,6 @@ public interface PlayServices
     public void submitScore_ALLScore(long highScore);
     public void showAchievement();
     public void showScore();
+    public boolean isOnline();
     public boolean isSignedIn();
 }

@@ -85,7 +85,7 @@ public class MenuState extends State {
         //Попытка запустить ГУГЛ плей сервисы атоматически
         //Кстати костыль, пробовать это делать только когда реклама смогла получить доступ в интеренет.
         if (playServices_my!=null) {
-            if (adsController_my.isOnline()) {
+            if (playServices_my.isOnline()) {
                  playServices_my.signIn();
             }
         }
@@ -271,6 +271,7 @@ public class MenuState extends State {
         //Assets.dispose();
       }
 
+      //Судя по всему попытка загрузить сейвы из файла
     public void load_from_file(){
         //переменные
         FileHandle file = Gdx.files.external("saved_score.txt");
