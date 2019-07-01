@@ -8,8 +8,8 @@ android {
             //storePassword 'bzoqmort39'
         }
     }
-    buildToolsVersion "26.0.1"
-    compileSdkVersion 26
+    buildToolsVersion "26.0.3"
+    compileSdkVersion 27
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -70,6 +70,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.Config_key
         }
+    }
+
+    configurations.all {
+        resolutionStrategy.force 'com.android.support:multidex:1.0.3'
     }
 }
 // called every time gradle gets executed, takes the native dependencies of
@@ -172,7 +176,9 @@ idea {
     }
 }
 dependencies {
-    compile 'com.android.support:multidex:1.0.1'
+    //compile 'com.android.support:multidex:1.0.3'
+    //compile 'com.google.firebase:firebase-core:17.0.0'
+    //compile 'com.google.android.gms:play-services:11.6.0'
     compile 'com.google.firebase:firebase-core:11.6.0'
 }
 apply plugin: 'com.google.gms.google-services'
