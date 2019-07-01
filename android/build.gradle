@@ -34,8 +34,9 @@ android {
     }
     productFlavors {
         free {
+            //Плановое обновление всех библиотек
             applicationId "ru.detone_studio.pop_balloon.free"
-            versionName '0.9.8.9'
+            versionName '0.9.9.1'
             minSdkVersion 16
             targetSdkVersion 16
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -51,7 +52,7 @@ android {
         }
         full {
             applicationId "ru.asupd.poop_ballon.full"
-            versionName '0.9.8'
+            versionName '0.9.9.1'
             minSdkVersion 16
             targetSdkVersion 16
             versionCode 1
