@@ -27,10 +27,10 @@ android {
     }
     defaultConfig {
         applicationId "ru.detone_studio.pop_balloon"
-        minSdkVersion 9
-        targetSdkVersion 26
+        minSdkVersion 12
+        targetSdkVersion 27
         versionCode 1
-        versionName "0.9.7"
+        versionName "0.9.9.1"
     }
     productFlavors {
         free {
