@@ -382,7 +382,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	public void loginGPGS() {	}
 	@Override
 	public void submitScoreGPGS(int score) {	}
-
+	//Конец
 
 
 	//Тихий вход в акк
