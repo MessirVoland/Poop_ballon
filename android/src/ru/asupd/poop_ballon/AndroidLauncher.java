@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -38,6 +39,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -58,7 +60,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	//GameHelper gameHelper;
 	View gameView;
 
-	private GoogleSignInClient signInClient;
+	private static GoogleSignInClient signInClient;
 	private GoogleSignInAccount signedInAccount=null;
     //private GoogleSignInAccount account;
     private GamesClient gamesClient;
@@ -143,6 +145,8 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 		setContentView(layout);
 
+		signInClient = GoogleSignIn.getClient(this,GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
+
 	}
 
 	@Override
@@ -157,25 +161,46 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	@Override
 	protected void onResume() {
 		super.onResume();
-		//ueuksignInSilently();
+		//signInSilently();
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == RC_SIGN_IN) {
-			result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+			GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
 			if (result.isSuccess()) {
-				 signedInAccount = result.getSignInAccount();
+				// The signed in account is stored in the result.
+				GoogleSignInAccount signedInAccount = result.getSignInAccount();
 			} else {
 				String message = result.getStatus().getStatusMessage();
-				if (message == null || message.isEmpty()) {
-					message = "Error smth went wrong: 132";
-				}
+				new AlertDialog.Builder(this).setMessage(message)
+						.setNeutralButton(android.R.string.ok, null).show();
 			}
-
 		}
 	}
+
+	private void startSignInIntent() {
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+									.requestEmail()
+									.build();
+/*
+							//Activity currActivity = appConstantsObj.getCurrentActivity();
+							GoogleSignInClient signInClient = GoogleSignIn.getClient(gameView.getContext(),gso);
+							Intent signInIntent = signInClient.getSignInIntent();
+   							startActivityForResult(signInIntent, RC_SIGN_IN);*/
+
+
+
+		GoogleSignInClient signInClient = GoogleSignIn.getClient(this,gso);
+		Intent signInIntent = signInClient.getSignInIntent();
+		startActivityForResult(signInIntent, RC_SIGN_IN);
+	}
+
+
+
+
+
 
 	//Дурацкая функция из-за которой скорей всего всё и вылетает!
 	//Тихий вход в аккаунт
@@ -389,10 +414,26 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	//Конец
 
 
+
+
 	//Тихий вход в акк
 	private void signInSilently() {
-		signInClient = GoogleSignIn.getClient(this,GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
+		/*
+		mGoogleSignInClient.silentSignIn().addOnCompleteListener(this,
+				new OnCompleteListener<GoogleSignInAccount>() {
+					@Override
+					public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
+						if (task.isSuccessful()) {
+							greetingMsg="Welcome back, ";
+							onConnected(task.getResult());
+						} else {
+							onDisconnected();
+						}
+					}
+				});
+		*/
 
+		//
 		signInClient.silentSignIn().addOnCompleteListener(this,
 				new OnCompleteListener<GoogleSignInAccount>() {
 					@Override
@@ -400,17 +441,58 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 						if (task.isSuccessful()) {
 							// The signed in account is stored in the task's result.
 							signedInAccount = task.getResult();
+							GamesClient gamesClient = Games.getGamesClient(AndroidLauncher.this, signedInAccount);
                             //gamesClient = Games.getGamesClient(AndroidLauncher.this,signedInAccount);
                             //gamesClient.setViewForPopups(layout);
 						} else {
 							// Player will need to sign-in explicitly using via UI
-                            //signInClient = GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
-                            intent = signInClient.getSignInIntent();
-                            startActivityForResult(intent, RC_SIGN_IN);
+							//GoogleSignInOptions signInOption = GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN;
+
+                            //signInClient = GoogleSignIn.getClient(activity, signInOption);
+
+							//intent = signInClient.getSignInIntent();
+                            //startActivityForResult(intent, RC_SIGN_IN);
+							//LeaderboardsClient = null;
+							//PlayersClient = null;
+
+							/*GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+									.requestEmail()
+									.build();
+
+							//Activity currActivity = appConstantsObj.getCurrentActivity();
+							GoogleSignInClient signInClient = GoogleSignIn.getClient(gameView.getContext(),gso);
+							Intent signInIntent = signInClient.getSignInIntent();
+   							startActivityForResult(signInIntent, RC_SIGN_IN);*/
+							startSignInIntent();
 						}
 					}
 				});
+
 	}
+/*
+	private void onConnected(GoogleSignInAccount googleSignInAccount) {
+
+		//mLeaderboardsClient = Games.getLeaderboardsClient(this, googleSignInAccount);
+		//mPlayersClient = Games.getPlayersClient(this, googleSignInAccount);
+
+		mPlayersClient.getCurrentPlayer()
+				.addOnCompleteListener(new OnCompleteListener<Player>() {
+					@Override
+					public void onComplete(@NonNull Task<Player> task) {
+						String displayName;
+						if (task.isSuccessful()) {
+							displayName = task.getResult().getDisplayName();
+						} else {
+							Exception e = task.getException();
+							handleException(e, getString(R.string.players_exception));
+							displayName = "???";
+						}
+
+						if(!greetingDisplayed)
+							welcomeMessage(displayName);
+					}
+				});
+	}*/
 
 	@Override
 	public void unlockAchievementGPGS(String achievementId) {
@@ -429,5 +511,4 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 
 	@Override
 	public void onSignInSucceeded() {   }
-	private void startSignInIntent() {	}
 }
