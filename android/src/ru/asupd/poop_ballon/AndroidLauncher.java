@@ -157,7 +157,7 @@ public class AndroidLauncher extends AndroidApplication implements AdsController
 	@Override
 	protected void onResume() {
 		super.onResume();
-		//signInSilently();
+		//ueuksignInSilently();
 	}
 
 	@Override
